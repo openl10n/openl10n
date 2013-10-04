@@ -1,0 +1,9 @@
+openl10n_security_login:
+    pattern: /login
+    defaults: { _controller: Openl10nUserBundle:Security:login }
+
+openl10n_security_check:
+    pattern: /login/check
+
+openl10n_security_logout:
+    pattern: /logout

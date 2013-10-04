@@ -1,0 +1,43 @@
+{% if route_params is not defined %}
+    {% set route_params = {} %}
+{% endif %}
+
+{% if pager.haveToPaginate() %}
+  <ul class="pagination">
+    {# Left arrow #}
+    {% if pager.hasPreviousPage() %}
+      <li>
+        <a href="{{ path(route, route_params + {'page': pager.getPreviousPage()}) }}">
+          &larr;
+        </a>
+      </li>
+    {% else %}
+      <li class="disabled">
+        <span>&larr;</span>
+      </li>
+    {% endif %}
+
+    {# Pages iteration #}
+    {% for page in range(1, pager.getNbPages()) %}
+      <li{% if page == pager.getCurrentPage() %} class="active"{% endif %}>
+        <a href="{{ path(route, route_params + {'page': page}) }}">
+        {{- page -}}
+        </a>
+      </li>
+    {% endfor %}
+
+
+    {# Right arrow #}
+    {% if pager.hasNextPage() %}
+      <li>
+        <a href="{{ path(route, route_params + {'page': pager.getNextPage()}) }}">
+          &rarr;
+        </a>
+      </li>
+      {% else %}
+      <li class="disabled">
+        <span>&rarr;</span>
+      </li>
+    {% endif %}
+    </ul>
+{% endif %}

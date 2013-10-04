@@ -1,0 +1,14 @@
+/web/bundles/
+/web/css/
+/web/js/
+
+/app/bootstrap.php.cache
+/app/cache/*
+/app/config/parameters.yml
+/app/logs/*
+
+/vendor/
+/build/
+/bin/
+/composer.phar
+/behat.yml

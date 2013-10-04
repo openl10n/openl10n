@@ -1,0 +1,27 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity table="users"
+            name="Openl10n\Bundle\UserBundle\Entity\User"
+            repository-class="Openl10n\Bundle\UserBundle\Entity\UserRepository">
+
+        <unique-constraints>
+            <unique-constraint name="slug" columns="username" />
+        </unique-constraints>
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="username" column="username" type="string" length="255" />
+        <field name="displayName" column="display_name" type="string" length="255" />
+        <field name="email" column="email" type="string" length="255" />
+        <field name="preferedLocale" column="prefered_locale" type="string" length="64" />
+
+        <one-to-one field="credentials" target-entity="UserCredentials" mapped-by="user" />
+
+        <many-to-many field="roles" mapped-by="users" target-entity="UserRole"/>
+    </entity>
+
+</doctrine-mapping>

@@ -1,0 +1,23 @@
+{% extends '@Openl10nWeb/layout/base.html.twig' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <form action="{{ path("openl10n_security_check") }}" method="POST" class="panel panel-default" novalidate>
+          <div class="panel-heading">
+            <h3 class="panel-title">Login</h3>
+          </div>
+
+          <div class="panel-body">
+            {{ form_widget(form) }}
+          </div>
+
+          <div class="panel-footer">
+            <button type="submit" id="_submit" name="_submit" class="btn btn-primary">Login</button>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

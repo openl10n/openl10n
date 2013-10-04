@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Openl10n</title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% block stylesheets %}
+    {% stylesheets
+      '@Openl10nWebBundle/Resources/assets/css/vendor/*'
+      '@Openl10nWebBundle/Resources/assets/css/*'
+      '@Openl10nWebBundle/Resources/assets/css/components/*.scss'
+    %}
+      <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+  {% endblock %}
+</head>
+<body>
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ path('openl10n_homepage') }}">
+        OpenLocalization
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="{{ path('openl10n_project_list') }}">
+            Projects
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            Learn
+          </a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        {% if is_granted('ROLE_USER') %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              {{ app.user.username }}
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{{ path('openl10n_security_logout') }}">
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </li>
+        {% else %}
+          <li>
+            <a href="{{ path('openl10n_security_login') }}">
+              Login
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+
+  {% block content '' %}
+
+  {% block javascripts %}
+    {% javascripts
+      '@Openl10nWebBundle/Resources/assets/js/vendor/jquery.js'
+      '@Openl10nWebBundle/Resources/assets/js/vendor/bootstrap.js'
+      '@Openl10nWebBundle/Resources/assets/js/vendor/selectize.js'
+      '@Openl10nWebBundle/Resources/assets/js/vendor/string.js'
+      '@Openl10nWebBundle/Resources/assets/js/vendor/essage.js'
+      '@Openl10nWebBundle/Resources/assets/js/*.js'
+    %}
+      <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+  {% endblock %}
+</body>
+</html>

@@ -1,0 +1,42 @@
+@import "../variables.scss";
+
+@mixin button-variant($color, $background, $border) {
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: $color;
+    background-color: darken($background, 8%);
+        border-color: darken($border, 12%);
+  }
+
+  &:active,
+  &.active {
+    background-image: none;
+  }
+
+  &.disabled,
+  &[disabled] {
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: $background;
+          border-color: $border;
+    }
+  }
+}
+
+.btn-dark {
+    @include button-variant(#444, $dark-gray, $dark-gray);
+}
+.btn-light {
+    @include button-variant(#444, $light-gray, $light-gray);
+}
+.btn-flashy {
+    @include button-variant(#fff, $complement-color, $complement-color);
+}

@@ -1,0 +1,12 @@
+// Collapsed feature enhancement
+.collapsed {
+    .collapsed-show {
+        display: inline-block;
+    }
+    .collapsed-hide {
+        display: none;
+    }
+}
+.collapsed-show {
+    display: none;
+}

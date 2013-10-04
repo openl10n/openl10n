@@ -1,0 +1,35 @@
+security:
+    encoders:
+        Openl10n\Bundle\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        database:
+            entity:
+                class: Openl10nUserBundle:User
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern:    ^/
+            form_login:
+                check_path: openl10n_security_check
+                login_path: openl10n_security_login
+            logout:
+                path:   openl10n_security_logout
+                target: openl10n_homepage
+            anonymous: ~
+            remember_me:
+                name:     __remember_me
+                key:      %secret%
+                lifetime: 2592000 # 30 days in seconds
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }

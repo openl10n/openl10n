@@ -1,0 +1,20 @@
+; top-most EditorConfig file
+root = true
+
+[*]
+; Unix-style newlines
+end_of_line = LF
+; Space indentation
+indent_style = space
+
+[*.php]
+indent_size = 4
+
+[*.js]
+indent_size = 2
+
+[*.html.twig]
+indent_size = 2
+
+[*.feature]
+indent_size = 4

@@ -1,0 +1,66 @@
+{% extends '@Openl10nWeb/layout/base.html.twig' %}
+
+{% block content %}
+  <div class="ol-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <div class="btn-group pull-right">
+              <a class="btn btn-dark" href="{{ path('openl10n_project_edit', {'slug': project.slug}) }}" title="Edit">
+                <i class="icon-pencil"></i>
+              </a>
+              <a class="btn btn-dark" href="{{ path('openl10n_domain_import', {'slug': project.slug}) }}" title="Import">
+                <i class="icon-upload-alt"></i>
+              </a>
+              <a class="btn btn-dark" href="{{ path('openl10n_domain_export', {'slug': project.slug}) }}" title="Export">
+                <i class="icon-download-alt"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="ol-header-title">
+              {{ project.name }}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 hidden-xs hidden-sm">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <a href="{{ path('openl10n_language_list', {slug: project.slug}) }}" class="pull-right">
+                <i class="icon-pencil"></i>
+              </a>
+              Locales
+            </h3>
+          </div>
+          <div class="panel-body">
+            <table class="table">
+              {% for language in project.languages %}
+                <tr>
+                  <td>
+                    {{ language.locale.displayName }} ({{ language.locale }})
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        {{ render(controller('Openl10nWebBundle:ProjectWidget:listDomains', {project: project})) }}
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

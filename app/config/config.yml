@@ -1,0 +1,95 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+services:
+    twig.extension.text:
+       class: Twig_Extensions_Extension_Text
+       tags:
+           - { name: twig.extension }
+
+framework:
+    #esi:             ~
+    translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:
+        name: __sess_id
+        cookie_lifetime: 108000 # 30 minutes
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+        resources:
+            - "@Openl10nWeb/layout/form.html.twig"
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:
+        - Openl10nWebBundle
+    filters:
+        cssrewrite: ~
+        sass: { apply_to: "\.scss$" }
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+
+# REST Configuration
+fos_rest:
+    #body_listener: false
+    allowed_methods_listener: true
+    param_fetcher_listener: true
+    routing_loader:
+        default_format: json
+    view:
+        view_response_listener: force
+        serialize_null: true
+        formats:
+            xml: false
+            json: true
+        templating_formats:
+            html: false
+    format_listener:
+        default_priorities: ['json', html, '*/*']
+        fallback_format: json
+        prefer_extension: true
+
+sensio_framework_extra:
+    view:    { annotations: false }
+    router:  { annotations: true }
+    request: { converters: true }

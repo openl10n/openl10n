@@ -1,0 +1,73 @@
+{% extends '@Openl10nWeb/layout/base.html.twig' %}
+
+{% block content %}
+  <div class="ol-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <form action="{{ path('openl10n_translation_context_switch', {project: project.slug}) }}" method="POST" class="form-inline" role="form">
+              {{ form_row(form_context.source) }}
+              <i class="icon-arrow-right"></i>
+              {{ form_row(form_context.target) }}
+              {{ form_rest(form_context) }}
+
+              <button class="btn btn-default" type="submit">
+                <i class="icon-refresh" data-toggle="tooltip" title="Update"></i>
+              </button>
+            </form>
+          </div>
+
+          <div>
+            <h2 class="ol-header-title">
+              <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}">
+                {{ project.name }}
+              </a>
+              <span>
+                /
+              </span>
+              <a href="{{ path('openl10n_translation_list', {project: project.slug, domain: domain.slug, target: context.target}) }}">
+                {{ domain.name }}
+              </a>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <form class="panel panel-default" action="{{ path('openl10n_translation_show', {project: project.slug, domain: domain.slug, target: context.target, hash: translation_key.hash}) }}" method="POST" {{ form_enctype(form) }} novalidate>
+          <div class="panel-heading">
+            <h3 class="panel-title">
+                Edit translation
+            </h3>
+          </div>
+
+          <div class="panel-body">
+            <label>Original</label>
+
+            <div class="well">
+              {{ source_phrase.text }}
+            </div>
+
+            {{ form_widget(form) }}
+          </div>
+
+          <div class="panel-footer">
+            <button type="submit" class="btn btn-primary">
+                Save
+            </button>
+            <a href="{{ path('openl10n_translation_list', {project: project.slug, domain: domain.slug, target: context.target}) }}" class="btn btn-link">
+                Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

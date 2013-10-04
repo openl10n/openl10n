@@ -1,0 +1,17 @@
+.panel {
+    &.project-card {
+        display: block;
+
+        &:hover {
+            background: #F2F2F2;
+        }
+    }
+
+    &.domain-card {
+        display: block;
+
+        &:hover {
+            background: #F2F2F2;
+        }
+    }
+}

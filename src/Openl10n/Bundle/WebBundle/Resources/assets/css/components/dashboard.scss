@@ -1,0 +1,107 @@
+.ol-dashboard {
+}
+
+
+.ol-dashboard-sidebar {
+    background: #eee;
+    border-right: 1px solid #ddd;
+    height: 590px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0;
+
+    .ol-dashboard-loader {
+        font-size: 36px;
+        color: #aaa;
+        margin: auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .ol-dashboard-filter-form {
+        padding: 5px;
+
+        .input-group-addon {
+            background: #fff;
+            width: 10px;
+        }
+        input[type="text"].form-control {
+            padding-left: 0;
+            border-left: 0;
+            border-right: 0;
+            box-shadow: none;
+
+            &:focus {
+                box-shadow: none;
+                border-color: #ccc;
+            }
+        }
+        .btn:focus {
+            outline: none;
+        }
+    }
+}
+
+.ol-dashboard-workspace {
+    height: 590px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+ul.ol-dashboard-list {
+    list-style-type: none;
+    padding: 0;
+
+    > li {
+        > a {
+            display: block;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        &:nth-child(even) {
+            background: #f4f4f4;
+        }
+        &:hover {
+            background: #e5e5e5;
+            cursor: pointer;
+        }
+        &.active {
+            background: #fdfdfd;
+        }
+    }
+
+    p {
+        margin-bottom: 0px;
+
+        &.key {
+            color: #444;
+            font-size: 16px;
+        }
+        &.meta {
+            color: #888;
+            font-size: 12px;
+        }
+    }
+}
+
+.ol-dashboard-reference {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    margin-bottom: 10px;
+
+    h4 {
+        font-size: 15px;
+        font-weight: normal;
+        color: #999;
+    }
+    .key {
+        font-size: 22px;
+        font-weight: 300;
+        margin-bottom: 0;
+    }
+}
+
+.ol-dashboard-menu {
+    margin-bottom: 20px;
+}

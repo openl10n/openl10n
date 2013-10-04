@@ -1,0 +1,71 @@
+{% extends '@Openl10nWeb/layout/base.html.twig' %}
+
+{% block content %}
+  <div class="ol-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <a class="btn btn-dark" href="{{ path('openl10n_project_new') }}">
+              Create project
+            </a>
+          </div>
+
+          <div>
+            <h2 class="ol-header-title">
+              Projects
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container">
+    <div class="row">
+
+      {# Sidebar #}
+      <div class="col-md-4 hidden-xs hidden-sm">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <p>
+              Connected as <strong>{{ app.user.displayName }}</strong>
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {# Main column #}
+      <div class="col-md-8">
+        <h2>Projects</h2>
+
+        <div class="row">
+          {% for project in projects %}
+            <div class="col-sm-4">
+              <a class="panel panel-default project-card" href="{{ path('openl10n_project_show', {'slug': project.slug}) }}">
+                <div class="panel-body">
+                  <strong>{{ project.name }}</strong>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+
+          <div class="col-sm-4">
+            <a class="panel panel-default project-card" href="{{ path('openl10n_project_new') }}">
+              <div class="panel-body">
+                <i class="icon-plus"></i>
+                Create a new project
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

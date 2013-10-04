@@ -1,0 +1,156 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Form Type -->
+        <parameter key="openl10n.form.type.project.class">Openl10n\Bundle\CoreBundle\Form\Type\ProjectType</parameter>
+        <parameter key="openl10n.form.type.language.class">Openl10n\Bundle\CoreBundle\Form\Type\LanguageType</parameter>
+        <parameter key="openl10n.form.type.locale_choice.class">Openl10n\Bundle\CoreBundle\Form\Type\LocaleChoiceType</parameter>
+        <parameter key="openl10n.form.type.import_domain.class">Openl10n\Bundle\CoreBundle\Form\Type\ImportDomainType</parameter>
+        <parameter key="openl10n.form.type.export_domain.class">Openl10n\Bundle\CoreBundle\Form\Type\ExportDomainType</parameter>
+        <parameter key="openl10n.form.type.translation.class">Openl10n\Bundle\CoreBundle\Form\Type\TranslationType</parameter>
+        <parameter key="openl10n.form.type.translation_context.class">Openl10n\Bundle\CoreBundle\Form\Type\TranslationContextType</parameter>
+
+        <!-- Processor -->
+        <parameter key="openl10n.processor.create_project.class">Openl10n\Bundle\CoreBundle\Processor\CreateProjectProcessor</parameter>
+        <parameter key="openl10n.processor.edit_project.class">Openl10n\Bundle\CoreBundle\Processor\EditProjectProcessor</parameter>
+        <parameter key="openl10n.processor.delete_project.class">Openl10n\Bundle\CoreBundle\Processor\DeleteProjectProcessor</parameter>
+        <parameter key="openl10n.processor.create_language.class">Openl10n\Bundle\CoreBundle\Processor\CreateLanguageProcessor</parameter>
+        <parameter key="openl10n.processor.delete_language.class">Openl10n\Bundle\CoreBundle\Processor\DeleteLanguageProcessor</parameter>
+        <parameter key="openl10n.processor.switch_translation_context.class">Openl10n\Bundle\CoreBundle\Processor\SwitchTranslationContextProcessor</parameter>
+        <parameter key="openl10n.processor.import_domain.class">Openl10n\Bundle\CoreBundle\Processor\ImportDomainProcessor</parameter>
+        <parameter key="openl10n.processor.export_domain.class">Openl10n\Bundle\CoreBundle\Processor\ExportDomainProcessor</parameter>
+        <parameter key="openl10n.processor.save_translation.class">Openl10n\Bundle\CoreBundle\Processor\SaveTranslationProcessor</parameter>
+
+        <!-- Listener -->
+        <parameter key="openl10n.listener.locale_listener.class">Openl10n\Bundle\CoreBundle\Listener\LocaleListener</parameter>
+
+        <!-- Repository -->
+        <parameter key="openl10n.repository.locale.class">Openl10n\Bundle\CoreBundle\Repository\InMemoryLocaleRepository</parameter>
+
+        <parameter key="openl10n.uploader.file.class">Openl10n\Bundle\CoreBundle\Uploader\FileUploader</parameter>
+        <parameter key="openl10n.storage.translation_context.class">Openl10n\Bundle\CoreBundle\Storage\TranslationContextStorage</parameter>
+
+        <!-- Translation -->
+        <parameter key="openl10n.translation.loader.class">Openl10n\Bundle\CoreBundle\Translation\TranslationLoader</parameter>
+        <parameter key="openl10n.translation.dumper.class">Openl10n\Bundle\CoreBundle\Translation\TranslationDumper</parameter>
+        <parameter key="openl10n.resolver.translation_context.class">Openl10n\Bundle\CoreBundle\Resolver\TranslationContextResolver</parameter>
+
+        <!-- Validator -->
+        <parameter key="openl10n.validator.project_unique.class">Openl10n\Bundle\CoreBundle\Validator\Constraints\UniqueProjectValidator</parameter>
+    </parameters>
+
+    <services>
+        <!-- Form Type -->
+        <service id="openl10n.form.type.project" class="%openl10n.form.type.project.class%">
+            <tag name="form.type" alias="openl10n_project" />
+        </service>
+        <service id="openl10n.form.type.language" class="%openl10n.form.type.language.class%">
+            <tag name="form.type" alias="openl10n_language" />
+        </service>
+        <service id="openl10n.form.type.locale_choice" class="%openl10n.form.type.locale_choice.class%">
+            <argument type="service" id="openl10n.repository.locale" />
+            <tag name="form.type" alias="openl10n_locale_choice" />
+        </service>
+        <service id="openl10n.form.type.import_domain" class="%openl10n.form.type.import_domain.class%">
+            <tag name="form.type" alias="openl10n_import_domain" />
+        </service>
+        <service id="openl10n.form.type.export_domain" class="%openl10n.form.type.export_domain.class%">
+            <argument type="service" id="openl10n.repository.domain" />
+            <argument type="service" id="openl10n.translation.dumper" />
+            <tag name="form.type" alias="openl10n_export_domain" />
+        </service>
+        <service id="openl10n.form.type.translation" class="%openl10n.form.type.translation.class%">
+            <tag name="form.type" alias="openl10n_translation" />
+        </service>
+        <service id="openl10n.form.type.translation_context" class="%openl10n.form.type.translation_context.class%">
+            <tag name="form.type" alias="openl10n_translation_context" />
+        </service>
+
+        <!-- Repository -->
+        <service id="openl10n.repository.locale" class="%openl10n.repository.locale.class%">
+        </service>
+
+        <!-- Processor -->
+        <service id="openl10n.processor.create_project" class="%openl10n.processor.create_project.class%">
+            <argument type="service" id="openl10n.factory.project" />
+            <argument type="service" id="openl10n.manager.project" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.edit_project" class="%openl10n.processor.edit_project.class%">
+            <argument type="service" id="openl10n.repository.project" />
+            <argument type="service" id="openl10n.manager.project" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.delete_project" class="%openl10n.processor.delete_project.class%">
+            <argument type="service" id="openl10n.manager.project" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.create_language" class="%openl10n.processor.create_language.class%">
+            <argument type="service" id="openl10n.manager.project" />
+            <argument type="service" id="openl10n.factory.language" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.delete_language" class="%openl10n.processor.delete_language.class%">
+            <argument type="service" id="openl10n.manager.project" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.switch_translation_context" class="%openl10n.processor.switch_translation_context.class%">
+            <argument type="service" id="openl10n.storage.translation_context" />
+        </service>
+        <service id="openl10n.processor.import_domain" class="%openl10n.processor.import_domain.class%">
+            <argument type="service" id="openl10n.manager.domain" />
+            <argument type="service" id="openl10n.repository.domain" />
+            <argument type="service" id="openl10n.factory.domain" />
+            <argument type="service" id="openl10n.manager.translation" />
+            <argument type="service" id="openl10n.repository.translation" />
+            <argument type="service" id="openl10n.factory.translation" />
+            <argument type="service" id="openl10n.uploader.file" />
+            <argument type="service" id="openl10n.translation.loader" />
+        </service>
+        <service id="openl10n.processor.export_domain" class="%openl10n.processor.export_domain.class%">
+            <argument type="service" id="openl10n.repository.domain" />
+            <argument type="service" id="openl10n.repository.translation" />
+            <argument type="service" id="openl10n.translation.dumper" />
+        </service>
+        <service id="openl10n.processor.save_translation" class="%openl10n.processor.save_translation.class%">
+            <argument type="service" id="openl10n.factory.translation" />
+            <argument type="service" id="openl10n.manager.translation" />
+        </service>
+
+        <!-- Services -->
+        <service id="openl10n.uploader.file" class="%openl10n.uploader.file.class%">
+            <argument type="service" id="filesystem" />
+        </service>
+        <service id="openl10n.storage.translation_context" class="%openl10n.storage.translation_context.class%">
+            <argument type="service" id="session" />
+        </service>
+
+        <!-- Listener -->
+        <service id="openl10n.listener.locale_listener" class="%openl10n.listener.locale_listener.class%">
+            <argument type="service" id="openl10n.manager.project" />
+            <argument type="service" id="openl10n.repository.language" />
+            <argument type="service" id="openl10n.factory.language" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <!-- Translation -->
+        <service id="openl10n.translation.loader" class="%openl10n.translation.loader.class%" />
+        <service id="openl10n.translation.dumper" class="%openl10n.translation.dumper.class%" />
+
+        <service id="openl10n.resolver.translation_context" class="%openl10n.resolver.translation_context.class%">
+            <argument type="service" id="openl10n.storage.translation_context" />
+            <call method="setRequest">
+                <argument type="service" id="request" on-invalid="null" strict="false" />
+            </call>
+        </service>
+
+        <!-- Validator -->
+        <service id="openl10n.validator.project_unique" class="%openl10n.validator.project_unique.class%">
+            <tag name="validator.constraint_validator" alias="openl10n.validator.project_unique" />
+            <argument type="service" id="openl10n.repository.project" />
+        </service>
+    </services>
+</container>

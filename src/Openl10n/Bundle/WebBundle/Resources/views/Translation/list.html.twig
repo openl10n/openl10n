@@ -1,0 +1,105 @@
+{% extends '@Openl10nWeb/layout/base.html.twig' %}
+
+{% block content %}
+  <div class="ol-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <form action="{{ path('openl10n_translation_context_switch', {project: project.slug}) }}" method="POST" class="form-inline" role="form">
+              {{ form_row(form_context.source) }}
+              <i class="icon-arrow-right"></i>
+              {{ form_row(form_context.target) }}
+              {{ form_rest(form_context) }}
+
+              <button class="btn btn-default" type="submit">
+                <i class="icon-refresh" data-toggle="tooltip" title="Update"></i>
+              </button>
+            </form>
+          </div>
+          <div>
+            <h2 class="ol-header-title">
+              <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}">
+                {{ project.name }}
+              </a>
+              <span>
+                /
+              </span>
+              <span>
+                {{ domain.name }}
+              </span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+
+        <br>
+
+          <form class="form-inline" role="form" action="">
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" name="text" class="form-control" id="searchInput" placeholder="Search" value="{{ filters.text }}">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button">
+                    <i class="icon-search"></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+
+        <br>
+      </div>
+
+
+      <div class="col-lg-8">
+        <div class="text-right">
+          {% set route_params = {project: project.slug, domain: domain.slug, target: context.target}|merge(filters.toArray()) %}
+
+          {{ include('@Openl10nWeb/layout/pagination.html.twig', {
+            pager: pager,
+            route: 'openl10n_translation_list',
+            route_params: route_params,
+          }, with_context = false) }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered table-hover">
+          <tr class="active">
+            <th>Key</th>
+            <th>Source</th>
+            <th>Target</th>
+          </tr>
+          {% for translation in translations %}
+            <tr>
+              <td class="col-md-2 active">
+                <em>{{ translation.key }}</em>
+              </td>
+              <td class="col-md-5 {% if not translation.isSourceValid() %}warning{% endif %}">
+                {{ translation.source.text|truncate(50) }}
+              </td>
+              <td class="col-md-5
+                {%- if translation.isApproved() %} text-success
+                {%- elseif not translation.isTranslated() %} warning
+                {%- endif %}">
+                {{ translation.target.text|truncate(50) }}
+                <a href="{{ path('openl10n_translation_show', {project: project.slug, domain: domain.slug, target: context.target, hash: translation.key.hash}) }}">
+                  <i class="icon-edit"></i>
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

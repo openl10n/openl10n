@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Form Type -->
+        <parameter key="openl10n.form.type.login.class">Openl10n\Bundle\UserBundle\Form\Type\LoginType</parameter>
+    </parameters>
+
+    <services>
+        <!-- Form Type -->
+        <service id="form.type.login" class="%openl10n.form.type.login.class%">
+            <tag name="form.type" alias="login" />
+        </service>
+    </services>
+</container>

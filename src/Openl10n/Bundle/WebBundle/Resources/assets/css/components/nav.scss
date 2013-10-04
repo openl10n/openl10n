@@ -1,0 +1,8 @@
+.nav {
+    &.nav-small {
+        > li > a {
+            font-size: 13px;
+            padding: 7px 10px;
+        }
+    }
+}
