@@ -16,9 +16,9 @@ class TranslationContextType extends AbstractType
         $locales = array();
 
         if (null !== $project = $options['project']) {
-            $locales = array_map(function($projectLocale) {
-                return $projectLocale->getLocale()->toString();
-            }, $project->getLocales()->toArray());
+            $locales = array_map(function($language) {
+                return $language->getLocale()->toString();
+            }, $project->getLanguages()->toArray());
         }
 
         $builder
