@@ -22,9 +22,11 @@ class LocaleChoiceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $self = $this;
+
         $resolver->setDefaults(array(
-            'choice_list' => function(Options $options) {
-                return $this->getChoiceList($options['restrict']);
+            'choice_list' => function(Options $options) use ($self) {
+                return $self->getChoiceList($options['restrict']);
             },
             'restrict' => array(),
         ));
@@ -51,7 +53,7 @@ class LocaleChoiceType extends AbstractType
      *
      * @return ChoiceListInterface
      */
-    protected function getChoiceList(array $restrict = array())
+    public function getChoiceList(array $restrict = array())
     {
         $locales = $this->localeRepository->getLocales();
 
