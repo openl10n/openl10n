@@ -43,4 +43,7 @@ script:
     - bin/behat
 
 after_failure:
+    # Dump log
+    - cat app/logs/prod.log
+    - cat app/logs/dev.log
     - cat /var/log/php-errors.log
