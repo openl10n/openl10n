@@ -10,16 +10,16 @@ $(function () {
   //$('select').selectize();
 
   // Fullheight
-  var $div = $('.fullheight');
   var $window = $(window);
-  function updateEditorHeight() {
-    if ($div.length < 1) return;
-    var height = $window.height() - $div.offset().top;
-    $div.height(height);
+  function updateBlockHeight() {
+    $('.fullheight').each(function() {
+      var $this = $(this);
+      var height = $window.height() - $this.offset().top;
+      $this.height(height);
+    });
   }
-
-  updateEditorHeight();
-  $(window).resize(updateEditorHeight);
+  updateBlockHeight();
+  $(window).resize(updateBlockHeight);
 
   // Slugify
   $(document).on('keyup', '.js-slugify', function() {

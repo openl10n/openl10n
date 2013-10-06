@@ -43,6 +43,7 @@ assetic:
     use_controller: false
     bundles:
         - Openl10nWebBundle
+        - Openl10nEditorBundle
     filters:
         cssrewrite: ~
         sass: { apply_to: "\.scss$" }

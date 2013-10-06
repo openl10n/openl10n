@@ -32,11 +32,17 @@
 }
 
 .btn-dark {
-    @include button-variant(#444, $dark-gray, $dark-gray);
+  @include button-variant(#444, $dark-gray, $dark-gray);
 }
 .btn-light {
-    @include button-variant(#444, $light-gray, $light-gray);
+  @include button-variant(#444, $light-gray, $light-gray);
 }
 .btn-flashy {
-    @include button-variant(#fff, $complement-color, $complement-color);
+  @include button-variant(#fff, $complement-color, $complement-color);
+}
+
+// Use for the save button on editor
+.btn-sm.btn-wide {
+  padding-left: 20px;
+  padding-right: 20px;
 }

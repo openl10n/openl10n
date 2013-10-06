@@ -1,0 +1,22 @@
+<div class="ol-editor-source-area">
+  <div class="meta pull-right">
+    <% if (is_translated) { %>
+      <i class="icon-ok-circle <% if (is_approved) { %>text-success<% } %>"></i>
+    <% } %>
+
+    <span><%- key %></span>
+    <span class="meta-domain">(<%- domain %>)</span>
+  </div>
+
+  <h4 class="title">
+    Original phrase
+  </h4>
+
+  <p class="phrase">
+    <%- source_phrase %>
+  </p>
+</div>
+
+<div class="ol-editor-target-area">
+  <textarea class="form-control phrase-editor" placeholder="Translate here…"><%- target_phrase %></textarea>
+</div>
