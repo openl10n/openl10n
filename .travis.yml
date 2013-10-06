@@ -9,7 +9,7 @@ before_script:
 
     # Web server
     - sudo apt-get install -y --force-yes php5-curl php5-mysql php5-intl php5-sqlite sqlite3
-    - echo "extension = apc.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - phpenv config-add app/travis-ci/php-config.ini
     - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
     - php -S localhost:8080 -t web/ > /dev/null 2>&1 &
 
@@ -24,14 +24,23 @@ before_script:
     #- sudo mv chromedriver /usr/bin
     - java -jar selenium-server-standalone-2.35.0.jar > /dev/null 2>&1 &
 
-    # Frontend
+    # Frontend dependencies
     - gem install compass
 
-    # Backend
+    # App configuration
+    - cp app/travis-ci/parameters.yml app/config/parameters.yml
+    - cp app/travis-ci/behat.yml behat.yml
+
+    # App install
     - composer self-update
     - composer install --prefer-dist --no-progress --no-interaction
+
+    # Init backend data
     - ./reset.sh
 
 script:
     - bin/phpspec
     - bin/behat
+
+after_failure:
+    - cat /var/log/php-errors.log
