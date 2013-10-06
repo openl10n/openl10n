@@ -9,7 +9,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.4",
-        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/orm": "~2.4",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
@@ -20,7 +20,7 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "*",
-        "friendsofsymfony/rest-bundle": "~0.12",
+        "friendsofsymfony/rest-bundle": "~0.13",
         "jms/serializer-bundle": "~0.12",
         "friendsofsymfony/jsrouting-bundle": "~1.1",
         "pagerfanta/pagerfanta": "~1.0"

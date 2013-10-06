@@ -13,7 +13,7 @@
 
         <field name="locale" column="locale" type="string" length="20" />
 
-        <many-to-one field="project" target-entity="Project" inversed-by="locales">
+        <many-to-one field="project" target-entity="Project" inversed-by="languages">
             <join-columns>
                 <join-column name="project_id" referenced-column-name="id" />
             </join-columns>

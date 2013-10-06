@@ -4,8 +4,43 @@ php:
   - 5.4
 
 before_script:
+    # System
+    - sudo apt-get update -qq
+
+    # Web server
+    - sudo apt-get install -y --force-yes php5-curl php5-mysql php5-intl php5-sqlite sqlite3
+    - phpenv config-add app/travis-ci/php-config.ini
+    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - php -S localhost:8080 -t web/ > /dev/null 2>&1 &
+
+    # XVFB
+    - sh -e /etc/init.d/xvfb start
+    - export DISPLAY=:99.0
+
+    # Selenium server
+    - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar
+    #- wget http://chromedriver.storage.googleapis.com/2.4/chromedriver_linux32.zip
+    #- unzip chromedriver_linux32.zip
+    #- sudo mv chromedriver /usr/bin
+    - java -jar selenium-server-standalone-2.35.0.jar > /dev/null 2>&1 &
+
+    # Frontend dependencies
+    - gem install compass
+
+    # App configuration
+    - cp app/travis-ci/parameters.yml app/config/parameters.yml
+    - cp app/travis-ci/behat.yml behat.yml
+
+    # App install
     - composer self-update
-    - composer install --prefer-dist --no-interaction
+    - composer install --prefer-dist --no-progress --no-interaction
+
+    # Init backend data
+    - ./reset.sh
 
 script:
-    - ./bin/phpspec run
+    - bin/phpspec
+    - bin/behat
+
+after_failure:
+    - cat /var/log/php-errors.log

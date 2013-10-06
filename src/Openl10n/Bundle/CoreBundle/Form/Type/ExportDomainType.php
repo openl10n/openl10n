@@ -29,8 +29,10 @@ class ExportDomainType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $domainRepository = $this->domainRepository;
+
         $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use ($domainRepository) {
                 $form = $event->getForm();
                 $data = $event->getData();
 
@@ -39,7 +41,7 @@ class ExportDomainType extends AbstractType
                 }
 
                 $project = $data->getProject();
-                $domains = $this->domainRepository->findByProject($project);
+                $domains = $domainRepository->findByProject($project);
 
                 $keys = array_map(function ($domain) { return $domain->getSlug(); }, $domains);
                 $values = array_map(function ($domain) { return $domain->getName(); }, $domains);
