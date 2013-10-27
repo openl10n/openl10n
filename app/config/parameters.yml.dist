@@ -13,3 +13,6 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    sensio_connect.client_id:     12345678910
+    sensio_connect.client_secret: 12345678910

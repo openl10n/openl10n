@@ -40,6 +40,7 @@ class User implements UserInterface
     public function __construct(Slug $username)
     {
         $this->username = $username;
+        $this->preferedLocale = new Locale('en');
     }
 
     /**

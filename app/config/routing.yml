@@ -5,7 +5,6 @@ openl10n_api:
 
 openl10n_web:
     resource: "@Openl10nWebBundle/Resources/config/routing.yml"
-
 openl10n_user:
     resource: "@Openl10nUserBundle/Resources/config/routing.yml"
 
@@ -14,3 +13,12 @@ openl10n_editor:
 
 fos_js:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+#hwi_oauth_login:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+#    prefix:   /login-oauth
+sensio_connect_login:
+    pattern: /login/check-sensio

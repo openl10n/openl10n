@@ -16,7 +16,25 @@
           <div class="panel-footer">
             <button type="submit" id="_submit" name="_submit" class="btn btn-primary">Login</button>
           </div>
-      </form>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">OAuth Connect</h3>
+          </div>
+
+          <div class="panel-body">
+            {% for owner in hwi_oauth_resource_owners() %}
+              <a class="btn btn-success" href="{{ hwi_oauth_login_url(owner) }}" title="{{ owner }}">
+                {{ owner }}
+              </a>
+            {% endfor %}
+          </div>
+        </div>
       </div>
     </div>
   </div>

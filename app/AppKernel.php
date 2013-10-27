@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
 
             new Openl10n\Bundle\CoreBundle\Openl10nCoreBundle(),
             new Openl10n\Bundle\WebBundle\Openl10nWebBundle(),

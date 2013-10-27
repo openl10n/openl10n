@@ -23,5 +23,9 @@
             <argument type="service" id="security.encoder_factory" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="openl10n.oauth_aware.user_provider" class="Openl10n\Bundle\UserBundle\OAuth\Provider\OAuthAwareUserProvider">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
     </services>
 </container>
