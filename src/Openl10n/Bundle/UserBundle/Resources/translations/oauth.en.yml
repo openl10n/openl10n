@@ -2,3 +2,4 @@ provider:
     facebook: Facebook
     sensio_connect: SensioLabs
     vkontakte: VKontakte
+    github: GitHub

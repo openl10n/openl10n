@@ -20,3 +20,5 @@ parameters:
     vkontakte.client_secret:      12345678910
     facebook.client_id:           12345678910
     facebook.client_secret:       12345678910
+    github.client_id:           12345678910
+    github.client_secret:       12345678910

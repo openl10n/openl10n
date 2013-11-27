@@ -26,3 +26,5 @@ vkontakte_login:
     pattern: /login/check-vkontakte
 facebook_login:
     pattern: /login/check-facebook
+github_login:
+    pattern: /login/check-github
