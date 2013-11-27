@@ -1,0 +1,118 @@
+{% extends '@Openl10nWeb/layout/base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets '@Openl10nEditorBundle/Resources/assets/css/editor.scss' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock stylesheets %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts
+    '@Openl10nEditorBundle/Resources/assets/js/vendor/underscore.js'
+    '@Openl10nEditorBundle/Resources/assets/js/vendor/backbone.js'
+    '@Openl10nEditorBundle/Resources/assets/js/vendor/backbone.marionette.js'
+    '@Openl10nEditorBundle/Resources/assets/js/bootstrap.js'
+    '@Openl10nEditorBundle/Resources/assets/js/application.js'
+    '@Openl10nEditorBundle/Resources/assets/js/lib/*.js'
+    '@Openl10nEditorBundle/Resources/assets/js/models/*.js'
+    '@Openl10nEditorBundle/Resources/assets/js/views/*.js'
+  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+
+  <script type="text/javascript">
+    $(function() {
+      editor.app.start({
+        project: "{{ project.slug }}"
+      });
+    });
+  </script>
+{% endblock javascripts %}
+
+{% block content %}
+  <div id="appLayout">
+    <div class="ol-header">
+      <div class="container-fluid">
+        <div class="row" id="header">
+          {# Everything under #header element will be overidden by backbone #}
+          <div class="col-md-5">
+            <h2 class="ol-header-title" id="title">
+              <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}">
+                {{ project.name }}
+              </a>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ol-editor">
+      <div class="ol-editor-sidebar">
+        <form action="#" class="ol-editor-filter-form">
+          <div class="form-group">
+            <input type="text" class="form-control" id="translationFilterInput" placeholder="Search…">
+          </div>
+          {# <p class="meta">
+            42 translations
+          </p> #}
+        </form>
+
+        <div class="ol-editor-translation-list fullheight" id="translation-list">
+          {# <ul id="translationList">
+            <li>
+              <div class="loader-item">
+                <i class="icon-refresh icon-spin"></i>
+              </div>
+            </li>
+          </ul> #}
+        </div>
+      </div>
+
+      <div class="ol-editor-content">
+        <div class="ol-editor-actionbar">
+          <div class="pull-right" id="actions"></div>
+
+          <div class="status">
+            <button class="btn btn-sm btn-light">
+              Tous {# <span class="badge">42</span> #}
+            </button>
+            <button class="btn btn-sm btn-light">
+              Non Traduits {# <span class="badge">4</span> #}
+            </button>
+            <button class="btn btn-sm btn-light">
+              Non Relus {# <span class="badge">10</span> #}
+            </button>
+          </div>
+        </div>
+
+        <div class="fullheight">
+          <div id="translation-edit"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/template" id="header-template">
+    {{ include('@Openl10nEditor/Editor/js_templates/header.html.twig', {
+      project: project,
+      domains: domains,
+      languages: languages
+    }, with_context = false) }}
+  </script>
+
+  <script type="text/template" id="translation-item-template">
+    {{ include('@Openl10nEditor/Editor/js_templates/translation-item.html.twig', {}, with_context = false) }}
+  </script>
+
+  <script type="text/template" id="translation-edit-template">
+    {{ include('@Openl10nEditor/Editor/js_templates/translation-edit.html.twig', {}, with_context = false) }}
+  </script>
+
+  <script type="text/template" id="actions-template">
+    {{ include('@Openl10nEditor/Editor/js_templates/actions.html.twig', {}, with_context = false) }}
+  </script>
+{% endblock %}

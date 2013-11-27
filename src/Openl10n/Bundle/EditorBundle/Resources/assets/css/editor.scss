@@ -1,0 +1,189 @@
+//
+// Layout
+//
+.ol-editor {
+    min-width: 900px;
+
+    .fullheight {
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+.ol-editor-sidebar,
+.ol-editor-content {
+    float: left;
+}
+
+.ol-editor-sidebar {
+    width: 30%;
+    background-color: #f2f2f2;
+}
+
+.ol-editor-content {
+    width: 70%;
+    background-color: #fdfdfd;
+}
+
+//
+// Filter/Search form
+//
+.ol-editor-filter-form {
+    padding: 7px 5px;
+    //background-color: #eee;
+    border-bottom: 1px solid #ddd;
+    box-shadow: -2px 3px 5px -2px #ddd;
+    position: relative;
+    z-index: 10;
+
+    .form-group {
+        // Ecrase bootstrap value
+        margin-bottom: 0;
+    }
+
+    p.meta {
+        margin: 5px 0 0;
+        font-size: 13px;
+    }
+}
+
+//
+// Translation list
+//
+.ol-editor-translation-list {
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        &:nth-child(even) {
+            background: #f4f4f4;
+        }
+    }
+
+    .loader-item {
+        font-size: 36px;
+        color: #aaa;
+        margin: auto;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .translation-item {
+        display: block;
+        position: relative;
+        padding: 10px;
+        border-bottom: 1px solid #e5e5e5;
+
+        &:hover {
+            background: #e5e5e5;
+            cursor: pointer;
+        }
+        &.active {
+            background: #fdfdfd;
+        }
+
+        .status {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 6px;
+            background-color: #ddd;
+
+            &.status-translated {
+                background-color: lighten(#5cb85c, 15%);
+            }
+            &.status-approved {
+                background-color: #5cb85c;
+            }
+        }
+
+        p {
+            margin-bottom: 0px;
+
+            &.key {
+                color: #444;
+                font-size: 14px;
+            }
+            &.domain {
+                color: #888;
+                font-size: 12px;
+            }
+            &.meta {
+                color: #888;
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+//
+// Main content
+//
+.ol-editor-content {
+    background-color: #fafafa;
+}
+
+//
+// Translation actions
+//
+.ol-editor-actionbar {
+    padding: 10px;
+    min-height: 50px;
+}
+
+//
+// Translation workspace
+//
+.ol-editor-source-area {
+    padding: 5px 10px 15px;
+    border-bottom: 1px solid #eee;
+
+    .title {
+        margin: 0 0 5px;
+        font-size: 15px;
+        font-weight: normal;
+        color: #999;
+    }
+    .meta {
+        font-size: 12px;
+        color: #555;
+    }
+    .meta-domain {
+        padding-left: 5px;
+        color: #777;
+    }
+    .phrase {
+        font-size: 22px;
+        font-weight: 300;
+        margin-bottom: 0;
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+}
+
+.ol-editor-target-area {
+    padding: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+
+    textarea.phrase-editor {
+        padding: 10px;
+        border: none;
+        box-shadow: none;
+        font-size: 16px;
+        //font-weight: 300;
+        resize: none;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        word-wrap: break-word;
+        height: 110px;
+    }
+}

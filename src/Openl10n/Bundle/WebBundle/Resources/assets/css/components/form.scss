@@ -1,0 +1,4 @@
+// Fix display block of select when it should be inlined
+.form-inline select.form-control {
+    width: auto;
+}

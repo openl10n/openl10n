@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Openl10n\Bundle\CoreBundle\Openl10nCoreBundle(),
             new Openl10n\Bundle\WebBundle\Openl10nWebBundle(),
             new Openl10n\Bundle\UserBundle\Openl10nUserBundle(),
+            new Openl10n\Bundle\EditorBundle\Openl10nEditorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

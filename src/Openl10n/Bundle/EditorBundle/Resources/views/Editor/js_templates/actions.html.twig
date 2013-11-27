@@ -1,0 +1,26 @@
+<div class="btn-group">
+  <button class="btn btn-sm btn-light action-undo" title="Undo">
+    <i class="icon-undo"></i>
+  </button>
+  <button class="btn btn-sm btn-light action-copy" title="Copy text">
+    <i class="icon-copy"></i>
+  </button>
+  <button class="btn btn-sm btn-light action-skip" title="Skip">
+    <i class="icon-forward"></i>
+  </button>
+</div>
+
+<div class="btn-group">
+  <button class="btn btn-sm btn-light action-unapprove" <% if (!is_approved) { %>disabled<% } %>>
+    <i class="icon-thumbs-down"></i>
+  </button>
+  <button class="btn btn-sm btn-light action-approve" <% if (is_approved) { %>disabled<% } %>>
+    <i class="icon-thumbs-up"></i>
+  </button>
+</div>
+
+<div class="btn-group">
+  <button class="btn btn-sm btn-success btn-wide action-save">
+    Save
+  </button>
+</div>
