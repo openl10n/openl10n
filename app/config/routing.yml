@@ -22,3 +22,5 @@ hwi_oauth_redirect:
 #    prefix:   /login-oauth
 sensio_connect_login:
     pattern: /login/check-sensio
+vkontakte_login:
+    pattern: /login/check-vkontakte

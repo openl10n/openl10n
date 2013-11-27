@@ -112,3 +112,10 @@ hwi_oauth:
             client_id:           %sensio_connect.client_id%
             client_secret:       %sensio_connect.client_secret%
             scope:               "SCOPE_EMAIL SCOPE_PUBLIC"
+        vkontakte:
+            type:                vkontakte
+            client_id:           %vkontakte.client_id%
+            client_secret:       %vkontakte.client_secret%
+            user_response_class: "Openl10n\Bundle\UserBundle\OAuth\Response\VkontakteUserResponse"
+            paths:
+                realname: ['response.0.first_name', 'response.0.last_name']

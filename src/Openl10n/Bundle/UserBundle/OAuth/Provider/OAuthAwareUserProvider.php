@@ -22,22 +22,42 @@ class OAuthAwareUserProvider implements OAuthAwareUserProviderInterface
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $email = $response->getEmail();
-        $user = $this->manager->getRepository('Openl10nUserBundle:User')
-            ->findOneBy(array('email' => $email))
-        ;
+        $user = null;
+
+        // @TODO find user per provider ID
+        if (null !== $email = $response->getEmail()) {
+            $user = $this->manager->getRepository('Openl10nUserBundle:User')
+                ->findOneBy(array('email' => $email))
+            ;
+        }
 
         if (null === $user) {
             // create this user on the fly
-            $user = new User(new Slug((new \DateTime())->getTimestamp()));
-            $user->setEmail(new Email($email));
-            $user->setDisplayName(new Name($response->getRealName()));
+            $user = $this->createUser($response);
 
             $this->manager->persist($user);
             $this->manager->flush($user);
         }
 
-        //throw new UsernameNotFoundException('You have not been allowed to access to this page. Please drop a mail to AFSY administrators.');
+        //throw new UsernameNotFoundException('You have not been allowed to access to this page.');
+
+        return $user;
+    }
+
+    protected function createUser($response)
+    {
+        $username = $response->getUsername() ?: (new \DateTime())->getTimestamp();
+
+        // TODO use proper factory service to create new user object
+        $user = new User(new Slug($username));
+
+        if (null !== $email = $response->getEmail()) {
+            $user->setEmail(new Email($email));
+        }
+
+        if (null !== $name = $response->getRealName()) {
+            $user->setDisplayName(new Name($name));
+        }
 
         return $user;
     }
