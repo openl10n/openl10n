@@ -18,3 +18,5 @@ parameters:
     sensio_connect.client_secret: 12345678910
     vkontakte.client_id:          12345678910
     vkontakte.client_secret:      12345678910
+    facebook.client_id:           12345678910
+    facebook.client_secret:       12345678910

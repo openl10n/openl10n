@@ -40,6 +40,7 @@ security:
                 resource_owners:
                     sensio_connect:   sensio_connect_login
                     vkontakte:        vkontakte_login
+                    facebook:         facebook_login
                 login_path:        openl10n_security_login
                 failure_path:      openl10n_security_login
 

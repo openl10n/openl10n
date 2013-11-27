@@ -119,3 +119,8 @@ hwi_oauth:
             user_response_class: "Openl10n\Bundle\UserBundle\OAuth\Response\VkontakteUserResponse"
             paths:
                 realname: ['response.0.first_name', 'response.0.last_name']
+        facebook:
+            type:                facebook
+            client_id:           %facebook.client_id%
+            client_secret:       %facebook.client_secret%
+            scope:               "email"

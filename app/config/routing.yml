@@ -24,3 +24,5 @@ sensio_connect_login:
     pattern: /login/check-sensio
 vkontakte_login:
     pattern: /login/check-vkontakte
+facebook_login:
+    pattern: /login/check-facebook
