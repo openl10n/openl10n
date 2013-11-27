@@ -40,6 +40,26 @@
 
       model.set('selected', true);
       this.selectedItem = model;
+    },
+
+    selectNextItem: function() {
+      if (null === this.selectedItem)
+        return;
+
+      var currentIndex = this.indexOf(this.selectedItem);
+      var nextItemIndex = Math.min(currentIndex + 1, this.length - 1);
+      var nextItem = this.at(nextItemIndex);
+      editor.page.set('hash', nextItem.id);
+    },
+
+    selectPreviousItem: function() {
+      if (null === this.selectedItem)
+        return;
+
+      var currentIndex = this.indexOf(this.selectedItem);
+      var previousItemIndex = Math.max(0, currentIndex - 1);
+      var previousItem = this.at(previousItemIndex);
+      editor.page.set('hash', previousItem.id);
     }
 
   });
