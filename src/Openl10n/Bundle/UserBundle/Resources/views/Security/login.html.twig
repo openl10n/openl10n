@@ -1,6 +1,8 @@
 {% extends '@Openl10nWeb/layout/base.html.twig' %}
 
 {% block content %}
+  <div id="fb-root"></div>
+
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -38,4 +40,12 @@
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  <script type="text/javascript">
+    {{ include('@Openl10nUser/Security/js/facebook_popup.html.js', {}, with_context = false) }}
+  </script>
 {% endblock %}
