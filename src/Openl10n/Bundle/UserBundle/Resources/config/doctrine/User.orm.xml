@@ -21,6 +21,13 @@
 
         <one-to-one field="credentials" target-entity="UserCredentials" mapped-by="user" />
 
+        <one-to-many field="oauthTokens" target-entity="UserOAuthToken" mapped-by="user">
+            <cascade>
+                <cascade-persist />
+                <cascade-remove />
+            </cascade>
+        </one-to-many>
+
         <many-to-many field="roles" mapped-by="users" target-entity="UserRole"/>
     </entity>
 

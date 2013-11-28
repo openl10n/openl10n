@@ -38,6 +38,28 @@ class UserRepository extends EntityRepository implements UserProviderInterface
         return $user;
     }
 
+    public function findOneByOAuthId($providerName, $tokenId)
+    {
+        $q = $this
+            ->createQueryBuilder('u')
+            ->select('u, t, u')
+            ->leftJoin('u.oauthTokens', 't')
+            ->leftJoin('u.roles', 'r')
+            ->where('t.providerName = :providerName')
+            ->andWhere('t.tokenId = :tokenId')
+            ->setParameter('providerName', $providerName)
+            ->setParameter('tokenId', $tokenId)
+            ->getQuery();
+
+        try {
+            $user = $q->getSingleResult();
+        } catch (NoResultException $e) {
+            return null;
+        }
+
+        return $user;
+    }
+
     public function refreshUser(UserInterface $user)
     {
         $class = get_class($user);

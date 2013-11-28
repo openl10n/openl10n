@@ -9,11 +9,13 @@ use Openl10n\Bundle\CoreBundle\Object\Email;
 use Openl10n\Bundle\CoreBundle\Object\Name;
 use Openl10n\Bundle\CoreBundle\Object\Slug;
 use Openl10n\Bundle\UserBundle\Entity\User;
+use Openl10n\Bundle\UserBundle\Entity\UserRepository;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class OAuthAwareUserProvider implements OAuthAwareUserProviderInterface
 {
     protected $manager;
+    protected $userRepository;
 
     public function __construct(ObjectManager $manager)
     {
@@ -24,7 +26,18 @@ class OAuthAwareUserProvider implements OAuthAwareUserProviderInterface
     {
         $user = null;
 
-        // @TODO find user per provider ID
+        $providerName = $response->getResourceOwner()->getName();
+
+        if (null !== $oauthId = $response->getUsername()) {
+            $user = $this->manager->getRepository('Openl10nUserBundle:User')
+                ->findOneByOAuthId($providerName, $oauthId)
+            ;
+        }
+
+        if (null !== $user) {
+            return $user;
+        }
+
         if (null !== $email = $response->getEmail()) {
             $user = $this->manager->getRepository('Openl10nUserBundle:User')
                 ->findOneBy(array('email' => $email))
@@ -57,6 +70,11 @@ class OAuthAwareUserProvider implements OAuthAwareUserProviderInterface
 
         if (null !== $name = $response->getRealName()) {
             $user->setDisplayName(new Name($name));
+        }
+
+        $providerName = $response->getResourceOwner()->getName();
+        if (null !== $oauthId = $response->getUsername()) {
+            $user->addOAuthTokenId($providerName, $oauthId);
         }
 
         return $user;
