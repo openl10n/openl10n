@@ -2,6 +2,7 @@
 
 namespace Openl10n\Bundle\UserBundle\Controller;
 
+use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,9 +19,19 @@ class SecurityController extends Controller
 
         // Create login form
         $form = $this->get('form.factory')->createNamed('', 'login');
+        $error = $this->getErrorForRequest($request);
 
-        if ($error = $this->getErrorMessage()) {
-            $form->addError(new FormError($error));
+        if ($error instanceof AccountNotLinkedException) {
+            $key = time();
+            $session = $request->getSession();
+            $session->set('_hwi_oauth.registration_error.'.$key, $error);
+
+            return $this->redirect($this->generateUrl('openl10n_registration', array('key' => $key)));
+        }
+
+        if ($error) {
+            $message = $error instanceof \Exception ? $error->getMessage() : $error;
+            $form->addError(new FormError($message));
         }
 
         return $this->render('Openl10nUserBundle:Security:login.html.twig', array(
@@ -38,14 +49,11 @@ class SecurityController extends Controller
         throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
     }
 
-    protected function getErrorMessage()
+    protected function getErrorForRequest(Request $request)
     {
-        $request = $this->getRequest();
-        $attrs = $request->attributes;
         $session = $request->getSession();
-
-        if ($attrs->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $attrs->get(SecurityContext::AUTHENTICATION_ERROR);
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
         } elseif (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
@@ -53,6 +61,6 @@ class SecurityController extends Controller
             $error = '';
         }
 
-        return $error instanceof \Exception ? $error->getMessage() : $error;
+        return $error;
     }
 }

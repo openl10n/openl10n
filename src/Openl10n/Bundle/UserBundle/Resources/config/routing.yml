@@ -7,3 +7,7 @@ openl10n_security_check:
 
 openl10n_security_logout:
     pattern: /logout
+
+openl10n_registration:
+    pattern: /registration/{key}
+    defaults: { _controller: Openl10nUserBundle:Registration:registration }

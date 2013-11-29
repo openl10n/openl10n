@@ -10,12 +10,29 @@
 
         <!-- Processor -->
         <parameter key="openl10n.processor.create_user.class">Openl10n\Bundle\UserBundle\Processor\CreateUserProcessor</parameter>
+        <parameter key="openl10n.form.type.registration.class">Openl10n\Bundle\UserBundle\Form\Type\RegistrationType</parameter>
+
+        <!-- Form Handler  -->
+        <parameter key="openl10n.form.handler.registration.class">Openl10n\Bundle\UserBundle\Form\Handler\RegistrationFormHandler</parameter>
+
+        <!-- Security -->
+        <parameter key="openl10n.oauth_aware.user_provider.class">Openl10n\Bundle\UserBundle\OAuth\Provider\OAuthAwareUserProvider</parameter>
     </parameters>
 
     <services>
         <!-- Form Type -->
-        <service id="form.type.login" class="%openl10n.form.type.login.class%">
+        <service id="openl10n.form.type.login" class="%openl10n.form.type.login.class%">
             <tag name="form.type" alias="login" />
+        </service>
+        <service id="openl10n.form.type.registration" class="%openl10n.form.type.registration.class%">
+            <tag name="form.type" alias="registration" />
+        </service>
+
+        <!-- Form Handler  -->
+        <service id="openl10n.form.handler.registration" class="%openl10n.form.handler.registration.class%">
+        </service>
+        <service id="openl10n.form.registration" factory-service="form.factory" factory-method="create" class="Symfony\Component\Form\FormInterface">
+            <argument>registration</argument>
         </service>
 
         <!-- Processor -->
@@ -24,7 +41,8 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
-        <service id="openl10n.oauth_aware.user_provider" class="Openl10n\Bundle\UserBundle\OAuth\Provider\OAuthAwareUserProvider">
+        <!-- Security -->
+        <service id="openl10n.oauth_aware.user_provider" class="%openl10n.oauth_aware.user_provider.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>

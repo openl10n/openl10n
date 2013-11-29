@@ -1,25 +1,31 @@
+# OpenLocalization
+openl10n_web:
+    resource: "@Openl10nWebBundle/Resources/config/routing.yml"
+openl10n_user:
+    resource: "@Openl10nUserBundle/Resources/config/routing.yml"
+openl10n_editor:
+    resource: "@Openl10nEditorBundle/Resources/config/routing.yml"
 openl10n_api:
     type: rest
     resource: "@Openl10nApiBundle/Resources/config/routing.yml"
     prefix:   /api
 
-openl10n_web:
-    resource: "@Openl10nWebBundle/Resources/config/routing.yml"
-openl10n_user:
-    resource: "@Openl10nUserBundle/Resources/config/routing.yml"
-
-openl10n_editor:
-    resource: "@Openl10nEditorBundle/Resources/config/routing.yml"
-
+# FOS JS
 fos_js:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
+# HWI
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix:   /connect
-#hwi_oauth_login:
-#    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
-#    prefix:   /login-oauth
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /connect
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /connect
+
+# OAuth login check path
 sensio_connect_login:
     pattern: /login/check-sensio
 vkontakte_login:

@@ -106,6 +106,11 @@ jms_serializer:
 
 hwi_oauth:
     firewall_name: main
+    connect:
+        confirmation:              true
+        account_connector:         openl10n.oauth_aware.user_provider
+        registration_form_handler: openl10n.form.handler.registration
+        registration_form:         openl10n.form.registration
     resource_owners:
         sensio_connect:
             type:                sensio_connect

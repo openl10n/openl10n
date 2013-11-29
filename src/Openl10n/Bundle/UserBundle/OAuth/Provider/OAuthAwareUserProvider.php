@@ -3,7 +3,9 @@
 namespace Openl10n\Bundle\UserBundle\OAuth\Provider;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Openl10n\Bundle\CoreBundle\Object\Email;
 use Openl10n\Bundle\CoreBundle\Object\Name;
@@ -11,8 +13,9 @@ use Openl10n\Bundle\CoreBundle\Object\Slug;
 use Openl10n\Bundle\UserBundle\Entity\User;
 use Openl10n\Bundle\UserBundle\Entity\UserRepository;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class OAuthAwareUserProvider implements OAuthAwareUserProviderInterface
+class OAuthAwareUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
     protected $manager;
     protected $userRepository;
@@ -20,6 +23,12 @@ class OAuthAwareUserProvider implements OAuthAwareUserProviderInterface
     public function __construct(ObjectManager $manager)
     {
         $this->manager = $manager;
+    }
+
+    public function connect(UserInterface $user, UserResponseInterface $response)
+    {
+        $this->manager->persist($user);
+        $this->manager->flush($user);
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
@@ -45,8 +54,7 @@ class OAuthAwareUserProvider implements OAuthAwareUserProviderInterface
         }
 
         if (null === $user) {
-            // create this user on the fly
-            $user = $this->createUser($response);
+            throw new AccountNotLinkedException(sprintf("User '%s:%s' not found.", $providerName, $oauthId));
         }
 
         $this->attachOAuthId(
@@ -57,26 +65,6 @@ class OAuthAwareUserProvider implements OAuthAwareUserProviderInterface
 
         $this->manager->persist($user);
         $this->manager->flush($user);
-
-        //throw new UsernameNotFoundException('You have not been allowed to access to this page.');
-
-        return $user;
-    }
-
-    protected function createUser($response)
-    {
-        $username = $response->getUsername() ?: (new \DateTime())->getTimestamp();
-
-        // TODO use proper factory service to create new user object
-        $user = new User(new Slug($username));
-
-        if (null !== $email = $response->getEmail()) {
-            $user->setEmail(new Email($email));
-        }
-
-        if (null !== $name = $response->getRealName()) {
-            $user->setDisplayName(new Name($name));
-        }
 
         return $user;
     }
