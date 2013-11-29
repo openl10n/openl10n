@@ -47,10 +47,16 @@ class OAuthAwareUserProvider implements OAuthAwareUserProviderInterface
         if (null === $user) {
             // create this user on the fly
             $user = $this->createUser($response);
-
-            $this->manager->persist($user);
-            $this->manager->flush($user);
         }
+
+        $this->attachOAuthId(
+            $user,
+            $response->getResourceOwner()->getName(),
+            $response->getUsername()
+        );
+
+        $this->manager->persist($user);
+        $this->manager->flush($user);
 
         //throw new UsernameNotFoundException('You have not been allowed to access to this page.');
 
@@ -72,11 +78,13 @@ class OAuthAwareUserProvider implements OAuthAwareUserProviderInterface
             $user->setDisplayName(new Name($name));
         }
 
-        $providerName = $response->getResourceOwner()->getName();
-        if (null !== $oauthId = $response->getUsername()) {
+        return $user;
+    }
+
+    protected function attachOAuthId($user, $providerName, $oauthId)
+    {
+        if (null !== $oauthId) {
             $user->addOAuthTokenId($providerName, $oauthId);
         }
-
-        return $user;
     }
 }
