@@ -16,7 +16,7 @@
 
         <many-to-one field="project" target-entity="Project" inversed-by="domains">
             <join-columns>
-                <join-column name="project_id" referenced-column-name="id" />
+                <join-column name="project_id" referenced-column-name="id" nullable="false" />
             </join-columns>
         </many-to-one>
 

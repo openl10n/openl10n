@@ -19,7 +19,7 @@
 
         <many-to-one field="key" target-entity="TranslationKey" inversed-by="phrases">
             <join-columns>
-                <join-column name="key_id" referenced-column-name="id" />
+                <join-column name="key_id" referenced-column-name="id" nullable="false" />
             </join-columns>
         </many-to-one>
     </entity>
