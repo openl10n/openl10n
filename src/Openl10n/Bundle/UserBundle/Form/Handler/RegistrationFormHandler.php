@@ -3,8 +3,8 @@
 namespace Openl10n\Bundle\UserBundle\Form\Handler;
 
 use HWI\Bundle\OAuthBundle\Form\RegistrationFormHandlerInterface;
-use Openl10n\Bundle\UserBundle\Security\User\RegisterUser;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use Openl10n\Bundle\UserBundle\Security\User\RegisterUser;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 

@@ -36,7 +36,7 @@ class RegistrationController extends Controller
         $error = $session->get('_hwi_oauth.registration_error.'.$key);
         //$session->remove('_hwi_oauth.registration_error.'.$key);
 
-        if (!($error instanceof AccountNotLinkedException) || (time() - $key > 300)) {
+        if (!$error instanceof AccountNotLinkedException) {
             throw new \Exception('Cannot register an account.');
         }
 
