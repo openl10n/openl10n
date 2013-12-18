@@ -1,0 +1,4 @@
+projects:
+    type:     rest
+    resource: Openl10n\Bundle\ApiBundle\Controller\ProjectController
+    name_prefix: openl10n_api_

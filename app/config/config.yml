@@ -94,3 +94,12 @@ sensio_framework_extra:
     view:    { annotations: false }
     router:  { annotations: true }
     request: { converters: true }
+
+jms_serializer:
+    metadata:
+        auto_detection: false
+
+        directories:
+            api:
+                namespace_prefix: "Openl10n\Bundle\CoreBundle"
+                path: "@Openl10nApiBundle/Resources/config/serializer"

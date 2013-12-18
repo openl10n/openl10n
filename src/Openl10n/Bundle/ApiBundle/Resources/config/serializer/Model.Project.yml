@@ -1,0 +1,12 @@
+Openl10n\Bundle\CoreBundle\Model\Project:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: false
+        slug:
+            expose: true
+        name:
+            expose: true
+        defaultLocale:
+            expose: true
+

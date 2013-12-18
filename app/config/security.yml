@@ -16,6 +16,13 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        api:
+            pattern:    ^/api
+            anonymous: ~
+            stateless: true
+            http_basic:
+                realm: "API access"
+
         main:
             pattern:    ^/
             form_login:
@@ -32,4 +39,5 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: ROLE_USER }
         - { path: ^/, roles: ROLE_USER }

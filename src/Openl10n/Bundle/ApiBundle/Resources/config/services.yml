@@ -1,0 +1,7 @@
+parameters:
+#    openl10n_api.example.class: Openl10n\Bundle\ApiBundle\Example
+
+services:
+#    openl10n_api.example:
+#        class: %openl10n_api.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
