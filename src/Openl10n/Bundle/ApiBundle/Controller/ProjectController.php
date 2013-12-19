@@ -28,9 +28,9 @@ class ProjectController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function getAction($slug)
+    public function getAction($project)
     {
-        return $this->findProjectOr404($slug);
+        return $this->findProjectOr404($project);
     }
 
     /**
@@ -47,7 +47,7 @@ class ProjectController extends Controller implements ClassResourceInterface
             $project = $this->get('openl10n.processor.create_project')->execute($action);
             $url = $this->generateUrl(
                 'openl10n_api_get_project',
-                array('slug' => (string) $project->getSlug()),
+                array('project' => (string) $project->getSlug()),
                 true // absolute
             );
 
@@ -60,9 +60,9 @@ class ProjectController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function putAction(Request $request, $slug)
+    public function putAction(Request $request, $project)
     {
-        $project = $this->findProjectOr404($slug);
+        $project = $this->findProjectOr404($project);
 
         $action = new EditProjectAction($project);
         $form = $this->get('form.factory')->createNamed('', 'openl10n_project', $action, array(
@@ -81,9 +81,9 @@ class ProjectController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function patchAction(Request $request, $slug)
+    public function patchAction(Request $request, $project)
     {
-        $project = $this->findProjectOr404($slug);
+        $project = $this->findProjectOr404($project);
 
         $action = new EditProjectAction($project);
         $form = $this->get('form.factory')->createNamed('', 'openl10n_project', $action, array(
@@ -102,9 +102,9 @@ class ProjectController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View(statusCode=204)
      */
-    public function deleteAction(Request $request, $slug)
+    public function deleteAction(Request $request, $project)
     {
-        $project = $this->findProjectOr404($slug);
+        $project = $this->findProjectOr404($project);
         $action = new DeleteProjectAction($project);
         $this->get('openl10n.processor.delete_project')->execute($action);
     }

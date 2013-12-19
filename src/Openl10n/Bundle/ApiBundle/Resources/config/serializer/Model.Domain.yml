@@ -1,0 +1,10 @@
+Openl10n\Bundle\CoreBundle\Model\Domain:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: false
+        slug:
+            expose: true
+        name:
+            expose: true
+

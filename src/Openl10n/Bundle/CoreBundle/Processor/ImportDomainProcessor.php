@@ -85,5 +85,7 @@ class ImportDomainProcessor
         $this->translationManager->flush();
 
         $this->fileUploader->remove($file);
+
+        return $domain;
     }
 }
