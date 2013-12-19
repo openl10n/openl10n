@@ -31,6 +31,7 @@
         "behat/mink-extension":         "*",
         "behat/mink-browserkit-driver": "*",
         "behat/mink-selenium2-driver":  "*",
+        "behat/mink-goutte-driver":     "*",
         "phpspec/phpspec":              "2.0.*@dev"
     },
     "scripts": {
