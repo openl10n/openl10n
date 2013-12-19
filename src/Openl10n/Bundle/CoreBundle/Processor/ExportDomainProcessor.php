@@ -43,7 +43,11 @@ class ExportDomainProcessor
         }
 
         // Export messages into a MessageCatalogue
-        $messages = $this->translationRepository->export($domain, $locale);
+        $translations = $this->translationRepository->findByDomain($domain);
+        //$messages = array_map(function() {
+        //    return array();
+        //}, $translations);
+        $messages = ['foo' => 'bar'];
         $catalogue = new MessageCatalogue($locale, array($domain->getSlug()->toString() => $messages));
 
         // Dump to file

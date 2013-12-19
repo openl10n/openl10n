@@ -59,11 +59,13 @@ class TranslationRepository implements TranslationRepositoryInterface
         return array_pop($result);
     }
 
-    public function findAll()
+    public function findByDomain(DomainInterface $domain)
     {
         return $this->registry->getManager()
             ->getRepository('Openl10nCoreBundle:TranslationKey')
-            ->findAll()
+            ->findByDomain(array(
+                'domain' => $domain
+            ))
         ;
     }
 
