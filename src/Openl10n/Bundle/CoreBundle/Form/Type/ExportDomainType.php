@@ -43,20 +43,23 @@ class ExportDomainType extends AbstractType
                 $project = $data->getProject();
                 $domains = $domainRepository->findByProject($project);
 
+                $projectLocales = array_map(function($language) {
+                    return $language->getLocale()->toString();
+                }, $project->getLanguages()->toArray());
+
                 $keys = array_map(function ($domain) { return $domain->getSlug(); }, $domains);
                 $values = array_map(function ($domain) { return $domain->getName(); }, $domains);
                 $domainList = array_combine($keys, $values);
 
-                $form->add('domain', 'choice', array(
-                    'choices' => $domainList,
-                ));
+                $form
+                    ->add('domain', 'choice', array(
+                        'choices' => $domainList,
+                    ))
+                    ->add('locale', 'openl10n_locale_choice', array(
+                        'restrict' => $projectLocales,
+                    ))
+                ;
             })
-            ->add('locale', 'choice', array(
-                'choices' => array(
-                    'en_GB' => 'English',
-                    'fr_FR' => 'French',
-                )
-            ))
             ->add('format', 'choice', array(
                 'choices' => $this->getFormats()
             ))
