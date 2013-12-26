@@ -50,10 +50,13 @@ class ExportDomainProcessor
         $values = array_map(function ($translation) use ($locale) {
             $phrase = $translation->getPhrase($locale);
 
-            return (null !== $phrase && '' != $phrase->getText()) ? $phrase->getText() : $translation->getKey();
+            return null !== $phrase ? $phrase->getText() : null;
         }, $translations);
 
-        $catalogue = new MessageCatalogue($locale, array($domain->getSlug()->toString() => array_combine($keys, $values)));
+        $messages = array_combine($keys, $values);
+        $messages = array_filter($messages);
+
+        $catalogue = new MessageCatalogue($locale, array($domain->getSlug()->toString() => $messages));
 
         // Dump to file
         $directory = sys_get_temp_dir().DIRECTORY_SEPARATOR.'export_'.mt_rand(0, 99999);
