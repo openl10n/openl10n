@@ -1,11 +1,19 @@
 {
-    "name": "openlocalization/openlocalization",
+    "name": "openl10n/openl10n",
     "license": "MIT",
     "type": "project",
     "description": "The OpenLocalization web site",
     "autoload": {
         "psr-0": { "": "src/" }
     },
+    "authors": [
+        {
+            "name": "Matthieu Moquet",
+            "email": "matthieu@moquet.net",
+            "homepage": "http://moquet.net",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.4",
