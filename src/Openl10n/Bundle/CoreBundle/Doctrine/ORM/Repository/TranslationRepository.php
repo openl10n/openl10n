@@ -9,6 +9,7 @@ use Openl10n\Bundle\CoreBundle\Model\ProjectInterface;
 use Openl10n\Bundle\CoreBundle\Model\Translation;
 use Openl10n\Bundle\CoreBundle\Repository\TranslationRepositoryInterface;
 use Openl10n\Bundle\CoreBundle\Specification\TranslationSpecificationInterface;
+use Openl10n\Bundle\CoreBundle\Object\Locale;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
@@ -67,6 +68,26 @@ class TranslationRepository implements TranslationRepositoryInterface
                 'domain' => $domain
             ))
         ;
+    }
+
+    public function findApprovedByDomain(DomainInterface $domain, Locale $locale)
+    {
+        $queryBuilder = $this->createQueryBuilder();
+
+        $queryBuilder
+            ->addSelect('p')
+            ->leftJoin('k.phrases', 'p')
+            ->where('k.domain = :domain')
+            ->andWhere('p.locale = :locale')
+            ->andWhere('p.isApproved = :approved')
+            ->setParameters(array(
+                'domain' => $domain,
+                'locale' => $locale,
+                'approved' => true,
+            ))
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     public function findSatisfying(TranslationSpecificationInterface $spec)
