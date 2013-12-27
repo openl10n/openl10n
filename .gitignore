@@ -6,6 +6,8 @@
 /app/cache/*
 /app/config/parameters.yml
 /app/logs/*
+/app/deploy/*
+!/app/deploy/deploy.rb.dist
 
 /vendor/
 /build/
