@@ -7,12 +7,21 @@
     <parameters>
         <!-- Form Type -->
         <parameter key="openl10n.form.type.login.class">Openl10n\Bundle\UserBundle\Form\Type\LoginType</parameter>
+
+        <!-- Processor -->
+        <parameter key="openl10n.processor.create_user.class">Openl10n\Bundle\UserBundle\Processor\CreateUserProcessor</parameter>
     </parameters>
 
     <services>
         <!-- Form Type -->
         <service id="form.type.login" class="%openl10n.form.type.login.class%">
             <tag name="form.type" alias="login" />
+        </service>
+
+        <!-- Processor -->
+        <service id="openl10n.processor.create_user" class="%openl10n.processor.create_user.class%">
+            <argument type="service" id="security.encoder_factory" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>
 </container>

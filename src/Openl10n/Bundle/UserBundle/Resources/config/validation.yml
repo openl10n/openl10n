@@ -1,0 +1,14 @@
+Openl10n\Bundle\UserBundle\Action\CreateUserAction:
+    properties:
+        username:
+            - NotBlank: ~
+            - Regex: "/^[a-zA-Z0-9\-\.\_]+$/"
+        displayName:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
+            - Email: ~
+        password:
+            - NotBlank: ~
+            - Length:
+                min: 6
