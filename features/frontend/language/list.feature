@@ -4,5 +4,5 @@ Feature: Project locales list
         Given I am connected as "john"
           And I am on "/projects/tutorial/languages/"
 
-         Then I should see "(en)"
-          And I should see "(fr_FR)"
+         Then the response should contain "en -"
+          And the response should contain "fr_FR -"
