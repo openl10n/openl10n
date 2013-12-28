@@ -37,10 +37,7 @@ class ExportController extends Controller
         if ($form->submit($data)->isValid()) {
             $file = $this->get('openl10n.processor.export_domain')->execute($action);
 
-            $response = new BinaryFileResponse($file);
-            $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT);
-
-            return $response;
+            return new BinaryFileResponse($file);
         }
 
         return View::create($form, 400);
