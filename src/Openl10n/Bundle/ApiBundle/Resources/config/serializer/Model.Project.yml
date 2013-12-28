@@ -5,8 +5,11 @@ Openl10n\Bundle\CoreBundle\Model\Project:
             expose: false
         slug:
             expose: true
+            inline: true
         name:
             expose: true
+            inline: true
         defaultLocale:
             expose: true
+            inline: true
 

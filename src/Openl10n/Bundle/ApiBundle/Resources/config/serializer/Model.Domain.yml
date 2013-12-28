@@ -5,6 +5,8 @@ Openl10n\Bundle\CoreBundle\Model\Domain:
             expose: false
         slug:
             expose: true
+            inline: true
         name:
             expose: true
+            inline: true
 

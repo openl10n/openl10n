@@ -5,4 +5,5 @@ Openl10n\Bundle\CoreBundle\Model\Language:
             expose: false
         locale:
             expose: true
+            inline: true
 
