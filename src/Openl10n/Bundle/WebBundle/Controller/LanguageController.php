@@ -15,16 +15,16 @@ class LanguageController extends Controller
     public function listAction(Request $request, $slug)
     {
         $project = $this->findProjectOr404($slug);
-        $locales = $this->get('openl10n.repository.language')->findByProject($project);
+        $languages = $this->get('openl10n.repository.language')->findByProject($project);
 
         // Simple sort by display languages
-        usort($locales, function($locale1, $locale2) {
+        usort($languages, function($locale1, $locale2) {
             return strcmp($locale1->getLocale()->getDisplayName(), $locale2->getLocale()->getDisplayName());
         });
 
         return $this->render('Openl10nWebBundle:Language:list.html.twig', array(
             'project' => $project,
-            'locales' => $locales,
+            'languages' => $languages,
         ));
     }
 

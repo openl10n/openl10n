@@ -1,5 +1,7 @@
 {% extends '@Openl10nWeb/layout/base.html.twig' %}
 
+{% import '@Openl10nWeb/layout/macros.html.twig' as macros %}
+
 {% block content %}
   <div class="ol-header">
     <div class="container">
@@ -37,10 +39,10 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
-              <a href="{{ path('openl10n_language_list', {slug: project.slug}) }}" class="pull-right">
+              <a href="{{ path('openl10n_language_list', {'slug': project.slug}) }}" class="pull-right">
                 <i class="icon-pencil"></i>
               </a>
-              Locales
+              Languages
             </h3>
           </div>
           <div class="panel-body">
@@ -48,7 +50,8 @@
               {% for language in project.languages %}
                 <tr>
                   <td>
-                    {{ language.locale.displayName }} ({{ language.locale }})
+                    {{ macros.flag(language.locale) }}
+                    {{ language.locale.displayName(app.user.preferedLocale)|title }}
                   </td>
                 </tr>
               {% endfor %}
@@ -58,7 +61,7 @@
       </div>
 
       <div class="col-md-8">
-        {{ render(controller('Openl10nWebBundle:ProjectWidget:listDomains', {project: project})) }}
+        {{ render(controller('Openl10nWebBundle:ProjectWidget:listDomains', {'project': project})) }}
       </div>
     </div>
   </div>

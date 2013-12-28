@@ -12,7 +12,7 @@ Feature: Add locale to a project
          And I press "Add"
 
         Then I should be on "/projects/tutorial/languages/"
-         And I should see "fr_BE"
+         And the response should contain "fr_BE -"
 
     Scenario: A new project must have a default locale
         Given I am connected as "john"
@@ -27,7 +27,7 @@ Feature: Add locale to a project
         Then I should be on "/projects/test-new-locale/"
 
         When I am on "/projects/test-new-locale/languages/"
-        Then I should see "pt_BR"
+        Then the response should contain "pt_BR -"
 
     #Scenario: A user cannot add an existing locale
     #    Given I am connected as "john"

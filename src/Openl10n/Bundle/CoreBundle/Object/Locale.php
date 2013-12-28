@@ -43,6 +43,22 @@ class Locale
     }
 
     /**
+     * Gets the flag for the locale.
+     *
+     * @return string The flag code or 'unknown'
+     */
+    public function getFlag()
+    {
+        if ($this->getRegion() !== '') {
+            return strtolower($this->getRegion());
+        } elseif (array_key_exists($this->getPrimaryLanguage(), Flag::$mapping)) {
+            return strtolower(Flag::$mapping[$this->getPrimaryLanguage()]);
+        }
+
+        return 'unknown';
+    }
+
+    /**
      * Returns an appropriately localized display name for the locale.
      *
      * @return string The display name
@@ -52,6 +68,32 @@ class Locale
         return $inLocale ?
             \Locale::getDisplayName($this->locale, $inLocale) :
             \Locale::getDisplayName($this->locale)
+        ;
+    }
+
+    /**
+     * Returns an appropriately localized display language for the locale.
+     *
+     * @return string The display language
+     */
+    public function getDisplayLanguage($inLocale = null)
+    {
+        return $inLocale ?
+            \Locale::getDisplayLanguage($this->locale, $inLocale) :
+            \Locale::getDisplayLanguage($this->locale)
+        ;
+    }
+
+    /**
+     * Returns an appropriately localized display region for the locale.
+     *
+     * @return string The display region
+     */
+    public function getDisplayRegion($inLocale = null)
+    {
+        return $inLocale ?
+            \Locale::getDisplayRegion($this->locale, $inLocale) :
+            \Locale::getDisplayRegion($this->locale)
         ;
     }
 

@@ -1,12 +1,14 @@
 {% extends '@Openl10nWeb/layout/base.html.twig' %}
 
+{% import '@Openl10nWeb/layout/macros.html.twig' as macros %}
+
 {% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">{{ project.name }}'s locales</h3>
+          <h3 class="panel-title">{{ project.name }}'s languages</h3>
         </div>
 
         <div class="panel-body">
@@ -18,18 +20,20 @@
               </tr>
             </thead>
             <tbody>
-              {% for locale in locales %}
-                <tr{% if project.defaultLocale == locale.locale %} class="active"{% endif %}>
+              {% for language in languages %}
+                <tr{% if project.defaultLocale == language.locale %} class="active"{% endif %}>
                   <td>
-                    {{ locale.locale.displayName }}
-                    ({{ locale.locale }})
-                    {% if project.defaultLocale == locale.locale %}
+                    {{ macros.flag(language.locale) }}
+                    {{ language.locale.displayName(app.user.preferedLocale)|title }}
+                    ({{ language.locale }})
+
+                    {% if project.defaultLocale == language.locale %}
                       — <span class="text-info">default locale</span>
                     {% endif %}
                   </td>
                   <td>
-                    {% if project.defaultLocale != locale.locale %}
-                      <a href="{{ path('openl10n_language_delete', {slug: project.slug, locale: locale.locale}) }}">
+                    {% if project.defaultLocale != language.locale %}
+                      <a href="{{ path('openl10n_language_delete', {slug: project.slug, locale: language.locale}) }}">
                         <i class="icon-trash" title="Remove locale"></i>
                       </a>
                     {% endif %}
