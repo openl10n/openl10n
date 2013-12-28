@@ -18,12 +18,4 @@ class UniqueProject extends Constraint
     {
         return $this->service;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getTargets()
-    {
-        return self::CLASS_CONSTRAINT;
-    }
 }

@@ -25,28 +25,32 @@ class UniqueProjectValidator extends ConstraintValidator
     }
 
     /**
-     * @param object     $model
+     * @param object     $value
      * @param Constraint $constraint
      *
      * @throws UnexpectedTypeException
      * @throws ConstraintDefinitionException
      */
-    public function validate($model, Constraint $constraint)
+    public function validate($value, Constraint $constraint)
     {
-        if (!$model instanceof CreateProjectAction) {
-            throw new UnexpectedTypeException($model, 'Openl10n\Bundle\CoreBundle\Action\CreateProjectAction');
+        if (null === $value || '' === $value) {
+            return;
         }
 
-        $slug = $model->slug;
-
-        if (empty($slug)) {
-            return true;
+        if (!is_scalar($value) && !(is_object($value) && method_exists($value, '__toString'))) {
+            throw new UnexpectedTypeException($value, 'string');
         }
 
-        $project = $this->projectRepository->findOneBySlug(new Slug($slug));
+        $value = (string) $value;
+
+        if (empty($value)) {
+            return;
+        }
+
+        $project = $this->projectRepository->findOneBySlug(new Slug($value));
 
         if (null !== $project) {
-            $this->context->addViolationAt('slug', $constraint->message);
+            $this->context->addViolation($constraint->message);
         }
     }
 }
