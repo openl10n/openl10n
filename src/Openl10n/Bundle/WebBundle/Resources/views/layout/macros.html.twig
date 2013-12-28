@@ -1,0 +1,3 @@
+{% macro locale(locale) %}
+    {{ locale.displayLanguage(app.user.preferedLocale)|title }} <span class="flag flag-{{ locale.flag }}" data-toggle="tooltip" data-original-title="{{ locale }} - {{ locale.displayName(app.user.preferedLocale)|title }}"></span>
+{% endmacro %}

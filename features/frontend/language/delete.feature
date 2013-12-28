@@ -10,7 +10,7 @@ Feature: Delete locale from a project
 
         When I press "Yes"
           And I should be on "/projects/tutorial/languages/"
-          And I should not see "it_IT"
+          And the response should not contain "it_IT -"
 
     Scenario: A user cannot delete the project's default locale
         Given I am connected as "john"
