@@ -9,6 +9,12 @@ domain:
     parent: project
     name_prefix: openl10n_api_
 
+language:
+    type: rest
+    resource: Openl10n\Bundle\ApiBundle\Controller\LanguageController
+    parent: project
+    name_prefix: openl10n_api_
+
 openl10n_api_export:
     path: /projects/{project}/domains/{domain}/translations.{locale}.{_format}
     defaults: { _controller: Openl10nApiBundle:Export:export }

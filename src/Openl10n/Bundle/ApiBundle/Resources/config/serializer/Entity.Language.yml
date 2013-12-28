@@ -1,0 +1,5 @@
+Openl10n\Bundle\CoreBundle\Entity\Language:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: false

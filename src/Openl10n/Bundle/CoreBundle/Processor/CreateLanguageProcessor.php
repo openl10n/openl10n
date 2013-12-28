@@ -33,5 +33,7 @@ class CreateLanguageProcessor
         $language = $this->languageFactory->createNew($project, $locale);
         $this->projectManager->persist($language);
         $this->projectManager->flush($language);
+
+        return $language;
     }
 }
