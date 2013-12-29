@@ -39,7 +39,7 @@ class TranslationController extends FOSRestController implements ClassResourceIn
 
         $specification = new TranslationListSpecification($domain, $context, $filters);
         $pager = $this->get('openl10n.repository.translation')->paginateSatisfying($specification);
-        $pager->setMaxPerPage(10);
+        $pager->setMaxPerPage(1000);
 
         try {
             $pager->setCurrentPage($request->query->get('page', 1));
