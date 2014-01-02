@@ -7,6 +7,7 @@
 /app/config/parameters.yml
 /app/config/deploy.rb
 /app/deploy/*
+!/app/deploy/example.rb
 /app/logs/*
 
 /vendor/
