@@ -5,9 +5,9 @@
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
+/app/config/deploy.rb
+/app/deploy/*
 /app/logs/*
-/app/config/production.rb
-/app/config/demo.rb
 
 /vendor/
 /build/
