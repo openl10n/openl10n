@@ -5,6 +5,8 @@ php:
 
 before_install:
     # Update system
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
     - sudo apt-get update -qq
     - composer self-update
 
@@ -22,11 +24,12 @@ install:
     - sh -e /etc/init.d/xvfb start
     - export DISPLAY=:99.0
 
-    # Selenium server
+    # Selenium server (with chrome driver)
+    - sudo apt-get install google-chrome-stable
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar
-    #- wget http://chromedriver.storage.googleapis.com/2.4/chromedriver_linux32.zip
-    #- unzip chromedriver_linux32.zip
-    #- sudo mv chromedriver /usr/bin
+    - wget http://chromedriver.storage.googleapis.com/2.4/chromedriver_linux32.zip
+    - unzip chromedriver_linux32.zip
+    - sudo mv chromedriver /usr/bin
     - java -jar selenium-server-standalone-2.35.0.jar > /dev/null 2>&1 &
 
     # App configuration
