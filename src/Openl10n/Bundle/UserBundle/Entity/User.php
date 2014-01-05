@@ -24,6 +24,11 @@ class User extends BaseUser implements SecurityUserInterface
     protected $credentials;
 
     /**
+     * @var UserOAuthTokens
+     */
+    protected $oauthTokens;
+
+    /**
      * @var array
      */
     private $roles;
@@ -33,6 +38,7 @@ class User extends BaseUser implements SecurityUserInterface
         parent::__construct($username);
 
         $this->roles = new ArrayCollection();
+        $this->oauthTokens = new ArrayCollection();
     }
 
     /**
@@ -89,6 +95,24 @@ class User extends BaseUser implements SecurityUserInterface
         }
 
         return $this->preferedLocale;
+    }
+
+    public function addOAuthTokenId($providerName, $tokenId)
+    {
+        $this->oauthTokens->add(new UserOAuthToken($this, $providerName, $tokenId));
+
+        return $this;
+    }
+
+    public function getOAuthId($providerName)
+    {
+        foreach ($this->oauthTokens as $token) {
+            if ($token->getProviderName() === $providerName) {
+                return $token->getTokenId();
+            }
+        }
+
+        return null;
     }
 
     /**

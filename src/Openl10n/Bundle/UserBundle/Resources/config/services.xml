@@ -10,18 +10,62 @@
 
         <!-- Processor -->
         <parameter key="openl10n.processor.create_user.class">Openl10n\Bundle\UserBundle\Processor\CreateUserProcessor</parameter>
+        <parameter key="openl10n.form.type.registration.class">Openl10n\Bundle\UserBundle\Form\Type\RegistrationType</parameter>
+
+        <!-- Form Handler  -->
+        <parameter key="openl10n.form.handler.registration.class">Openl10n\Bundle\UserBundle\Form\Handler\RegistrationFormHandler</parameter>
+
+        <!-- Security -->
+        <parameter key="openl10n.oauth_aware.user_provider.class">Openl10n\Bundle\UserBundle\OAuth\Provider\OAuthAwareUserProvider</parameter>
+
+        <!-- Validator -->
+        <parameter key="openl10n.validator.user_email_unique.class">Openl10n\Bundle\UserBundle\Validator\Constraints\UniqueEmailValidator</parameter>
     </parameters>
 
     <services>
         <!-- Form Type -->
-        <service id="form.type.login" class="%openl10n.form.type.login.class%">
+        <service id="openl10n.form.type.login" class="%openl10n.form.type.login.class%">
             <tag name="form.type" alias="login" />
+        </service>
+        <service id="openl10n.form.type.registration" class="%openl10n.form.type.registration.class%">
+            <tag name="form.type" alias="registration" />
+        </service>
+
+        <!-- Form Handler  -->
+        <service id="openl10n.form.handler.registration" class="%openl10n.form.handler.registration.class%">
+        </service>
+        <service id="openl10n.form.registration" factory-service="form.factory" factory-method="create" class="Symfony\Component\Form\FormInterface">
+            <argument>registration</argument>
         </service>
 
         <!-- Processor -->
         <service id="openl10n.processor.create_user" class="%openl10n.processor.create_user.class%">
             <argument type="service" id="security.encoder_factory" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <!-- Security -->
+        <service id="openl10n.oauth_aware.user_provider" class="%openl10n.oauth_aware.user_provider.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="openl10n.validator.user_email_unique" class="%openl10n.validator.user_email_unique.class%">
+            <tag name="validator.constraint_validator" alias="openl10n.validator.user_email_unique" />
+            <argument type="service" id="openl10n.repository.user" />
+        </service>
+
+        <!-- Repository -->
+        <service id="openl10n.repository.user" class="Openl10n\Bundle\UserBundle\Entity\UserRepository">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service">
+                <service
+                        factory-service="doctrine.orm.default_entity_manager"
+                        factory-method="getClassMetadata"
+                        class="Doctrine\ORM\Mapping\ClassMetadata"
+                        >
+                    <argument>Openl10n\Bundle\UserBundle\Entity\User</argument>
+                </service>
+            </argument>
         </service>
     </services>
 </container>

@@ -1,3 +1,6 @@
+namespaces:
+    Openl10nUser: Openl10n\Bundle\UserBundle\Validator\Constraints\
+
 Openl10n\Bundle\UserBundle\Action\CreateUserAction:
     properties:
         username:
@@ -12,3 +15,7 @@ Openl10n\Bundle\UserBundle\Action\CreateUserAction:
             - NotBlank: ~
             - Length:
                 min: 6
+
+Openl10n\Bundle\UserBundle\Security\User\RegisterUser:
+    constraints:
+        - Openl10nUser:UniqueEmail: ~

@@ -31,7 +31,8 @@
         "friendsofsymfony/rest-bundle": "~0.13",
         "jms/serializer-bundle": "~0.12",
         "friendsofsymfony/jsrouting-bundle": "~1.1",
-        "pagerfanta/pagerfanta": "~1.0"
+        "pagerfanta/pagerfanta": "~1.0",
+        "hwi/oauth-bundle": "~0.3"
     },
     "require-dev": {
         "behat/behat":                  "~2.4",

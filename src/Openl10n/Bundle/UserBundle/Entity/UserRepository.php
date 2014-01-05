@@ -2,15 +2,21 @@
 
 namespace Openl10n\Bundle\UserBundle\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
+use Openl10n\Bundle\CoreBundle\Object\Email;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserRepository extends EntityRepository implements UserProviderInterface
 {
+    public function findOneByEmail(Email $email)
+    {
+        return $this->findOneBy(array('email' => (string) $email));
+    }
+
     public function loadUserByUsername($username)
     {
         $q = $this
@@ -33,6 +39,28 @@ class UserRepository extends EntityRepository implements UserProviderInterface
             );
 
             throw new UsernameNotFoundException($message, 0, $e);
+        }
+
+        return $user;
+    }
+
+    public function findOneByOAuthId($providerName, $tokenId)
+    {
+        $q = $this
+            ->createQueryBuilder('u')
+            ->select('u, t, u')
+            ->leftJoin('u.oauthTokens', 't')
+            ->leftJoin('u.roles', 'r')
+            ->where('t.providerName = :providerName')
+            ->andWhere('t.tokenId = :tokenId')
+            ->setParameter('providerName', $providerName)
+            ->setParameter('tokenId', $tokenId)
+            ->getQuery();
+
+        try {
+            $user = $q->getSingleResult();
+        } catch (NoResultException $e) {
+            return null;
         }
 
         return $user;

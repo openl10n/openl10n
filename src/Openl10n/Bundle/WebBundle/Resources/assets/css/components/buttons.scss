@@ -46,3 +46,17 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+// OAuth connect buttons
+.btn-oauth-sensio_connect {
+  @include button-variant(#fff, #5cb85c, #5cb85c);
+}
+.btn-oauth-vkontakte {
+  @include button-variant(#fff, #4e729a, #4e729a);
+}
+.btn-oauth-facebook {
+  @include button-variant(#fff, #3B5998, #3B5998);
+}
+.btn-oauth-github {
+  @include button-variant(#000, #f3f3f3, #ddd);
+}

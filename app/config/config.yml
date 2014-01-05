@@ -103,3 +103,33 @@ jms_serializer:
             api:
                 namespace_prefix: "Openl10n\Bundle\CoreBundle"
                 path: "@Openl10nApiBundle/Resources/config/serializer"
+
+hwi_oauth:
+    firewall_name: main
+    connect:
+        confirmation:              true
+        account_connector:         openl10n.oauth_aware.user_provider
+        registration_form_handler: openl10n.form.handler.registration
+        registration_form:         openl10n.form.registration
+    resource_owners:
+        sensio_connect:
+            type:                sensio_connect
+            client_id:           %sensio_connect.client_id%
+            client_secret:       %sensio_connect.client_secret%
+            scope:               "SCOPE_EMAIL SCOPE_PUBLIC"
+        vkontakte:
+            type:                vkontakte
+            client_id:           %vkontakte.client_id%
+            client_secret:       %vkontakte.client_secret%
+            user_response_class: "Openl10n\Bundle\UserBundle\OAuth\Response\VkontakteUserResponse"
+            paths:
+                realname: ['response.0.first_name', 'response.0.last_name']
+        facebook:
+            type:                facebook
+            client_id:           %facebook.client_id%
+            client_secret:       %facebook.client_secret%
+            scope:               "email"
+        github:
+            type:                github
+            client_id:           %github.client_id%
+            client_secret:       %github.client_secret%
