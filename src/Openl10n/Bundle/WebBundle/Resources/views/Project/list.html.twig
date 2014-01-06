@@ -30,13 +30,21 @@
       <div class="col-md-4 hidden-xs hidden-sm">
         <div class="panel panel-default">
           <div class="panel-body">
-            <p>
-              Connected as <strong>{{ app.user.displayName }}</strong>
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
+
+            <div class="media">
+              <a class="pull-left" href="#">
+                <img class="media-object" src="{{ avatar_url(app.user.email, 70) }}" alt="Avatar">
+              </a>
+
+              <div class="media-body">
+                <h4 class="media-heading">
+                  Hello <strong>{{ app.user.displayName }}</strong>
+                </h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

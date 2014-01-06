@@ -10,6 +10,9 @@
 
         <!-- Processor -->
         <parameter key="openl10n.processor.create_user.class">Openl10n\Bundle\UserBundle\Processor\CreateUserProcessor</parameter>
+
+        <!-- Twig -->
+        <parameter key="openl10n.twig.extension.user.class">Openl10n\Bundle\UserBundle\Twig\Extension\UserExtension</parameter>
     </parameters>
 
     <services>
@@ -22,6 +25,11 @@
         <service id="openl10n.processor.create_user" class="%openl10n.processor.create_user.class%">
             <argument type="service" id="security.encoder_factory" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <!-- Twig -->
+        <service id="openl10n.twig.extension.user" class="%openl10n.twig.extension.user.class%">
+            <tag name="twig.extension" />
         </service>
     </services>
 </container>
