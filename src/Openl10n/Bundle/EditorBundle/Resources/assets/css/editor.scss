@@ -1,6 +1,12 @@
 //
 // Layout
 //
+#appLayout {
+    .ol-header {
+        margin-bottom: 0;
+    }
+}
+
 .ol-editor {
     min-width: 900px;
 

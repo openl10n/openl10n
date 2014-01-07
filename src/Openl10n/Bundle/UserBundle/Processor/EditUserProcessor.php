@@ -7,13 +7,13 @@ use Openl10n\Bundle\CoreBundle\Object\Email;
 use Openl10n\Bundle\CoreBundle\Object\Locale;
 use Openl10n\Bundle\CoreBundle\Object\Name;
 use Openl10n\Bundle\CoreBundle\Object\Slug;
-use Openl10n\Bundle\UserBundle\Action\CreateUserAction;
+use Openl10n\Bundle\UserBundle\Action\EditUserAction;
 use Openl10n\Bundle\UserBundle\Entity\User;
 use Openl10n\Bundle\UserBundle\Entity\UserCredentials;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class CreateUserProcessor
+class EditUserProcessor
 {
     protected $encoderFactory;
     protected $objectManager;
@@ -29,23 +29,26 @@ class CreateUserProcessor
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function execute(CreateUserAction $action)
+    public function execute(EditUserAction $action)
     {
-        $user = new User(new Slug($action->username));
+        $user = $action->getUser();
         $user
             ->setDisplayName(new Name($action->displayName))
             ->setEmail(new Email($action->email))
             ->setPreferedLocale(new Locale($action->preferedLocale))
         ;
+        if (null !== $action->password) {
+            $encoder = $this->encoderFactory->getEncoder($user);
+            $salt = md5(uniqid(null, true));
+            $password = $encoder->encodePassword($action->password, $salt);
 
-        $encoder = $this->encoderFactory->getEncoder($user);
-        $salt = md5(uniqid(null, true));
-        $password = $encoder->encodePassword($action->password, $salt);
-
-        $credentials = new UserCredentials($user, $password, $salt);
+            $credentials = $user->getCredentials();
+            $credentials->setPassword($password);
+            $credentials->setSalt($salt);
+            $this->objectManager->persist($credentials);
+        }
 
         $this->objectManager->persist($user);
-        $this->objectManager->persist($credentials);
         $this->objectManager->flush();
 
         return $user;

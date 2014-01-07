@@ -134,6 +134,14 @@ class User extends BaseUser implements SecurityUserInterface
     }
 
     /**
+     * @inheritDoc
+     */
+    public function getCredentials()
+    {
+        return $this->credentials;
+    }
+
+    /**
      * @see \Serializable::serialize()
      */
     public function serialize()

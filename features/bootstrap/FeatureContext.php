@@ -39,4 +39,19 @@ class FeatureContext extends BehatContext
             new When('I press "Login"'),
         );
     }
+
+    /**
+     * Login a user with a specific password.
+     *
+     * @Given /^I am connected as "([^"]*)" with "([^"]*)"$/
+     */
+    public function iAmConnectedAsWith($username, $password)
+    {
+        return array(
+            new When('I am on "/login"'),
+            new When('I fill in "Username" with "'.$username.'"'),
+            new When('I fill in "Password" with "'.$password.'"'),
+            new When('I press "Login"'),
+        );
+    }
 }

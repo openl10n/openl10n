@@ -4,7 +4,7 @@ Feature: Project creation
     So I can start translating it
 
     Scenario: A user creates a new project
-        Given I am connected as "john"
+        Given I am connected as "johndoe"
           And I am on "/projects/"
 
         Then I should see "Create a new project"
@@ -24,7 +24,7 @@ Feature: Project creation
          Then I should see "Login"
 
     Scenario: A user cannot create a project with a name already used
-        Given I am connected as "john"
+        Given I am connected as "johndoe"
 
          When I am on "/projects/new"
           And I fill in the following:
