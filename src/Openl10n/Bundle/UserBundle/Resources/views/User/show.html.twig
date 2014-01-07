@@ -1,0 +1,12 @@
+{% extends '@Openl10nWeb/layout/base.html.twig' %}
+
+{% import '@Openl10nWeb/layout/macros.html.twig' as macros %}
+
+{% block content %}
+  <div class="container">
+    <p><strong>Username</strong>: {{ user.username }}</p>
+    <p><strong>Email</strong>: {{ user.email }}</p>
+    <p><strong>Name</strong>: {{ user.displayName }}</p>
+    <p><strong>Locale</strong>: {{ macros.flag(user.preferedLocale) }} {{ user.preferedLocale.displayName(app.user.preferedLocale)|title }}</p>
+  </div>
+{% endblock %}

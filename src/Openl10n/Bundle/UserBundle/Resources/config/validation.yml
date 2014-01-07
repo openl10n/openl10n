@@ -1,6 +1,7 @@
 Openl10n\Bundle\UserBundle\Action\CreateUserAction:
     properties:
         username:
+            - Openl10n\Bundle\UserBundle\Validator\Constraints\UniqueUser: ~
             - NotBlank: ~
             - Regex: "/^[a-zA-Z0-9\-\.\_]+$/"
         displayName:
@@ -9,6 +10,24 @@ Openl10n\Bundle\UserBundle\Action\CreateUserAction:
             - NotBlank: ~
             - Email: ~
         password:
+            - NotBlank: ~
+            - Length:
+                min: 6
+
+Openl10n\Bundle\UserBundle\Action\EditUserAction:
+    properties:
+        displayName:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
+            - Email: ~
+
+Openl10n\Bundle\UserBundle\Action\ChangePasswordUserAction:
+    properties:
+        oldPassword:
+            - NotBlank: ~
+            - Symfony\Component\Security\Core\Validator\Constraints\UserPassword: ~
+        newPassword:
             - NotBlank: ~
             - Length:
                 min: 6

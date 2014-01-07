@@ -1,0 +1,27 @@
+{% extends '@Openl10nWeb/layout/base.html.twig' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <form action="{{ path('openl10n_user_leave') }}" method="POST" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Delete user</h3>
+          </div>
+
+          {{ form_widget(form) }}
+
+          <div class="panel-body">
+            <p>Be careful, this action cannot be undone.</p>
+            <p>Are you sur you want to remove your account?</p>
+          </div>
+
+          <div class="panel-footer">
+            <button type="submit" class="btn btn-danger">Yes, delete my account</button>
+            <a href="{{ path('openl10n_homepage') }}" class="btn btn-link">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

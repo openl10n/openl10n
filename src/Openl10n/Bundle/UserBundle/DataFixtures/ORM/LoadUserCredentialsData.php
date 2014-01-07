@@ -36,7 +36,7 @@ class LoadUserCredentialsData extends AbstractFixture implements OrderedFixtureI
         $user = $this->getReference('user_john');
         $encoder = $factory->getEncoder($user);
         $salt = md5(uniqid(null, true));
-        $password = $encoder->encodePassword('john', $salt);
+        $password = $encoder->encodePassword('johndoe', $salt);
 
         $johnCredentials = new UserCredentials(
             $this->getReference('user_john'),

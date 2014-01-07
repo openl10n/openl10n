@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Repository -->
+        <parameter key="openl10n.repository.user.class">Openl10n\Bundle\UserBundle\Doctrine\ORM\Repository\UserRepository</parameter>
+
+        <!-- Factory -->
+        <parameter key="openl10n.factory.user.class">Openl10n\Bundle\UserBundle\Doctrine\ORM\Factory\UserFactory</parameter>
+    </parameters>
+
+    <services>
+        <!-- Manager -->
+        <service id="openl10n.manager.user" alias="doctrine.orm.entity_manager" />
+
+        <!-- Repository -->
+        <service id="openl10n.repository.user" class="%openl10n.repository.user.class%">
+            <argument type="service" id="doctrine" />
+        </service>
+
+        <!-- Factory -->
+        <service id="openl10n.factory.user" class="%openl10n.factory.user.class%" />
+    </services>
+</container>

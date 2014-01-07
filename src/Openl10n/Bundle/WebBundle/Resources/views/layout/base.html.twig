@@ -18,7 +18,7 @@
   {% endblock %}
 </head>
 <body>
-  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+  <header class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -31,7 +31,7 @@
       </a>
     </div>
 
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <nav class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
         <li>
           <a href="{{ path('openl10n_project_list') }}">
@@ -54,6 +54,17 @@
             </a>
             <ul class="dropdown-menu">
               <li>
+                <a href="{{ path('openl10n_user_edit') }}">
+                  My profile
+                </a>
+              </li>
+              <li>
+                <a href="{{ path('openl10n_user_password') }}">
+                  My password
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
                 <a href="{{ path('openl10n_security_logout') }}">
                   Logout
                 </a>
@@ -68,8 +79,8 @@
           </li>
         {% endif %}
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </nav>
+    </nav><!-- /.navbar-collapse -->
+  </header>
 
   {% block content '' %}
 

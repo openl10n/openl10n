@@ -3,17 +3,11 @@
 namespace Openl10n\Bundle\UserBundle\Processor;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Openl10n\Bundle\CoreBundle\Object\Email;
-use Openl10n\Bundle\CoreBundle\Object\Locale;
-use Openl10n\Bundle\CoreBundle\Object\Name;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
-use Openl10n\Bundle\UserBundle\Action\CreateUserAction;
-use Openl10n\Bundle\UserBundle\Entity\User;
-use Openl10n\Bundle\UserBundle\Entity\UserCredentials;
+use Openl10n\Bundle\UserBundle\Action\PasswordUserAction;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class CreateUserProcessor
+class PasswordUserProcessor
 {
     protected $encoderFactory;
     protected $objectManager;
@@ -29,22 +23,17 @@ class CreateUserProcessor
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function execute(CreateUserAction $action)
+    public function execute(PasswordUserAction $action)
     {
-        $user = new User(new Slug($action->username));
-        $user
-            ->setDisplayName(new Name($action->displayName))
-            ->setEmail(new Email($action->email))
-            ->setPreferedLocale(new Locale($action->preferedLocale))
-        ;
-
+        $user = $action->getUser();
+        $credentials = $user->getCredentials();
         $encoder = $this->encoderFactory->getEncoder($user);
         $salt = md5(uniqid(null, true));
-        $password = $encoder->encodePassword($action->password, $salt);
 
-        $credentials = new UserCredentials($user, $password, $salt);
+        $password = $encoder->encodePassword($action->newPassword, $salt);
+        $credentials->setPassword($password);
+        $credentials->setSalt($salt);
 
-        $this->objectManager->persist($user);
         $this->objectManager->persist($credentials);
         $this->objectManager->flush();
 

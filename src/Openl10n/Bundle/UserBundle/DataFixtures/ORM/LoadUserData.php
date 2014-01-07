@@ -23,7 +23,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             ->setPreferedLocale(new Locale('fr-FR'))
         ;
 
-        $john = new User(new Slug('john'));
+        $john = new User(new Slug('johndoe'));
         $john
             ->setDisplayName(new Fullname('John', 'Doe'))
             ->setEmail(new Email('john.doe@example.org'))
