@@ -18,6 +18,7 @@
   {% endblock %}
 </head>
 <body>
+{% if is_granted('ROLE_USER') %}
   <header class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -81,6 +82,7 @@
       </ul>
     </nav><!-- /.navbar-collapse -->
   </header>
+  {% endif %}
 
   {% block content '' %}
 

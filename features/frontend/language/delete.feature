@@ -3,7 +3,7 @@ Feature: Delete locale from a project
     I can delete a locale to a project
 
     Scenario: A user can delete a locale
-        Given I am connected as "john"
+        Given I am connected as "johndoe"
           And I am on "/projects/tutorial/languages/it_IT/delete"
 
         Then I should see "Are you sur you want to remove locale it_IT from project Tutorial?"
@@ -13,6 +13,6 @@ Feature: Delete locale from a project
           And the response should not contain "it_IT -"
 
     Scenario: A user cannot delete the project's default locale
-        Given I am connected as "john"
+        Given I am connected as "johndoe"
           And I am on "/projects/tutorial/languages/en/delete"
         Then I should see "You cannot remove locale en of project Tutorial"

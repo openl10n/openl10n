@@ -4,7 +4,7 @@ Feature: Project administration
     So I easily manage information of my project
 
     Scenario: A user can edit project information
-        Given I am connected as "john"
+        Given I am connected as "johndoe"
          When I am on "/projects/todelete/edit"
           And I fill in the following:
             | Name           | Delete Me |
@@ -14,7 +14,7 @@ Feature: Project administration
           And I should see "Delete Me"
 
     Scenario: A user can delete a project
-        Given I am connected as "john"
+        Given I am connected as "johndoe"
           And I am on "/projects/todelete/edit"
          Then I should see "Delete"
 

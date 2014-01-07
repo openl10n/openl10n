@@ -4,7 +4,7 @@ Feature: Add locale to a project
     So I can start translating for this locale
 
     Scenario: A user add a new locale to the project
-        Given I am connected as "john"
+        Given I am connected as "johndoe"
           And I am on "/projects/tutorial/languages/"
 
         When I follow "Add locale"
@@ -15,7 +15,7 @@ Feature: Add locale to a project
          And the response should contain "fr_BE -"
 
     Scenario: A new project must have a default locale
-        Given I am connected as "john"
+        Given I am connected as "johndoe"
           And I am on "/projects/new"
 
         When I fill in the following:
@@ -30,7 +30,7 @@ Feature: Add locale to a project
         Then the response should contain "pt_BR -"
 
     #Scenario: A user cannot add an existing locale
-    #    Given I am connected as "john"
+    #    Given I am connected as "johndoe"
     #      And I am on "/projects/tutorial/locales/new"
     #
     #    When I fill in "Locale" with "fr_FR"

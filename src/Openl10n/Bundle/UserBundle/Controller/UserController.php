@@ -22,9 +22,7 @@ class UserController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $this->get('openl10n.processor.password_user')->execute($action);
 
-            return $this->redirect($this->generateUrl('openl10n_user_show', array(
-                'username' => $user->getUsername(),
-            )));
+            return $this->redirect($this->generateUrl('openl10n_homepage'));
         }
 
         return $this->render('Openl10nUserBundle:User:password.html.twig', array(
