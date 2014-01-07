@@ -21,7 +21,7 @@
 
         <one-to-one field="credentials" target-entity="UserCredentials" mapped-by="user" />
 
-        <many-to-many field="roles" mapped-by="users" target-entity="UserRole"/>
+        <many-to-many field="roles" mapped-by="users" target-entity="UserRole" />
     </entity>
 
 </doctrine-mapping>

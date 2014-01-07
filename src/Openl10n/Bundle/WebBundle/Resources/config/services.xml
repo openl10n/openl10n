@@ -19,7 +19,6 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
-
         <service id="openl10n.controller.homepage" class="%openl10n.controller.homepage.class%" parent="openl10n.controller" />
         <service id="openl10n.controller.project" class="%openl10n.controller.project.class%" parent="openl10n.controller" />
         <service id="openl10n.controller.domain" class="%openl10n.controller.domain.class%" parent="openl10n.controller" />

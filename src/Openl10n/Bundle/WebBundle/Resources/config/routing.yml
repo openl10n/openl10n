@@ -45,3 +45,4 @@ openl10n_translation_show:
 openl10n_translation_context_switch:
     pattern:  /projects/{project}/switch-context
     defaults: { _controller: Openl10nWebBundle:TranslationContext:switch }
+

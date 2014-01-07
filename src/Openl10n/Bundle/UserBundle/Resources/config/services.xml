@@ -7,12 +7,23 @@
     <parameters>
         <!-- Form Type -->
         <parameter key="openl10n.form.type.login.class">Openl10n\Bundle\UserBundle\Form\Type\LoginType</parameter>
-
-        <!-- Processor -->
-        <parameter key="openl10n.processor.create_user.class">Openl10n\Bundle\UserBundle\Processor\CreateUserProcessor</parameter>
+        <parameter key="openl10n.form.type.user.class">Openl10n\Bundle\UserBundle\Form\Type\UserType</parameter>
+        <parameter key="openl10n.form.type.password_user.class">Openl10n\Bundle\UserBundle\Form\Type\PasswordUserType</parameter>
 
         <!-- Twig -->
         <parameter key="openl10n.twig.extension.user.class">Openl10n\Bundle\UserBundle\Twig\Extension\UserExtension</parameter>
+
+        <!-- Processor -->
+        <parameter key="openl10n.processor.create_user.class">Openl10n\Bundle\UserBundle\Processor\CreateUserProcessor</parameter>
+        <parameter key="openl10n.processor.edit_user.class">Openl10n\Bundle\UserBundle\Processor\EditUserProcessor</parameter>
+        <parameter key="openl10n.processor.delete_user.class">Openl10n\Bundle\UserBundle\Processor\DeleteUserProcessor</parameter>
+        <parameter key="openl10n.processor.password_user.class">Openl10n\Bundle\UserBundle\Processor\PasswordUserProcessor</parameter>
+
+        <!-- Validator -->
+        <parameter key="openl10n.validator.user_unique.class">Openl10n\Bundle\UserBundle\Validator\Constraints\UniqueUserValidator</parameter>
+
+        <!-- Controller -->
+        <parameter key="openl10n.controller.user.class">Openl10n\Bundle\UserBundle\Controller\UserController</parameter>
     </parameters>
 
     <services>
@@ -20,16 +31,41 @@
         <service id="form.type.login" class="%openl10n.form.type.login.class%">
             <tag name="form.type" alias="login" />
         </service>
+        <service id="form.type.user" class="%openl10n.form.type.user.class%">
+            <tag name="form.type" alias="openl10n_user" />
+        </service>
+        <service id="form.type.password_user" class="%openl10n.form.type.password_user.class%">
+            <tag name="form.type" alias="openl10n_password_user" />
+        </service>
 
         <!-- Processor -->
-        <service id="openl10n.processor.create_user" class="%openl10n.processor.create_user.class%">
+        <service id="openl10n.processor.edit_user" class="%openl10n.processor.edit_user.class%">
             <argument type="service" id="security.encoder_factory" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="openl10n.manager.user" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.delete_user" class="%openl10n.processor.delete_user.class%">
+            <argument type="service" id="openl10n.manager.user" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.password_user" class="%openl10n.processor.password_user.class%">
+            <argument type="service" id="security.encoder_factory" />
+            <argument type="service" id="openl10n.manager.user" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <!-- Validator -->
+        <service id="openl10n.validator.user_unique" class="%openl10n.validator.user_unique.class%">
+            <tag name="validator.constraint_validator" alias="openl10n.validator.user_unique" />
+            <argument type="service" id="openl10n.repository.user" />
         </service>
 
         <!-- Twig -->
         <service id="openl10n.twig.extension.user" class="%openl10n.twig.extension.user.class%">
             <tag name="twig.extension" />
         </service>
+
+        <!-- Controller -->
+        <service id="openl10n.controller.user" class="%openl10n.controller.user.class%" parent="openl10n.controller" />
     </services>
 </container>

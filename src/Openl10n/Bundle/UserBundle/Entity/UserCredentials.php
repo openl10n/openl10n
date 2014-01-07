@@ -55,4 +55,14 @@ class UserCredentials
     {
         return $this->salt;
     }
+
+    public function setPassword($password)
+    {
+        return $this->password = $password;
+    }
+
+    public function setSalt($salt)
+    {
+        return $this->salt = $salt;
+    }
 }

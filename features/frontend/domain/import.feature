@@ -1,7 +1,7 @@
 Feature: Translation file import
 
     Scenario: A user can import translation file
-        Given I am connected as "john"
+        Given I am connected as "johndoe"
           And I am on "/projects/tutorial/import"
          Then I should see "Import translations"
 
