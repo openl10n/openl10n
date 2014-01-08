@@ -26,6 +26,7 @@ framework:
     session:
         name: __sess_id
         cookie_lifetime: 108000 # 30 minutes
+        save_path: "%kernel.root_dir%/sessions/"
     fragments:       ~
     http_method_override: true
 

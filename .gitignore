@@ -1,16 +1,17 @@
+/app/bootstrap.php.cache
+/app/cache/*
+/app/config/parameters.yml
+/app/deploy/*
+!/app/deploy/deploy.rb.dist
+/app/logs/*
+/app/sessions/
+
 /web/bundles/
 /web/css/
 /web/js/
 
-/app/bootstrap.php.cache
-/app/cache/*
-/app/config/parameters.yml
-/app/logs/*
-/app/deploy/*
-!/app/deploy/deploy.rb.dist
-
-/vendor/
-/build/
 /bin/
-/composer.phar
+/build/
+/vendor/
 /behat.yml
+/composer.phar

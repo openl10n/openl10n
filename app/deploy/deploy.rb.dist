@@ -21,9 +21,9 @@ set :branch, ""
 set :keep_releases, 5
 
 # Symfony2 configuration
-set :shared_files, ["app/config/parameters.yml"]
-set :shared_children, [app_path+"/logs", web_path+"/uploads"]
-set :writable_dirs, [app_path+"/logs", web_path+"/uploads"]
+set :shared_files, [app_path + "/config/parameters.yml"]
+set :shared_children, [app_path + "/logs", app_path + "/sessions", web_path + "/uploads"]
+set :writable_dirs, [app_path + "/cache", app_path + "/logs", app_path + "/sessions", web_path + "/uploads", app_path + "/sessions"]
 set :model_manager, "doctrine"
 set :dump_assetic_assets, true
 set :assets_install, true
