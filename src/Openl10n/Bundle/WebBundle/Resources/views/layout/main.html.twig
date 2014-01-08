@@ -1,0 +1,71 @@
+{% extends '@Openl10nWeb/layout/base.html.twig' %}
+
+{% block body %}
+  {% if is_granted('ROLE_USER') %}
+    <header class="navbar navbar-custom navbar-fixed-top" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('openl10n_homepage') }}">
+          OpenLocalization
+        </a>
+      </div>
+
+      <nav class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="{{ path('openl10n_project_list') }}">
+              Projects
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Learn
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          {% if is_granted('ROLE_USER') %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {{ app.user.username }}
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="{{ path('openl10n_user_edit') }}">
+                    My profile
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ path('openl10n_user_password') }}">
+                    My password
+                  </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="{{ path('openl10n_security_logout') }}">
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            </li>
+          {% else %}
+            <li>
+              <a href="{{ path('openl10n_security_login') }}">
+                Login
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav><!-- /.navbar-collapse -->
+    </header>
+  {% endif %}
+
+  {% block content '' %}
+{% endblock %}
