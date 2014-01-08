@@ -1,22 +1,32 @@
-{% extends '@Openl10nWeb/layout/base.html.twig' %}
+{% extends '@Openl10nWeb/layout/main.html.twig' %}
 
-{% block content %}
+{% block body %}
   <div class="container">
     <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <form action="{{ path("openl10n_security_check") }}" method="POST" class="panel panel-default" novalidate>
-          <div class="panel-heading">
-            <h3 class="panel-title">Login</h3>
+      <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
+        <form action="{{ path("openl10n_security_check") }}" method="POST" class="panel panel-default panel-login" novalidate>
+          <div class="panel-heading panel-heading-lg">
+            <h3 class="panel-title">
+              Please sign in
+            </h3>
           </div>
 
           <div class="panel-body">
-            {{ form_widget(form) }}
-          </div>
+            {{ form_row(form._username, {attr: {class: 'input-lg'}}) }}
+            {{ form_row(form._password, {attr: {class: 'input-lg'}}) }}
+            {{ form_rest(form) }}
 
-          <div class="panel-footer">
-            <button type="submit" id="_submit" name="_submit" class="btn btn-primary">Login</button>
+            <p>
+              <button type="submit" id="_submit" name="_submit" class="btn btn-primary btn-lg btn-block">
+                Login
+              </button>
+            </p>
+
+            <p class="pull-right">
+              <a href="#">Password forgotten?</a>
+            </p>
           </div>
-      </form>
+        </form>
       </div>
     </div>
   </div>
