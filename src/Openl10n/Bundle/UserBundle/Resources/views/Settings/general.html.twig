@@ -1,0 +1,25 @@
+{% extends '@Openl10nUser/Settings/layout.html.twig' %}
+
+{% set active_menu = 'general' %}
+
+{% block settings_content %}
+  <div class="row">
+    <div class="col-md-8">
+      <form action="{{ path('openl10n_user_settings_general') }}" method="POST" novalidate>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Edit your profile</h3>
+          </div>
+
+          <div class="panel-body">
+            {{ form_widget(form) }}
+          </div>
+
+          <div class="panel-footer">
+            <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
