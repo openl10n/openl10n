@@ -27,9 +27,9 @@
         <ul class="nav navbar-nav navbar-right">
           {% if is_granted('ROLE_USER') %}
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {{ app.user.displayName }}
-                <b class="caret"></b>
+              <a href="#" class="dropdown-toggle x-navbar-pic" data-toggle="dropdown">
+                <img src="{{ avatar_url(app.user.email, 32) }}" alt="Avatar">
+                {{ app.user.username }}
               </a>
               <ul class="dropdown-menu">
                 <li>
