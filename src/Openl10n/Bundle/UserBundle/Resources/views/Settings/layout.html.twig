@@ -7,8 +7,14 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+          <div class="pull-right">
+            <a class="btn btn-dark" href="{{ path('openl10n_user_profile_show', {username: app.user.username}) }}">
+              Public profile
+            </a>
+          </div>
+
           <div>
-            <h2 class="ol-header-title">
+            <h2 class="title title-lg">
               Settings
             </h2>
           </div>
@@ -20,34 +26,16 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="media">
-              <a class="pull-left" href="#">
-                <img class="media-object" src="{{ avatar_url(app.user.email, 70) }}" alt="Avatar">
-              </a>
-
-              <div class="media-body">
-                <h4 class="media-heading">
-                  <strong>{{ app.user.displayName }}</strong>
-                </h4>
-                <p>
-                  {{ app.user.username }}
-                </p>
-              </div>
-            </div>
-          </div>
-        <div class="list-group">
+        <div class="list-group x-list-group-profile">
           <a href="{{ path('openl10n_user_settings_general') }}" class="list-group-item {% if active_menu == 'general' %}active{% endif %}">
-            Profile
+            Edit my profile
           </a>
           <a href="{{ path('openl10n_user_settings_password') }}" class="list-group-item {% if active_menu == 'password' %}active{% endif %}">
-            Password
+            Change my password
           </a>
           <a href="{{ path('openl10n_user_settings_leave') }}" class="list-group-item {% if active_menu == 'leave' %}active{% endif %}">
-            Leave
+            Delete my account
           </a>
-        </div>
         </div>
       </div>
 

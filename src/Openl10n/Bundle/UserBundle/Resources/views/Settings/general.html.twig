@@ -4,22 +4,32 @@
 
 {% block settings_content %}
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-sm-12">
+      <h3 class="title title-md title-underlined">
+        Edit your profile
+      </h3>
+    </div>
+    <div class="col-sm-8">
       <form action="{{ path('openl10n_user_settings_general') }}" method="POST" novalidate>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Edit your profile</h3>
-          </div>
 
-          <div class="panel-body">
+          <div>
             {{ form_widget(form) }}
           </div>
 
-          <div class="panel-footer">
+          <div>
             <button type="submit" class="btn btn-primary">Update</button>
           </div>
-        </div>
       </form>
+    </div>
+
+    <div class="col-sm-3 hidden-xs">
+      <p>
+        <img class="img-responsive" src="{{ avatar_url(app.user.email, 150) }}" alt="Avatar">
+      </p>
+
+      <p>
+        You can change your avatar at <a href="#">Gravatar.com</a>
+      </p>
     </div>
   </div>
 {% endblock %}
