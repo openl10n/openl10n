@@ -1,4 +1,4 @@
-{% extends '@Openl10nWeb/layout/main.html.twig' %}
+{% extends '@Openl10nWeb/layout/base.html.twig' %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -35,14 +35,14 @@
   </script>
 {% endblock javascripts %}
 
-{% block content %}
+{% block body %}
   <div id="appLayout">
     <div class="ol-header">
       <div class="container-fluid">
         <div class="row" id="header">
           {# Everything under #header element will be overidden by backbone #}
           <div class="col-md-5">
-            <h2 class="ol-header-title" id="title">
+            <h2 class="title title-lg" id="title">
               <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}">
                 {{ project.name }}
               </a>
