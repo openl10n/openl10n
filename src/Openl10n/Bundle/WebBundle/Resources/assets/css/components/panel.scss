@@ -16,8 +16,7 @@
     }
 }
 
-
-.panel-login {
+.panel-flat {
     background-color: #f7f7f7;
     border-color: transparent;
     border-radius: 2px;
@@ -27,16 +26,14 @@
         background-color: transparent;
         border-bottom: none;
         padding: 20px 25px 10px;
-    }
-    .panel-body {
-        padding: 10px 25px 10px;
+        color: #777;
+        background-color: transparent;
     }
     .panel-title {
         font-size: 24px;
         font-weight: 300;
     }
-    .panel-heading {
-        color: #777;
-        background-color: transparent;
+    .panel-body {
+        padding: 10px 25px 10px;
     }
 }
