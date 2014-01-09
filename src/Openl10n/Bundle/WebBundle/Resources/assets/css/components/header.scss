@@ -1,7 +1,12 @@
+.page-wrapper {
+    .ol-header {
+        margin-top: -20px; /* stick to the navbar*/
+    }
+}
+
 .ol-header {
     background-color: #eee;
     border-bottom: 1px solid #eaeaea;
-    margin-top: -20px; /* stick to the navbar*/
     margin-bottom: 20px;
     padding: 15px 0 10px;
 
