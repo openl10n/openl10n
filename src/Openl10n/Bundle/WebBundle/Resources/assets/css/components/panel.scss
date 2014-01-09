@@ -1,17 +1,24 @@
 .panel {
-    &.project-card {
-        display: block;
 
-        &:hover {
-            background: #F2F2F2;
-        }
+  &.domain-card {
+    display: block;
+
+    &:hover {
+      background: #F2F2F2;
     }
-
-    &.domain-card {
-        display: block;
-
-        &:hover {
-            background: #F2F2F2;
-        }
+  }
+  &.panel-project {
+    .panel-heading {
+      &:hover {
+        background: #E9E9E9;
+      }
     }
+    .panel-body {
+      p {
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
 }
