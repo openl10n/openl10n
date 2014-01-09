@@ -109,6 +109,14 @@ class Project implements ProjectInterface
     /**
      * {@inheritdoc}
      */
+    public function getDomains()
+    {
+        return $this->domains;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasLocale(Locale $locale)
     {
         foreach ($this->languages as $language) {

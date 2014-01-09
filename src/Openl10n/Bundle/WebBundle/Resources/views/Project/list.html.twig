@@ -6,8 +6,8 @@
       <div class="row">
         <div class="col-md-12">
           <div class="pull-right">
-            <a class="btn btn-dark" href="{{ path('openl10n_project_new') }}">
-              Create project
+            <a class="btn btn-success" href="{{ path('openl10n_project_new') }}">
+              New project
             </a>
           </div>
 
@@ -54,22 +54,17 @@
         <div class="row">
           {% for project in projects %}
             <div class="col-sm-4">
-              <a class="panel panel-default project-card" href="{{ path('openl10n_project_show', {'slug': project.slug}) }}">
-                <div class="panel-body">
-                  <strong>{{ project.name }}</strong>
+              <div class="panel panel-default panel-project">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><a href="{{ path('openl10n_project_show', {'slug': project.slug}) }}">{{ project.name }}</a></h3>
                 </div>
-              </a>
+                <div class="panel-body">
+                  <p><a href="{{ path('openl10n_language_list', {'slug': project.slug}) }}">{{ ':count language|:count languages'|transchoice(project.languages|length, {':count': project.languages|length}) }}</a></p>
+                  <p><a href="{{ path('openl10n_project_show', {'slug': project.slug}) }}">{{ ':count domain|:count domains'|transchoice(project.domains|length, {':count': project.domains|length}) }}</a></p>
+                </div>
+              </div>
             </div>
           {% endfor %}
-
-          <div class="col-sm-4">
-            <a class="panel panel-default project-card" href="{{ path('openl10n_project_new') }}">
-              <div class="panel-body">
-                <i class="icon-plus"></i>
-                Create a new project
-              </div>
-            </a>
-          </div>
         </div>
       </div>
     </div>
