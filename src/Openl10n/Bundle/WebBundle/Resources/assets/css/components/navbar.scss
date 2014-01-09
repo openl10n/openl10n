@@ -169,4 +169,13 @@ $navbar-custom-toggle-border-color:       #ddd;
     width: auto;
     vertical-align: middle;
   }
+
+  .x-navbar-pic {
+    padding-top: 9px;
+    padding-bottom: 9px;
+
+    img {
+      margin-right: 7px;
+    }
+  }
 }
