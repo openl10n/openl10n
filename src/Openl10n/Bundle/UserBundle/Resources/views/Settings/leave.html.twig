@@ -1,10 +1,12 @@
-{% extends '@Openl10nWeb/layout/main.html.twig' %}
+{% extends '@Openl10nUser/Settings/layout.html.twig' %}
 
-{% block content %}
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <form action="{{ path('openl10n_user_leave') }}" method="POST" class="panel panel-default">
+{% set active_menu = 'leave' %}
+
+{% block settings_content %}
+  <div class="row">
+    <div class="col-md-8">
+      <form action="{{ path('openl10n_user_settings_leave') }}" method="POST" novalidate>
+        <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Delete my account</h3>
           </div>
@@ -20,8 +22,8 @@
             <button type="submit" class="btn btn-danger">Yes, delete my account</button>
             <a href="{{ path('openl10n_homepage') }}" class="btn btn-link">Cancel</a>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 {% endblock %}

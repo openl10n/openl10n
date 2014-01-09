@@ -1,0 +1,59 @@
+{% extends '@Openl10nWeb/layout/main.html.twig' %}
+
+{% set active_menu = active_menu|default('') %}
+
+{% block content %}
+  <div class="ol-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div>
+            <h2 class="ol-header-title">
+              Settings
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="media">
+              <a class="pull-left" href="#">
+                <img class="media-object" src="{{ avatar_url(app.user.email, 70) }}" alt="Avatar">
+              </a>
+
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <strong>{{ app.user.displayName }}</strong>
+                </h4>
+                <p>
+                  {{ app.user.username }}
+                </p>
+              </div>
+            </div>
+          </div>
+        <div class="list-group">
+          <a href="{{ path('openl10n_user_settings_general') }}" class="list-group-item {% if active_menu == 'general' %}active{% endif %}">
+            Profile
+          </a>
+          <a href="{{ path('openl10n_user_settings_password') }}" class="list-group-item {% if active_menu == 'password' %}active{% endif %}">
+            Password
+          </a>
+          <a href="{{ path('openl10n_user_settings_leave') }}" class="list-group-item {% if active_menu == 'leave' %}active{% endif %}">
+            Leave
+          </a>
+        </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        {% block settings_content '' %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

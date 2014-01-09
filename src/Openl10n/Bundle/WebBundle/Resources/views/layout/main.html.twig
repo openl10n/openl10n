@@ -22,28 +22,23 @@
               Projects
             </a>
           </li>
-          <li>
-            <a href="#">
-              Learn
-            </a>
-          </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
           {% if is_granted('ROLE_USER') %}
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {{ app.user.username }}
+                {{ app.user.displayName }}
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="{{ path('openl10n_user_edit') }}">
+                  <a href="{{ path('openl10n_user_settings_general') }}">
                     My profile
                   </a>
                 </li>
                 <li>
-                  <a href="{{ path('openl10n_user_password') }}">
+                  <a href="{{ path('openl10n_user_settings_password') }}">
                     My password
                   </a>
                 </li>
