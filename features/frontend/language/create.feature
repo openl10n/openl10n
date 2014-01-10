@@ -7,8 +7,7 @@ Feature: Add locale to a project
         Given I am connected as "johndoe"
           And I am on "/projects/tutorial/languages/"
 
-        When I follow "Add locale"
-         And I fill in "Locale" with "fr_BE"
+        When I fill in "Locale" with "fr_BE"
          And I press "Add"
 
         Then I should be on "/projects/tutorial/languages/"
