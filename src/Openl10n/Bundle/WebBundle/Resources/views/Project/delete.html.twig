@@ -1,26 +1,26 @@
-{% extends '@Openl10nWeb/layout/main.html.twig' %}
+{% extends '@Openl10nWeb/Project/layout.html.twig' %}
 
-{% block content %}
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <form action="{{ path('openl10n_project_delete', {'slug': project.slug}) }}" method="POST" class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Delete project</h3>
-          </div>
+{% set active_menu = 'delete' %}
 
-          {{ form_widget(form) }}
+{% block settings_content %}
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="title title-md title-underlined">
+        Delete project
+      </h3>
+    </div>
+    <div class="col-md-12">
+      <form action="{{ path('openl10n_project_delete', {'slug': project.slug}) }}" method="POST" novalidate>
+        {{ form_widget(form) }}
 
-          <p class="panel-body">
-            Are you sur you want to delete the project <strong>{{ project.name }}</strong>?
-          </p>
+        <p class="lead">
+          Are you sur you want to delete the project <strong>{{ project.name }}</strong>?
+        </p>
 
-          <div class="panel-footer">
-            <button type="submit" class="btn btn-danger">Yes, delete</button>
-            <a href="{{ path('openl10n_project_show', {'slug': project.slug}) }}" class="btn btn-link">Cancel</a>
-          </div>
-        </form>
-      </div>
+        <div>
+          <button type="submit" class="btn btn-danger">Yes, delete</button>
+        </div>
+      </form>
     </div>
   </div>
 {% endblock %}
