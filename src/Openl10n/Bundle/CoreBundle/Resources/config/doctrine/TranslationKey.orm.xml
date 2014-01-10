@@ -4,8 +4,12 @@
 
     <entity table="translation_keys" name="Openl10n\Bundle\CoreBundle\Entity\TranslationKey">
         <unique-constraints>
-            <unique-constraint name="slug" columns="domain_id,key_id" />
+            <unique-constraint name="key_id" columns="domain_id,key_id" />
         </unique-constraints>
+
+        <indexes>
+            <index name="hash" columns="domain_id,hash"/>
+        </indexes>
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />

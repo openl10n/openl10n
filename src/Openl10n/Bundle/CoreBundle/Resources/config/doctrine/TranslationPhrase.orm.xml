@@ -4,7 +4,7 @@
 
     <entity table="translation_phrases" name="Openl10n\Bundle\CoreBundle\Entity\TranslationPhrase">
         <unique-constraints>
-            <unique-constraint name="slug" columns="key_id,locale" />
+            <unique-constraint name="locale" columns="key_id,locale" />
         </unique-constraints>
 
         <id name="id" type="integer" column="id">
