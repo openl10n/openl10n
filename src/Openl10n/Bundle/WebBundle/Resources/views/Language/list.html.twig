@@ -1,60 +1,61 @@
-{% extends '@Openl10nWeb/layout/base.html.twig' %}
+{% extends '@Openl10nWeb/Project/layout.html.twig' %}
 
 {% import '@Openl10nWeb/layout/macros.html.twig' as macros %}
 
-{% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{ project.name }}'s languages</h3>
-        </div>
+{% set active_menu = 'languages' %}
 
-        <div class="panel-body">
-          <table class="table table-striped table-bordered table-hover">
-            <thead>
-              <tr>
-                <th>Locale</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for language in languages %}
-                <tr{% if project.defaultLocale == language.locale %} class="active"{% endif %}>
-                  <td>
-                    {{ macros.flag(language.locale) }}
-                    {{ language.locale.displayName(app.user.preferedLocale)|title }}
-                    ({{ language.locale }})
+{% block settings_content %}
+  <div class="row margin-bottom-md">
+    <div class="col-sm-12">
+      <h3 class="title title-md title-underlined">
+        Avalaible languages
+      </h3>
+    </div>
+    <div class="col-md-8">
+      <table class="table table-striped table-hover">
+        <tbody>
+          {% for language in languages %}
+            <tr{% if project.defaultLocale == language.locale %} class="active"{% endif %}>
+              <td>
+                {{ macros.flag(language.locale) }}
+                {{ language.locale.displayName(app.user.preferedLocale)|title }}
+                ({{ language.locale }})
 
-                    {% if project.defaultLocale == language.locale %}
-                      — <span class="text-info">default locale</span>
-                    {% endif %}
-                  </td>
-                  <td>
-                    {% if project.defaultLocale != language.locale %}
-                      <a href="{{ path('openl10n_language_delete', {slug: project.slug, locale: language.locale}) }}">
-                        <i class="icon-trash" title="Remove locale"></i>
-                      </a>
-                    {% endif %}
-                  </td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-
-        <div class="panel-footer">
-          <a href="{{ path('openl10n_language_new', {slug: project.slug}) }}" class="btn btn-primary">
-            Add locale
-          </a>
-          <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}" class="btn btn-link">
-            Back to project
-          </a>
-        </div>
-      </div>
+                {% if project.defaultLocale == language.locale %}
+                  — <span class="text-info">default locale</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if project.defaultLocale != language.locale %}
+                  <div class="text-right">
+                    <a data-toggle="tooltip" data-placement="left" title="Remove language" href="{{ path('openl10n_language_delete', {slug: project.slug, locale: language.locale}) }}">
+                      <i class="icon-remove"></i>
+                    </a>
+                  </div>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
-</div>
-{% endblock %}
 
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="title title-md title-underlined">
+        Add language
+      </h3>
+    </div>
+
+    <div class="col-md-8">
+      <form action="{{ path('openl10n_language_list', {'slug': project.slug}) }}" method="POST" novalidate>
+        {{ form_widget(form) }}
+
+        <p>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </p>
+      </form>
+    </div>
+  </div>
+{% endblock %}

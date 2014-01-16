@@ -1,31 +1,28 @@
-{% extends '@Openl10nWeb/layout/base.html.twig' %}
+{% extends '@Openl10nWeb/Project/layout.html.twig' %}
 
-{% block content %}
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <form class="panel panel-default" action="{{ path('openl10n_domain_export', {'slug': project.slug}) }}" method="POST" {{ form_enctype(form) }} novalidate>
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              Export translations of {{ project.name }}
-            </h3>
-          </div>
+{% set active_menu = 'export' %}
 
-          <div class="panel-body">
+{% block settings_content %}
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="title title-md title-underlined">
+        Export translations in {{ project.name }}
+      </h3>
+    </div>
+    <div class="col-sm-8">
+      <form action="{{ path('openl10n_domain_export', {'slug': project.slug}) }}" method="POST" {{ form_enctype(form) }} novalidate>
+
+          <div>
             {{ form_row(form.domain) }}
             {{ form_rest(form) }}
           </div>
 
-          <div class="panel-footer">
+          <div>
             <button type="submit" class="btn btn-primary">
               Export
             </button>
-            <a href="{{ path('openl10n_project_show', {'slug': project.slug}) }}" class="btn btn-link">
-              Cancel
-            </a>
           </div>
-        </form>
-      </div>
+      </form>
     </div>
   </div>
 {% endblock %}

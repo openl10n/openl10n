@@ -1,0 +1,13 @@
+.x-list-group-aside {
+    .list-group-item {
+        font-size: 16px;
+        border: none;
+        border-radius: 2px;
+
+        &.active {
+            background-color: #eee;
+            color: #000;
+            border-right: 1px solid #ccc;
+        }
+    }
+}

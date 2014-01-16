@@ -11,8 +11,26 @@ use Openl10n\Bundle\CoreBundle\Object\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class UserController extends Controller
+class SettingsController extends Controller
 {
+    public function generalAction(Request $request)
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        $action = new EditUserAction($user);
+        $form = $this->createForm('openl10n_user', $action);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $this->get('openl10n.processor.edit_user')->execute($action);
+
+            return $this->redirect($this->generateUrl('openl10n_homepage'));
+        }
+
+        return $this->render('Openl10nUserBundle:Settings:general.html.twig', array(
+            'user' => $user,
+            'form' => $form->createView(),
+        ));
+    }
+
     public function passwordAction(Request $request)
     {
         $user = $this->get('security.context')->getToken()->getUser();
@@ -25,36 +43,9 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('openl10n_homepage'));
         }
 
-        return $this->render('Openl10nUserBundle:User:password.html.twig', array(
+        return $this->render('Openl10nUserBundle:Settings:password.html.twig', array(
             'user' => $user,
             'form' => $form->createView(),
-        ));
-    }
-
-    public function editAction(Request $request)
-    {
-        $user = $this->get('security.context')->getToken()->getUser();
-        $action = new EditUserAction($user);
-        $form = $this->createForm('openl10n_user', $action);
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $this->get('openl10n.processor.edit_user')->execute($action);
-
-            return $this->redirect($this->generateUrl('openl10n_homepage'));
-        }
-
-        return $this->render('Openl10nUserBundle:User:edit.html.twig', array(
-            'user' => $user,
-            'form' => $form->createView(),
-        ));
-    }
-
-    public function showAction(Request $request, $username)
-    {
-        $user = $this->findUserOr404($username);
-
-        return $this->render('Openl10nUserBundle:User:show.html.twig', array(
-            'user' => $user,
         ));
     }
 
@@ -74,20 +65,9 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('openl10n_security_logout'));
         }
 
-        return $this->render('Openl10nUserBundle:User:leave.html.twig', array(
+        return $this->render('Openl10nUserBundle:Settings:leave.html.twig', array(
             'user' => $user,
             'form'    => $form->createView(),
         ));
-    }
-
-    protected function findUserOr404($username)
-    {
-        $user = $this->get('openl10n.repository.user')->findOneByUsername(new Slug($username));
-
-        if (null === $user) {
-            throw $this->createNotFoundException(sprintf('Unable to find user with username "%s"', $username));
-        }
-
-        return $user;
     }
 }

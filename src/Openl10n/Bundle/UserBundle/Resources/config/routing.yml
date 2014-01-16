@@ -8,18 +8,18 @@ openl10n_security_check:
 openl10n_security_logout:
     pattern: /logout
 
-openl10n_user_edit:
+openl10n_user_settings_general:
     pattern:  /settings/
-    defaults: { _controller: openl10n.controller.user:editAction }
+    defaults: { _controller: openl10n.controller.user_settings:generalAction }
 
-openl10n_user_show:
-    pattern:  /profile/{username}
-    defaults: { _controller: openl10n.controller.user:showAction }
-
-openl10n_user_leave:
+openl10n_user_settings_leave:
     pattern:  /settings/leave
-    defaults: { _controller: openl10n.controller.user:leaveAction }
+    defaults: { _controller: openl10n.controller.user_settings:leaveAction }
 
-openl10n_user_password:
+openl10n_user_settings_password:
     pattern:  /settings/password
-    defaults: { _controller: openl10n.controller.user:passwordAction }
+    defaults: { _controller: openl10n.controller.user_settings:passwordAction }
+
+openl10n_user_profile_show:
+    pattern:  /profile/{username}
+    defaults: { _controller: openl10n.controller.user_profile:showAction }
