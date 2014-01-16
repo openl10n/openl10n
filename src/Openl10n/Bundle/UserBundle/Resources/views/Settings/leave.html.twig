@@ -1,0 +1,28 @@
+{% extends '@Openl10nUser/Settings/layout.html.twig' %}
+
+{% set active_menu = 'leave' %}
+
+{% block settings_content %}
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="title title-md title-underlined">
+        Delete my account
+      </h3>
+    </div>
+    <div class="col-md-8">
+      <form action="{{ path('openl10n_user_settings_leave') }}" method="POST" novalidate>
+        {{ form_widget(form) }}
+
+        <p class="lead">
+          Be careful, this action cannot be undone.
+          <br>
+          Are you sur you want to <strong>remove your account</strong>?
+        </p>
+
+        <div>
+          <button type="submit" class="btn btn-danger">Yes, delete my account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -31,6 +31,15 @@
   }
 }
 
+.btn {
+  border-radius: 2px;
+}
+
+.btn-wide {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
 .btn-dark {
   @include button-variant(#444, $dark-gray, $dark-gray);
 }

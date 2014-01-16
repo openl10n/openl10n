@@ -23,7 +23,8 @@
         <parameter key="openl10n.validator.user_unique.class">Openl10n\Bundle\UserBundle\Validator\Constraints\UniqueUserValidator</parameter>
 
         <!-- Controller -->
-        <parameter key="openl10n.controller.user.class">Openl10n\Bundle\UserBundle\Controller\UserController</parameter>
+        <parameter key="openl10n.controller.user_settings.class">Openl10n\Bundle\UserBundle\Controller\SettingsController</parameter>
+        <parameter key="openl10n.controller.user_profile.class">Openl10n\Bundle\UserBundle\Controller\ProfileController</parameter>
     </parameters>
 
     <services>
@@ -66,6 +67,7 @@
         </service>
 
         <!-- Controller -->
-        <service id="openl10n.controller.user" class="%openl10n.controller.user.class%" parent="openl10n.controller" />
+        <service id="openl10n.controller.user_settings" class="%openl10n.controller.user_settings.class%" parent="openl10n.controller" />
+        <service id="openl10n.controller.user_profile" class="%openl10n.controller.user_profile.class%" parent="openl10n.controller" />
     </services>
 </container>

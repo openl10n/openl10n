@@ -15,22 +15,6 @@ class LanguageController extends Controller
     public function listAction(Request $request, $slug)
     {
         $project = $this->findProjectOr404($slug);
-        $languages = $this->get('openl10n.repository.language')->findByProject($project);
-
-        // Simple sort by display languages
-        usort($languages, function($locale1, $locale2) {
-            return strcmp($locale1->getLocale()->getDisplayName(), $locale2->getLocale()->getDisplayName());
-        });
-
-        return $this->render('Openl10nWebBundle:Language:list.html.twig', array(
-            'project' => $project,
-            'languages' => $languages,
-        ));
-    }
-
-    public function newAction(Request $request, $slug)
-    {
-        $project = $this->findProjectOr404($slug);
 
         $action = new CreateLanguageAction($project);
         $form = $this->createForm('openl10n_language', $action);
@@ -43,9 +27,17 @@ class LanguageController extends Controller
             )));
         }
 
-        return $this->render('Openl10nWebBundle:Language:new.html.twig', array(
+        $languages = $this->get('openl10n.repository.language')->findByProject($project);
+
+        // Simple sort by display languages
+        usort($languages, function($locale1, $locale2) {
+            return strcmp($locale1->getLocale()->getDisplayName(), $locale2->getLocale()->getDisplayName());
+        });
+
+        return $this->render('Openl10nWebBundle:Language:list.html.twig', array(
             'project' => $project,
-            'form'    => $form->createView(),
+            'languages' => $languages,
+            'form' => $form->createView(),
         ));
     }
 

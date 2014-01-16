@@ -1,3 +1,9 @@
+openl10n_design:
+    pattern:  /design
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'Openl10nWebBundle:Design:design.html.twig'
+
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
     prefix:   /_wdt
