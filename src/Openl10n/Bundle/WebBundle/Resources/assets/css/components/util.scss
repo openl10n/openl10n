@@ -1,3 +1,24 @@
-.margin-bottom-md {
-    margin-bottom: 20px;
+$xsmall: 5px;
+$small: 10px;
+$medium: 20px;
+$large: 40px;
+$xlarge: 60px;
+
+$positions: top bottom left right;
+@each $position in $positions {
+  .margin-#{$position}-xs {
+    margin-#{$position}: $xsmall;
+  }
+  .margin-#{$position}-sm {
+    margin-#{$position}: $small;
+  }
+  .margin-#{$position}-md {
+    margin-#{$position}: $medium;
+  }
+  .margin-#{$position}-lg {
+    margin-#{$position}: $large;
+  }
+  .margin-#{$position}-xlg {
+    margin-#{$position}: $xlarge;
+  }
 }

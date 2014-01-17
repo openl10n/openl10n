@@ -8,12 +8,12 @@
           <div class="pull-right">
             <form action="{{ path('openl10n_translation_context_switch', {project: project.slug}) }}" method="POST" class="form-inline" role="form">
               {{ form_row(form_context.source) }}
-              <i class="icon-arrow-right"></i>
+              <i class="fa fa-arrow-right"></i>
               {{ form_row(form_context.target) }}
               {{ form_rest(form_context) }}
 
               <button class="btn btn-default" type="submit">
-                <i class="icon-refresh" data-toggle="tooltip" title="Update"></i>
+                <i class="fa fa-refresh" data-toggle="tooltip" title="Update"></i>
               </button>
             </form>
           </div>
@@ -47,7 +47,7 @@
                 <input type="text" name="text" class="form-control" id="searchInput" placeholder="Search" value="{{ filters.text }}">
                 <span class="input-group-btn">
                   <button class="btn btn-primary" type="button">
-                    <i class="icon-search"></i>
+                    <i class="fa fa-search"></i>
                   </button>
                 </span>
               </div>
@@ -93,7 +93,7 @@
                 {%- endif %}">
                 {{ translation.target.text|truncate(50) }}
                 <a href="{{ path('openl10n_translation_show', {project: project.slug, domain: domain.slug, target: context.target, hash: translation.key.hash}) }}">
-                  <i class="icon-edit"></i>
+                  <i class="fa fa-edit"></i>
                 </a>
               </td>
             </tr>

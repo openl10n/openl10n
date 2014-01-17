@@ -1,14 +1,14 @@
 [class^="icon-"],
 [class*=" icon-"] {
-    .btn & {
-        // Used in project show page (in the header section)
-        font-size: 1em;
-    }
+  .btn & {
+    // Used in project show page (in the header section)
+    font-size: 1em;
+  }
 }
 
 .icon-spin {
-    -moz-animation: spin 1s infinite linear;
-    -o-animation: spin 1s infinite linear;
-    -webkit-animation: spin 1s infinite linear;
-    animation: spin 1s infinite linear;
+  -moz-animation: spin 1s infinite linear;
+  -o-animation: spin 1s infinite linear;
+  -webkit-animation: spin 1s infinite linear;
+  animation: spin 1s infinite linear;
 }

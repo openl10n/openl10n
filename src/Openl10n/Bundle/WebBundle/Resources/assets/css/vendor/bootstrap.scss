@@ -1,0 +1,7 @@
+@import "../variables";
+
+// Bootstrap specific vars
+$bootstrap-sass-asset-helper: false;
+$icon-font-path: "/fonts/bootstrap/";
+
+@import "bootstrap/bootstrap";

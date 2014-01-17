@@ -1,16 +1,16 @@
 .form-control {
-    border-radius: 2px;
+  border-radius: 2px;
 }
 
 label {
-    color: #777;
-    font-size: 12px;
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  color: #777;
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 // Fix display block of select when it should be inlined
 .form-inline select.form-control {
-    width: auto;
+  width: auto;
 }

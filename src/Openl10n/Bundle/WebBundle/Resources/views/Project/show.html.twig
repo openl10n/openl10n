@@ -10,13 +10,8 @@
           <div class="pull-right">
             <div class="btn-group pull-right">
               <a class="btn btn-dark" href="{{ path('openl10n_project_edit', {'slug': project.slug}) }}" title="Edit">
-                <i class="icon-pencil"></i>
-              </a>
-              <a class="btn btn-dark" href="{{ path('openl10n_domain_import', {'slug': project.slug}) }}" title="Import">
-                <i class="icon-upload-alt"></i>
-              </a>
-              <a class="btn btn-dark" href="{{ path('openl10n_domain_export', {'slug': project.slug}) }}" title="Export">
-                <i class="icon-download-alt"></i>
+                <i class="fa fa-cogs"></i>
+                Settings
               </a>
             </div>
           </div>
@@ -40,7 +35,7 @@
           <div class="panel-heading">
             <h3 class="panel-title">
               <a href="{{ path('openl10n_language_list', {'slug': project.slug}) }}" class="pull-right">
-                <i class="icon-pencil"></i>
+                <i class="fa fa-cogs"></i>
               </a>
               Languages
             </h3>

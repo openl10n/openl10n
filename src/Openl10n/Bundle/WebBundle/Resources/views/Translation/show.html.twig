@@ -8,12 +8,12 @@
           <div class="pull-right">
             <form action="{{ path('openl10n_translation_context_switch', {project: project.slug}) }}" method="POST" class="form-inline" role="form">
               {{ form_row(form_context.source) }}
-              <i class="icon-arrow-right"></i>
+              <i class="fa fa-arrow-right"></i>
               {{ form_row(form_context.target) }}
               {{ form_rest(form_context) }}
 
               <button class="btn btn-default" type="submit">
-                <i class="icon-refresh" data-toggle="tooltip" title="Update"></i>
+                <i class="fa fa-refresh" data-toggle="tooltip" title="Update"></i>
               </button>
             </form>
           </div>

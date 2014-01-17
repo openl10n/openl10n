@@ -2,58 +2,60 @@
 
 {% block body %}
   {% if is_granted('ROLE_USER') %}
-    <header class="navbar navbar-custom navbar-fixed-top" role="navigation">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="{{ path('openl10n_homepage') }}">
-          OpenLocalization
-        </a>
-      </div>
+    <header class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ path('openl10n_homepage') }}">
+            OpenLocalization
+          </a>
+        </div>
 
-      <nav class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav">
-          <li>
-            <a href="{{ path('openl10n_project_list') }}">
-              Projects
-            </a>
-          </li>
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-          {% if is_granted('ROLE_USER') %}
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle x-navbar-pic" data-toggle="dropdown">
-                <img src="{{ avatar_url(app.user.email, 32) }}" alt="Avatar">
-                {{ app.user.username }}
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="{{ path('openl10n_user_settings_general') }}">
-                    Profile
-                  </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <a href="{{ path('openl10n_security_logout') }}">
-                    Logout
-                  </a>
-                </li>
-              </ul>
-            </li>
-          {% else %}
+        <nav class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
             <li>
-              <a href="{{ path('openl10n_security_login') }}">
-                Login
+              <a href="{{ path('openl10n_project_list') }}">
+                Projects
               </a>
             </li>
-          {% endif %}
-        </ul>
-      </nav><!-- /.navbar-collapse -->
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            {% if is_granted('ROLE_USER') %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle x-navbar-pic" data-toggle="dropdown">
+                  <img src="{{ avatar_url(app.user.email, 32) }}" alt="Avatar">
+                  {{ app.user.username }}
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="{{ path('openl10n_user_settings_general') }}">
+                      Profile
+                    </a>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a href="{{ path('openl10n_security_logout') }}">
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            {% else %}
+              <li>
+                <a href="{{ path('openl10n_security_login') }}">
+                  Login
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
     </header>
   {% endif %}
 

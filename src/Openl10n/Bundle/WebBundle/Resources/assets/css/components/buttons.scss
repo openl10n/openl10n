@@ -1,39 +1,5 @@
-@import "../variables.scss";
-
-@mixin button-variant($color, $background, $border) {
-  color: $color;
-  background-color: $background;
-  border-color: $border;
-
-  &:hover,
-  &:focus,
-  &:active,
-  &.active {
-    color: $color;
-    background-color: darken($background, 8%);
-        border-color: darken($border, 12%);
-  }
-
-  &:active,
-  &.active {
-    background-image: none;
-  }
-
-  &.disabled,
-  &[disabled] {
-    &:hover,
-    &:focus,
-    &:active,
-    &.active {
-      background-color: $background;
-          border-color: $border;
-    }
-  }
-}
-
-.btn {
-  border-radius: 2px;
-}
+@import "../vendor/bootstrap/mixins";
+@import "../variables";
 
 .btn-wide {
   padding-left: 40px;

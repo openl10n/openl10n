@@ -29,7 +29,7 @@
                 {% if project.defaultLocale != language.locale %}
                   <div class="text-right">
                     <a data-toggle="tooltip" data-placement="left" title="Remove language" href="{{ path('openl10n_language_delete', {slug: project.slug, locale: language.locale}) }}">
-                      <i class="icon-remove"></i>
+                      <i class="fa fa-remove"></i>
                     </a>
                   </div>
                 {% endif %}
