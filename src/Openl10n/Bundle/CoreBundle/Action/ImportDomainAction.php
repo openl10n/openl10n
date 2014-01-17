@@ -20,6 +20,7 @@ class ImportDomainAction
     public function __construct(ProjectInterface $project)
     {
         $this->project = $project;
+        $this->options = array();
     }
 
     public function getProject()

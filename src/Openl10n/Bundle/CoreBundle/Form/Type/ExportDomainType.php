@@ -2,6 +2,7 @@
 
 namespace Openl10n\Bundle\CoreBundle\Form\Type;
 
+use Openl10n\Bundle\CoreBundle\Action\ExportDomainAction;
 use Openl10n\Bundle\CoreBundle\Repository\DomainRepositoryInterface;
 use Openl10n\Bundle\CoreBundle\Translation\TranslationDumperInterface;
 use Symfony\Component\Form\AbstractType;
@@ -62,6 +63,15 @@ class ExportDomainType extends AbstractType
             })
             ->add('format', 'choice', array(
                 'choices' => $this->getFormats()
+            ))
+            ->add('options', 'choice', array(
+                'choices' => array(
+                    ExportDomainAction::OPTION_REVIEWED => 'Only export reviewed translations',
+                    ExportDomainAction::OPTION_FALLBACK_LOCALE => 'Fallback on default locale',
+                    ExportDomainAction::OPTION_FALLBACK_KEY => 'Use key as fallback',
+                ),
+                'multiple' => true,
+                'expanded' => true,
             ))
         ;
     }
