@@ -70,12 +70,12 @@ class ImportDomainProcessor
                 $this->translationFactory->createNewKey($domain, $key)
             ;
 
-            $translationPhrase =
-                $translationKey->getPhrase($locale) ?:
-                $this->translationFactory->createNewPhrase($translationKey, $locale)
-            ;
+            $translationPhrase = $translationKey->getPhrase($locale);
 
-            $translationPhrase->setText($phrase);
+            if (null === $translationPhrase) {
+                $translationPhrase = $this->translationFactory->createNewPhrase($translationKey, $locale);
+                $translationPhrase->setText($phrase);
+            }
 
             $this->translationManager->persist($translationKey);
             $this->translationManager->persist($translationPhrase);
