@@ -2,6 +2,7 @@
 
 namespace Openl10n\Bundle\CoreBundle\Form\Type;
 
+use Openl10n\Bundle\CoreBundle\Action\ImportDomainAction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -20,9 +21,9 @@ class ImportDomainType extends AbstractType
             ))
             ->add('options', 'choice', array(
                 'choices' => array(
-                    'valid'  => 'Mark translations as reviewed',
-                    'ecrase' => 'Ecrase same values',
-                    'clean'  => 'Clean unused values',
+                    ImportDomainAction::OPTION_REVIEWED => 'Mark translations as reviewed',
+                    ImportDomainAction::OPTION_ERASE => 'Ecrase same values',
+                    ImportDomainAction::OPTION_CLEAN => 'Clean unused values',
                 ),
                 'multiple' => true,
                 'expanded' => true,

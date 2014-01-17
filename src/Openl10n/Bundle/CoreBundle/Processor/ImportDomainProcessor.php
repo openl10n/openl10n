@@ -50,12 +50,13 @@ class ImportDomainProcessor
         $project = $action->getProject();
         $locale = new Locale($action->locale);
         $domainSlug = new Slug($action->slug);
-        $options = $action->options;
 
+        // First upload translation file and extract message from it.
         $file = $this->fileUploader->upload($action->file);
-
         $catalogue = $this->translationLoader->loadMessages($file, $locale, $domainSlug->toString());
+        $messages = $catalogue->all($domainSlug->toString());
 
+        // Ensure domain exists
         $domain = $this->domainRepository->findOneBySlug($project, $domainSlug);
         if (null === $domain) {
             $domain = $this->domainFactory->createNew($project, $domainSlug);
@@ -63,7 +64,7 @@ class ImportDomainProcessor
             $this->domainManager->flush($domain);
         }
 
-        $messages = $catalogue->all($domainSlug->toString());
+        // Start importing messages
         foreach ($messages as $key => $phrase) {
             $translationKey =
                 $this->translationRepository->findOneByKey($domain, $key) ?:
@@ -73,17 +74,42 @@ class ImportDomainProcessor
             $translationPhrase = $translationKey->getPhrase($locale);
 
             if (null === $translationPhrase) {
+                // If translation phrase is new, then we can safely create
+                // a new one and set text to it.
                 $translationPhrase = $this->translationFactory->createNewPhrase($translationKey, $locale);
                 $translationPhrase->setText($phrase);
+            } elseif ($action->hasOptionErase()) {
+                // If translation phrase already exists, make sure erase
+                // option is set before setting text.
+                $translationPhrase->setText($phrase);
+            }
+
+            // If reviewed option is set, then automatically mark
+            // translation phrase as approved.
+            if ($action->hasOptionReviewed()) {
+                $translationPhrase->setApproved(true);
             }
 
             $this->translationManager->persist($translationKey);
             $this->translationManager->persist($translationPhrase);
         }
 
+        // If clean option is set, then remove every translations from this
+        // domain which are not present in the file.
+        if ($action->hasOptionClean()) {
+            $translationKeys = $this->translationRepository->findByDomain($domain);
+            foreach ($translationKeys as $translationKey) {
+                $key = $translationKey->getKey();
+
+                if (!isset($messages[$key])) {
+                    $this->translationManager->remove($translationKey);
+                }
+            }
+        }
 
         $this->translationManager->flush();
 
+        // Finally remove temporary file.
         $this->fileUploader->remove($file);
 
         return $domain;
