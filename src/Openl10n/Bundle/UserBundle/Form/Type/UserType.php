@@ -2,12 +2,13 @@
 
 namespace Openl10n\Bundle\UserBundle\Form\Type;
 
-use Openl10n\Bundle\UserBundle\Action\EditUserAction;
 use Openl10n\Bundle\UserBundle\Action\CreateUserAction;
+use Openl10n\Bundle\UserBundle\Action\EditUserAction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
@@ -17,9 +18,15 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('displayName', 'text')
-            ->add('preferedLocale', 'openl10n_locale_choice')
-            ->add('email', 'email')
+            ->add('displayName', 'text', array(
+                'label' => 'settings.general.form.name'
+            ))
+            ->add('preferedLocale', 'openl10n_locale_choice', array(
+                'label' => 'settings.general.form.locale'
+            ))
+            ->add('email', 'email', array(
+                'label' => 'settings.general.form.email'
+            ))
         ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
@@ -33,6 +40,13 @@ class UserType extends AbstractType
                 ;
             }
         });
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'translation_domain' => 'user',
+        ));
     }
 
     /**

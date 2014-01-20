@@ -14,9 +14,15 @@ class LoginType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('_username', 'text')
-            ->add('_password', 'password')
-            ->add('_remember_me', 'checkbox')
+            ->add('_username', 'text', array(
+                'label' => 'login.form.username'
+            ))
+            ->add('_password', 'password', array(
+                'label' => 'login.form.password'
+            ))
+            ->add('_remember_me', 'checkbox', array(
+                'label' => 'login.form.remember_me'
+            ))
         ;
     }
 
@@ -28,6 +34,7 @@ class LoginType extends AbstractType
         $resolver->setDefaults(array(
             'csrf_field_name' => '_csrf_token',
             'intention' => 'authenticate',
+            'translation_domain' => 'user',
         ));
     }
 

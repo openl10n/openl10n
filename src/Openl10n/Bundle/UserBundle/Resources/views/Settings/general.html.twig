@@ -1,12 +1,13 @@
 {% extends '@Openl10nUser/Settings/layout.html.twig' %}
 
+{% trans_default_domain 'user' %}
 {% set active_menu = 'general' %}
 
 {% block settings_content %}
   <div class="row">
     <div class="col-sm-12">
       <h3 class="title title-md title-underlined">
-        Edit your profile
+        {{ 'settings.general.title'|trans }}
       </h3>
     </div>
     <div class="col-sm-8">
@@ -17,7 +18,9 @@
           </div>
 
           <div>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">
+              {{ 'settings.general.submit'|trans }}
+            </button>
           </div>
       </form>
     </div>
@@ -28,7 +31,8 @@
       </p>
 
       <p>
-        You can change your avatar at <a href="#">Gravatar.com</a>
+        {{ 'settings.general.gravatar'|trans }}
+        <a href="http://www.gravatar.com/">Gravatar.com</a>
       </p>
     </div>
   </div>

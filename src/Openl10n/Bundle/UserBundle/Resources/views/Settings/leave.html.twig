@@ -1,12 +1,13 @@
 {% extends '@Openl10nUser/Settings/layout.html.twig' %}
 
+{% trans_default_domain 'user' %}
 {% set active_menu = 'leave' %}
 
 {% block settings_content %}
   <div class="row">
     <div class="col-sm-12">
       <h3 class="title title-md title-underlined">
-        Delete my account
+        {{ 'settings.leave.title'|trans }}
       </h3>
     </div>
     <div class="col-md-8">
@@ -14,13 +15,13 @@
         {{ form_widget(form) }}
 
         <p class="lead">
-          Be careful, this action cannot be undone.
-          <br>
-          Are you sur you want to <strong>remove your account</strong>?
+          {{ 'settings.leave.text'|trans|raw }}
         </p>
 
         <div>
-          <button type="submit" class="btn btn-danger">Yes, delete my account</button>
+          <button type="submit" class="btn btn-danger">
+            {{ 'settings.leave.submit'|trans }}
+          </button>
         </div>
       </form>
     </div>

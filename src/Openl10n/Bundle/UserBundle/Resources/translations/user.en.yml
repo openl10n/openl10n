@@ -1,0 +1,43 @@
+login:
+    title: Please sign in
+    submit: Login
+    reset_password:
+        link: Reset password
+    signup:
+        text: Don't have an account yet?
+        link: Sign up
+    form:
+        username: Username
+        password: Password
+        remember_me: Remember me
+
+settings:
+    title: Settings
+    public_profile:
+        link: Public profile
+    menu:
+        general: Edit my profile
+        password: Change my password
+        leave: Delete my account
+    general:
+        title: Edit my profile
+        submit: Update
+        gravatar: You can change your avatar at
+        form:
+            name: Display name
+            locale: Prefered language
+            email: Email
+    password:
+        title: Change my password
+        submit: Update
+        form:
+            old_password: Old password
+            new_password: Password
+            new_password_repeat: Password (repeat)
+    leave:
+        title: Delete my account
+        submit: "Yes, delete my account"
+        text: |
+            Be careful, this action cannot be undone.
+            <br>
+            Are you sur you want to <strong>remove your account</strong>?

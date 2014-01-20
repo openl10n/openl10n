@@ -1,5 +1,7 @@
 {% extends '@Openl10nWeb/layout/main.html.twig' %}
 
+{% trans_default_domain 'user' %}
+
 {% block body %}
 <div class="page-wrapper">
   <div class="container">
@@ -8,7 +10,7 @@
         <form action="{{ path("openl10n_security_check") }}" method="POST" class="panel panel-flat" novalidate>
           <div class="panel-heading panel-heading-lg">
             <h3 class="panel-title">
-              Please sign in
+              {{ 'login.title'|trans }}
             </h3>
           </div>
 
@@ -19,19 +21,23 @@
 
             <p>
               <button type="submit" id="_submit" name="_submit" class="btn btn-primary btn-lg btn-block">
-                Login
+                {{ 'login.submit'|trans }}
               </button>
             </p>
 
             <p class="pull-right">
-              <a href="#">Reset password</a>
+              <a href="#">
+                {{ 'login.reset_password.link'|trans }}
+              </a>
             </p>
           </div>
         </form>
 
         <p class="text-center">
-          Don't have an account yet?
-          <a href="#">Sign up</a>
+          {{ 'login.signup.text'|trans }}
+          <a href="#">
+            {{ 'login.signup.link'|trans }}
+          </a>
         </p>
       </div>
     </div>

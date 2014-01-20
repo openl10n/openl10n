@@ -1,5 +1,6 @@
 {% extends '@Openl10nWeb/layout/main.html.twig' %}
 
+{% trans_default_domain 'user' %}
 {% set active_menu = active_menu|default('') %}
 
 {% block content %}
@@ -9,13 +10,13 @@
         <div class="col-md-12">
           <div class="pull-right">
             <a class="btn btn-dark" href="{{ path('openl10n_user_profile_show', {username: app.user.username}) }}">
-              Public profile
+              {{ 'settings.public_profile.link'|trans }}
             </a>
           </div>
 
           <div>
             <h2 class="title title-lg">
-              Settings
+              {{ 'settings.title'|trans }}
             </h2>
           </div>
         </div>
@@ -28,13 +29,13 @@
       <div class="col-md-4">
         <div class="list-group x-list-group-aside">
           <a href="{{ path('openl10n_user_settings_general') }}" class="list-group-item {% if active_menu == 'general' %}active{% endif %}">
-            Edit my profile
+            {{ 'settings.menu.general'|trans }}
           </a>
           <a href="{{ path('openl10n_user_settings_password') }}" class="list-group-item {% if active_menu == 'password' %}active{% endif %}">
-            Change my password
+            {{ 'settings.menu.password'|trans }}
           </a>
           <a href="{{ path('openl10n_user_settings_leave') }}" class="list-group-item {% if active_menu == 'leave' %}active{% endif %}">
-            Delete my account
+            {{ 'settings.menu.leave'|trans }}
           </a>
         </div>
       </div>
