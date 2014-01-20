@@ -9,5 +9,10 @@
       color: #000;
       border-right: 1px solid #ccc;
     }
+    &.active:hover, &:hover {
+      color: #000;
+      background-color: #ddd;
+      border-right: 1px solid #ccc;
+    }
   }
 }
