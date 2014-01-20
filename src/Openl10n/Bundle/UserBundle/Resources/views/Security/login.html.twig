@@ -15,6 +15,7 @@
           </div>
 
           <div class="panel-body">
+            {{ form_errors(form) }}
             {{ form_row(form._username, {attr: {class: 'input-lg'}}) }}
             {{ form_row(form._password, {attr: {class: 'input-lg'}}) }}
             {{ form_rest(form) }}
