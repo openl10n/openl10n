@@ -40,6 +40,11 @@
         </service>
 
         <!-- Processor -->
+        <service id="openl10n.processor.create_user" class="%openl10n.processor.create_user.class%">
+            <argument type="service" id="security.encoder_factory" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
         <service id="openl10n.processor.edit_user" class="%openl10n.processor.edit_user.class%">
             <argument type="service" id="security.encoder_factory" />
             <argument type="service" id="openl10n.manager.user" />
