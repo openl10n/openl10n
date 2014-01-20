@@ -6,9 +6,9 @@ Feature: User edition
         Given I am connected as "johndoe"
          When I am on "/settings/"
           And I fill in the following:
-            | Display name    | Mister X            |
-            | Prefered locale | it_IT               |
-            | Email           | misterx@example.org |
+            | Display name      | Mister X            |
+            | Prefered language | it_IT               |
+            | Email             | misterx@example.org |
           And I press "Update"
          Then I should be on "/projects/"
          When I am on "/profile/johndoe"
