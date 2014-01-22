@@ -29,7 +29,7 @@ class Slug
             ));
         }
 
-        $this->slug = strtolower($slug);
+        $this->slug = $slug;
     }
 
     /**
