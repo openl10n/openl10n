@@ -1,11 +1,11 @@
 /**
  * Application definition
  */
-;(function(win, doc, editor) {
+;(function(win, doc, Editor) {
 
-  editor.app = new Backbone.Marionette.Application();
+  Editor.app = new Backbone.Marionette.Application();
 
-  editor.app.on("initialize:after", function(options) {
+  Editor.app.on("initialize:after", function(options) {
     Backbone.history.start({pushState: false});
 
     // Freeze the object
@@ -14,21 +14,30 @@
     }
   });
 
-  editor.app.addInitializer(function(options) {
-    // Instantiate the layout
-    editor.layout = new editor.views.AppLayout();
+  Editor.app.addInitializer(function(options) {
+    console.log('[DEBUG] app started');
 
-    // Instantiate the router on initialization
-    editor.controller = new editor.Controller();
-    editor.router = new editor.Router({
-      controller: editor.controller
+    // Models
+    Editor.project = new Backbone.Model(options.project);
+    Editor.domains = new Backbone.Collection(options.domains);
+    Editor.languages = new Backbone.Collection(options.languages);
+    Editor.context = new Editor.Models.Context({
+      source: Editor.project.get('locale')
     });
 
-    // Init Page controller
-    editor.page = new editor.models.Page({
-      project: options.project
+    // Views
+    Editor.layout = new Editor.Views.AppLayout();
+    Editor.headerView = new Editor.Views.HeaderView();
+    Editor.layout.header.show(Editor.headerView);
+
+    // Routing
+    Editor.controller = new Editor.Controller();
+    Editor.router = new Editor.Router({
+      controller: Editor.controller
     });
 
+    // Modules
+    Editor.Modules.Translate.attach(this);
   });
 
-})(window, window.document, window.editor)
+})(window, window.document, window.Editor)

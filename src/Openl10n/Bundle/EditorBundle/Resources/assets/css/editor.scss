@@ -1,3 +1,164 @@
+.ol-editor-layout {
+  background-color: #fafafa;
+  height: 100%;
+
+  .fullheight {
+    overflow: scroll;
+  }
+}
+
+
+//
+// Header
+//
+.ol-editor-header {
+  position: relative;
+  background-color: #eee;
+  border-bottom: 1px solid #ddd;
+  min-height: 60px;
+}
+
+.ol-editor-branding > a {
+  background-color: #428bca;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  display: inline-block;
+
+  &:hover {
+    background-color: darken(#428bca, 5%);
+  }
+}
+
+.ol-editor-logo-icon {
+  color: #fff;
+  padding: 15px 5px;
+  font-size: 28px;
+}
+
+.ol-editor-header-inner {
+  padding-left: 50px;
+  padding-right: 10px;
+}
+
+.ol-editor-header-title {
+  font-weight: 300;
+  font-size: 28px;
+  float: left;
+  line-height: 1.1;
+
+  > a {
+    display: inline-block;
+    padding: 15px 5px 15px;
+
+    &:hover {
+      //background-color: #ccc;
+    }
+  }
+
+
+  .fa {
+    font-size: 20px;
+  }
+}
+.ol-editor-domain-list {
+  display: inline-block;
+
+  a:focus {
+    text-decoration: none;
+  }
+}
+
+.ol-editor-header-item {
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.ol-editor-header-item-text {
+  padding-top: 11px;
+}
+.ol-editor-header-item-form {
+  padding-top: 3px;
+}
+
+
+//
+// Content
+//
+.ol-editor-content {
+}
+
+.ol-editor-sidebar {
+  width: 30%;
+  float: left;
+  background-color: #eee;
+  border-right: 1px solid #ddd;
+}
+.ol-editor-filter {
+  padding: 7px 5px;
+  border-bottom: 1px solid #ddd;
+
+  .form-group {
+    margin-bottom: 0;
+  }
+}
+.ol-editor-translation-list {
+}
+.ol-editor-translation-list-item > a {
+  display: block;
+  padding: 7px 10px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+
+  &.active {
+    background: #fefefe;
+  }
+
+  &:hover {
+    //background-color: #fafafa;
+  }
+
+  .key {
+    margin: 0;
+  }
+  .extract {
+    color: #777;
+    margin: 4px 0 0;
+  }
+  .domain {
+    color: #aaa;
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .status {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 6px;
+    background-color: #ddd;
+
+    &.status-translated {
+      background-color: lighten(#5cb85c, 15%);
+    }
+    &.status-approved {
+      background-color: #5cb85c;
+    }
+  }
+}
+
+.ol-editor-main {
+  width: 70%;
+  float: left;
+}
+
+
+
+/*
 //
 // Layout
 //
@@ -144,6 +305,15 @@
     padding: 10px;
     min-height: 50px;
 }
+*/
+
+.ol-editor-mainbar {
+  padding: 10px;
+  min-height: 50px;
+}
+.ol-editor-actionbar {
+  float: right;
+}
 
 //
 // Translation workspace
@@ -193,3 +363,4 @@
         height: 110px;
     }
 }
+

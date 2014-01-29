@@ -1,53 +1,66 @@
-<div class="col-md-12">
-  <div class="pull-right">
-    <form action="#" class="form-inline">
-      <div class="form-group">
-        <select class="form-control source-locale">
-          {% for language in languages %}
-            <option value="{{ language.locale }}">
-              {{ language.locale.displayName }}
-              ({{ language.locale }})
-            </option>
-          {% endfor %}
-        </select>
+<div class="ol-editor-branding">
+  <a href="/">
+    <i class="ol-editor-logo-icon fa fa-code"></i>
+  </a>
+</div>
 
-        <i class="fa fa-arrow-right"></i>
+<div class="ol-editor-header-inner">
+  <div class="pull-left">
+    <div class="ol-editor-header-title">
+      <a href="#">
+        <%- project.name %>
+      </a>
 
-        <select class="form-control target-locale">
-          {% for language in languages %}
-            <option value="{{ language.locale }}">
-              {{ language.locale.displayName }}
-              ({{ language.locale }})
-            </option>
-          {% endfor %}
-        </select>
+      <i class="fa fa-caret-right"></i>
+
+      <div class="ol-editor-domain-list dropdown">
+        <a data-toggle="dropdown" href="#">
+          <% if (context.domain) { %>
+            <%- context.domain.name %>
+          <% } else { %>
+            All Phrases
+          <% } %>
+          <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <li <% if (!context.domain) { %>class="active"<% } %>>
+            <a href="#" data-id="*">All Phrases</a>
+          </li>
+          <% _.each(domains, function(domain) { %>
+            <li <% if (context.domain && context.domain.id == domain.id) { %>class="active"<% } %>>
+              <a href="#" data-id="<%- domain.id %>"><%- domain.name %></a>
+            </li>
+          <% }); %>
+        </ul>
       </div>
-    </form>
+    </div>
   </div>
 
-  <h2 class="title title-lg" id="title">
-    <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}" data-bypass>
-      {{ project.name }}
-    </a>
+  <div class="pull-right">
+    <div class="ol-editor-header-item ol-editor-header-item-form">
+      <select class="form-control source-locale">
+        <% _.each(languages, function(language) { %>
+          <option value="<%- language.id %>" <% if (language.id == context.source) { %>selected<% } %>>
+            <%- language.name %>
+          </option>
+        <% }); %>
+      </select>
+    </div>
+    <div class="ol-editor-header-item ol-editor-header-item-text">
+      <p>
+        <i class="fa fa-arrow-right"></i>
+      </p>
+    </div>
+    <div class="ol-editor-header-item ol-editor-header-item-form">
+      <select class="form-control target-locale">
+        <% _.each(languages, function(language) { %>
+          <option value="<%- language.id %>" <% if (language.id == context.target) { %>selected<% } %>>
+            <%- language.name %>
+          </option>
+        <% }); %>
+      </select>
+    </div>
+  </div>
 
-    <span>
-      <i class="fa fa-angle-double-right"></i>
-    </span>
-
-    <span class="dropdown">
-      <a href="#" role="button" data-toggle="dropdown">
-        <%- domain %>
-        <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu domain-list" role="menu">
-        {% for domain in domains %}
-          <li>
-            <a href="#" data-slug="{{ domain.slug }}">
-              {{ domain.name }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </span>
-  </h2>
+  <div class="clearfix"></div>
 </div>

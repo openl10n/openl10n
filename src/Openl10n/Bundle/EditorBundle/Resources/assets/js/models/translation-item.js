@@ -1,13 +1,13 @@
-;(function(win, doc, editor) {
+;(function(win, doc, Editor) {
 
-  editor.models.Translation = Backbone.Model.extend({
+  Editor.Models.Translation = Backbone.Model.extend({
     url: function() {
       return Routing.generate('openl10n_editorapi_get_translation', {
-        'project': editor.page.get('project'),
+        'project': Editor.project.get('id'),
         'domain': this.get('domain'),
         'target': this.get('target_locale'),
         'hash': this.id,
-        'source': editor.page.get('source')
+        'source': this.get('source_locale')
       });
     },
 
@@ -28,4 +28,4 @@
     }
   });
 
-})(window, window.document, window.editor)
+})(window, window.document, window.Editor)

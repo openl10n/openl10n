@@ -1,7 +1,7 @@
-;(function(win, doc, editor) {
+;(function(win, doc, Editor) {
 
-  editor.views.TranslationEditView = Backbone.Marionette.ItemView.extend({
-    template: '#translation-edit-template',
+  Editor.Views.TranslationEditView = Backbone.Marionette.ItemView.extend({
+    template: '#ol-editor-translation-edit-template',
 
     ui: {
       'editor': 'textarea.phrase-editor'
@@ -9,10 +9,6 @@
 
     initialize: function () {
       this.listenTo(this.model, 'change', this.render);
-    },
-
-    render: function() {
-      Backbone.Marionette.ItemView.prototype.render.apply(this, arguments);
     },
 
     onRender: function() {
@@ -26,4 +22,4 @@
 
   });
 
-})(window, window.document, window.editor)
+})(window, window.document, window.Editor)
