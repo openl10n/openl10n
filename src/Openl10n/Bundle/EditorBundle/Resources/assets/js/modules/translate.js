@@ -59,7 +59,7 @@
         });
         Editor.layout.actionsBar.show(actionsView);
 
-        console.log('show translation ' + hash);
+        translation.fetch();
       });
     }
   };
