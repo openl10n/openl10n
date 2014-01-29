@@ -9,7 +9,11 @@
       domain: null,
       source: null,
       target: null,
-      hash: null
+      hash: null,
+
+      text: null,
+      translated: null,
+      approved: null,
     },
 
     generatePath: function(params) {

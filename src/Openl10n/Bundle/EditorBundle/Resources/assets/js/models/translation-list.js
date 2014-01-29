@@ -8,7 +8,10 @@
         'project': Editor.project.get('id'),
         'domain': Editor.context.get('domain') ? Editor.context.get('domain') : '*',
         'target': Editor.context.get('target'),
-        'source': Editor.context.get('source')
+        'source': Editor.context.get('source'),
+        'text': Editor.context.get('text') ? Editor.context.get('text') : null,
+        'translated': Editor.context.get('translated') ? Editor.context.get('translated') : null,
+        'approved': Editor.context.get('approved') ? Editor.context.get('approved') : null,
       });
     },
 

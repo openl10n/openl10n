@@ -9,6 +9,10 @@
         this.listenTo(Editor.context, 'change:source', _this.fetchTranslations);
         this.listenTo(Editor.context, 'change:target', _this.fetchTranslations);
 
+        this.listenTo(Editor.context, 'change:text', _this.fetchTranslations);
+        this.listenTo(Editor.context, 'change:translated', _this.fetchTranslations);
+        this.listenTo(Editor.context, 'change:approved', _this.fetchTranslations);
+
         this.listenTo(Editor.context, 'change:hash', _this.showTranslation);
         this.listenTo(Editor.context, 'change:source', _this.showTranslation);
         this.listenTo(Editor.context, 'change:target', _this.showTranslation);

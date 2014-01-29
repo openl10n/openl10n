@@ -40,6 +40,7 @@ class TranslationListSpecification implements DoctrineOrmTranslationSpecificatio
             ->leftJoin('k.phrases', 's', Expr\Join::WITH, 's.locale = :source')
             ->leftJoin('k.phrases', 't', Expr\Join::WITH, 't.locale = :target')
             ->andWhere('k.domain = :domain')
+            ->orderBy('k.key', 'ASC')
             ->setParameters(array(
                 'domain' => $this->domain,
                 'source' => $this->source,
@@ -55,6 +56,22 @@ class TranslationListSpecification implements DoctrineOrmTranslationSpecificatio
                     $queryBuilder->expr()->like('t.text', ':text')
                 ))
                 ->setParameter('text', '%'.$text.'%')
+            ;
+        }
+
+        if (null !== $translated = $this->filterBag->translated) {
+            $queryBuilder
+                ->andWhere($translated ?
+                    $queryBuilder->expr()->isNotNull('t.text') :
+                    $queryBuilder->expr()->isNull('t.text')
+                )
+            ;
+        }
+
+        if (null !== $approved = $this->filterBag->approved) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq('t.isApproved', ':isApproved'))
+                ->setParameter('isApproved', $approved)
             ;
         }
     }
