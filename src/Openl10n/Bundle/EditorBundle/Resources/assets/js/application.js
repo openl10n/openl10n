@@ -29,6 +29,7 @@
     Editor.layout = new Editor.Views.AppLayout();
     Editor.headerView = new Editor.Views.HeaderView();
     Editor.layout.header.show(Editor.headerView);
+    Editor.layout.filter.show(new Editor.Views.FilterView);
 
     // Routing
     Editor.controller = new Editor.Controller();

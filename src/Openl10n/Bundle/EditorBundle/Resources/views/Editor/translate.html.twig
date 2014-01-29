@@ -25,6 +25,7 @@
     '@Openl10nEditorBundle/Resources/assets/js/modules/translate.js'
     '@Openl10nEditorBundle/Resources/assets/js/views/app-layout.js'
     '@Openl10nEditorBundle/Resources/assets/js/views/actions-view.js'
+    '@Openl10nEditorBundle/Resources/assets/js/views/filter-view.js'
     '@Openl10nEditorBundle/Resources/assets/js/views/header-view.js'
     '@Openl10nEditorBundle/Resources/assets/js/views/translation-item-view.js'
     '@Openl10nEditorBundle/Resources/assets/js/views/translation-list-view.js'
@@ -87,7 +88,7 @@
 
     <div class="ol-editor-content">
       <div class="ol-editor-sidebar">
-        <div class="ol-editor-filter">
+        <div class="ol-editor-filter" id="ol-editor-filter">
           <div class="form-group">
             <input type="text" class="form-control" id="translationFilterInput" placeholder="Search…">
           </div>
@@ -123,6 +124,10 @@
 
   <script type="text/template" id="ol-editor-actions-template">
     {{ include('@Openl10nEditor/Editor/js_templates/actions.html.twig', {}, with_context = false) }}
+  </script>
+
+  <script type="text/template" id="ol-editor-filter-template">
+    {{ include('@Openl10nEditor/Editor/js_templates/filter.html.twig', {}, with_context = false) }}
   </script>
 
 

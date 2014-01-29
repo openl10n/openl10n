@@ -9,6 +9,7 @@
       translationList: '#ol-editor-translation-list',
       translationEdit: '#ol-editor-translation-edit',
       actionsBar: '#ol-editor-actionbar',
+      filter: '#ol-editor-filter',
     },
 
     initialize: function() {
