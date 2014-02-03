@@ -39,27 +39,7 @@
 
   <script type="text/javascript">
     $(function() {
-      Editor.app.start({
-        project: {
-          id: "{{ project.slug }}",
-          name: "{{ project.name }}",
-          locale: "{{ project.defaultLocale }}"
-        },
-        languages: [{
-          id: 'en',
-          name: 'English (en)'
-        },{
-          id: 'fr',
-          name: 'French (fr)'
-        }],
-        domains: [{
-          id: 'barbaz',
-          name: 'Barbaz'
-        },{
-          id: 'barbaz2',
-          name: 'Barbaz2'
-        }]
-      });
+      Editor.app.start({{ data|json_encode|raw }});
     });
   </script>
 {% endblock javascripts %}
