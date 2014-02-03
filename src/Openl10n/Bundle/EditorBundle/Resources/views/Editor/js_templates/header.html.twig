@@ -1,5 +1,5 @@
 <div class="ol-editor-branding">
-  <a href="/">
+  <a href="{{ path('openl10n_homepage') }}">
     <i class="ol-editor-logo-icon fa fa-code"></i>
   </a>
 </div>
@@ -7,7 +7,7 @@
 <div class="ol-editor-header-inner">
   <div class="pull-left">
     <div class="ol-editor-header-title">
-      <a href="#">
+      <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}">
         <%- project.name %>
       </a>
 
@@ -41,7 +41,7 @@
       <select class="form-control source-locale">
         <% _.each(languages, function(language) { %>
           <option value="<%- language.id %>" <% if (language.id == context.source) { %>selected<% } %>>
-            <%- language.name %>
+            <%- language.name %> (<%- language.id %>)
           </option>
         <% }); %>
       </select>
@@ -55,7 +55,7 @@
       <select class="form-control target-locale">
         <% _.each(languages, function(language) { %>
           <option value="<%- language.id %>" <% if (language.id == context.target) { %>selected<% } %>>
-            <%- language.name %>
+            <%- language.name %> (<%- language.id %>)
           </option>
         <% }); %>
       </select>

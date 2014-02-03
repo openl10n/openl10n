@@ -15,11 +15,11 @@
   </p>
 
   <% if (source_phrase) { %>
-    <p class="extract">
+    <p class="extract text-default">
       <%- S(source_phrase).truncate(100, '…') %>
     </p>
   <% } else { %>
-    <p class="extract text-muted">
+    <p class="extract text-danger">
       undefined
     </p>
   <% } %>

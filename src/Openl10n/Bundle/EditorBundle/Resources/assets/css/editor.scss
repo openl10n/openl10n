@@ -125,8 +125,11 @@
     margin: 0;
   }
   .extract {
-    color: #777;
     margin: 4px 0 0;
+
+    &.text-default {
+      color: #777;
+    }
   }
   .domain {
     color: #aaa;
