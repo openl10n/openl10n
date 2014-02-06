@@ -23,10 +23,16 @@
 
       if (params.target) {
         path.push(params.target);
+      } else {
+        return path.join('/');
       }
+
       if (params.domain) {
         path.push(params.domain);
+      } else {
+        path.push('*');
       }
+
       if (params.hash) {
         path.push(params.hash);
       }

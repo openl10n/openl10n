@@ -40,6 +40,10 @@
         return;
       }
 
+      if (!Editor.context.get('hash')) {
+        return;
+      }
+
       this.translationDeferred.done(function() {
         var hash = Editor.context.get('hash');
 

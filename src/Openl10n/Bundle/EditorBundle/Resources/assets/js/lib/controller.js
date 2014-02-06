@@ -19,11 +19,14 @@
     },
 
     listTranslation: function(target, domain) {
-      if (domain != '*' && !Editor.domains.get(domain)) {
+      console.log('[DEBUG] listTranslation action');
+
+      if (domain == '*' || !Editor.domains.get(domain)) {
         Editor.context.set({
           'target': target,
           'domain': null
         });
+
         return;
       }
 
@@ -31,19 +34,6 @@
         'target': target,
         'domain': domain
       });
-
-      return;
-      Editor.page.set({
-        target: target,
-        domain: domain
-      });
-
-      $
-        .when(Editor.page.listDeferred)
-        .then(function() {
-          var firstItem = Editor.page.translationList.at(0);
-          Editor.page.set('hash', firstItem.id);
-        });
     },
 
     showTranslation: function(target, domain, hash) {
@@ -61,19 +51,6 @@
         'domain': domain,
         'hash': hash
       });
-
-      return;
-      Editor.page.set({
-        target: target,
-        domain: domain,
-        hash: hash
-      });
-
-      $
-        .when(Editor.page.listDeferred, Editor.page.itemDeferred)
-        .then(function() {
-          Editor.page.translationList.selectItem();
-        });
     },
 
     notFound: function() {

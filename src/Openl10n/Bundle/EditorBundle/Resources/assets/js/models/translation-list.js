@@ -6,7 +6,7 @@
     url: function() {
       return Routing.generate('openl10n_editorapi_get_translations', {
         'project': Editor.project.get('id'),
-        'domain': Editor.context.get('domain') ? Editor.context.get('domain') : '*',
+        'domain': Editor.context.get('domain') ? Editor.context.get('domain') : null,
         'target': Editor.context.get('target'),
         'source': Editor.context.get('source'),
         'text': Editor.context.get('text') ? Editor.context.get('text') : null,

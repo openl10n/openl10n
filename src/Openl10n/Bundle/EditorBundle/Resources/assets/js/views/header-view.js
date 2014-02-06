@@ -28,8 +28,10 @@
         evt.preventDefault();
 
         var domain = $(this).data('id');
+        domain = Editor.domains.get(domain) ? domain : null;
+
         Editor.context.set({
-          'domain': domain,
+          'domain': '*' != domain ? domain : null,
           'hash': null
         });
       });
