@@ -11,17 +11,17 @@
 
 
 openl10n_editorapi_get_translations:
-    path: /projects/{project}/domains/{domain}/translations/{target}
+    path: /projects/{project}/translations/{target}
     defaults: { _controller: Openl10nEditorBundle:Api/Translation:cget, _format: json }
     requirements:
         _method: GET
 openl10n_editorapi_get_translation:
-    path: /projects/{project}/domains/{domain}/translations/{target}/{hash}
+    path: /projects/{project}/translations/{target}/{hash}
     defaults: { _controller: Openl10nEditorBundle:Api/Translation:get, _format: json }
     requirements:
         _method: GET
 openl10n_editorapi_put_translation:
-    path: /projects/{project}/domains/{domain}/translations/{target}/{hash}
+    path: /projects/{project}/translations/{target}/{hash}
     defaults: { _controller: Openl10nEditorBundle:Api/Translation:put, _format: json }
     requirements:
         _method: PUT

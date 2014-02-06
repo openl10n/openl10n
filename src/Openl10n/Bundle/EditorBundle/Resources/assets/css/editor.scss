@@ -3,7 +3,7 @@
   height: 100%;
 
   .fullheight {
-    overflow: scroll;
+    overflow-y: scroll;
   }
 }
 
@@ -106,6 +106,7 @@
   }
 }
 .ol-editor-translation-list {
+  overflow-x: hidden;
 }
 .ol-editor-translation-list-item > a {
   display: block;

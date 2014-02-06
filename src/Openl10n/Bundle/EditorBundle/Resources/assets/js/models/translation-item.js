@@ -4,7 +4,6 @@
     url: function() {
       return Routing.generate('openl10n_editorapi_get_translation', {
         'project': Editor.project.get('id'),
-        'domain': this.get('domain'),
         'target': this.get('target_locale'),
         'hash': this.id,
         'source': this.get('source_locale')
