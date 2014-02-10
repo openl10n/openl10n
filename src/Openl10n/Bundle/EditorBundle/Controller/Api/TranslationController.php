@@ -31,7 +31,12 @@ class TranslationController extends FOSRestController implements ClassResourceIn
         $project = $this->findProjectOr404($project);
         $language = $this->findLanguageOr404($project, $target);
 
-        $source = Locale::parse('en');
+        if ($request->query->has('source')) {
+            $source = Locale::parse($request->query->get('source'));
+        } else {
+            $source = $project->getDefaultLocale();
+        }
+
         $specification = new CustomTranslationSpecification($project, $source, $target);
 
         $pager = $this->get('openl10n.repository.translation')->findSatisfying($specification);
@@ -64,8 +69,11 @@ class TranslationController extends FOSRestController implements ClassResourceIn
         $project = $this->findProjectOr404($project);
         $language = $this->findLanguageOr404($project, $target);
 
-        //$source = $request->query->has('source') ? Locale::parse($request->query->get('source')) : null;
-        $source = Locale::parse('en');
+        if ($request->query->has('source')) {
+            $source = Locale::parse($request->query->get('source'));
+        } else {
+            $source = $project->getDefaultLocale();
+        }
 
         $key = $this->findTranslationOr404($project, $hash);
 

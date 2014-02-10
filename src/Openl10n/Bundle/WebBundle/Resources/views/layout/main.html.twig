@@ -29,8 +29,7 @@
             {% if is_granted('ROLE_USER') %}
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle x-navbar-pic" data-toggle="dropdown">
-                  <img src="{{ avatar_url(app.user.email, 32) }}" alt="Avatar">
-                  {{ app.user.username }}
+                  <img src="{{ avatar_url(app.user.email, 32) }}" alt="Avatar" class="img-circle">
                 </a>
                 <ul class="dropdown-menu">
                   <li>
