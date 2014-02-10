@@ -1,14 +1,17 @@
-;(function(win, doc, editor) {
+;(function(win, doc, Editor) {
 
-  editor.models.TranslationList = Backbone.Collection.extend({
-    model: editor.models.Translation,
+  Editor.Models.TranslationList = Backbone.Collection.extend({
+    model: Editor.Models.Translation,
 
     url: function() {
       return Routing.generate('openl10n_editorapi_get_translations', {
-        'project': editor.page.get('project'),
-        'domain': this.domain,
-        'target': this.target,
-        'source': editor.page.get('source')
+        'project': Editor.project.get('id'),
+        'domain': Editor.context.get('domain') ? Editor.context.get('domain') : null,
+        'target': Editor.context.get('target'),
+        'source': Editor.context.get('source'),
+        'text': Editor.context.get('text') ? Editor.context.get('text') : null,
+        'translated': Editor.context.get('translated') ? Editor.context.get('translated') : null,
+        'approved': Editor.context.get('approved') ? Editor.context.get('approved') : null,
       });
     },
 
@@ -20,17 +23,17 @@
       options || (options = {});
 
       // Init arguments
-      this.domain = options.domain;
-      this.target = options.target;
+      //this.domain = options.domain;
+      //this.target = options.target;
       this.selectedItem = null;
 
       // Events
-      this.listenTo(editor.page, 'change:hash', this.selectItem.bind(this));
+      this.listenTo(Editor.context, 'change:hash', function(evt, hash) {
+        this.selectItem(hash);
+      }.bind(this));
     },
 
-    selectItem: function() {
-      var hash = editor.page.get('hash');
-
+    selectItem: function(hash) {
       if (this.selectedItem)
         this.selectedItem.set('selected', false);
 
@@ -40,6 +43,8 @@
 
       model.set('selected', true);
       this.selectedItem = model;
+
+      return model;
     },
 
     selectNextItem: function() {
@@ -49,7 +54,7 @@
       var currentIndex = this.indexOf(this.selectedItem);
       var nextItemIndex = Math.min(currentIndex + 1, this.length - 1);
       var nextItem = this.at(nextItemIndex);
-      editor.page.set('hash', nextItem.id);
+      Editor.context.set('hash', nextItem.id);
     },
 
     selectPreviousItem: function() {
@@ -59,8 +64,8 @@
       var currentIndex = this.indexOf(this.selectedItem);
       var previousItemIndex = Math.max(0, currentIndex - 1);
       var previousItem = this.at(previousItemIndex);
-      editor.page.set('hash', previousItem.id);
+      Editor.context.set('hash', previousItem.id);
     }
 
   });
-})(window, window.document, window.editor)
+})(window, window.document, window.Editor)

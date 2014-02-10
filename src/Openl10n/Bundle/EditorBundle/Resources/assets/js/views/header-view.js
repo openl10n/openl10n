@@ -1,48 +1,68 @@
-;(function(win, doc, editor) {
+;(function(win, doc, Editor) {
 
-  editor.views.HeaderView = Backbone.Marionette.ItemView.extend({
-    template: '#header-template',
+  Editor.Views.HeaderView = Backbone.Marionette.ItemView.extend({
+    template: '#ol-editor-template-header',
 
     ui: {
-      domainList: 'ul.domain-list li a',
+      domainList: '.ol-editor-domain-list li a[data-id]',
       selectSource: 'select.source-locale',
       selectTarget: 'select.target-locale',
+    },
+
+    initialize: function () {
+      this.listenTo(Editor.context, 'change:domain', this.render);
+      this.listenTo(Editor.context, 'change:source', this.render);
+      this.listenTo(Editor.context, 'change:target', this.render);
+    },
+
+    updateSelectTarget: function() {
+      this.ui.selectTarget.val(Editor.context.get('target'));
     },
 
     onRender: function() {
       var _this = this;
 
-      _this.ui.selectSource.val(editor.page.get('source'));
-      _this.ui.selectTarget.val(editor.page.get('target'));
-
-      editor.page.on('change:source', function() {
-        _this.ui.selectSource.val(editor.page.get('source'));
-      })
-
-      editor.page.on('change:target', function() {
-        _this.ui.selectTarget.val(editor.page.get('target'));
-      })
-
-      this.ui.selectSource.on('change', function() {
-        editor.page.set('source', $(this).val());
-      });
-
-      this.ui.selectTarget.on('change', function() {
-        editor.page.set('target', $(this).val());
-      });
+      console.log('[DEBUG] HeaderView onRender');
 
       this.ui.domainList.on('click', function(evt) {
         evt.preventDefault();
-        editor.page.set('domain', $(this).data('slug'));
+
+        var domain = $(this).data('id');
+        domain = Editor.domains.get(domain) ? domain : null;
+
+        Editor.context.set({
+          'domain': '*' != domain ? domain : null,
+          'hash': null
+        });
+      });
+
+      this.ui.selectTarget.on('change', function() {
+        var target = $(this).val();
+        Editor.context.set('target', target);
+      });
+
+      this.ui.selectSource.on('change', function() {
+        var source = $(this).val();
+        Editor.context.set('source', source);
       });
     },
 
-    serializeData: function(){
+    serializeData: function() {
+      var context = {
+        target: Editor.context.get('target'),
+        source: Editor.context.get('source'),
+        domain: Editor.domains.get(Editor.context.get('domain')) ?
+          Editor.domains.get(Editor.context.get('domain')).toJSON() : null,
+      };
+
       return {
-        domain: editor.page.get('domain')
+        project: Editor.project.toJSON(),
+        domains: Editor.domains.toJSON(),
+        languages: Editor.languages.toJSON(),
+        context: context,
       };
     }
 
   });
 
-})(window, window.document, window.editor)
+})(window, window.document, window.Editor)

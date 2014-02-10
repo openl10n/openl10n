@@ -1,44 +1,61 @@
-;(function(win, doc, editor) {
+;(function(win, doc, Editor) {
 
-  editor.Controller = Marionette.Controller.extend({
+  Editor.Controller = Marionette.Controller.extend({
     initialize: function() {
     },
 
-    home: function() {
-      console.log('Home action');
+    index: function() {
+      console.log('[DEBUG] index action');
+
+      var path = Editor.project.get('locale');
+
+      Backbone.history.navigate(path, {trigger: true});
+    },
+
+    showLanguage: function(target) {
+      console.log('[DEBUG] showLanguage action');
+
+      Editor.context.set('target', target);
     },
 
     listTranslation: function(target, domain) {
-      editor.page.set({
-        target: target,
-        domain: domain
-      });
+      console.log('[DEBUG] listTranslation action');
 
-      $
-        .when(editor.page.listDeferred)
-        .then(function() {
-          var firstItem = editor.page.translationList.at(0);
-          editor.page.set('hash', firstItem.id);
+      if (domain == '*' || !Editor.domains.get(domain)) {
+        Editor.context.set({
+          'target': target,
+          'domain': null
         });
+
+        return;
+      }
+
+      Editor.context.set({
+        'target': target,
+        'domain': domain
+      });
     },
 
     showTranslation: function(target, domain, hash) {
-      editor.page.set({
-        target: target,
-        domain: domain,
-        hash: hash
-      });
-
-      $
-        .when(editor.page.listDeferred, editor.page.itemDeferred)
-        .then(function() {
-          editor.page.translationList.selectItem();
+      if (domain != '*' && !Editor.domains.get(domain)) {
+        Editor.context.set({
+          'target': target,
+          'domain': null,
+          'hash': hash
         });
+        return;
+      }
+
+      Editor.context.set({
+        'target': target,
+        'domain': domain,
+        'hash': hash
+      });
     },
 
     notFound: function() {
-      console.log('Route not found');
+      console.log('[DEBUG] route not found');
     }
   });
 
-})(window, window.document, window.editor)
+})(window, window.document, window.Editor)

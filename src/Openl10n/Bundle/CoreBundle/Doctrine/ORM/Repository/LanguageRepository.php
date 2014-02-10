@@ -52,6 +52,6 @@ class LanguageRepository implements LanguageRepositoryInterface
     {
         return $this->registry->getManager()
             ->getRepository('Openl10nCoreBundle:Language')
-            ->findOneBy(array('project' => $project, 'locale' => $locale));
+            ->findOneBy(array('project' => $project, 'locale' => (string) $locale));
     }
 }

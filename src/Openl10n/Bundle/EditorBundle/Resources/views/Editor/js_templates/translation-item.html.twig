@@ -1,13 +1,26 @@
-<a href="#" class="translation-item <% if (selected) { %>active<% } %>">
-  <p class="key"><%- key %></p>
+<a href="#" <% if (selected) { %>class="active"<% } %>>
+  <span class="status <% if (is_approved) { %>status-approved<% } else if (is_translated) { %>status-translated<% } %>">
+  </span>
+
+  <p class="domain pull-right">
+    <%- domain %>
+  </p>
+
+  <p class="key">
+    <span class="text-<% if (is_translated) { %>success<% } else { %>muted<% } %>">
+      <i class="fa <% if (is_approved) { %>fa-check-circle-o<% } else { %>fa-circle-o<% } %>"></i>
+    </span>
+
+    <%- key %>
+  </p>
+
   <% if (source_phrase) { %>
-  <p class="extract"><%- S(source_phrase).truncate(100, '…') %></p>
+    <p class="extract text-default">
+      <%- S(source_phrase).truncate(100, '…') %>
+    </p>
   <% } else { %>
-  <p class="text-muted extract">undefined</p>
+    <p class="extract text-danger">
+      undefined
+    </p>
   <% } %>
-
-  <p class="domain pull-right"><%- domain %></p>
-  <p class="meta">Last updated on 24th July</p>
-
-  <span class="status <% if (is_approved) { %>status-approved<% } else if (is_translated) { %>status-translated<% } %>"></span>
 </a>

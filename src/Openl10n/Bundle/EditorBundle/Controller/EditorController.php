@@ -12,14 +12,42 @@ class EditorController extends Controller
     public function translateAction(Request $request, $project)
     {
         $project = $this->findProjectOr404($project);
-        $domains = $this->getProjectDomains($project);
-        $languages = $this->getProjectLanguages($project);
+        $appData = $this->getDataForProject($project);
 
         return $this->render('@Openl10nEditor/Editor/translate.html.twig', array(
             'project' => $project,
-            'domains' => $domains,
-            'languages' => $languages,
+            'data' => $appData,
         ));
+    }
+
+    protected function getDataForProject(ProjectInterface $project)
+    {
+        $data = array();
+
+        $data['project'] = array(
+            'id' => (string) $project->getSlug(),
+            'name' => (string) $project->getName(),
+            'locale' => (string) $project->getDefaultLocale(),
+        );
+
+        $data['domains'] = array();
+        foreach ($this->getProjectDomains($project) as $domain) {
+            $data['domains'][] = array(
+                'id' => (string) $domain->getSlug(),
+                'name' => (string) $domain->getName(),
+            );
+        }
+
+        $data['languages'] = array();
+        foreach ($this->getProjectLanguages($project) as $language) {
+            $locale = $language->getLocale();
+            $data['languages'][] = array(
+                'id' => (string) $locale,
+                'name' => (string) $locale->getDisplayName(),
+            );
+        }
+
+        return $data;
     }
 
     protected function findProjectOr404($slug)

@@ -1,7 +1,7 @@
-;(function(win, doc, editor) {
+;(function(win, doc, Editor) {
 
-  editor.views.ActionsView = Backbone.Marionette.ItemView.extend({
-    template: '#actions-template',
+  Editor.Views.ActionsView = Backbone.Marionette.ItemView.extend({
+    template: '#ol-editor-actions-template',
 
     ui: {
       undo: '.action-undo',
@@ -41,4 +41,4 @@
 
   });
 
-})(window, window.document, window.editor)
+})(window, window.document, window.Editor)

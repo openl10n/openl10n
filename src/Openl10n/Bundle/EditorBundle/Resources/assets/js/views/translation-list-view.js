@@ -1,9 +1,10 @@
-;(function(win, doc, editor) {
+;(function(win, doc, Editor) {
 
-  editor.views.TranslationListView = Backbone.Marionette.CollectionView.extend({
-    itemView: editor.views.TranslationView,
+  Editor.Views.TranslationListView = Backbone.Marionette.CollectionView.extend({
+    itemView: Editor.Views.TranslationView,
     tagName: 'ul',
+    className: 'list-unstyled',
   });
 
 
-})(window, window.document, window.editor)
+})(window, window.document, window.Editor)

@@ -1,14 +1,15 @@
-;(function(win, doc, editor) {
+;(function(win, doc, Editor) {
 
-  editor.views.AppLayout = Backbone.Marionette.Layout.extend({
-    el: '#appLayout',
+  Editor.Views.AppLayout = Backbone.Marionette.Layout.extend({
+    el: '#ol-editor-layout',
 
     // Regions
     regions: {
-      header: '#header',
-      translationList: '#translation-list',
-      translationEdit: '#translation-edit',
-      actions: '#actions',
+      header: '#ol-editor-header',
+      translationList: '#ol-editor-translation-list',
+      translationEdit: '#ol-editor-translation-edit',
+      actionsBar: '#ol-editor-actionbar',
+      filter: '#ol-editor-filter',
     },
 
     initialize: function() {
@@ -42,4 +43,4 @@
     }
   });
 
-})(window, window.document, window.editor)
+})(window, window.document, window.Editor)

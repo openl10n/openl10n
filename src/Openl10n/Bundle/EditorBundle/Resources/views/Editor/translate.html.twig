@@ -19,28 +19,102 @@
     '@Openl10nEditorBundle/Resources/assets/js/vendor/backbone.shortcuts.js'
     '@Openl10nEditorBundle/Resources/assets/js/bootstrap.js'
     '@Openl10nEditorBundle/Resources/assets/js/application.js'
-    '@Openl10nEditorBundle/Resources/assets/js/lib/*.js'
-    '@Openl10nEditorBundle/Resources/assets/js/models/*.js'
-    '@Openl10nEditorBundle/Resources/assets/js/views/*.js'
+    '@Openl10nEditorBundle/Resources/assets/js/models/context.js'
+    '@Openl10nEditorBundle/Resources/assets/js/models/translation-item.js'
+    '@Openl10nEditorBundle/Resources/assets/js/models/translation-list.js'
+    '@Openl10nEditorBundle/Resources/assets/js/modules/translate.js'
+    '@Openl10nEditorBundle/Resources/assets/js/views/app-layout.js'
+    '@Openl10nEditorBundle/Resources/assets/js/views/actions-view.js'
+    '@Openl10nEditorBundle/Resources/assets/js/views/filter-view.js'
+    '@Openl10nEditorBundle/Resources/assets/js/views/header-view.js'
+    '@Openl10nEditorBundle/Resources/assets/js/views/translation-item-view.js'
+    '@Openl10nEditorBundle/Resources/assets/js/views/translation-list-view.js'
+    '@Openl10nEditorBundle/Resources/assets/js/views/translation-edit-view.js'
+    '@Openl10nEditorBundle/Resources/assets/js/lib/controller.js'
+    '@Openl10nEditorBundle/Resources/assets/js/lib/router.js'
+    '@Openl10nEditorBundle/Resources/assets/js/lib/shortcuts.js'
   %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
 
   <script type="text/javascript">
     $(function() {
-      editor.app.start({
-        project: "{{ project.slug }}"
-      });
+      Editor.app.start({{ data|json_encode|raw }});
     });
   </script>
 {% endblock javascripts %}
 
 {% block body %}
-  <div id="appLayout">
+  <div class="ol-editor-layout" id="ol-editor-layout">
+    <div class="ol-editor-header" id="ol-editor-header">
+      <div class="ol-editor-branding">
+        <a href="{{ path('openl10n_homepage') }}">
+          <i class="ol-editor-logo-icon fa fa-code"></i>
+        </a>
+      </div>
+
+      <div class="ol-editor-header-inner">
+        <div class="pull-left">
+          <div class="ol-editor-header-title">
+            <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}">
+              {{ project.name }}
+            </a>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div> <!-- /.ol-editor-header -->
+
+    <div class="ol-editor-content">
+      <div class="ol-editor-sidebar">
+        <div class="ol-editor-filter" id="ol-editor-filter">
+          <div class="form-group">
+            <input type="text" class="form-control" id="translationFilterInput" placeholder="Search…">
+          </div>
+        </div>
+
+        <div class="ol-editor-translation-list fullheight" id="ol-editor-translation-list">
+        </div>
+      </div> <!-- /.ol-editor-sidebar -->
+
+      <div class="ol-editor-main">
+        <div class="ol-editor-mainbar">
+          <div class="ol-editor-actionbar" id="ol-editor-actionbar">
+          </div>
+        </div>
+
+        <div class="ol-editor-translation-edit" id="ol-editor-translation-edit">
+        </div>
+      </div> <!-- /.ol-editor-main -->
+    </div> <!-- /.ol-editor-content -->
+  </div>
+
+  <script type="text/template" id="ol-editor-template-header">
+    {{ include('@Openl10nEditor/Editor/js_templates/header.html.twig', {project: project}, with_context = false) }}
+  </script>
+
+  <script type="text/template" id="ol-editor-translation-item-template">
+    {{ include('@Openl10nEditor/Editor/js_templates/translation-item.html.twig', {}, with_context = false) }}
+  </script>
+
+  <script type="text/template" id="ol-editor-translation-edit-template">
+    {{ include('@Openl10nEditor/Editor/js_templates/translation-edit.html.twig', {}, with_context = false) }}
+  </script>
+
+  <script type="text/template" id="ol-editor-actions-template">
+    {{ include('@Openl10nEditor/Editor/js_templates/actions.html.twig', {}, with_context = false) }}
+  </script>
+
+  <script type="text/template" id="ol-editor-filter-template">
+    {{ include('@Openl10nEditor/Editor/js_templates/filter.html.twig', {}, with_context = false) }}
+  </script>
+
+
+  {#<div id="appLayout">
     <div class="ol-header">
       <div class="container-fluid">
         <div class="row" id="header">
-          {# Everything under #header element will be overidden by backbone #}
           <div class="col-md-5">
             <h2 class="title title-lg" id="title">
               <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}">
@@ -58,19 +132,16 @@
           <div class="form-group">
             <input type="text" class="form-control" id="translationFilterInput" placeholder="Search…">
           </div>
-          {# <p class="meta">
-            42 translations
-          </p> #}
         </form>
 
         <div class="ol-editor-translation-list fullheight" id="translation-list">
-          {# <ul id="translationList">
+          <ul id="translationList">
             <li>
               <div class="loader-item">
                 <i class="fa fa-refresh fa-spin"></i>
               </div>
             </li>
-          </ul> #}
+          </ul>
         </div>
       </div>
 
@@ -80,13 +151,13 @@
 
           <div class="status">
             <button class="btn btn-sm btn-light">
-              Tous {# <span class="badge">42</span> #}
+              Tous <span class="badge">42</span>
             </button>
             <button class="btn btn-sm btn-light">
-              Non Traduits {# <span class="badge">4</span> #}
+              Non Traduits
             </button>
             <button class="btn btn-sm btn-light">
-              Non Relus {# <span class="badge">10</span> #}
+              Non Relus
             </button>
           </div>
         </div>
@@ -117,4 +188,5 @@
   <script type="text/template" id="actions-template">
     {{ include('@Openl10nEditor/Editor/js_templates/actions.html.twig', {}, with_context = false) }}
   </script>
+  #}
 {% endblock %}

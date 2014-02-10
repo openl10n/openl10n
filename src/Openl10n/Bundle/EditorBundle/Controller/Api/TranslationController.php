@@ -25,11 +25,10 @@ class TranslationController extends FOSRestController implements ClassResourceIn
     /**
      * @Rest\View(serializerGroups="list")
      */
-    public function cgetAction(Request $request, $project, $domain, $target)
+    public function cgetAction(Request $request, $project, $target)
     {
         $target = new Locale($target);
         $project = $this->findProjectOr404($project);
-        $domain = $this->findDomainOr404($project, $domain);
         $language = $this->findLanguageOr404($project, $target);
 
         $source = $request->query->has('source') ? new Locale($request->query->get('source')) : null;
@@ -37,7 +36,7 @@ class TranslationController extends FOSRestController implements ClassResourceIn
 
         $filters = TranslationFilterBag::createFromRequest($request);
 
-        $specification = new TranslationListSpecification($domain, $context, $filters);
+        $specification = new TranslationListSpecification($project, $context, $filters);
         $pager = $this->get('openl10n.repository.translation')->paginateSatisfying($specification);
         $pager->setMaxPerPage(1000);
 
@@ -47,11 +46,11 @@ class TranslationController extends FOSRestController implements ClassResourceIn
             throw $this->createNotFoundException($e->getMessage(), $e);
         }
 
-        $translations = array_map(function($key) use ($project, $domain, $context) {
+        $translations = array_map(function($key) use ($project, $context) {
             $source = $key->getPhrase($context->getSource()) ?: new TranslationPhrase($key, $context->getSource());
             $target = $key->getPhrase($context->getTarget()) ?: new TranslationPhrase($key, $context->getTarget());
 
-            return new TranslationCommit($project, $domain, $key, $source, $target);
+            return new TranslationCommit($project, $key->getDomain(), $key, $source, $target);
         }, iterator_to_array($pager->getCurrentPageResults()));
 
         return array(
@@ -62,11 +61,10 @@ class TranslationController extends FOSRestController implements ClassResourceIn
     /**
      * @Rest\View(serializerGroups="details")
      */
-    public function getAction(Request $request, $project, $domain, $target, $hash)
+    public function getAction(Request $request, $project, $target, $hash)
     {
         $target = new Locale($target);
         $project = $this->findProjectOr404($project);
-        $domain = $this->findDomainOr404($project, $domain);
         $language = $this->findLanguageOr404($project, $target);
 
         $source = $request->query->has('source') ? new Locale($request->query->get('source')) : null;
@@ -77,7 +75,7 @@ class TranslationController extends FOSRestController implements ClassResourceIn
         $source = $key->getPhrase($context->getSource()) ?: new TranslationPhrase($key, $context->getSource());
         $target = $key->getPhrase($context->getTarget()) ?: new TranslationPhrase($key, $context->getTarget());
 
-        $translation = new TranslationCommit($project, $domain, $key, $source, $target);
+        $translation = new TranslationCommit($project, $key->getDomain(), $key, $source, $target);
 
         return $translation;
     }
@@ -85,11 +83,10 @@ class TranslationController extends FOSRestController implements ClassResourceIn
     /**
      * @Rest\View(statusCode=204)
      */
-    public function putAction($project, $domain, $target, $hash)
+    public function putAction($project, $target, $hash)
     {
         $target = new Locale($target);
         $project = $this->findProjectOr404($project);
-        $domain = $this->findDomainOr404($project, $domain);
         $language = $this->findLanguageOr404($project, $target);
 
         $key = $this->findTranslationOr404($project, $hash);
@@ -116,17 +113,6 @@ class TranslationController extends FOSRestController implements ClassResourceIn
         }
 
         return $project;
-    }
-
-    protected function findDomainOr404(ProjectInterface $project, $slug)
-    {
-        $domain = $this->get('openl10n.repository.domain')->findOneBySlug($project, new Slug($slug));
-
-        if (null === $domain) {
-            throw $this->createNotFoundException(sprintf('Unable to find domain with slug "%s"', $slug));
-        }
-
-        return $domain;
     }
 
     protected function findLanguageOr404(ProjectInterface $project, Locale $locale)

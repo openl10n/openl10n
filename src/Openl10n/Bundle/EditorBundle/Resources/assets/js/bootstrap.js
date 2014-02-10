@@ -1,17 +1,18 @@
 /**
  * Definition of elements we'll use
  */
-;(function(win, doc, editor) {
+;(function(win, doc, Editor) {
 
   // Classes
-  editor.models = {};
-  editor.views = {};
+  Editor.Models = {};
+  Editor.Modules = {};
+  Editor.Views = {};
 
   // Instances
-  editor.app = null;
-  editor.router = null;
-  editor.controller = null;
-  editor.layout = null;
-  editor.page = null;
+  //Editor.app = null;
+  //Editor.router = null;
+  //Editor.controller = null;
+  //Editor.layout = null;
+  //Editor.page = null;
 
-})(window, window.document, window.editor || (window.editor = {}))
+})(window, window.document, window.Editor || (window.Editor = {}))

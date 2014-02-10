@@ -1,4 +1,4 @@
-;(function(win, doc, editor) {
+;(function(win, doc, Editor) {
 
   var ShortcutKeys = Backbone.Shortcuts.extend({
     shortcuts: {
@@ -7,11 +7,11 @@
     },
 
     selectNextItem: function() {
-      editor.page.translationList.selectNextItem();
+      Editor.translations.selectNextItem();
     },
 
     selectPreviousItem: function() {
-      editor.page.translationList.selectPreviousItem();
+      Editor.translations.selectPreviousItem();
     }
   });
 
@@ -21,5 +21,5 @@
     return true;
   }
 
-  editor.shortcuts = new ShortcutKeys;
-})(window, window.document, window.editor)
+  Editor.shortcuts = new ShortcutKeys;
+})(window, window.document, window.Editor)
