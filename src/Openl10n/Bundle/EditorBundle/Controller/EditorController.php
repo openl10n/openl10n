@@ -2,9 +2,10 @@
 
 namespace Openl10n\Bundle\EditorBundle\Controller;
 
-use Openl10n\Bundle\CoreBundle\Model\ProjectInterface;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Openl10n\Value\Localization\DisplayLocale;
+use Openl10n\Value\String\Slug;
+use Openl10n\Domain\Project\Model\Project;
 use Symfony\Component\HttpFoundation\Request;
 
 class EditorController extends Controller
@@ -20,7 +21,7 @@ class EditorController extends Controller
         ));
     }
 
-    protected function getDataForProject(ProjectInterface $project)
+    protected function getDataForProject(Project $project)
     {
         $data = array();
 
@@ -41,9 +42,10 @@ class EditorController extends Controller
         $data['languages'] = array();
         foreach ($this->getProjectLanguages($project) as $language) {
             $locale = $language->getLocale();
+            $displayLocale = DisplayLocale::createFromLocale($locale);
             $data['languages'][] = array(
                 'id' => (string) $locale,
-                'name' => (string) $locale->getDisplayName(),
+                'name' => (string) $displayLocale->getName(),
             );
         }
 
@@ -61,13 +63,13 @@ class EditorController extends Controller
         return $project;
     }
 
-    protected function getProjectDomains(ProjectInterface $project)
+    protected function getProjectDomains(Project $project)
     {
         return $this->get('openl10n.repository.domain')->findByProject($project);
     }
 
-    protected function getProjectLanguages(ProjectInterface $project)
+    protected function getProjectLanguages(Project $project)
     {
-        return $project->getLanguages();
+        return $this->get('openl10n.repository.language')->findByProject($project);
     }
 }

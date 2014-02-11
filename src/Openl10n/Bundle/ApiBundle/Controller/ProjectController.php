@@ -5,10 +5,12 @@ namespace Openl10n\Bundle\ApiBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
-use Openl10n\Bundle\CoreBundle\Action\CreateProjectAction;
-use Openl10n\Bundle\CoreBundle\Action\DeleteProjectAction;
-use Openl10n\Bundle\CoreBundle\Action\EditProjectAction;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
+use Openl10n\Bundle\ApiBundle\Facade\Project as ProjectFacade;
+use Openl10n\Domain\Project\Application\Action\CreateProjectAction;
+use Openl10n\Domain\Project\Application\Action\DeleteProjectAction;
+use Openl10n\Domain\Project\Application\Action\EditProjectAction;
+use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +24,9 @@ class ProjectController extends Controller implements ClassResourceInterface
     {
         $projects = $this->get('openl10n.repository.project')->findAll();
 
-        return $projects;
+        $facades = array_map([$this, 'transformProject'], $projects);
+
+        return $facades;
     }
 
     /**
@@ -30,7 +34,11 @@ class ProjectController extends Controller implements ClassResourceInterface
      */
     public function getAction($project)
     {
-        return $this->findProjectOr404($project);
+        $project = $this->findProjectOr404($project);
+
+        $facade = $this->transformProject($project);
+
+        return $facade;
     }
 
     /**
@@ -130,5 +138,12 @@ class ProjectController extends Controller implements ClassResourceInterface
         }
 
         return $project;
+    }
+
+    protected function transformProject(Project $project)
+    {
+        $facade = new ProjectFacade($project);
+
+        return $facade;
     }
 }

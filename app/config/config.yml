@@ -98,9 +98,4 @@ sensio_framework_extra:
 
 jms_serializer:
     metadata:
-        auto_detection: false
-
-        directories:
-            api:
-                namespace_prefix: "Openl10n\Bundle\CoreBundle"
-                path: "@Openl10nApiBundle/Resources/config/serializer"
+        auto_detection: true

@@ -2,17 +2,17 @@
 
 namespace Openl10n\Bundle\EditorBundle\Controller;
 
-use Openl10n\Bundle\CoreBundle\Model\ProjectInterface;
-use Openl10n\Bundle\CoreBundle\Object\Locale;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Value\String\Slug;
+use Openl10n\Value\Localization\Locale;
 use Symfony\Component\HttpFoundation\Request;
 
 class TranslationController extends Controller
 {
     public function listAction(Request $request, $project, $domain, $target)
     {
-        $target = new Locale($target);
+        $target = Locale::parse($target);
 
         $project = $this->findProjectOr404($project);
         $domain = $this->findDomainOr404($project, $domain);
@@ -58,7 +58,7 @@ class TranslationController extends Controller
         return $project;
     }
 
-    protected function findDomainOr404(ProjectInterface $project, $slug)
+    protected function findDomainOr404(Project $project, $slug)
     {
         $domain = $this->get('openl10n.repository.domain')->findOneBySlug($project, new Slug($slug));
 
@@ -69,7 +69,7 @@ class TranslationController extends Controller
         return $domain;
     }
 
-    protected function findLanguageOr404(ProjectInterface $project, Locale $locale)
+    protected function findLanguageOr404(Project $project, Locale $locale)
     {
         $language = $this->get('openl10n.repository.language')
             ->findOneByProject($project, $locale)
@@ -86,7 +86,7 @@ class TranslationController extends Controller
         return $language;
     }
 
-    protected function findKeyOr404(ProjectInterface $project, $hash)
+    protected function findKeyOr404(Project $project, $hash)
     {
         $key = $this->get('openl10n.repository.translation')->findOneByHash($project, $hash);
 

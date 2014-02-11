@@ -4,12 +4,11 @@ namespace Openl10n\Bundle\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Routing\ClassResourceInterface;
-use Openl10n\Bundle\CoreBundle\Action\ImportDomainAction;
 use FOS\RestBundle\View\View;
-use Openl10n\Bundle\CoreBundle\Action\CreateProjectAction;
-use Openl10n\Bundle\CoreBundle\Action\DeleteProjectAction;
-use Openl10n\Bundle\CoreBundle\Action\EditProjectAction;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
+use Openl10n\Bundle\ApiBundle\Facade\Domain as DomainFacade;
+use Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction;
+use Openl10n\Domain\Translation\Model\Domain;
+use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +23,9 @@ class DomainController extends Controller implements ClassResourceInterface
         $project = $this->findProjectOr404($project);
         $domains = $this->get('openl10n.repository.domain')->findByProject($project);
 
-        return $domains;
+        $facades = array_map([$this, 'transformDomain'], $domains);
+
+        return $facades;
     }
 
     /**
@@ -33,8 +34,11 @@ class DomainController extends Controller implements ClassResourceInterface
     public function getAction($project, $domain)
     {
         $project = $this->findProjectOr404($project);
+        $domain = $this->get('openl10n.repository.domain')->findOneBySlug($project, new Slug($domain));
 
-        return $this->get('openl10n.repository.domain')->findOneBySlug($project, new Slug($domain));
+        $facade = $this->transformDomain($domain);
+
+        return $facade;
     }
 
     /**
@@ -44,13 +48,13 @@ class DomainController extends Controller implements ClassResourceInterface
     {
         $project = $this->findProjectOr404($project);
 
-        $action = new ImportDomainAction($project);
+        $action = new ImportTranslationFileAction($project);
         $form = $this->get('form.factory')->createNamed('', 'openl10n_import_domain', $action, array(
             'csrf_protection' => false
         ));
 
         if ($form->handleRequest($request)->isValid()) {
-            $domain = $this->get('openl10n.processor.import_domain')->execute($action);
+            $domain = $this->get('openl10n.processor.import_translation_file')->execute($action);
             $url = $this->generateUrl(
                 'openl10n_api_get_project_domain',
                 array(
@@ -87,5 +91,12 @@ class DomainController extends Controller implements ClassResourceInterface
         }
 
         return $project;
+    }
+
+    protected function transformDomain(Domain $domain)
+    {
+        $facade = new DomainFacade($domain);
+
+        return $facade;
     }
 }

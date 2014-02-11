@@ -5,12 +5,8 @@ namespace Openl10n\Bundle\ApiBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
-use Openl10n\Bundle\CoreBundle\Action\CreateProjectAction;
-use Openl10n\Bundle\CoreBundle\Action\DeleteProjectAction;
-use Openl10n\Bundle\CoreBundle\Action\EditProjectAction;
-use Openl10n\Bundle\CoreBundle\Action\ExportDomainAction;
-use Openl10n\Bundle\CoreBundle\Action\ImportDomainAction;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
+use Openl10n\Domain\Translation\Application\Action\ExportTranslationFileAction;
+use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +19,7 @@ class ExportController extends Controller
     {
         $project = $this->findProjectOr404($project);
 
-        $action = new ExportDomainAction($project);
+        $action = new ExportTranslationFileAction($project);
         $form = $this->get('form.factory')->createNamed('', 'openl10n_export_domain', $action, array(
             'csrf_protection' => false
         ));
@@ -35,7 +31,7 @@ class ExportController extends Controller
         );
 
         if ($form->submit($data)->isValid()) {
-            $file = $this->get('openl10n.processor.export_domain')->execute($action);
+            $file = $this->get('openl10n.processor.export_translation_file')->execute($action);
 
             return new BinaryFileResponse($file);
         }

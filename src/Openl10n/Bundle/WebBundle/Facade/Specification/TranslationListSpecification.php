@@ -4,11 +4,11 @@ namespace Openl10n\Bundle\WebBundle\Facade\Specification;
 
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
-use Openl10n\Bundle\CoreBundle\Context\TranslationContext;
-use Openl10n\Bundle\CoreBundle\Doctrine\ORM\Specification\DoctrineOrmTranslationSpecification;
-use Openl10n\Bundle\CoreBundle\Model\ProjectInterface;
-use Openl10n\Bundle\CoreBundle\Model\TranslationKeyInterface;
-use Openl10n\Bundle\CoreBundle\Object\Locale;
+use Openl10n\Bundle\InfraBundle\Context\TranslationContext;
+use Openl10n\Bundle\InfraBundle\Doctrine\ORM\Specification\DoctrineOrmTranslationSpecification;
+use Openl10n\Bundle\InfraBundle\Model\ProjectInterface;
+use Openl10n\Bundle\InfraBundle\Model\TranslationKeyInterface;
+use Openl10n\Bundle\InfraBundle\Object\Locale;
 use Openl10n\Bundle\WebBundle\Facade\Model\TranslationFilterBag;
 
 

@@ -2,9 +2,9 @@
 
 namespace Openl10n\Bundle\WebBundle\Facade\Transformer;
 
-use Openl10n\Bundle\CoreBundle\Context\TranslationContext;
-use Openl10n\Bundle\CoreBundle\Model\TranslationKeyInterface;
-use Openl10n\Bundle\CoreBundle\Model\TranslationPhrase;
+use Openl10n\Bundle\InfraBundle\Context\TranslationContext;
+use Openl10n\Bundle\InfraBundle\Model\TranslationKeyInterface;
+use Openl10n\Bundle\InfraBundle\Model\TranslationPhrase;
 use Openl10n\Bundle\WebBundle\Facade\Model\TranslationCommit;
 
 class TranslationCommitTransformer

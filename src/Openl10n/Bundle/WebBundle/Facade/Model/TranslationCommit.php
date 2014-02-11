@@ -2,8 +2,8 @@
 
 namespace Openl10n\Bundle\WebBundle\Facade\Model;
 
-use Openl10n\Bundle\CoreBundle\Model\TranslationKeyInterface;
-use Openl10n\Bundle\CoreBundle\Model\TranslationPhraseInterface;
+use Openl10n\Bundle\InfraBundle\Model\TranslationKeyInterface;
+use Openl10n\Bundle\InfraBundle\Model\TranslationPhraseInterface;
 
 class TranslationCommit
 {

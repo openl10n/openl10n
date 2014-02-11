@@ -2,9 +2,9 @@
 
 namespace Openl10n\Bundle\WebBundle\Controller;
 
-use Openl10n\Bundle\CoreBundle\Action\ExportDomainAction;
-use Openl10n\Bundle\CoreBundle\Action\ImportDomainAction;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
+use Openl10n\Domain\Translation\Application\Action\ExportTranslationFileAction;
+use Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction;
+use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,11 +16,11 @@ class DomainController extends Controller
     {
         $project = $this->findProjectOr404($slug);
 
-        $action = new ImportDomainAction($project);
+        $action = new ImportTranslationFileAction($project);
         $form = $this->createForm('openl10n_import_domain', $action);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $domain = $this->get('openl10n.processor.import_domain')->execute($action);
+            $domain = $this->get('openl10n.processor.import_translation_file')->execute($action);
 
             return $this->redirect($this->generateUrl('openl10n_project_show', array(
                 'slug' => $project->getSlug(),
@@ -37,11 +37,11 @@ class DomainController extends Controller
     {
         $project = $this->findProjectOr404($slug);
 
-        $action = new ExportDomainAction($project);
+        $action = new ExportTranslationFileAction($project);
         $form = $this->createForm('openl10n_export_domain', $action);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $file = $this->get('openl10n.processor.export_domain')->execute($action);
+            $file = $this->get('openl10n.processor.export_translation_file')->execute($action);
 
             $response = new BinaryFileResponse($file);
             $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT);
