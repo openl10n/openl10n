@@ -28,6 +28,7 @@ class ExportController extends Controller
             'locale' => $locale,
             'domain' => $domain,
             'format' => $_format,
+            'options' => $request->query->get('options', array())
         );
 
         if ($form->submit($data)->isValid()) {
