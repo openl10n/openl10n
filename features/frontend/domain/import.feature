@@ -7,7 +7,7 @@ Feature: Translation file import
 
          When I attach the file "messages.en.yml" to "File"
           And I fill in the following:
-            | Slug   | messages |
+            | Domain | messages |
             | Locale | en_GB    |
           And I press "Import"
          Then I should be on "/projects/tutorial/"

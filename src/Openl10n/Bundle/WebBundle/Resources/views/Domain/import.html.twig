@@ -15,11 +15,11 @@
           <div>
             {{ form_row(form.file, {'attr': {
               'class': 'js-file-slugify',
-              'data-slug': form.slug.vars.id,
+              'data-slug': form.domain.vars.id,
               'data-locale': form.locale.vars.id
             }}) }}
 
-            {{ form_row(form.slug) }}
+            {{ form_row(form.domain) }}
             {{ form_row(form.locale) }}
 
             {{ form_rest(form) }}

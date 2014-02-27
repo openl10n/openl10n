@@ -4,14 +4,13 @@ namespace Openl10n\Bundle\EditorBundle\Controller\Api;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
+use Openl10n\Domain\Translation\Application\Action\EditTranslationPhraseAction;
+use Openl10n\Domain\Translation\Model\Phrase;
+use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Value\String\Slug;
+use Openl10n\Value\Localization\Locale;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
-use Openl10n\Bundle\CoreBundle\Action\SaveTranslationAction;
-use Openl10n\Bundle\CoreBundle\Action\SwitchTranslationContextAction;
-use Openl10n\Bundle\CoreBundle\Model\ProjectInterface;
-use Openl10n\Bundle\CoreBundle\Model\TranslationPhrase;
-use Openl10n\Bundle\CoreBundle\Object\Locale;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
 use Openl10n\Bundle\EditorBundle\Facade\Model\TranslationCommit;
 use Openl10n\Bundle\WebBundle\Facade\Model\TranslationFilterBag;
 use Openl10n\Bundle\WebBundle\Facade\Specification\TranslationListSpecification;
@@ -19,6 +18,7 @@ use Openl10n\Bundle\WebBundle\Facade\Transformer\TranslationCommitTransformer;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Openl10n\Bundle\EditorBundle\Translation\CustomTranslationSpecification;
 
 class TranslationController extends FOSRestController implements ClassResourceInterface
 {
@@ -27,17 +27,14 @@ class TranslationController extends FOSRestController implements ClassResourceIn
      */
     public function cgetAction(Request $request, $project, $target)
     {
-        $target = new Locale($target);
+        $target = Locale::parse($target);
         $project = $this->findProjectOr404($project);
         $language = $this->findLanguageOr404($project, $target);
 
-        $source = $request->query->has('source') ? new Locale($request->query->get('source')) : null;
-        $context = $this->get('openl10n.resolver.translation_context')->resolveContext($project, $target, $source);
+        $source = Locale::parse('en');
+        $specification = new CustomTranslationSpecification($project, $source, $target);
 
-        $filters = TranslationFilterBag::createFromRequest($request);
-
-        $specification = new TranslationListSpecification($project, $context, $filters);
-        $pager = $this->get('openl10n.repository.translation')->paginateSatisfying($specification);
+        $pager = $this->get('openl10n.repository.translation')->findSatisfying($specification);
         $pager->setMaxPerPage(1000);
 
         try {
@@ -46,9 +43,9 @@ class TranslationController extends FOSRestController implements ClassResourceIn
             throw $this->createNotFoundException($e->getMessage(), $e);
         }
 
-        $translations = array_map(function($key) use ($project, $context) {
-            $source = $key->getPhrase($context->getSource()) ?: new TranslationPhrase($key, $context->getSource());
-            $target = $key->getPhrase($context->getTarget()) ?: new TranslationPhrase($key, $context->getTarget());
+        $translations = array_map(function($key) use ($project, $source, $target) {
+            $source = $key->getPhrase($source) ?: new Phrase($key, $source);
+            $target = $key->getPhrase($target) ?: new Phrase($key, $target);
 
             return new TranslationCommit($project, $key->getDomain(), $key, $source, $target);
         }, iterator_to_array($pager->getCurrentPageResults()));
@@ -63,17 +60,17 @@ class TranslationController extends FOSRestController implements ClassResourceIn
      */
     public function getAction(Request $request, $project, $target, $hash)
     {
-        $target = new Locale($target);
+        $target = Locale::parse($target);
         $project = $this->findProjectOr404($project);
         $language = $this->findLanguageOr404($project, $target);
 
-        $source = $request->query->has('source') ? new Locale($request->query->get('source')) : null;
-        $context = $this->get('openl10n.resolver.translation_context')->resolveContext($project, $target, $source);
+        //$source = $request->query->has('source') ? Locale::parse($request->query->get('source')) : null;
+        $source = Locale::parse('en');
 
         $key = $this->findTranslationOr404($project, $hash);
 
-        $source = $key->getPhrase($context->getSource()) ?: new TranslationPhrase($key, $context->getSource());
-        $target = $key->getPhrase($context->getTarget()) ?: new TranslationPhrase($key, $context->getTarget());
+        $source = $key->getPhrase($source) ?: new Phrase($key, $source);
+        $target = $key->getPhrase($target) ?: new Phrase($key, $target);
 
         $translation = new TranslationCommit($project, $key->getDomain(), $key, $source, $target);
 
@@ -85,7 +82,7 @@ class TranslationController extends FOSRestController implements ClassResourceIn
      */
     public function putAction($project, $target, $hash)
     {
-        $target = new Locale($target);
+        $target = Locale::parse($target);
         $project = $this->findProjectOr404($project);
         $language = $this->findLanguageOr404($project, $target);
 
@@ -98,10 +95,11 @@ class TranslationController extends FOSRestController implements ClassResourceIn
             //throw new \Exception('No phrase to save', 400);
         }
 
-        $action = new SaveTranslationAction($key, $target);
-        $action->text = $translation->targetPhrase ?: '';
-        $action->isApproved = $translation->isApproved;
-        $this->get('openl10n.processor.save_translation')->execute($action);
+        $action = new EditTranslationPhraseAction($key, $target);
+        $action->setText($translation->targetPhrase ?: '');
+        $action->setApproved($translation->isApproved);
+
+        $this->get('openl10n.processor.edit_translation')->execute($action);
     }
 
     protected function findProjectOr404($slug)
@@ -115,7 +113,7 @@ class TranslationController extends FOSRestController implements ClassResourceIn
         return $project;
     }
 
-    protected function findLanguageOr404(ProjectInterface $project, Locale $locale)
+    protected function findLanguageOr404(Project $project, Locale $locale)
     {
         $language = $this->get('openl10n.repository.language')
             ->findOneByProject($project, $locale)
@@ -132,7 +130,7 @@ class TranslationController extends FOSRestController implements ClassResourceIn
         return $language;
     }
 
-    protected function findTranslationOr404(ProjectInterface $project, $hash)
+    protected function findTranslationOr404(Project $project, $hash)
     {
         $translation = $this->get('openl10n.repository.translation')
             ->findOneByHash($project, $hash)

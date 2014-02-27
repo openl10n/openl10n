@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
-            new Openl10n\Bundle\CoreBundle\Openl10nCoreBundle(),
+            new Openl10n\Bundle\InfraBundle\Openl10nInfraBundle(),
             new Openl10n\Bundle\WebBundle\Openl10nWebBundle(),
             new Openl10n\Bundle\UserBundle\Openl10nUserBundle(),
             new Openl10n\Bundle\EditorBundle\Openl10nEditorBundle(),

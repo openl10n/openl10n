@@ -1,0 +1,29 @@
+namespaces:
+    Openl10nInfra: Openl10n\Bundle\InfraBundle\Validator\Constraints\
+
+Openl10n\Domain\Project\Application\Action\CreateProjectAction:
+    properties:
+        name:
+            - NotBlank: ~
+        slug:
+            - NotBlank: ~
+            - Regex: "/^[a-zA-Z0-9\-\.\_]+$/"
+            - Openl10nInfra:UniqueProject: ~
+        defaultLocale:
+            - NotBlank: ~
+
+Openl10n\Domain\Project\Application\Action\EditProjectAction:
+    properties:
+        name:
+            - NotBlank: ~
+        defaultLocale:
+            - NotBlank: ~
+
+Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction:
+    properties:
+        file:
+            - NotBlank: ~
+        domain:
+            - NotBlank: ~
+        locale:
+            - NotBlank: ~

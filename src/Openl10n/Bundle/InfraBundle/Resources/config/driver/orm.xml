@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Repository -->
+        <parameter key="openl10n.repository.project.class">Openl10n\Bundle\InfraBundle\Repository\ProjectRepository</parameter>
+        <parameter key="openl10n.repository.language.class">Openl10n\Bundle\InfraBundle\Repository\LanguageRepository</parameter>
+
+        <parameter key="openl10n.repository.domain.class">Openl10n\Bundle\InfraBundle\Repository\DomainRepository</parameter>
+        <parameter key="openl10n.repository.translation.class">Openl10n\Bundle\InfraBundle\Repository\TranslationRepository</parameter>
+
+        <parameter key="openl10n.factory.project.class">Openl10n\Bundle\CoreBundle\Doctrine\ORM\Factory\ProjectFactory</parameter>
+        <parameter key="openl10n.factory.language.class">Openl10n\Bundle\CoreBundle\Doctrine\ORM\Factory\LanguageFactory</parameter>
+        <parameter key="openl10n.factory.domain.class">Openl10n\Bundle\CoreBundle\Doctrine\ORM\Factory\DomainFactory</parameter>
+        <parameter key="openl10n.factory.translation.class">Openl10n\Bundle\CoreBundle\Doctrine\ORM\Factory\TranslationFactory</parameter>
+    </parameters>
+
+    <services>
+        <service id="openl10n.manager.project" alias="doctrine.orm.entity_manager" />
+        <service id="openl10n.manager.domain" alias="doctrine.orm.entity_manager" />
+        <service id="openl10n.manager.translation" alias="doctrine.orm.entity_manager" />
+
+        <!-- Repository -->
+        <service id="openl10n.repository.project" class="%openl10n.repository.project.class%"
+            factory-service="doctrine.orm.entity_manager"
+            factory-method="getRepository">
+            <argument>Openl10nInfraBundle:Project</argument>
+        </service>
+        <service id="openl10n.repository.language" class="%openl10n.repository.language.class%"
+            factory-service="doctrine.orm.entity_manager"
+            factory-method="getRepository">
+            <argument>Openl10nInfraBundle:Language</argument>
+        </service>
+
+        <service id="openl10n.repository.domain" class="%openl10n.repository.domain.class%"
+            factory-service="doctrine.orm.entity_manager"
+            factory-method="getRepository">
+            <argument>Openl10nInfraBundle:Domain</argument>
+        </service>
+        <service id="openl10n.repository.translation" class="%openl10n.repository.translation.class%"
+            factory-service="doctrine.orm.entity_manager"
+            factory-method="getRepository">
+            <argument>Openl10nInfraBundle:Key</argument>
+        </service>
+
+        <!-- Factory -->
+        <service id="openl10n.factory.project" class="%openl10n.factory.project.class%" />
+        <service id="openl10n.factory.language" class="%openl10n.factory.language.class%" />
+        <service id="openl10n.factory.domain" class="%openl10n.factory.domain.class%" />
+        <service id="openl10n.factory.translation" class="%openl10n.factory.translation.class%" />
+    </services>
+</container>

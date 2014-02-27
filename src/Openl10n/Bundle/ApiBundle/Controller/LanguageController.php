@@ -4,12 +4,14 @@ namespace Openl10n\Bundle\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Routing\ClassResourceInterface;
+use Openl10n\Domain\Project\Model\Language;
 use FOS\RestBundle\View\View;
-use Openl10n\Bundle\CoreBundle\Action\CreateLanguageAction;
-use Openl10n\Bundle\CoreBundle\Action\DeleteLanguageAction;
-use Openl10n\Bundle\CoreBundle\Model\ProjectInterface;
-use Openl10n\Bundle\CoreBundle\Object\Locale;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
+use Openl10n\Bundle\ApiBundle\Facade\Language as LanguageFacade;
+use Openl10n\Domain\Project\Application\Action\CreateLanguageAction;
+use Openl10n\Domain\Project\Application\Action\DeleteLanguageAction;
+use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Value\Localization\Locale;
+use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +26,9 @@ class LanguageController extends Controller implements ClassResourceInterface
         $project = $this->findProjectOr404($project);
         $languages = $this->get('openl10n.repository.language')->findByProject($project);
 
-        return $languages;
+        $facades = array_map([$this, 'transformLanguage'], $languages);
+
+        return $facades;
     }
 
     /**
@@ -35,7 +39,9 @@ class LanguageController extends Controller implements ClassResourceInterface
         $project = $this->findProjectOr404($project);
         $language = $this->findLanguageOr404($project, $locale);
 
-        return $language;
+        $facade = $this->transformLanguage($language);
+
+        return $facade;
     }
 
     /**
@@ -75,7 +81,7 @@ class LanguageController extends Controller implements ClassResourceInterface
         $project = $this->findProjectOr404($project);
         $language = $this->findLanguageOr404($project, $locale);
 
-        if ($project->getDefaultLocale()->equals(new Locale($locale))) {
+        if ((string) $project->getDefaultLocale() === (string) Locale::parse($locale)) {
             return View::create(array(
                 'message' => 'You can not delete project default locale'
             ), 400);
@@ -108,10 +114,10 @@ class LanguageController extends Controller implements ClassResourceInterface
         return $project;
     }
 
-    protected function findLanguageOr404(ProjectInterface $project, $locale)
+    protected function findLanguageOr404(Project $project, $locale)
     {
         $language = $this->get('openl10n.repository.language')
-            ->findOneByProject($project, new Locale($locale))
+            ->findOneByProject($project, Locale::parse($locale))
         ;
 
         if (null === $language) {
@@ -123,5 +129,12 @@ class LanguageController extends Controller implements ClassResourceInterface
         }
 
         return $language;
+    }
+
+    protected function transformLanguage(Language $language)
+    {
+        $facade = new LanguageFacade($language);
+
+        return $facade;
     }
 }

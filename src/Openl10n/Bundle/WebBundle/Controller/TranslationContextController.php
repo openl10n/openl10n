@@ -2,8 +2,8 @@
 
 namespace Openl10n\Bundle\WebBundle\Controller;
 
-use Openl10n\Bundle\CoreBundle\Action\SwitchTranslationContextAction;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
+use Openl10n\Bundle\InfraBundle\Action\SwitchTranslationContextAction;
+use Openl10n\Bundle\InfraBundle\Object\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 

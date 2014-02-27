@@ -5,22 +5,21 @@
 
     <parameters>
         <!-- Repository -->
-        <parameter key="openl10n.repository.user.class">Openl10n\Bundle\UserBundle\Doctrine\ORM\Repository\UserRepository</parameter>
-
-        <!-- Factory -->
-        <parameter key="openl10n.factory.user.class">Openl10n\Bundle\UserBundle\Doctrine\ORM\Factory\UserFactory</parameter>
+        <parameter key="openl10n.repository.user.class">Openl10n\Bundle\UserBundle\Repository\UserRepository</parameter>
+        <parameter key="openl10n.repository.credentials.class">Openl10n\Bundle\UserBundle\Repository\CredentialsRepository</parameter>
     </parameters>
 
     <services>
-        <!-- Manager -->
-        <service id="openl10n.manager.user" alias="doctrine.orm.entity_manager" />
-
         <!-- Repository -->
-        <service id="openl10n.repository.user" class="%openl10n.repository.user.class%">
-            <argument type="service" id="doctrine" />
+        <service id="openl10n.repository.user" class="%openl10n.repository.user.class%"
+            factory-service="doctrine.orm.entity_manager"
+            factory-method="getRepository">
+            <argument>Openl10nUserBundle:User</argument>
         </service>
-
-        <!-- Factory -->
-        <service id="openl10n.factory.user" class="%openl10n.factory.user.class%" />
+        <service id="openl10n.repository.credentials" class="%openl10n.repository.credentials.class%"
+            factory-service="doctrine.orm.entity_manager"
+            factory-method="getRepository">
+            <argument>Openl10nUserBundle:Credentials</argument>
+        </service>
     </services>
 </container>

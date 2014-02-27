@@ -1,4 +1,4 @@
-Openl10n\Bundle\UserBundle\Action\CreateUserAction:
+Openl10n\Domain\User\Application\Action\RegisterUserAction:
     properties:
         username:
             - Openl10n\Bundle\UserBundle\Validator\Constraints\UniqueUser: ~
@@ -14,7 +14,7 @@ Openl10n\Bundle\UserBundle\Action\CreateUserAction:
             - Length:
                 min: 6
 
-Openl10n\Bundle\UserBundle\Action\EditUserAction:
+Openl10n\Domain\User\Application\Action\EditProfileAction:
     properties:
         displayName:
             - NotBlank: ~
@@ -22,7 +22,7 @@ Openl10n\Bundle\UserBundle\Action\EditUserAction:
             - NotBlank: ~
             - Email: ~
 
-Openl10n\Bundle\UserBundle\Action\PasswordUserAction:
+Openl10n\Domain\User\Application\Action\ChangePasswordAction:
     properties:
         oldPassword:
             - NotBlank: ~
