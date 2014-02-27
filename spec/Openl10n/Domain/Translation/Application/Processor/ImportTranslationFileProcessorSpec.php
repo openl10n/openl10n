@@ -36,22 +36,22 @@ class ImportTranslationFileProcessorSpec extends ObjectBehavior
         $this->shouldHaveType('Openl10n\Domain\Translation\Application\Processor\ImportTranslationFileProcessor');
     }
 
-    function it_can_import_translation_file(
-        DomainRepository $domainRepository,
-        TranslationRepository $translationRepository,
-        FileUploaderInterface $fileUploader,
-        TranslationLoaderInterface $translationLoader,
-        EventDispatcherInterface $eventDispatcher,
-        Project $project,
-        UploadedFile $uploadedFile,
-        ImportTranslationFileAction $action
-    )
-    {
-        //$action->getProject()->willReturn($project);
-        //$action->getLocale()->willReturn('en_GB');
-        //$action->getDomain()->willReturn('foobar');
-        //$action->getFile()->willReturn($uploadedFile);
+    // function it_can_import_translation_file(
+    //     DomainRepository $domainRepository,
+    //     TranslationRepository $translationRepository,
+    //     FileUploaderInterface $fileUploader,
+    //     TranslationLoaderInterface $translationLoader,
+    //     EventDispatcherInterface $eventDispatcher,
+    //     Project $project,
+    //     UploadedFile $uploadedFile,
+    //     ImportTranslationFileAction $action
+    // )
+    // {
+    //     $action->getProject()->willReturn($project);
+    //     $action->getLocale()->willReturn('en_GB');
+    //     $action->getDomain()->willReturn('foobar');
+    //     $action->getFile()->willReturn($uploadedFile);
 
-        //$this->execute($action);
-    }
+    //     $this->execute($action);
+    // }
 }

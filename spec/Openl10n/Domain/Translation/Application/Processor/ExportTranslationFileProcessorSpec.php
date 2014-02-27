@@ -28,13 +28,13 @@ class ExportTranslationFileProcessorSpec extends ObjectBehavior
         $this->shouldHaveType('Openl10n\Domain\Translation\Application\Processor\ExportTranslationFileProcessor');
     }
 
-    function it_can_export_translations(
-        DomainRepository $domainRepository,
-        TranslationRepository $translationRepository,
-        TranslationDumperInterface $translationDumper,
-        Project $project,
-        ExportTranslationFileAction $action
-    )
-    {
-    }
+    // function it_can_export_translations(
+    //     DomainRepository $domainRepository,
+    //     TranslationRepository $translationRepository,
+    //     TranslationDumperInterface $translationDumper,
+    //     Project $project,
+    //     ExportTranslationFileAction $action
+    // )
+    // {
+    // }
 }
