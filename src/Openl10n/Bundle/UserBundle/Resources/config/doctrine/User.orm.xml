@@ -4,7 +4,7 @@
 
     <entity table="users"
             name="Openl10n\Bundle\UserBundle\Entity\User"
-            repository-class="Openl10n\Bundle\UserBundle\Entity\UserRepository">
+            repository-class="Openl10n\Bundle\UserBundle\Repository\UserRepository">
 
         <unique-constraints>
             <unique-constraint name="slug" columns="username" />
@@ -15,13 +15,16 @@
         </id>
 
         <field name="username" column="username" type="string" length="255" />
-        <field name="displayName" column="display_name" type="string" length="255" />
+        <field name="name" column="display_name" type="string" length="255" />
         <field name="email" column="email" type="string" length="255" />
         <field name="preferedLocale" column="prefered_locale" type="string" length="64" />
 
-        <one-to-one field="credentials" target-entity="UserCredentials" mapped-by="user" />
-
-        <many-to-many field="roles" mapped-by="users" target-entity="UserRole" />
+        <one-to-one field="credentials" target-entity="Credentials" mapped-by="user">
+            <cascade>
+                <cascade-persist />
+                <cascade-remove />
+            </cascade>
+        </one-to-one>
     </entity>
 
 </doctrine-mapping>

@@ -2,10 +2,14 @@
 
 namespace Openl10n\Bundle\EditorBundle\Facade\Model;
 
-use Openl10n\Bundle\CoreBundle\Model\ProjectInterface;
-use Openl10n\Bundle\CoreBundle\Model\TranslationPhraseInterface;
-use Openl10n\Bundle\CoreBundle\Model\TranslationKeyInterface;
-use Openl10n\Bundle\CoreBundle\Model\DomainInterface;
+use Openl10n\Bundle\InfraBundle\Model\ProjectInterface;
+use Openl10n\Domain\Translation\Model\Phrase;
+use Openl10n\Domain\Translation\Model\Key;
+use Openl10n\Domain\Translation\Model\Domain;
+use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Bundle\InfraBundle\Model\TranslationPhraseInterface;
+use Openl10n\Bundle\InfraBundle\Model\TranslationKeyInterface;
+use Openl10n\Bundle\InfraBundle\Model\DomainInterface;
 
 use JMS\Serializer\Annotation as Serializer;
 
@@ -85,22 +89,22 @@ class TranslationCommit
     public $isTranslated;
 
     public function __construct(
-        ProjectInterface $project,
-        DomainInterface $domain,
-        TranslationKeyInterface $key,
-        TranslationPhraseInterface $source,
-        TranslationPhraseInterface $target
+        Project $project,
+        Domain $domain,
+        Key $key,
+        Phrase $source,
+        Phrase $target
     )
     {
         $this->id = $key->getHash();
         $this->domain = $domain->getSlug();
         $this->project = $project->getSlug();
-        $this->key = $key->getKey();
+        $this->key = $key->getIdentifier();
 
         $this->sourcePhrase = $source->getText();
         $this->targetPhrase = $target->getText();
-        $this->sourceLocale = $source->getLocale()->toString();
-        $this->targetLocale = $target->getLocale()->toString();
+        $this->sourceLocale = (string) $source->getLocale();
+        $this->targetLocale = (string) $target->getLocale();
 
         $this->isApproved = $target->isApproved();
         $this->isTranslated = !empty($this->targetPhrase);

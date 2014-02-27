@@ -1,9 +1,0 @@
-Openl10n\Bundle\CoreBundle\Model\Language:
-    exclusion_policy: ALL
-    properties:
-        id:
-            expose: false
-        locale:
-            expose: true
-            inline: true
-

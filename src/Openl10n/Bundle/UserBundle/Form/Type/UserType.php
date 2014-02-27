@@ -2,8 +2,6 @@
 
 namespace Openl10n\Bundle\UserBundle\Form\Type;
 
-use Openl10n\Bundle\UserBundle\Action\CreateUserAction;
-use Openl10n\Bundle\UserBundle\Action\EditUserAction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -28,18 +26,6 @@ class UserType extends AbstractType
                 'label' => 'settings.general.form.email'
             ))
         ;
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
-            $data = $event->getData();
-            $form = $event->getForm();
-
-            if ($data instanceof CreateUserAction) {
-                $form
-                    ->add('username', 'text')
-                    ->add('password', 'password');
-                ;
-            }
-        });
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

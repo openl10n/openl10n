@@ -17,8 +17,8 @@
           {% for language in languages %}
             <tr{% if project.defaultLocale == language.locale %} class="active"{% endif %}>
               <td>
-                {{ macros.flag(language.locale) }}
-                {{ language.locale.displayName(app.user.preferedLocale)|title }}
+                {{ macros.flag(language) }}
+                {{ language.name|title }}
                 ({{ language.locale }})
 
                 {% if project.defaultLocale == language.locale %}
@@ -29,7 +29,7 @@
                 {% if project.defaultLocale != language.locale %}
                   <div class="text-right">
                     <a data-toggle="tooltip" data-placement="left" title="Remove language" href="{{ path('openl10n_language_delete', {slug: project.slug, locale: language.locale}) }}">
-                      <i class="fa fa-remove"></i>
+                      <i class="fa fa-times"></i>
                     </a>
                   </div>
                 {% endif %}

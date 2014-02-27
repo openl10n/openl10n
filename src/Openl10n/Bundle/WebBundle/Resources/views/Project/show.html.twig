@@ -41,11 +41,11 @@
             </h3>
           </div>
             <table class="table">
-              {% for language in project.languages %}
+              {% for language in languages %}
                 <tr>
                   <td>
-                    {{ macros.flag(language.locale) }}
-                    {{ language.locale.displayName(app.user.preferedLocale)|title }}
+                    {{ macros.flag(language) }}
+                    {{ language.name|title }}
                   </td>
                 </tr>
               {% endfor %}

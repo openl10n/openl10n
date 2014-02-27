@@ -2,12 +2,16 @@
 
 namespace Openl10n\Bundle\UserBundle\Controller;
 
+use Openl10n\Bundle\InfraBundle\Object\Slug;
+use Openl10n\Domain\User\Application\Action\DeleteAccountAction;
+use Openl10n\Domain\User\Application\Action\ChangePasswordAction;
 use Openl10n\Bundle\UserBundle\Action\CreateUserAction;
+use Openl10n\Bundle\UserBundle\Action\DeleteUserAction;
 use Openl10n\Bundle\UserBundle\Action\EditUserAction;
 use Openl10n\Bundle\UserBundle\Action\PasswordUserAction;
-use Openl10n\Bundle\UserBundle\Action\DeleteUserAction;
 use Openl10n\Bundle\UserBundle\Model\UserInterface;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
+use Openl10n\Domain\User\Application\Action\EditProfileAction;
+use Openl10n\Domain\User\Value\Username;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,12 +19,16 @@ class SettingsController extends Controller
 {
     public function generalAction(Request $request)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
-        $action = new EditUserAction($user);
+        $securityUser = $this->get('security.context')->getToken()->getUser();
+        $username = new Username($securityUser->getUsername());
+
+        $user = $this->get('openl10n.repository.user')->findOneByUsername($username);
+
+        $action = new EditProfileAction($user);
         $form = $this->createForm('openl10n_user', $action);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $this->get('openl10n.processor.edit_user')->execute($action);
+            $this->get('openl10n.processor.edit_profile')->execute($action);
 
             return $this->redirect($this->generateUrl('openl10n_homepage'));
         }
@@ -33,12 +41,16 @@ class SettingsController extends Controller
 
     public function passwordAction(Request $request)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
-        $action = new PasswordUserAction($user);
+        $securityUser = $this->get('security.context')->getToken()->getUser();
+        $username = new Username($securityUser->getUsername());
+
+        $user = $this->get('openl10n.repository.user')->findOneByUsername($username);
+
+        $action = new ChangePasswordAction($user);
         $form = $this->createForm('openl10n_password_user', $action);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $this->get('openl10n.processor.password_user')->execute($action);
+            $this->get('openl10n.processor.change_password')->execute($action);
 
             return $this->redirect($this->generateUrl('openl10n_homepage'));
         }
@@ -51,12 +63,15 @@ class SettingsController extends Controller
 
     public function leaveAction(Request $request)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
         $form = $this->get('form.factory')->createBuilder('form')->getForm();
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $action = new DeleteUserAction($user);
-            $this->get('openl10n.processor.delete_user')->execute($action);
+            $securityUser = $this->get('security.context')->getToken()->getUser();
+            $username = new Username($securityUser->getUsername());
+            $user = $this->get('openl10n.repository.user')->findOneByUsername($username);
+
+            $action = new DeleteAccountAction($user);
+            $this->get('openl10n.processor.delete_account')->execute($action);
 
             // Invalidate the user session an token
             $this->get('request')->getSession()->invalidate();
@@ -66,7 +81,6 @@ class SettingsController extends Controller
         }
 
         return $this->render('Openl10nUserBundle:Settings:leave.html.twig', array(
-            'user' => $user,
             'form'    => $form->createView(),
         ));
     }

@@ -2,11 +2,15 @@
 
 namespace Openl10n\Bundle\WebBundle\Controller;
 
-use Openl10n\Bundle\CoreBundle\Action\CreateLanguageAction;
-use Openl10n\Bundle\CoreBundle\Action\DeleteLanguageAction;
-use Openl10n\Bundle\CoreBundle\Model\ProjectInterface;
-use Openl10n\Bundle\CoreBundle\Object\Locale;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
+use Openl10n\Bundle\WebBundle\View\LanguageView;
+use Openl10n\Value\Localization\RegionMap;
+use Openl10n\Value\Localization\DisplayLocale;
+use Openl10n\Domain\Project\Model\Language;
+use Openl10n\Domain\Project\Application\Action\CreateLanguageAction;
+use Openl10n\Domain\Project\Application\Action\DeleteLanguageAction;
+use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Value\Localization\Locale;
+use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -29,9 +33,11 @@ class LanguageController extends Controller
 
         $languages = $this->get('openl10n.repository.language')->findByProject($project);
 
+        $languages = array_map([$this, 'prepareLanguageView'], $languages);
+
         // Simple sort by display languages
         usort($languages, function($locale1, $locale2) {
-            return strcmp($locale1->getLocale()->getDisplayName(), $locale2->getLocale()->getDisplayName());
+            return strcmp($locale1->name, $locale2->name);
         });
 
         return $this->render('Openl10nWebBundle:Language:list.html.twig', array(
@@ -52,12 +58,12 @@ class LanguageController extends Controller
 
     public function deleteAction(Request $request, $slug, $locale)
     {
-        $locale = new Locale($locale);
+        $locale = Locale::parse($locale);
 
         $project = $this->findProjectOr404($slug);
         $language = $this->findLanguageOr404($project, $locale);
 
-        if ($project->getDefaultLocale()->equals($locale)) {
+        if ((string) $project->getDefaultLocale() === (string) $locale) {
             return $this->render('Openl10nWebBundle:Language:delete_impossible.html.twig', array(
                 'project' => $project,
                 'locale' => $language
@@ -94,7 +100,7 @@ class LanguageController extends Controller
         return $project;
     }
 
-    protected function findLanguageOr404(ProjectInterface $project, Locale $locale)
+    protected function findLanguageOr404(Project $project, Locale $locale)
     {
         $language = $this->get('openl10n.repository.language')
             ->findOneByProject($project, $locale)
@@ -109,5 +115,21 @@ class LanguageController extends Controller
         }
 
         return $language;
+    }
+
+    protected function prepareLanguageView(Language $language)
+    {
+        $locale = $language->getLocale();
+        $displayLocale = DisplayLocale::createFromLocale($locale);
+
+        $view = new LanguageView();
+        $view->locale = (string) $locale;
+        $view->name = (string) $displayLocale->getName();
+
+        $view->flag = null !== $locale->getRegion() ?
+            (string) $locale->getRegion() :
+            RegionMap::$mapping[(string) $locale->getLanguage()];
+
+        return $view;
     }
 }

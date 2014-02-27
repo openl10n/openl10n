@@ -2,13 +2,13 @@
 
 namespace Openl10n\Bundle\WebBundle\Controller;
 
-use Openl10n\Bundle\CoreBundle\Action\SaveTranslationAction;
-use Openl10n\Bundle\CoreBundle\Action\SwitchTranslationContextAction;
-use Openl10n\Bundle\CoreBundle\Entity\TranslationPhrase as TranslationPhraseEntity;
-use Openl10n\Bundle\CoreBundle\Model\ProjectInterface;
-use Openl10n\Bundle\CoreBundle\Model\TranslationPhrase;
-use Openl10n\Bundle\CoreBundle\Object\Locale;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
+use Openl10n\Bundle\InfraBundle\Action\SaveTranslationAction;
+use Openl10n\Bundle\InfraBundle\Action\SwitchTranslationContextAction;
+use Openl10n\Bundle\InfraBundle\Entity\TranslationPhrase as TranslationPhraseEntity;
+use Openl10n\Bundle\InfraBundle\Model\ProjectInterface;
+use Openl10n\Bundle\InfraBundle\Model\TranslationPhrase;
+use Openl10n\Bundle\InfraBundle\Object\Locale;
+use Openl10n\Bundle\InfraBundle\Object\Slug;
 use Openl10n\Bundle\WebBundle\Facade\Model\TranslationFilterBag;
 use Openl10n\Bundle\WebBundle\Facade\Specification\TranslationListSpecification;
 use Openl10n\Bundle\WebBundle\Facade\Transformer\TranslationCommitTransformer;

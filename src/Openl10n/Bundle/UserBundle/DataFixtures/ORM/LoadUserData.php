@@ -6,28 +6,27 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Openl10n\Bundle\UserBundle\Entity\User;
-use Openl10n\Bundle\CoreBundle\Object\Email;
-use Openl10n\Bundle\CoreBundle\Object\FullName;
-use Openl10n\Bundle\CoreBundle\Object\Locale;
-use Openl10n\Bundle\CoreBundle\Object\Name;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
+use Openl10n\Domain\User\Value\Email;
+use Openl10n\Domain\User\Value\Username;
+use Openl10n\Value\Localization\Locale;
+use Openl10n\Value\String\Name;
 
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $user = new User(new Slug('user'));
+        $user = new User(new Username('user'));
         $user
-            ->setDisplayName(new Name('User'))
+            ->setName(new Name('User'))
             ->setEmail(new Email('user@example.org'))
-            ->setPreferedLocale(new Locale('fr-FR'))
+            ->setPreferedLocale(Locale::parse('fr-FR'))
         ;
 
-        $john = new User(new Slug('johndoe'));
+        $john = new User(new Username('johndoe'));
         $john
-            ->setDisplayName(new Fullname('John', 'Doe'))
+            ->setName(new Name('John Doe'))
             ->setEmail(new Email('john.doe@example.org'))
-            ->setPreferedLocale(new Locale('en-US'))
+            ->setPreferedLocale(Locale::parse('en-US'))
         ;
 
         $this->addReference('user_user', $user);

@@ -23,7 +23,7 @@
   <div class="row">
     {% for domain in domains %}
       <div class="col-sm-4">
-        <a class="panel panel-default domain-card" href="{{ path('openl10n_translation_list', {project: project.slug, domain: domain.slug, target: context.target}) }}">
+        <a class="panel panel-default domain-card" href="{{ path('openl10n_translation_list', {project: project.slug, domain: domain.slug, target: 'en'}) }}">
         {#<a class="panel panel-default domain-card" href="{{ path('openl10n_editor_translate', {'project': project.slug}) }}#fr/{{ domain.slug }}">#}
           <div class="panel-body">
             {#<span class="label label-success">100%</span>#}

@@ -1,5 +1,0 @@
-Openl10n\Bundle\CoreBundle\Entity\Project:
-    exclusion_policy: ALL
-    properties:
-        id:
-            expose: false

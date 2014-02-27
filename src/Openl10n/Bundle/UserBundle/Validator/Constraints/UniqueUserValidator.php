@@ -2,10 +2,8 @@
 
 namespace Openl10n\Bundle\UserBundle\Validator\Constraints;
 
-use Openl10n\Bundle\UserBundle\Action\CreateUserAction;
-use Openl10n\Bundle\UserBundle\Action\EditUserAction;
-use Openl10n\Bundle\UserBundle\Repository\UserRepositoryInterface;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
+use Openl10n\Domain\User\Repository\UserRepository;
+use Openl10n\Domain\User\Value\Username;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -13,14 +11,14 @@ use Symfony\Component\Validator\ConstraintValidator;
 class UniqueUserValidator extends ConstraintValidator
 {
     /**
-     * @var UserRepositoryInterface
+     * @var UserRepository
      */
     private $userRepository;
 
     /**
-     * @param UserRepositoryInterface $userRepository
+     * @param UserRepository $userRepository
      */
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -50,7 +48,7 @@ class UniqueUserValidator extends ConstraintValidator
 
         $value = (string) $value;
 
-        $user = $this->userRepository->findOneByUsername(new Slug($value));
+        $user = $this->userRepository->findOneByUsername(new Username($value));
         if (null !== $user) {
             $this->context->addViolation($constraint->message);
         }

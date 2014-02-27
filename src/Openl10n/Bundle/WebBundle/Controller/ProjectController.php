@@ -2,11 +2,16 @@
 
 namespace Openl10n\Bundle\WebBundle\Controller;
 
-use Openl10n\Bundle\CoreBundle\Action\CreateProjectAction;
-use Openl10n\Bundle\CoreBundle\Action\DeleteProjectAction;
-use Openl10n\Bundle\CoreBundle\Action\EditProjectAction;
-use Openl10n\Bundle\CoreBundle\Object\Slug;
-use Openl10n\Bundle\WebBundle\Form\Model\Project;
+use Openl10n\Bundle\WebBundle\View\LanguageView;
+use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Bundle\WebBundle\View\ProjectView;
+use Openl10n\Domain\Project\Application\Action\CreateProjectAction;
+use Openl10n\Domain\Project\Application\Action\DeleteProjectAction;
+use Openl10n\Domain\Project\Application\Action\EditProjectAction;
+use Openl10n\Domain\Project\Model\Language;
+use Openl10n\Value\Localization\DisplayLocale;
+use Openl10n\Value\Localization\RegionMap;
+use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,9 +30,14 @@ class ProjectController extends Controller
     public function showAction($slug)
     {
         $project = $this->findProjectOr404($slug);
+        $languages = $this->get('openl10n.repository.language')->findByProject($project);
+
+        // Prepare views
+        $languages = array_map([$this, 'prepareLanguageView'], $languages);
 
         return $this->render('Openl10nWebBundle:Project:show.html.twig', array(
             'project' => $project,
+            'languages' => $languages,
         ));
     }
 
@@ -111,5 +121,30 @@ class ProjectController extends Controller
         }
 
         return $project;
+    }
+
+    protected function prepareProjectView(Project $project)
+    {
+        $view = new ProjectView();
+        $view->name = (string) $project->getName();
+        $view->slug = (string) $project->getSlug();
+
+        return $view;
+    }
+
+    protected function prepareLanguageView(Language $language)
+    {
+        $locale = $language->getLocale();
+        $displayLocale = DisplayLocale::createFromLocale($locale);
+
+        $view = new LanguageView();
+        $view->locale = (string) $locale;
+        $view->name = (string) $displayLocale->getName();
+
+        $view->flag = null !== $locale->getRegion() ?
+            (string) $locale->getRegion() :
+            RegionMap::$mapping[(string) $locale->getLanguage()];
+
+        return $view;
     }
 }

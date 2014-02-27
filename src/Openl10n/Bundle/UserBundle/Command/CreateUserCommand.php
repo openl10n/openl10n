@@ -2,7 +2,7 @@
 
 namespace Openl10n\Bundle\UserBundle\Command;
 
-use Openl10n\Bundle\UserBundle\Action\CreateUserAction;
+use Openl10n\Domain\User\Application\Action\RegisterUserAction;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -30,12 +30,12 @@ class CreateUserCommand extends ContainerAwareCommand
         $dialog = $this->getHelperSet()->get('dialog');
         $validator = $this->getContainer()->get('validator');
 
-        $this->action = new CreateUserAction();
+        $this->action = new RegisterUserAction();
 
         // Validation callback: validate a single property of the action.
         $validation = function($property) use ($validator) {
             return function($value) use ($validator, $property) {
-                $action = new CreateUserAction();
+                $action = new RegisterUserAction();
                 $action->$property = $value;
                 $violations = $validator->validateProperty($action, $property);
 
@@ -48,35 +48,35 @@ class CreateUserCommand extends ContainerAwareCommand
         };
 
         // Ask for username
-        $this->action->username = $dialog->askAndValidate(
+        $this->action->setUsername($dialog->askAndValidate(
             $output,
             'Username: ',
             $validation('username')
-        );
+        ));
 
         // Ask for display name
         $defaultDisplayName = ucfirst($this->action->username);
-        $this->action->displayName = $dialog->askAndValidate(
+        $this->action->setDisplayName($dialog->askAndValidate(
             $output,
             'Display name ['.$defaultDisplayName.']: ',
             $validation('displayName'),
             false,
             $defaultDisplayName
-        );
+        ));
 
         // Ask for email
-        $this->action->email = $dialog->askAndValidate(
+        $this->action->setEmail($dialog->askAndValidate(
             $output,
             'Email: ',
             $validation('email')
-        );
+        ));
 
         // Ask for password
-        $this->action->password = $dialog->askHiddenResponseAndValidate(
+        $this->action->setPassword($dialog->askHiddenResponseAndValidate(
             $output,
             'Password: ',
             $validation('password')
-        );
+        ));
     }
 
     /**
@@ -95,7 +95,7 @@ class CreateUserCommand extends ContainerAwareCommand
             throw new \LogicException('User is not valid');
         }
 
-        $user = $this->getContainer()->get('openl10n.processor.create_user')->execute($this->action);
+        $user = $this->getContainer()->get('openl10n.processor.register_user')->execute($this->action);
         $output->writeln(sprintf('<info>User <comment>%s</comment> created</info>', $user->getUsername()));
     }
 }

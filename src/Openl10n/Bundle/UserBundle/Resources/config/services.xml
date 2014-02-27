@@ -14,10 +14,10 @@
         <parameter key="openl10n.twig.extension.user.class">Openl10n\Bundle\UserBundle\Twig\Extension\UserExtension</parameter>
 
         <!-- Processor -->
-        <parameter key="openl10n.processor.create_user.class">Openl10n\Bundle\UserBundle\Processor\CreateUserProcessor</parameter>
-        <parameter key="openl10n.processor.edit_user.class">Openl10n\Bundle\UserBundle\Processor\EditUserProcessor</parameter>
-        <parameter key="openl10n.processor.delete_user.class">Openl10n\Bundle\UserBundle\Processor\DeleteUserProcessor</parameter>
-        <parameter key="openl10n.processor.password_user.class">Openl10n\Bundle\UserBundle\Processor\PasswordUserProcessor</parameter>
+        <parameter key="openl10n.processor.register_user.class">Openl10n\Domain\User\Application\Processor\RegisterUserProcessor</parameter>
+        <parameter key="openl10n.processor.edit_profile.class">Openl10n\Domain\User\Application\Processor\EditProfileProcessor</parameter>
+        <parameter key="openl10n.processor.change_password.class">Openl10n\Domain\User\Application\Processor\ChangePasswordProcessor</parameter>
+        <parameter key="openl10n.processor.delete_account.class">Openl10n\Domain\User\Application\Processor\DeleteAccountProcessor</parameter>
 
         <!-- Validator -->
         <parameter key="openl10n.validator.user_unique.class">Openl10n\Bundle\UserBundle\Validator\Constraints\UniqueUserValidator</parameter>
@@ -40,23 +40,23 @@
         </service>
 
         <!-- Processor -->
-        <service id="openl10n.processor.create_user" class="%openl10n.processor.create_user.class%">
+        <service id="openl10n.processor.register_user" class="%openl10n.processor.register_user.class%">
+            <argument type="service" id="openl10n.repository.user" />
+            <argument type="service" id="openl10n.repository.credentials" />
             <argument type="service" id="security.encoder_factory" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="event_dispatcher" />
         </service>
-        <service id="openl10n.processor.edit_user" class="%openl10n.processor.edit_user.class%">
-            <argument type="service" id="security.encoder_factory" />
-            <argument type="service" id="openl10n.manager.user" />
+        <service id="openl10n.processor.edit_profile" class="%openl10n.processor.edit_profile.class%">
+            <argument type="service" id="openl10n.repository.user" />
             <argument type="service" id="event_dispatcher" />
         </service>
-        <service id="openl10n.processor.delete_user" class="%openl10n.processor.delete_user.class%">
-            <argument type="service" id="openl10n.manager.user" />
+        <service id="openl10n.processor.delete_account" class="%openl10n.processor.delete_account.class%">
+            <argument type="service" id="openl10n.repository.user" />
             <argument type="service" id="event_dispatcher" />
         </service>
-        <service id="openl10n.processor.password_user" class="%openl10n.processor.password_user.class%">
+        <service id="openl10n.processor.change_password" class="%openl10n.processor.change_password.class%">
+            <argument type="service" id="openl10n.repository.credentials" />
             <argument type="service" id="security.encoder_factory" />
-            <argument type="service" id="openl10n.manager.user" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
@@ -74,5 +74,11 @@
         <!-- Controller -->
         <service id="openl10n.controller.user_settings" class="%openl10n.controller.user_settings.class%" parent="openl10n.controller" />
         <service id="openl10n.controller.user_profile" class="%openl10n.controller.user_profile.class%" parent="openl10n.controller" />
+
+        <!-- Security -->
+        <service id="openl10n.security.user_provider" class="Openl10n\Bundle\UserBundle\Security\User\UserProvider">
+            <argument type="service" id="openl10n.repository.user" />
+            <argument type="service" id="openl10n.repository.credentials" />
+        </service>
     </services>
 </container>
