@@ -38,7 +38,7 @@ install:
     - cp app/travis-ci/behat.yml behat.yml
 
     # App install
-    - composer install --prefer-dist --no-progress --no-interaction
+    - SYMFONY_ENV=prod composer install --prefer-dist --no-progress --no-interaction
 
 before_script:
     # Init backend data
