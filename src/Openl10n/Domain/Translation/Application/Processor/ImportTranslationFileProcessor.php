@@ -59,7 +59,9 @@ class ImportTranslationFileProcessor
                 $this->translationRepository->createNewKey($domain, $key)
             ;
 
-            if (!$translationKey->hasPhrase($locale)) {
+            $translationPhrase = $translationKey->getPhrase($locale);
+
+            if (null === $translationPhrase) {
                 // If phrase doesn't exist, then create a new one and
                 // attach the given text.
                 $translationPhrase = $this->translationRepository->createNewPhrase($translationKey, $locale);
@@ -68,7 +70,6 @@ class ImportTranslationFileProcessor
             } elseif ($action->hasOptionErase()) {
                 // If phrase already exist, then ecrase text only
                 // if option is declared.
-                $translationPhrase = $this->translationRepository->createNewPhrase($translationKey, $locale);
                 $translationPhrase->setText($phrase);
             }
 
