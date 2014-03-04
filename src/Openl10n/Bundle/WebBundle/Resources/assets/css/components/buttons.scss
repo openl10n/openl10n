@@ -21,3 +21,13 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.btn-dashed {
+  background-color: transparent;
+  border: 2px dashed #ccc;
+  color: #888;
+
+  &:hover {
+    background-color: #eee;
+  }
+}

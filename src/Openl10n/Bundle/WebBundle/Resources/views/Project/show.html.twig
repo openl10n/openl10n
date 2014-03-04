@@ -7,11 +7,14 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+          <a href="{{ path('openl10n_project_list') }}" class="x-back-link pull-left">
+            <i class="fa fa-chevron-left"></i>
+          </a>
+
           <div class="pull-right">
             <div class="btn-group pull-right">
-              <a class="btn btn-dark" href="{{ path('openl10n_project_edit', {'slug': project.slug}) }}" title="Edit">
+              <a class="btn btn-dark btn-wide" href="{{ path('openl10n_project_edit', {'slug': project.slug}) }}" title="Edit">
                 <i class="fa fa-cogs"></i>
-                Settings
               </a>
             </div>
           </div>
@@ -30,33 +33,51 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-4 hidden-xs hidden-sm">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              <a href="{{ path('openl10n_language_list', {'slug': project.slug}) }}" class="pull-right">
-                <i class="fa fa-cogs"></i>
+      <div class="col-md-3 hidden-xs hidden-sm">
+        <div>
+          <ul class="nav nav-vtabs x-nav-languages">
+            <li {% if in_locale is null %}class="active"{% endif %}>
+              <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}">
+                <p class="main">
+                  All Languages
+                </p>
+                <p class="meta">
+                  ?? translations
+                </p>
               </a>
-              Languages
-            </h3>
-          </div>
-            <table class="table">
-              {% for language in languages %}
-                <tr>
-                  <td>
+            </li>
+            {% for language in languages %}
+              <li {% if in_locale == language.locale %}class="active"{% endif %}>
+                <a href="{{ path('openl10n_project_show', {slug: project.slug, locale: language.locale}) }}">
+                  <p class="main">
                     {{ macros.flag(language) }}
                     {{ language.name|title }}
-                  </td>
-                </tr>
-              {% endfor %}
-            </table>
+
+                    {# <span class="text-muted">
+                      {{ language.locale }}
+                    </span> #}
+                  </p>
+                  <p class="meta">
+                    ??% translated – ??% reviewed
+                  </p>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
         </div>
       </div>
 
-      <div class="col-md-8">
+      <div class="col-md-6">
         {{ render(controller('Openl10nWebBundle:ProjectWidget:listDomains', {'project': project})) }}
+
+        {# {{ render(controller('Openl10nWebBundle:ProjectWidget:feeds', {'project': project})) }} #}
+      </div>
+
+      <div class="col-md-3">
+        {{ render(controller('Openl10nWebBundle:ProjectWidget:stats', {'project': project})) }}
+
+        {{ render(controller('Openl10nWebBundle:ProjectWidget:releases', {'project': project})) }}
       </div>
     </div>
   </div>
-
 {% endblock %}

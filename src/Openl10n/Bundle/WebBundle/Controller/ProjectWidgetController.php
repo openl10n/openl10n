@@ -18,4 +18,22 @@ class ProjectWidgetController extends Controller
             //'context' => $context,
         ));
     }
+
+    public function feedsAction(Project $project)
+    {
+        return $this->render('Openl10nWebBundle:ProjectWidget:feeds.html.twig', array(
+        ));
+    }
+
+    public function statsAction(Project $project)
+    {
+        return $this->render('Openl10nWebBundle:ProjectWidget:stats.html.twig', array(
+        ));
+    }
+
+    public function releasesAction(Project $project)
+    {
+        return $this->render('Openl10nWebBundle:ProjectWidget:releases.html.twig', array(
+        ));
+    }
 }
