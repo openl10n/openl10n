@@ -36,8 +36,8 @@
       <div class="col-md-3 hidden-xs hidden-sm">
         <div>
           <ul class="nav nav-vtabs x-nav-languages">
-            <li class="active">
-              <a href="#">
+            <li {% if in_locale is null %}class="active"{% endif %}>
+              <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}">
                 <p class="main">
                   All Languages
                 </p>
@@ -47,8 +47,8 @@
               </a>
             </li>
             {% for language in languages %}
-              <li>
-                <a href="#">
+              <li {% if in_locale == language.locale %}class="active"{% endif %}>
+                <a href="{{ path('openl10n_project_show', {slug: project.slug, locale: language.locale}) }}">
                   <p class="main">
                     {{ macros.flag(language) }}
                     {{ language.name|title }}

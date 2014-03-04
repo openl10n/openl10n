@@ -27,7 +27,7 @@ class ProjectController extends Controller
         ));
     }
 
-    public function showAction($slug)
+    public function showAction(Request $request, $slug)
     {
         $project = $this->findProjectOr404($slug);
         $languages = $this->get('openl10n.repository.language')->findByProject($project);
@@ -35,9 +35,17 @@ class ProjectController extends Controller
         // Prepare views
         $languages = array_map([$this, 'prepareLanguageView'], $languages);
 
+        $inLocale = $request->query->get('locale', null);
+        if (null !== $inLocale && !array_filter($languages, function($language) use ($inLocale) {
+            return $language->locale === $inLocale;
+        })) {
+            $inLocale = null;
+        }
+
         return $this->render('Openl10nWebBundle:Project:show.html.twig', array(
             'project' => $project,
             'languages' => $languages,
+            'in_locale' => $inLocale,
         ));
     }
 
