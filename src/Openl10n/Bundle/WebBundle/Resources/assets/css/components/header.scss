@@ -19,6 +19,18 @@
     //margin: 0;
     //font-size: 28px;
   }
+
+  .x-back-link {
+    font-size: 22px;
+    line-height: 32px;
+    margin-left: -30px;
+    color: #aaa;
+
+    &:hover {
+      color: #888;
+    }
+  }
+
   .nav-pills > li > a {
     padding: 7px 15px;
   }
