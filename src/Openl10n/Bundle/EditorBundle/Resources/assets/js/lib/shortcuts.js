@@ -2,8 +2,8 @@
 
   var ShortcutKeys = Backbone.Shortcuts.extend({
     shortcuts: {
-      "ctrl+j" : "selectNextItem",
-      "ctrl+k" : "selectPreviousItem",
+      "ctrl+down" : "selectNextItem",
+      "ctrl+up" : "selectPreviousItem",
     },
 
     selectNextItem: function() {
