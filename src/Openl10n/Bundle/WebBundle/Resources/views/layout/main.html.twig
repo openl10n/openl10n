@@ -1,9 +1,7 @@
 {% extends '@Openl10nWeb/layout/base.html.twig' %}
 
 {% block body %}
-  {% if is_granted('ROLE_USER') %}
-    {{ include('@Openl10nWeb/layout/_navbar.html.twig', with_context = false) }}
-  {% endif %}
+  {{ include('@Openl10nWeb/layout/_navbar.html.twig', with_context = false) }}
 
   <div class="page-wrapper">
     {% block content '' %}
