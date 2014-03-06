@@ -1,11 +1,15 @@
-/app/bootstrap.php.cache
 /app/cache/*
+/app/bootstrap.php.cache
 /app/config/parameters.yml
 /app/deploy/*
 !/app/deploy/deploy.rb.dist
 /app/logs/*
 /app/sessions/
 
+/.sass-cache/
+/node_modules/
+/web/assets/dist/
+/web/assets/src/vendor/
 /web/bundles/
 /web/css/
 /web/js/

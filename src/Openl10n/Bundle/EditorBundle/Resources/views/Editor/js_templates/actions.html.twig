@@ -1,26 +1,20 @@
 <div class="btn-group">
-  <button class="btn btn-sm btn-light action-undo" title="Undo">
+  <button class="btn btn-default btn-lg action-undo">
     <i class="fa fa-undo"></i>
   </button>
-  <button class="btn btn-sm btn-light action-copy" title="Copy text">
+  <button class="btn btn-default btn-lg action-copy">
     <i class="fa fa-copy"></i>
   </button>
-  <button class="btn btn-sm btn-light action-skip" title="Skip">
+  <button class="btn btn-default btn-lg action-skip">
     <i class="fa fa-forward"></i>
   </button>
-</div>
-
-<div class="btn-group">
-  <button class="btn btn-sm btn-light action-unapprove" <% if (!is_approved) { %>disabled<% } %>>
+  <button class="btn btn-default btn-lg action-unapprove" <% if (!is_approved) { %>disabled<% } %>>
     <i class="fa fa-thumbs-down"></i>
   </button>
-  <button class="btn btn-sm btn-light action-approve" <% if (is_approved) { %>disabled<% } %>>
+  <button class="btn btn-default btn-lg action-approve" <% if (is_approved || !is_translated) { %>disabled<% } %>>
     <i class="fa fa-thumbs-up"></i>
   </button>
-</div>
-
-<div class="btn-group">
-  <button class="btn btn-sm btn-success btn-wide action-save">
+  <button class="btn btn-success btn-lg btn-wide action-save">
     Save
   </button>
 </div>

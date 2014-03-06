@@ -7,30 +7,34 @@
 <div class="ol-editor-header-inner">
   <div class="pull-left">
     <div class="ol-editor-header-title">
-      <a href="{{ path('openl10n_project_show', {slug: project.slug}) }}">
-        <%- project.name %>
+      <a class="project-name" href="{{ path('openl10n_project_show', {slug: project.slug}) }}">
+        {{ project.name }}
       </a>
-
-      <i class="fa fa-caret-right"></i>
 
       <div class="ol-editor-domain-list dropdown">
         <a data-toggle="dropdown" href="#">
-          <% if (context.domain) { %>
-            <%- context.domain.name %>
-          <% } else { %>
-            All Phrases
-          <% } %>
+          <span class="domain-name">
+            All phrases
+          </span>
           <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <li <% if (!context.domain) { %>class="active"<% } %>>
-            <a href="#" data-id="*">All Phrases</a>
+          <li>
+            <a href="#" data-id="*">
+              <span class="domain-name">
+                All Phrases
+              </span>
+            </a>
           </li>
-          <% _.each(domains, function(domain) { %>
-            <li <% if (context.domain && context.domain.id == domain.id) { %>class="active"<% } %>>
-              <a href="#" data-id="<%- domain.id %>"><%- domain.name %></a>
+          {% for domain in domains %}
+            <li>
+              <a href="#" data-id="{{ domain.slug }}">
+                <span class="domain-name">
+                  {{ domain.name }}
+                </span>
+              </a>
             </li>
-          <% }); %>
+          {% endfor %}
         </ul>
       </div>
     </div>
@@ -39,25 +43,27 @@
   <div class="pull-right">
     <div class="ol-editor-header-item ol-editor-header-item-form">
       <select class="form-control source-locale">
-        <% _.each(languages, function(language) { %>
-          <option value="<%- language.id %>" <% if (language.id == context.source) { %>selected<% } %>>
-            <%- language.name %> (<%- language.id %>)
+        {% for language in languages %}
+          <option value="{{ language.locale }}">
+            {{ language.name }} ({{ language.locale }})
           </option>
-        <% }); %>
+        {% endfor %}
       </select>
     </div>
+
     <div class="ol-editor-header-item ol-editor-header-item-text">
       <p>
         <i class="fa fa-arrow-right"></i>
       </p>
     </div>
+
     <div class="ol-editor-header-item ol-editor-header-item-form">
       <select class="form-control target-locale">
-        <% _.each(languages, function(language) { %>
-          <option value="<%- language.id %>" <% if (language.id == context.target) { %>selected<% } %>>
-            <%- language.name %> (<%- language.id %>)
+        {% for language in languages %}
+          <option value="{{ language.locale }}">
+            {{ language.name }} ({{ language.locale }})
           </option>
-        <% }); %>
+        {% endfor %}
       </select>
     </div>
   </div>

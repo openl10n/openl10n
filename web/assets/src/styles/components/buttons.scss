@@ -1,0 +1,32 @@
+@import "mixins";
+
+.btn-wide {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.btn-dark {
+  @include button-variant(#444, $dark-gray, $dark-gray);
+}
+.btn-light {
+  @include button-variant(#444, $light-gray, $light-gray);
+}
+.btn-flashy {
+  @include button-variant(#fff, $complement-color, $complement-color);
+}
+
+// Use for the save button on editor
+.btn-sm.btn-wide {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.btn-dashed {
+  background-color: transparent;
+  border: 2px dashed #ccc;
+  color: #888;
+
+  &:hover {
+    background-color: #eee;
+  }
+}

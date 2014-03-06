@@ -1,0 +1,49 @@
+//
+// Application variables
+// ---------------------
+
+$primary-color: #428bca;
+$complement-color: #ffb147;
+
+$light-gray: #eee;
+$dark-gray: #ccc;
+
+
+// Bootstrap variables
+// -------------------
+
+//
+// Generic style
+//
+$border-radius-base:  2px;
+$border-radius-large: 2px;
+$border-radius-small: 0px;
+
+//
+// Buttons
+//
+//$btn-primary-bg: #ee6123;
+//$btn-primary-border: #ee6123;
+
+//
+// Navbar
+//
+$navbar-default-color:                     #fff;
+$navbar-default-bg:                        $primary-color;
+$navbar-default-link-color:                #fff;
+$navbar-default-link-hover-color:          #f2f2f2;
+//$navbar-default-link-hover-bg:             transparent;
+//$navbar-default-link-active-color:         #eee;
+//$navbar-default-link-active-bg:            darken($navbar-default-bg, 6.5%);
+//$navbar-default-link-disabled-color:       #ccc;
+//$navbar-default-link-disabled-bg:          transparent;
+//$navbar-default-toggle-hover-bg:           darken($navbar-default-bg, 6.5%);
+//$navbar-default-toggle-icon-bar-bg:        #fff;
+//$navbar-default-toggle-border-color:       darken($navbar-default-bg, 6.5%);
+//$navbar-border-radius:                     0;
+
+
+// Font Awesome variables
+// ----------------------
+
+$fa-font-path: '/assets/dist/fonts/font-awesome';

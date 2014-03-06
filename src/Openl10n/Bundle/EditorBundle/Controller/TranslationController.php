@@ -2,10 +2,10 @@
 
 namespace Openl10n\Bundle\EditorBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Openl10n\Domain\Project\Model\Project;
-use Openl10n\Value\String\Slug;
 use Openl10n\Value\Localization\Locale;
+use Openl10n\Value\String\Slug;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class TranslationController extends Controller
@@ -23,7 +23,7 @@ class TranslationController extends Controller
         ));
 
         // BackboneJS route
-        $route = sprintf('%s/%s', $target, $domain->getSlug());
+        $route = sprintf('%s/%s', $project->getDefaultLocale(), $target);
 
         return $this->redirect($url.'#'.$route);
     }
@@ -42,7 +42,7 @@ class TranslationController extends Controller
         ));
 
         // BackboneJS route
-        $route = sprintf('%s/%s/%s', $target, $domain->getSlug(), $hash);
+        $route = sprintf('%s/%s/%s', $project->getDefaultLocale(), $target, $hash);
 
         return $this->redirect($url.'#'.$route);
     }

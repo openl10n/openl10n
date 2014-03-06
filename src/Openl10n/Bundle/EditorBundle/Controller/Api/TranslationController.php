@@ -39,6 +39,19 @@ class TranslationController extends FOSRestController implements ClassResourceIn
 
         $specification = new CustomTranslationSpecification($project, $source, $target);
 
+        if ($request->query->has('domain')) {
+            $specification->domain = $request->query->get('domain');
+        }
+        if ($request->query->has('translated')) {
+            $specification->translated = $request->query->get('translated');
+        }
+        if ($request->query->has('approved')) {
+            $specification->approved = $request->query->get('approved');
+        }
+        if ($request->query->has('text')) {
+            $specification->text = $request->query->get('text');
+        }
+
         $pager = $this->get('openl10n.repository.translation')->findSatisfying($specification);
         $pager->setMaxPerPage(1000);
 

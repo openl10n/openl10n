@@ -2,10 +2,13 @@
 
 namespace Openl10n\Bundle\EditorBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Openl10n\Value\Localization\DisplayLocale;
-use Openl10n\Value\String\Slug;
+use Openl10n\Bundle\WebBundle\View\LanguageView;
+use Openl10n\Domain\Project\Model\Language;
 use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Value\Localization\DisplayLocale;
+use Openl10n\Value\Localization\RegionMap;
+use Openl10n\Value\String\Slug;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class EditorController extends Controller
@@ -15,8 +18,17 @@ class EditorController extends Controller
         $project = $this->findProjectOr404($project);
         $appData = $this->getDataForProject($project);
 
+        $languages = array_map(
+            [$this, 'prepareLanguageView'],
+            $this->get('openl10n.repository.language')->findByProject($project)
+        );
+
+        $domains = $this->get('openl10n.repository.domain')->findByProject($project);
+
         return $this->render('@Openl10nEditor/Editor/translate.html.twig', array(
             'project' => $project,
+            'languages' => $languages,
+            'domains' => $domains,
             'data' => $appData,
         ));
     }
@@ -71,5 +83,21 @@ class EditorController extends Controller
     protected function getProjectLanguages(Project $project)
     {
         return $this->get('openl10n.repository.language')->findByProject($project);
+    }
+
+    protected function prepareLanguageView(Language $language)
+    {
+        $locale = $language->getLocale();
+        $displayLocale = DisplayLocale::createFromLocale($locale);
+
+        $view = new LanguageView();
+        $view->locale = (string) $locale;
+        $view->name = (string) $displayLocale->getName();
+
+        $view->flag = null !== $locale->getRegion() ?
+            (string) $locale->getRegion() :
+            RegionMap::$mapping[(string) $locale->getLanguage()];
+
+        return $view;
     }
 }

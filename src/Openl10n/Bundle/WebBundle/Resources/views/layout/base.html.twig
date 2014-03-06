@@ -7,31 +7,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
   {% block stylesheets %}
-    {% stylesheets
-      '@Openl10nWebBundle/Resources/assets/css/vendor/*'
-      '@Openl10nWebBundle/Resources/assets/css/*'
-      '@Openl10nWebBundle/Resources/assets/css/components/*.scss'
-    %}
-      <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/vendor.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/main.css') }}" />
+  {% endblock %}
+
+  {% block requirejs %}
+    {{ include('@Openl10nWeb/layout/_requirejs.html.twig', {
+        module: false
+    }, with_context=false) }}
   {% endblock %}
 </head>
 <body>
   {% block body '' %}
 
   {% block javascripts %}
-    {% javascripts
-      '@Openl10nWebBundle/Resources/assets/js/vendor/jquery.js'
-      '@Openl10nWebBundle/Resources/assets/js/vendor/bootstrap.js'
-      '@Openl10nWebBundle/Resources/assets/js/vendor/selectize.js'
-      '@Openl10nWebBundle/Resources/assets/js/vendor/string.js'
-      '@Openl10nWebBundle/Resources/assets/js/vendor/essage.js'
-      '@Openl10nWebBundle/Resources/assets/js/*.js'
-    %}
-      <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
   {% endblock %}

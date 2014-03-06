@@ -59,7 +59,7 @@ class CustomTranslationSpecification implements DoctrineOrmTranslationSpecificat
         if ($text = $this->text) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->like('k.key', ':text'),
+                    $queryBuilder->expr()->like('k.identifier', ':text'),
                     $queryBuilder->expr()->like('s.text', ':text'),
                     $queryBuilder->expr()->like('t.text', ':text')
                 ))
