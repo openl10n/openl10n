@@ -31,8 +31,26 @@ set :assets_symlinks, true
 set :clear_controllers, true
 set :use_composer, true
 
-# Run some custom tasks
-after "deploy", "deploy:cleanup"
-
 # Be more verbose by uncommenting the following line
 #logger.level = Logger::MAX_LEVEL
+
+# Run some custom tasks
+after 'symfony:cache:warmup', 'openl10n:assets_build'
+#after :deploy, 'symfony:doctrine:schema:update'
+after "deploy", "deploy:cleanup"
+
+namespace :openl10n do
+  task :assets_build do
+    capifony_pretty_print "--> Installing Node dependencies"
+    invoke_command "sh -c 'cd #{latest_release} && npm install'", :via => run_method
+    capifony_puts_ok
+
+    capifony_pretty_print "--> Installing Bower dependencies"
+    invoke_command "sh -c 'cd #{latest_release} && ./node_modules/.bin/bower install'", :via => run_method
+    capifony_puts_ok
+
+    capifony_pretty_print "--> Launching gulp to compile assets"
+    invoke_command "sh -c 'cd #{latest_release} && ./node_modules/.bin/gulp build --prod'", :via => run_method
+    capifony_puts_ok
+  end
+end
