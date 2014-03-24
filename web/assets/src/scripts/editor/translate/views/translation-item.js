@@ -42,7 +42,6 @@ define(['marionette', 'string', 'editor/common/msgbus'], function(Marionette, S,
         }, 200);
       }
     }
-
   });
 
   return TranslationView;

@@ -19,7 +19,15 @@ define(['marionette'], function(Marionette) {
 
       this.ui.editor.on('keyup', function() {
         var text = $(this).val();
-        _this.model.set('target_phrase', text, {silent: true});
+        var currentPhrase = _this.model.get('target_phrase');
+
+        if (text != currentPhrase) {
+          _this.model.set({
+            'target_phrase': text,
+            'is_dirty': true
+          }, {silent: true});
+          _this.model.trigger('edited');
+        }
       });
     },
   });

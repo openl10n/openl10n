@@ -9,6 +9,7 @@
     "gulp-clean": "~0.2.4",
     "gulp-minify-css": "~0.3.0",
     "gulp-uglify": "~0.2.0",
-    "requirejs": "^2.1.11"
+    "requirejs": "^2.1.11",
+    "async": "^0.2.10"
   }
 }

@@ -24,6 +24,7 @@ define(['backbone', 'editor/common/backend-router'], function(Backbone, backendR
 
       // UI attributes
       selected: false,
+      is_dirty: false
     },
 
     initialize: function(models, options) {
@@ -32,6 +33,10 @@ define(['backbone', 'editor/common/backend-router'], function(Backbone, backendR
       // Init arguments
       this.context = options.context;
     },
+
+    _onSync: function() {
+      this.set('is_dirty', false, {silent: true});
+    }
 
     // save: function(attributes, options) {
     //   attributes || (attributes = {});

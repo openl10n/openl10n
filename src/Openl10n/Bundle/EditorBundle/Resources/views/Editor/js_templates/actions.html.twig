@@ -11,7 +11,7 @@
   <button class="btn btn-default btn-lg action-unapprove" <% if (!is_approved) { %>disabled<% } %>>
     <i class="fa fa-thumbs-down"></i>
   </button>
-  <button class="btn btn-default btn-lg action-approve" <% if (is_approved || !is_translated) { %>disabled<% } %>>
+  <button class="btn btn-default btn-lg action-approve" <% if (is_approved) { %>disabled<% } %>>
     <i class="fa fa-thumbs-up"></i>
   </button>
   <button class="btn btn-success btn-lg btn-wide action-save">
