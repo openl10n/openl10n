@@ -1,7 +1,7 @@
 ;(function(win, doc, Editor) {
 
   Editor.Controller = Marionette.Controller.extend({
-    initialize: function() {
+    initialize: function() {
     },
 
     index: function() {

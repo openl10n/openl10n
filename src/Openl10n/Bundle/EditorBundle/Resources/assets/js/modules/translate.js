@@ -19,7 +19,7 @@
       });
     },
 
-    fetchTranslations: function() {
+    fetchTranslations: function() {
       Editor.translations = new Editor.Models.TranslationList();
       this.translationDeferred = Editor.translations.fetch();
 

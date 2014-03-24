@@ -1,4 +1,4 @@
-define(['marionette'], function(Marionette) {
+define(['marionette'], function(Marionette) {
 
   var TranslationEditView = Marionette.ItemView.extend({
     template: '#ol-editor-translation-edit-template',

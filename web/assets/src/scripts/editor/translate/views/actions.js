@@ -42,13 +42,13 @@ define(['marionette', 'editor/common/msgbus'], function(Marionette, msgBus) {
     unapprove: function() {
       this.model.save({is_approved: false});
     },
-    copy: function() {
+    copy: function() {
       this.model.set({
         'target_phrase': this.model.get('source_phrase'),
         'is_dirty': true
       });
     },
-    undo: function() {
+    undo: function() {
       this.model.fetch();
     },
     skip: function() {

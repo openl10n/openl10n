@@ -1,6 +1,6 @@
 define(['marionette'], function(Marionette) {
   var Controller = Marionette.Controller.extend({
-    initialize: function(options) {
+    initialize: function(options) {
       this.app = options.app;
     },
 
