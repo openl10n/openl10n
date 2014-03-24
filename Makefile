@@ -16,6 +16,7 @@ help:
 
 install:
 	@ echo "❯ Installing..."
+	@ composer install --prefer-dist --optimize-autoloader --no-scripts
 	@ npm install
 	@ node_modules/.bin/bower install
 
