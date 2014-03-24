@@ -1,0 +1,15 @@
+{
+  "name": "openl10n",
+  "repository": "git://github.com:openl10n/openl10n.git",
+  "devDependencies": {
+    "gulp": "~3.5.1",
+    "gulp-ruby-sass": "~0.3.0",
+    "gulp-util": "~2.2.14",
+    "gulp-concat": "~2.1.7",
+    "gulp-clean": "~0.2.4",
+    "gulp-minify-css": "~0.3.0",
+    "gulp-uglify": "~0.2.0",
+    "requirejs": "^2.1.11",
+    "async": "^0.2.10"
+  }
+}

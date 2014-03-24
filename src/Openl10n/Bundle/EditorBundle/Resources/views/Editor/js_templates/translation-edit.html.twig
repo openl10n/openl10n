@@ -1,8 +1,8 @@
 <div class="ol-editor-source-area">
   <div class="meta pull-right">
-    <% if (is_translated) { %>
-      <i class="fa fa-check-circle <% if (is_approved) { %>text-success<% } %>"></i>
-    <% } %>
+    <span class="text-<% if (is_translated) { %>success<% } else { %>danger<% } %>">
+      <i class="fa <% if (is_approved) { %>fa-check<% } else { %>fa-circle<% } %>"></i>
+    </span>
 
     <span><%- key %></span>
     <span class="meta-domain">(<%- domain %>)</span>
@@ -12,9 +12,15 @@
     Original phrase
   </h4>
 
-  <p class="phrase">
-    <%- source_phrase %>
-  </p>
+  <% if (source_phrase) { %>
+    <p class="phrase text-default">
+      <%- source_phrase %>
+    </p>
+  <% } else { %>
+    <p class="phrase text-danger">
+      undefined
+    </p>
+  <% } %>
 </div>
 
 <div class="ol-editor-target-area">

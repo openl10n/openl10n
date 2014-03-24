@@ -1,0 +1,554 @@
+.ol-editor-layout {
+  background-color: #fafafa;
+  height: 100%;
+
+  .fullheight {
+    overflow-y: scroll;
+  }
+}
+
+
+//
+// Header
+//
+.ol-editor-header {
+  position: relative;
+  background-color: #eee;
+  border-bottom: 1px solid #ddd;
+  min-height: 60px;
+  //overflow-y: hidden;
+}
+
+.ol-editor-branding > a {
+  background-color: #428bca;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  display: inline-block;
+  text-align: center;
+
+  &:hover {
+    background-color: darken(#428bca, 5%);
+  }
+}
+
+.ol-editor-logo-icon {
+  color: #fff;
+  padding: 15px 5px;
+  font-size: 28px;
+}
+
+.ol-editor-header-inner {
+  padding-left: 40px;
+  padding-right: 10px;
+}
+
+.ol-editor-header-title {
+  font-weight: 300;
+  font-size: 28px;
+  float: left;
+  line-height: 1.1;
+
+  .project-name {
+    padding-left: 15px;
+    padding-right: 5px;
+    background-color: #ddd;
+    position: relative;
+    margin-right: 35px;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: -1px;
+      right: -31px;
+      width: 0;
+      height: 0;
+      border-top: 31px solid transparent;
+      border-bottom: 31px solid transparent;
+      border-left: 31px solid #ddd;
+    }
+  }
+
+  > a {
+    display: inline-block;
+    padding: 15px 5px 15px;
+
+    &:hover {
+      //background-color: #ccc;
+    }
+  }
+
+
+  .fa {
+    font-size: 20px;
+  }
+}
+.ol-editor-domain-list {
+  display: inline-block;
+
+  a:focus {
+    text-decoration: none;
+  }
+}
+
+.ol-editor-header-item {
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.ol-editor-header-item-text {
+  padding-top: 11px;
+}
+.ol-editor-header-item-form {
+  padding-top: 3px;
+}
+
+//
+// Grid
+//
+.ol-editor-row {
+  &:before, &:after {
+    clear: both;
+    content: " ";
+    display: table;
+  }
+}
+.ol-editor-col-30 {
+  float: left;
+  position: relative;
+  min-height: 1px;
+  width: 30%;
+}
+.ol-editor-col-70 {
+  float: left;
+  min-height: 1px;
+  width: 70%;
+}
+
+
+//
+// ActionBar
+//
+.ol-editor-actionbar {
+  border-bottom: 1px solid #ddd;
+
+  .pull-left {
+    .btn:first-child {
+      border-left: none;
+    }
+  }
+
+  .btn {
+    border-radius: 0;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+  }
+  .btn-lg {
+    font-size: 16px;
+    padding-top: 12px;
+    padding-bottom: 11px;
+  }
+  .btn-default {
+    border-left-color: #ddd;
+    border-right-color: #ddd;
+    background-color: #fafafa;
+
+    &:hover {
+      //border-color: $light-gray;
+      background-color: #eee;
+      box-shadow: none;
+    }
+  }
+
+  .action-approve:hover {
+    color: #5cb85c;
+  }
+  .action-unapprove:hover {
+    color: #d9534f;
+  }
+}
+
+.ol-editor-filter {
+  //padding: 7px 5px;
+  //border-bottom: 1px solid #ddd;
+
+  .form-group {
+    margin-bottom: 0;
+
+    .prepend-icon {
+      font-size: 18px;
+      color: #777;
+      position: absolute;
+      top: 13px;
+      left: 10px;
+    }
+  }
+
+  input[type="text"] {
+    //height: 45px;
+    border: none;
+    border-right: 1px solid #ddd;
+    border-radius: 0;
+    //height: 45px;
+    box-shadow: none;
+    padding-left: 35px;
+
+    &:active, &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+  }
+}
+
+//
+// Content
+//
+.ol-editor-content {
+}
+
+.ol-editor-aside {
+  width: 30%;
+  float: left;
+}
+
+.ol-editor-sidebar {
+  background-color: #eee;
+  border-right: 1px solid #ddd;
+  overflow-x: hidden;
+}
+
+.ol-editor-translation-list-filters {
+  padding: 4px 8px;
+  border-bottom: 1px solid #ccc;
+  background-color: #eee;
+  font-size: 12px;
+  color: #777;
+
+  .dropdown {
+    color: #777;
+    padding: 2px 6px 2px 6px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-top: 1px 0;
+
+    &:hover {
+      background-color: #ccc;
+    }
+
+    &.active {
+      background-color: lighten(#428bca, 5);
+      color: #fff;
+    }
+  }
+}
+
+.ol-editor-translation-list {
+  background-color: #f2f2f2;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.ol-editor-translation-list-item > div.item-wrapper {
+  display: block;
+  padding: 7px 10px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  color: #428bca;
+
+  &:hover {
+    cursor: pointer;
+    color: #2a6496;
+  }
+
+  &.active {
+    background: #fafafa;
+    padding-left: 15px;
+
+    &:after {
+      display: block;
+      content: '';
+      background-color: #428bca;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+    }
+  }
+
+  &:hover {
+    //background-color: #fafafa;
+  }
+
+  .key {
+    margin: 0;
+  }
+  .extract {
+    margin: 4px 0 0;
+
+    &.text-default {
+      color: #777;
+    }
+  }
+  .domain {
+    color: #aaa;
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .status {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 6px;
+    background-color: #ddd;
+
+    &.status-translated {
+      background-color: lighten(#5cb85c, 25%);
+    }
+    &.status-approved {
+      background-color: #5cb85c;
+    }
+  }
+}
+
+.ol-editor-main {
+  width: 70%;
+  float: left;
+}
+
+
+
+/*
+//
+// Layout
+//
+#appLayout {
+    .ol-header {
+        margin-bottom: 0;
+    }
+}
+
+.ol-editor {
+    min-width: 900px;
+
+    .fullheight {
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+.ol-editor-sidebar,
+.ol-editor-content {
+    float: left;
+}
+
+.ol-editor-sidebar {
+    width: 30%;
+    background-color: #f2f2f2;
+}
+
+.ol-editor-content {
+    width: 70%;
+    background-color: #fdfdfd;
+}
+
+//
+// Filter/Search form
+//
+.ol-editor-filter-form {
+    padding: 7px 5px;
+    //background-color: #eee;
+    border-bottom: 1px solid #ddd;
+    box-shadow: -2px 3px 5px -2px #ddd;
+    position: relative;
+    z-index: 10;
+
+    .form-group {
+        // Ecrase bootstrap value
+        margin-bottom: 0;
+    }
+
+    p.meta {
+        margin: 5px 0 0;
+        font-size: 13px;
+    }
+}
+
+//
+// Translation list
+//
+.ol-editor-translation-list {
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        &:nth-child(even) {
+            background: #f4f4f4;
+        }
+    }
+
+    .loader-item {
+        font-size: 36px;
+        color: #aaa;
+        margin: auto;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .translation-item {
+        display: block;
+        position: relative;
+        padding: 10px;
+        border-bottom: 1px solid #e5e5e5;
+
+        &:hover {
+            background: #e5e5e5;
+            cursor: pointer;
+        }
+        &.active {
+            background: #fdfdfd;
+        }
+
+        .status {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 6px;
+            background-color: #ddd;
+
+            &.status-translated {
+                background-color: lighten(#5cb85c, 15%);
+            }
+            &.status-approved {
+                background-color: #5cb85c;
+            }
+        }
+
+        p {
+            margin-bottom: 0px;
+
+            &.key {
+                color: #444;
+                font-size: 14px;
+            }
+            &.domain {
+                color: #888;
+                font-size: 12px;
+            }
+            &.meta {
+                color: #888;
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+//
+// Main content
+//
+.ol-editor-content {
+    background-color: #fafafa;
+}
+
+//
+// Translation actions
+//
+.ol-editor-actionbar {
+    padding: 10px;
+    min-height: 50px;
+}
+*/
+
+//
+// Translation workspace
+//
+.ol-editor-source-area {
+    border-bottom: 1px solid #eee;
+    background: #fafafa;
+    padding: 15px 10px 15px;
+    position: relative;
+
+    /* Required for Down Triangle */
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-color: transparent;
+      border-bottom: 0;
+    }
+
+    /* Stroke */
+    &:before {
+      bottom: -9px;
+      left: 21px;
+
+      /* If 1px darken stroke slightly */
+      border-top-color: #eaeaea;
+      border-width: 9px;
+    }
+
+    /* Fill */
+    &:after {
+      bottom: -8px;
+      left: 22px;
+      border-top-color: #fafafa;
+      border-width: 8px;
+    }
+
+    .title {
+        margin: 0 0 5px;
+        font-size: 15px;
+        font-weight: normal;
+        color: #999;
+    }
+    .meta {
+        font-size: 14px;
+        color: #555;
+    }
+    .meta-domain {
+        padding-left: 5px;
+        color: #777;
+    }
+    .phrase {
+        font-size: 22px;
+        font-weight: 300;
+        margin-bottom: 0;
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+}
+
+.ol-editor-target-area {
+    padding: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+
+    textarea.phrase-editor {
+        padding: 10px;
+        border: none;
+        box-shadow: none;
+        font-size: 16px;
+        //font-weight: 300;
+        resize: none;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        word-wrap: break-word;
+        height: 110px;
+    }
+}
