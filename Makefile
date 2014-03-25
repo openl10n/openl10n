@@ -1,3 +1,5 @@
+all: install build
+
 help:
 	@ echo ''
 	@ echo 'Welcome to openl10n.'
@@ -16,7 +18,11 @@ help:
 
 install:
 	@ echo "❯ Installing..."
-	@ composer install --prefer-dist --optimize-autoloader --no-scripts
+ifeq ($(PROD), 1)
+	@ composer install --prefer-dist --optimize-autoloader --no-dev --no-interaction
+else
+	@ composer install
+endif
 	@ npm install
 	@ node_modules/.bin/bower install
 
@@ -31,4 +37,8 @@ watch:
 
 build:
 	@ echo "❯ Compiling..."
+ifeq ($(PROD), 1)
 	@ node_modules/.bin/gulp build --prod
+else
+	@ node_modules/.bin/gulp build
+endif
