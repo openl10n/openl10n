@@ -21,6 +21,9 @@ define(['marionette'], function(Marionette) {
     onRender: function() {
       var _this = this;
 
+      this.ui.selectSource.val(this.context.get('source_locale'));
+      this.ui.selectTarget.val(this.context.get('target_locale'));
+
       _this.ui.selectSource.on('change', function() {
         _this.context.set('source_locale', _this.ui.selectSource.val());
       });
