@@ -36,10 +36,10 @@ openl10n_domain_export:
     defaults: { _controller: openl10n.controller.domain:exportAction }
 
 openl10n_translation_list:
-    pattern:  /projects/{project}/domains/{domain}/translations/{target}/
+    pattern:  /projects/{project}/translations/{target}/
     defaults: { _controller: openl10n.controller.translation:listAction }
 openl10n_translation_show:
-    pattern:  /projects/{project}/domains/{domain}/translations/{target}/{hash}
+    pattern:  /projects/{project}/translations/{target}/{hash}
     defaults: { _controller: openl10n.controller.translation:showAction }
 
 openl10n_translation_context_switch:

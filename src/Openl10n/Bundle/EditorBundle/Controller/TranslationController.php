@@ -10,12 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TranslationController extends Controller
 {
-    public function listAction(Request $request, $project, $domain, $target)
+    public function listAction(Request $request, $project, $target)
     {
         $target = Locale::parse($target);
 
         $project = $this->findProjectOr404($project);
-        $domain = $this->findDomainOr404($project, $domain);
+        //$domain = $this->findDomainOr404($project, $domain);
         $language = $this->findLanguageOr404($project, $target);
 
         $url = $this->generateUrl('openl10n_editor_translate', array(
@@ -28,12 +28,12 @@ class TranslationController extends Controller
         return $this->redirect($url.'#'.$route);
     }
 
-    public function showAction(Request $request, $project, $domain, $target, $hash)
+    public function showAction(Request $request, $project, $target, $hash)
     {
         $target = new Locale($target);
 
         $project = $this->findProjectOr404($project);
-        $domain = $this->findDomainOr404($project, $domain);
+        //$domain = $this->findDomainOr404($project, $domain);
         $language = $this->findLanguageOr404($project, $target);
         $key = $this->findKeyOr404($project, $hash);
 

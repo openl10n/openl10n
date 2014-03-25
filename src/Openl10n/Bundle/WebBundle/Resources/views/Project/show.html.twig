@@ -12,11 +12,16 @@
           </a>
 
           <div class="pull-right">
-            <div class="btn-group pull-right">
-              <a class="btn btn-dark btn-wide" href="{{ path('openl10n_project_edit', {'slug': project.slug}) }}" title="Edit">
+              <a class="btn btn-dark" href="{{ path('openl10n_project_edit', {'slug': project.slug}) }}" title="Edit">
                 <i class="fa fa-cogs"></i>
               </a>
-            </div>
+
+              <a href="{{ path('openl10n_translation_list', {project: project.slug, target: project.defaultLocale}) }}" class="btn btn-success">
+                <i class="fa fa-pencil"></i>
+                <span class="margin-left-xs">
+                  Translate
+                </span>
+              </a>
           </div>
 
           <div>

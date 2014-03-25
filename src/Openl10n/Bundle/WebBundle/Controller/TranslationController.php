@@ -18,8 +18,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TranslationController extends Controller
 {
-    public function listAction(Request $request, $project, $domain, $target)
+    public function listAction(Request $request, $project, $target)
     {
+        // TODO Remove this obsolete controller
+        return;
+
         $target = new Locale($target);
 
         $project = $this->findProjectOr404($project);
