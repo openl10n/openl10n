@@ -61,7 +61,7 @@ class CreateUserCommand extends ContainerAwareCommand
 
         // Ask for display name
         $defaultDisplayName = ucfirst($username);
-        $input->setOption('username', $dialog->askAndValidate(
+        $input->setOption('display-name', $dialog->askAndValidate(
             $output,
             'Display name ['.$defaultDisplayName.']: ',
             $validation('displayName'),
