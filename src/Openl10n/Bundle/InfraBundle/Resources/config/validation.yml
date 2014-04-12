@@ -23,6 +23,8 @@ Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction:
     properties:
         file:
             - NotBlank: ~
+        resource:
+            - NotBlank: ~
         domain:
             - NotBlank: ~
         locale:

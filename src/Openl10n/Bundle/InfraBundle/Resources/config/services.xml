@@ -93,6 +93,7 @@
             <argument type="service" id="event_dispatcher" />
         </service>
         <service id="openl10n.processor.import_translation_file" class="%openl10n.processor.import_translation_file.class%">
+            <argument type="service" id="openl10n.repository.resource" />
             <argument type="service" id="openl10n.repository.domain" />
             <argument type="service" id="openl10n.repository.translation" />
             <argument type="service" id="openl10n.uploader.file" />

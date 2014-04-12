@@ -15,6 +15,7 @@ class ImportDomainType extends AbstractType
     {
         $builder
             ->add('file', 'file')
+            ->add('resource', 'text')
             ->add('domain', 'text')
             ->add('locale', 'openl10n_locale_choice', array(
                 'empty_value' => '',

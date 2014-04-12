@@ -6,4 +6,5 @@ class DomainView
 {
     public $slug;
     public $name;
+    public $resources = [];
 }

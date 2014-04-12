@@ -9,7 +9,7 @@ use Rhumsaa\Uuid\Uuid;
 
 interface ResourceRepository
 {
-    public function createNew(Domain $resource, Uuid $uuid, $pattern);
+    public function createNew(Domain $domain, $pattern);
 
     public function findOneByUuid(Domain $domain, Uuid $uuid);
 

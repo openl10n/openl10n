@@ -54,25 +54,21 @@
                     <small>
                       <i class="fa fa-caret-down"></i>
                       <i class="fa fa-caret-right"></i>
-                      ? resources
+                      {{ domain.resources|length }} resources
                     </small>
                   </a>
                 </li>
               </ul>
 
               <ul class="list-unstyled x-list-resources collapse out" id="collapse-{{ domain.name }}">
-                <li>
-                  <a href="#">
-                    <i class="fa fa-file-text-o"></i>
-                    /path/to/{{ domain.name }}.<span class="placeholder">en_GB</span>.yml
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-file-text-o"></i>
-                    /path/to/other/{{ domain.name }}.<span class="placeholder">en_GB</span>.yml
-                  </a>
-                </li>
+                {% for resource in domain.resources %}
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-file-text-o"></i>
+                      {{ resource.pattern|replace({'%locale%': '<span class="placeholder">en_GB</span>'})|raw }}
+                    </a>
+                  </li>
+                {% endfor %}
               </ul>
             </div>
           </li>

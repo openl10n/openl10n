@@ -22,6 +22,11 @@ class ImportTranslationFileAction
     protected $domain;
 
     /**
+     * @var string
+     */
+    protected $resource;
+
+    /**
      * @var UploadedFile
      */
     protected $file;
@@ -60,6 +65,18 @@ class ImportTranslationFileAction
     public function setDomain($domain)
     {
         $this->domain = $domain;
+
+        return $this;
+    }
+
+    public function getResource()
+    {
+        return $this->resource;
+    }
+
+    public function setResource($resource)
+    {
+        $this->resource = $resource;
 
         return $this;
     }

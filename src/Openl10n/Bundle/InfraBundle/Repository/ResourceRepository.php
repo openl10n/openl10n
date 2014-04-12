@@ -4,6 +4,7 @@ namespace Openl10n\Bundle\InfraBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Domain\Translation\Model\Domain;
 use Openl10n\Domain\Translation\Model\Resource;
 use Openl10n\Bundle\InfraBundle\Entity\Resource as ResourceEntity;
 use Openl10n\Domain\Translation\Repository\ResourceRepository as ResourceRepositoryInterface;
@@ -17,9 +18,15 @@ class ResourceRepository extends EntityRepository implements ResourceRepositoryI
      */
     public function createNew(Domain $domain, $pattern)
     {
-        $uuid = new Uuid('abc');
+        return new ResourceEntity(Uuid::uuid1(), $domain, $pattern);
+    }
 
-        return new ResourceEntity($uuid, $domain, $pattern);
+    /**
+     * {@inheritdoc}
+     */
+    public function findByDomain(Domain $domain)
+    {
+        return $this->findBy(['domain' => $domain]);
     }
 
     /**

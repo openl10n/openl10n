@@ -6,14 +6,17 @@ use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Model\Domain;
 use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Domain\Translation\Model\Phrase;
+use Openl10n\Domain\Translation\Model\Resource;
 use Openl10n\Domain\Translation\Specification\TranslationSpecification;
 use Openl10n\Value\Localization\Locale;
 
 interface TranslationRepository
 {
-    public function createNewKey(Domain $domain, $identifier);
+    public function createNewKey(Resource $resource, $identifier);
 
     public function createNewPhrase(Key $key, Locale $locale, $text = '');
+
+    public function findOneByKey(Resource $resource, $identifier);
 
     public function findOneByHash(Project $project, $hash);
 

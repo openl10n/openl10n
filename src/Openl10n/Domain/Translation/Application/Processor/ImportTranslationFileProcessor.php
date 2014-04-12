@@ -4,6 +4,7 @@ namespace Openl10n\Domain\Translation\Application\Processor;
 
 use Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction;
 use Openl10n\Domain\Translation\Repository\DomainRepository;
+use Openl10n\Domain\Translation\Repository\ResourceRepository;
 use Openl10n\Domain\Translation\Repository\TranslationRepository;
 use Openl10n\Domain\Translation\Service\Loader\TranslationLoaderInterface;
 use Openl10n\Domain\Translation\Service\Uploader\FileUploaderInterface;
@@ -20,6 +21,7 @@ class ImportTranslationFileProcessor
     protected $eventDispatcher;
 
     public function __construct(
+        ResourceRepository $resourceRepository,
         DomainRepository $domainRepository,
         TranslationRepository $translationRepository,
         FileUploaderInterface $fileUploader,
@@ -27,6 +29,7 @@ class ImportTranslationFileProcessor
         EventDispatcherInterface $eventDispatcher
     )
     {
+        $this->resourceRepository = $resourceRepository;
         $this->domainRepository = $domainRepository;
         $this->translationRepository = $translationRepository;
         $this->fileUploader = $fileUploader;
@@ -39,6 +42,7 @@ class ImportTranslationFileProcessor
         $project = $action->getProject();
         $locale = Locale::parse($action->getLocale());
         $domainSlug = new Slug($action->getDomain());
+        $resourcePattern = $action->getResource();
 
         // First upload translation file and extract message from it.
         $file = $this->fileUploader->upload($action->getFile());
@@ -52,11 +56,15 @@ class ImportTranslationFileProcessor
             $this->domainRepository->save($domain);
         }
 
+        // Create resource file
+        $resource = $this->resourceRepository->createNew($domain, $resourcePattern);
+        $this->resourceRepository->save($resource);
+
         // Start importing messages
         foreach ($messages as $key => $phrase) {
             $translationKey =
-                $this->translationRepository->findOneByKey($domain, $key) ?:
-                $this->translationRepository->createNewKey($domain, $key)
+                $this->translationRepository->findOneByKey($resource, $key) ?:
+                $this->translationRepository->createNewKey($resource, $key)
             ;
 
             $translationPhrase = $translationKey->getPhrase($locale);

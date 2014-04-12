@@ -4,7 +4,7 @@ namespace Openl10n\Bundle\InfraBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Openl10n\Domain\Project\Model\Project;
-use Openl10n\Domain\Translation\Model\Domain;
+use Openl10n\Domain\Translation\Model\Resource;
 use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Domain\Translation\Model\Phrase;
 use Openl10n\Bundle\InfraBundle\Entity\Key as KeyEntity;
@@ -20,9 +20,9 @@ use Pagerfanta\Pagerfanta;
 
 class TranslationRepository extends EntityRepository implements TranslationRepositoryInterface
 {
-    public function createNewKey(Domain $domain, $identifier)
+    public function createNewKey(Resource $resource, $identifier)
     {
-        return new KeyEntity($domain, $identifier);
+        return new KeyEntity($resource, $identifier);
     }
 
     public function createNewPhrase(Key $key, Locale $locale, $text = '')
@@ -30,16 +30,17 @@ class TranslationRepository extends EntityRepository implements TranslationRepos
         return new PhraseEntity($key, $locale, $text);
     }
 
-    public function findOneByKey(Domain $domain, $identifier)
+    public function findOneByKey(Resource $resource, $identifier)
     {
-        return $this->findOneBy(['domain' => $domain, 'identifier' => $identifier]);
+        return $this->findOneBy(['resource' => $resource, 'identifier' => $identifier]);
     }
 
     public function findOneByHash(Project $project, $hash)
     {
         $queryBuilder = $this->createQueryBuilder('k')
             ->select('k')
-            ->leftJoin('k.domain', 'd')
+            ->leftJoin('k.resource', 'r')
+            ->leftJoin('r.domain', 'd')
             ->where('d.project = :project')
             ->andWhere('k.hash = :hash')
             ->setParameters(array(
