@@ -14,8 +14,8 @@ class LoadKeyData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $key1 = new Key($this->getReference('domain_basic'), 'example.key1');
-        $key2 = new Key($this->getReference('domain_basic'), 'example.key2');
+        $key1 = new Key($this->getReference('domain_basic_res1'), 'example.key1');
+        $key2 = new Key($this->getReference('domain_basic_res1'), 'example.key2');
 
         $this->addReference('key_key1', $key1);
         $this->addReference('key_key2', $key2);
@@ -30,6 +30,6 @@ class LoadKeyData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 3;
+        return 4;
     }
 }

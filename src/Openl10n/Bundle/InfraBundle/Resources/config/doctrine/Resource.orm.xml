@@ -1,0 +1,31 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity
+        table="resources"
+        name="Openl10n\Bundle\InfraBundle\Entity\Resource"
+        repository-class="Openl10n\Bundle\InfraBundle\Repository\ResourceRepository"
+        >
+
+        <id name="uuid" type="string" column="uuid">
+            <generator strategy="NONE" />
+        </id>
+
+        <field name="pattern" column="pattern" type="string" length="255" />
+
+        <many-to-one field="domain" target-entity="Domain">
+            <join-columns>
+                <join-column name="domain_id" referenced-column-name="id" nullable="false" />
+            </join-columns>
+        </many-to-one>
+
+        <!-- <one-to-many field="keys" target-entity="TranslationKey" mapped-by="domain">
+            <cascade>
+                <cascade-persist />
+                <cascade-remove />
+            </cascade>
+        </one-to-many> -->
+    </entity>
+
+</doctrine-mapping>

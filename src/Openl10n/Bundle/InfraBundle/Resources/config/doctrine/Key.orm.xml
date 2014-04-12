@@ -8,11 +8,11 @@
         repository-class="Openl10n\Bundle\InfraBundle\Repository\TranslationRepository"
         >
         <unique-constraints>
-            <unique-constraint name="key_id" columns="domain_id,key_id" />
+            <unique-constraint name="key_id" columns="resource_id,key_id" />
         </unique-constraints>
 
         <indexes>
-            <index name="hash" columns="domain_id,hash"/>
+            <index name="hash" columns="resource_id,hash"/>
         </indexes>
 
         <id name="id" type="integer" column="id">
@@ -22,9 +22,9 @@
         <field name="identifier" column="key_id" type="string" length="255" />
         <field name="hash" column="hash" type="string" length="255" />
 
-        <many-to-one field="domain" target-entity="Domain" inversed-by="keys">
+        <many-to-one field="resource" target-entity="Resource" inversed-by="keys">
             <join-columns>
-                <join-column name="domain_id" referenced-column-name="id" nullable="false" />
+                <join-column name="resource_id" referenced-column-name="uuid" nullable="false" />
             </join-columns>
         </many-to-one>
 

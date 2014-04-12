@@ -2,29 +2,40 @@
 
 namespace Openl10n\Domain\Translation\Model;
 
-use Openl10n\Domain\Project\Model\Project;
+use Rhumsaa\Uuid\Uuid;
 
 class Resource
 {
     /**
-     * @var Project
+     * @var Uuid
      */
-    protected $project;
+    protected $uuid;
+
+    /**
+     * @var Domain
+     */
+    protected $domain;
 
     /**
      * @var string
      */
     protected $pattern;
 
-    public function __construct(Project $project, $pattern)
+    public function __construct(Uuid $uuid, Domain $domain, $pattern)
     {
-        $this->project = $project;
+        $this->uuid = $uuid;
+        $this->domain = $domain;
         $this->pattern = $pattern;
     }
 
-    public function getProject()
+    public function getUuid()
     {
-        return $this->project;
+        return $this->uuid;
+    }
+
+    public function getDomain()
+    {
+        return $this->domain;
     }
 
     public function getPattern()

@@ -8,9 +8,9 @@ use Openl10n\Value\Localization\Locale;
 class Key
 {
     /**
-     * @var Domain
+     * @var Resource
      */
-    protected $domain;
+    protected $resource;
 
     /**
      * @var string
@@ -27,25 +27,25 @@ class Key
      */
     protected $phrases;
 
-    public function __construct(Domain $domain, $identifier)
+    public function __construct(Resource $resource, $identifier)
     {
-        $this->domain = $domain;
+        $this->resource = $resource;
         $this->identifier = $identifier;
 
         // Generate hash
-        $this->hash = sha1($domain->getSlug().'#'.$identifier);
+        $this->hash = sha1($resource->getDomain()->getSlug().'#'.$identifier);
 
         $this->phrases = new ArrayCollection();
     }
 
     /**
-     * The translation domain.
+     * The translation resource.
      *
-     * @return Domain The translation domain
+     * @return Resource The translation resource
      */
-    public function getDomain()
+    public function getResource()
     {
-        return $this->domain;
+        return $this->resource;
     }
 
     /**
