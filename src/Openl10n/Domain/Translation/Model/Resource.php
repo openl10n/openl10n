@@ -7,9 +7,9 @@ use Rhumsaa\Uuid\Uuid;
 class Resource
 {
     /**
-     * @var Uuid
+     * @var int|string
      */
-    protected $uuid;
+    protected $id;
 
     /**
      * @var Domain
@@ -21,16 +21,20 @@ class Resource
      */
     protected $pattern;
 
-    public function __construct(Uuid $uuid, Domain $domain, $pattern)
+    public function __construct(Domain $domain, $pattern)
     {
-        $this->uuid = $uuid;
         $this->domain = $domain;
         $this->pattern = $pattern;
     }
 
-    public function getUuid()
+    /**
+     * Entity identifiant.
+     *
+     * @return int|string
+     */
+    public function getId()
     {
-        return $this->uuid;
+        return $this->id;
     }
 
     public function getDomain()

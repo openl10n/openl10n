@@ -15,13 +15,13 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="locale" column="locale" type="string" length="20" />
-
         <many-to-one field="project" target-entity="Project" inversed-by="languages">
             <join-columns>
                 <join-column name="project_id" referenced-column-name="id" nullable="false" />
             </join-columns>
         </many-to-one>
+
+        <field name="locale" column="locale" type="string" length="20" />
     </entity>
 
 </doctrine-mapping>

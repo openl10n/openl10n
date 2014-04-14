@@ -8,6 +8,11 @@ use Openl10n\Value\Localization\Locale;
 class Key
 {
     /**
+     * @var int|string
+     */
+    protected $id;
+
+    /**
      * @var Resource
      */
     protected $resource;
@@ -33,9 +38,19 @@ class Key
         $this->identifier = $identifier;
 
         // Generate hash
-        $this->hash = sha1($resource->getDomain()->getSlug().'#'.$identifier);
+        $this->hash = sha1(/*$resource->getDomain()->getSlug().*/'#'.$identifier);
 
         $this->phrases = new ArrayCollection();
+    }
+
+    /**
+     * Entity identifiant.
+     *
+     * @return int|string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**

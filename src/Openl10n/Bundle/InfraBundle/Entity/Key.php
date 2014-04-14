@@ -7,5 +7,4 @@ use Openl10n\Value\Localization\Locale;
 
 class Key extends BaseKey
 {
-    private $id;
 }

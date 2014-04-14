@@ -6,6 +6,11 @@ use Openl10n\Value\Localization\Locale;
 
 class Language
 {
+    /**
+     * @var int|string
+     */
+    protected $id;
+
     protected $project;
     protected $locale;
 

@@ -19,14 +19,14 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="identifier" column="key_id" type="string" length="255" />
-        <field name="hash" column="hash" type="string" length="255" />
-
-        <many-to-one field="resource" target-entity="Resource" inversed-by="keys">
+        <many-to-one field="resource" target-entity="Resource">
             <join-columns>
-                <join-column name="resource_id" referenced-column-name="uuid" nullable="false" />
+                <join-column name="resource_id" referenced-column-name="id" nullable="false" />
             </join-columns>
         </many-to-one>
+
+        <field name="identifier" column="key_id" type="string" length="255" />
+        <field name="hash" column="hash" type="string" length="255" />
 
         <one-to-many field="phrases" target-entity="Phrase" mapped-by="key">
             <cascade>

@@ -8,8 +8,8 @@
         repository-class="Openl10n\Bundle\InfraBundle\Repository\ResourceRepository"
         >
 
-        <id name="uuid" type="string" column="uuid">
-            <generator strategy="NONE" />
+        <id name="id" type="string" column="id">
+            <generator strategy="AUTO" />
         </id>
 
         <field name="pattern" column="pattern" type="string" length="255" />

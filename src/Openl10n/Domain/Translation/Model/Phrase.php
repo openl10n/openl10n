@@ -7,6 +7,11 @@ use Openl10n\Value\Localization\Locale;
 class Phrase
 {
     /**
+     * @var int|string
+     */
+    protected $id;
+
+    /**
      * @var Key
      */
     protected $key;

@@ -11,17 +11,17 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="locale" column="locale" type="string" length="255" />
-        <field name="text" column="text" type="text" />
-        <field name="isApproved" column="is_approved" type="boolean" />
-        <field name="createdAt" column="created_at" type="datetime" />
-        <field name="updatedAt" column="updated_at" type="datetime" />
-
         <many-to-one field="key" target-entity="Key" inversed-by="phrases">
             <join-columns>
                 <join-column name="key_id" referenced-column-name="id" nullable="false" />
             </join-columns>
         </many-to-one>
+
+        <field name="locale" column="locale" type="string" length="255" />
+        <field name="text" column="text" type="text" />
+        <field name="isApproved" column="is_approved" type="boolean" />
+        <field name="createdAt" column="created_at" type="datetime" />
+        <field name="updatedAt" column="updated_at" type="datetime" />
     </entity>
 
 </doctrine-mapping>

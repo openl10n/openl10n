@@ -15,6 +15,7 @@ class LoadPhraseData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        return;
         $target1 = new Phrase($this->getReference('key_key1'), Locale::parse('en'));
         $target1
             ->setText('This is a first example')

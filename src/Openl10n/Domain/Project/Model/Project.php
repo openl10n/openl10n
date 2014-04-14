@@ -10,6 +10,11 @@ use Openl10n\Value\String\Slug;
 class Project
 {
     /**
+     * @var int|string
+     */
+    protected $id;
+
+    /**
      * @var Slug
      */
     protected $slug;
@@ -35,6 +40,16 @@ class Project
 
         // Default attributes
         $this->languages = new ArrayCollection();
+    }
+
+    /**
+     * Entity identifiant.
+     *
+     * @return int|string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
