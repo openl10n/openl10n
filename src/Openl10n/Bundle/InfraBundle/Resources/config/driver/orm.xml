@@ -40,11 +40,11 @@
             factory-method="getRepository">
             <argument>Openl10nInfraBundle:Resource</argument>
         </service>
-        <service id="openl10n.repository.domain" class="%openl10n.repository.domain.class%"
+        <!-- <service id="openl10n.repository.domain" class="%openl10n.repository.domain.class%"
             factory-service="doctrine.orm.entity_manager"
             factory-method="getRepository">
             <argument>Openl10nInfraBundle:Domain</argument>
-        </service>
+        </service> -->
         <service id="openl10n.repository.translation" class="%openl10n.repository.translation.class%"
             factory-service="doctrine.orm.entity_manager"
             factory-method="getRepository">

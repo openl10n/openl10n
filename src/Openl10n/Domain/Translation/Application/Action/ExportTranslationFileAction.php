@@ -2,7 +2,7 @@
 
 namespace Openl10n\Domain\Translation\Application\Action;
 
-use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Domain\Translation\Model\Resource;
 
 class ExportTranslationFileAction
 {
@@ -11,19 +11,9 @@ class ExportTranslationFileAction
     const OPTION_FALLBACK_KEY = 'fallback_key';
 
     /**
-     * @var Project
+     * @var Resource
      */
-    private $project;
-
-    /**
-     * @var string
-     */
-    protected $domain;
-
-    /**
-     * @var string
-     */
-    protected $format;
+    protected $resource;
 
     /**
      * @var string
@@ -31,29 +21,34 @@ class ExportTranslationFileAction
     protected $locale;
 
     /**
+     * @var string
+     */
+    protected $format;
+
+    /**
      * @var array
      */
     protected $options;
 
-    public function __construct(Project $project)
+    public function __construct(Resource $resource)
     {
-        $this->project = $project;
+        $this->resource = $resource;
         $this->options = [];
     }
 
-    public function getProject()
+    public function getResource()
     {
-        return $this->project;
+        return $this->resource;
     }
 
-    public function getDomain()
+    public function getLocale()
     {
-        return $this->domain;
+        return $this->locale;
     }
 
-    public function setDomain($domain)
+    public function setLocale($locale)
     {
-        $this->domain = $domain;
+        $this->locale = $locale;
 
         return $this;
     }
@@ -66,18 +61,6 @@ class ExportTranslationFileAction
     public function setFormat($format)
     {
         $this->format = $format;
-
-        return $this;
-    }
-
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-
-    public function setLocale($locale)
-    {
-        $this->locale = $locale;
 
         return $this;
     }

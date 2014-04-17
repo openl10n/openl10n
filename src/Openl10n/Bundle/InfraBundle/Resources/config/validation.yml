@@ -19,13 +19,26 @@ Openl10n\Domain\Project\Application\Action\EditProjectAction:
         defaultLocale:
             - NotBlank: ~
 
+Openl10n\Domain\Translation\Application\Action\CreateResourceAction:
+    properties:
+        file:
+            - NotBlank: ~
+        pathname:
+            - NotBlank: ~
+
+Openl10n\Domain\Translation\Application\Action\ExportTranslationFileAction:
+    properties:
+        locale:
+            - NotBlank: ~
+
 Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction:
     properties:
         file:
             - NotBlank: ~
-        resource:
-            - NotBlank: ~
-        domain:
-            - NotBlank: ~
         locale:
+            - NotBlank: ~
+
+Openl10n\Domain\Translation\Application\Action\UpdateResourceAction:
+    properties:
+        pathname:
             - NotBlank: ~

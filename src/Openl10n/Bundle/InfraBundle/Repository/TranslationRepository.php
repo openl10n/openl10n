@@ -3,15 +3,16 @@
 namespace Openl10n\Bundle\InfraBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Openl10n\Domain\Project\Model\Project;
-use Openl10n\Domain\Translation\Model\Resource;
-use Openl10n\Domain\Translation\Model\Key;
-use Openl10n\Domain\Translation\Model\Phrase;
 use Openl10n\Bundle\InfraBundle\Entity\Key as KeyEntity;
 use Openl10n\Bundle\InfraBundle\Entity\Phrase as PhraseEntity;
-use Openl10n\Domain\Translation\Specification\DoctrineOrmTranslationSpecification;
+use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Domain\Translation\Model\Key;
+use Openl10n\Domain\Translation\Model\Phrase;
+use Openl10n\Domain\Translation\Model\Resource;
 use Openl10n\Domain\Translation\Repository\TranslationRepository as TranslationRepositoryInterface;
+use Openl10n\Domain\Translation\Specification\DoctrineOrmTranslationSpecification;
 use Openl10n\Domain\Translation\Specification\TranslationSpecification;
+use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Slug;
 use Pagerfanta\Adapter\ArrayAdapter;
@@ -20,7 +21,7 @@ use Pagerfanta\Pagerfanta;
 
 class TranslationRepository extends EntityRepository implements TranslationRepositoryInterface
 {
-    public function createNewKey(Resource $resource, $identifier)
+    public function createNewKey(Resource $resource, StringIdentifier $identifier)
     {
         return new KeyEntity($resource, $identifier);
     }
@@ -28,6 +29,11 @@ class TranslationRepository extends EntityRepository implements TranslationRepos
     public function createNewPhrase(Key $key, Locale $locale, $text = '')
     {
         return new PhraseEntity($key, $locale, $text);
+    }
+
+    public function findOneByResource(Resource $resource)
+    {
+        return $this->findBy(['resource' => $resource]);
     }
 
     public function findOneByKey(Resource $resource, $identifier)

@@ -2,11 +2,11 @@
 
 namespace Openl10n\Bundle\InfraBundle\Form\Type;
 
-use Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction;
+use Openl10n\Domain\Translation\Application\Action\CreateResourceAction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class ImportDomainType extends AbstractType
+class CreateResourceType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -18,9 +18,7 @@ class ImportDomainType extends AbstractType
             ->add('pathname', 'text')
             ->add('options', 'choice', array(
                 'choices' => array(
-                    ImportTranslationFileAction::OPTION_REVIEWED => 'Mark translations as reviewed',
-                    ImportTranslationFileAction::OPTION_ERASE => 'Ecrase same values',
-                    ImportTranslationFileAction::OPTION_CLEAN => 'Clean unused values',
+                    CreateResourceAction::OPTION_REVIEWED => 'Mark translations as reviewed',
                 ),
                 'multiple' => true,
                 'expanded' => true,
@@ -33,6 +31,6 @@ class ImportDomainType extends AbstractType
      */
     public function getName()
     {
-        return 'openl10n_import_domain';
+        return 'openl10n_create_resource';
     }
 }

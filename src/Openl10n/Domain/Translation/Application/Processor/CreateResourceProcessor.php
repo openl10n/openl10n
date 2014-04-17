@@ -2,19 +2,16 @@
 
 namespace Openl10n\Domain\Translation\Application\Processor;
 
-use Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction;
-use Openl10n\Domain\Translation\Repository\DomainRepository;
+use Openl10n\Domain\Translation\Application\Action\CreateResourceAction;
 use Openl10n\Domain\Translation\Repository\ResourceRepository;
 use Openl10n\Domain\Translation\Repository\TranslationRepository;
 use Openl10n\Domain\Translation\Service\Loader\TranslationLoaderInterface;
 use Openl10n\Domain\Translation\Service\Uploader\FileUploaderInterface;
 use Openl10n\Domain\Translation\Value\Pathname;
 use Openl10n\Domain\Translation\Value\StringIdentifier;
-use Openl10n\Value\Localization\Locale;
-use Openl10n\Value\String\Slug;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class ImportTranslationFileProcessor
+class CreateResourceProcessor
 {
     protected $domainRepository;
     protected $translationRepository;
@@ -37,37 +34,29 @@ class ImportTranslationFileProcessor
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function execute(ImportTranslationFileAction $action)
+    public function execute(CreateResourceAction $action)
     {
-        $resource = $action->getResource();
-        $locale = Locale::parse($action->getLocale());
+        $project = $action->getProject();
+        $locale = $project->getDefaultLocale();
+        $pathname = new Pathname($action->getPathname());
 
         // First upload translation file and extract message from it.
         $file = $this->fileUploader->upload($action->getFile());
         $catalogue = $this->translationLoader->loadMessages($file, $locale, 'messages');
         $messages = $catalogue->all('messages');
 
+        // Create resource file
+        $resource = $this->resourceRepository->createNew($project, $pathname);
+        $this->resourceRepository->save($resource);
+
         // Start importing messages
         foreach ($messages as $key => $phrase) {
             $identifier = new StringIdentifier($key);
-            $translationKey =
-                $this->translationRepository->findOneByKey($resource, $identifier) ?:
-                $this->translationRepository->createNewKey($resource, $identifier)
-            ;
+            $translationKey = $this->translationRepository->createNewKey($resource, $identifier);
 
-            $translationPhrase = $translationKey->getPhrase($locale);
-
-            if (null === $translationPhrase) {
-                // If phrase doesn't exist, then create a new one and
-                // attach the given text.
-                $translationPhrase = $this->translationRepository->createNewPhrase($translationKey, $locale);
-                $translationKey->addPhrase($translationPhrase);
-                $translationPhrase->setText($phrase);
-            } elseif ($action->hasOptionErase()) {
-                // If phrase already exist, then ecrase text only
-                // if option is declared.
-                $translationPhrase->setText($phrase);
-            }
+            $translationPhrase = $this->translationRepository->createNewPhrase($translationKey, $locale);
+            $translationKey->addPhrase($translationPhrase);
+            $translationPhrase->setText($phrase);
 
             // If reviewed option is set, then automatically mark
             // translation phrase as approved.
@@ -77,19 +66,6 @@ class ImportTranslationFileProcessor
 
             $this->translationRepository->saveKey($translationKey);
             $this->translationRepository->savePhrase($translationPhrase);
-        }
-
-        // If clean option is set, then remove every translations from this
-        // domain which are not present in the file.
-        if ($action->hasOptionClean()) {
-            // $translationKeys = $this->translationRepository->findByDomain($domain);
-            // foreach ($translationKeys as $translationKey) {
-            //     $identifier = $translationKey->getIdentifier();
-
-            //     if (!isset($messages[$identifier])) {
-            //         $this->translationManager->remove($translationKey);
-            //     }
-            // }
         }
 
         // Finally remove temporary file.

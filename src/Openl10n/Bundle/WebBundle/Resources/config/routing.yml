@@ -28,12 +28,21 @@ openl10n_language_delete:
     pattern:  /projects/{slug}/languages/{locale}/delete
     defaults: { _controller: openl10n.controller.language:deleteAction }
 
-openl10n_domain_import:
-    pattern:  /projects/{slug}/import
-    defaults: { _controller: openl10n.controller.domain:importAction }
-openl10n_domain_export:
-    pattern:  /projects/{slug}/export
-    defaults: { _controller: openl10n.controller.domain:exportAction }
+openl10n_resource_list:
+    pattern:  /projects/{project}/resources/
+    defaults: { _controller: openl10n.controller.resource:listAction }
+openl10n_resource_create:
+    pattern:  /projects/{project}/resources/new
+    defaults: { _controller: openl10n.controller.resource:createAction }
+openl10n_resource_update:
+    pattern:  /projects/{project}/resources/{resource}/edit
+    defaults: { _controller: openl10n.controller.resource:updateAction }
+openl10n_resource_import:
+    pattern:  /projects/{project}/resources/{resource}/import
+    defaults: { _controller: openl10n.controller.resource:importAction }
+openl10n_resource_export:
+    pattern:  /projects/{project}/resources/{resource}/export
+    defaults: { _controller: openl10n.controller.resource:exportAction }
 
 openl10n_translation_list:
     pattern:  /projects/{project}/translations/{target}/

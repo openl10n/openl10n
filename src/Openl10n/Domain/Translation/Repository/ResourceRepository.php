@@ -2,6 +2,7 @@
 
 namespace Openl10n\Domain\Translation\Repository;
 
+use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Model\Domain;
 use Openl10n\Domain\Translation\Model\Resource;
 use Openl10n\Domain\Translation\Value\Pathname;

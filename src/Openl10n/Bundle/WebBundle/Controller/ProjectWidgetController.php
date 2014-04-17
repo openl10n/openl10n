@@ -6,26 +6,22 @@ use Openl10n\Bundle\WebBundle\View\DomainView;
 use Openl10n\Bundle\WebBundle\View\ResourceView;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Model\Domain;
+use Openl10n\Domain\Translation\Model\Resource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProjectWidgetController extends Controller
 {
-    public function listDomainsAction(Project $project)
+    public function resourcesAction(Project $project)
     {
-        $domains = $this->get('openl10n.repository.domain')->findByProject($project);
-
-        $resources = [];
-        foreach ($domains as $domain) {
-            $resources[] = $this->get('openl10n.repository.resource')->findByDomain($domain);
-        }
+        $resources = $this->get('openl10n.repository.resource')->findByProject($project);
 
         // Prepare views
-        $domains = array_map([$this, 'prepareDomainView'], $domains, $resources);
+        $resources = array_map([$this, 'prepareResourceView'], $resources);
 
-        return $this->render('Openl10nWebBundle:ProjectWidget:listDomains.html.twig', array(
+        return $this->render('Openl10nWebBundle:ProjectWidget:resources.html.twig', array(
             'project' => $project,
-            'domains' => $domains,
-            //'context' => $context,
+            'resources' => $resources,
         ));
     }
 
@@ -47,19 +43,11 @@ class ProjectWidgetController extends Controller
         ));
     }
 
-    protected function prepareDomainView(Domain $domain, array $resources)
+    protected function prepareResourceView(Resource $resource)
     {
-        $view = new DomainView();
-        $view->slug = (string) $domain->getSlug();
-        $view->name = (string) $domain->getName();
-
-        foreach ($resources as $resource) {
-            $resView = new ResourceView();
-            $resView->uuid = $resource->getUuid();
-            $resView->pattern = $resource->getPattern();
-
-            $view->resources[] = $resView;
-        }
+        $view = new ResourceView();
+        $view->hash = (string) $resource->getHash();
+        $view->pathname = (string) $resource->getPathname();
 
         return $view;
     }

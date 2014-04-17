@@ -2,7 +2,7 @@
 
 namespace Openl10n\Domain\Translation\Application\Action;
 
-use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Domain\Translation\Model\Resource;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImportTranslationFileAction
@@ -12,24 +12,14 @@ class ImportTranslationFileAction
     const OPTION_CLEAN = 'clean';
 
     /**
-     * @var Project
+     * @var Resource
      */
-    private $project;
-
-    /**
-     * @var string
-     */
-    protected $pathname;
+    private $resource;
 
     /**
      * @var UploadedFile
      */
     protected $file;
-
-    /**
-     * @var string
-     */
-    protected $format;
 
     /**
      * @var string
@@ -41,39 +31,15 @@ class ImportTranslationFileAction
      */
     protected $options;
 
-    public function __construct(Project $project)
+    public function __construct(Resource $resource)
     {
-        $this->project = $project;
+        $this->resource = $resource;
         $this->options = [];
-    }
-
-    public function getProject()
-    {
-        return $this->project;
-    }
-
-    public function getDomain()
-    {
-        return $this->domain;
-    }
-
-    public function setDomain($domain)
-    {
-        $this->domain = $domain;
-
-        return $this;
     }
 
     public function getResource()
     {
         return $this->resource;
-    }
-
-    public function setResource($resource)
-    {
-        $this->resource = $resource;
-
-        return $this;
     }
 
     public function getFile()
@@ -84,18 +50,6 @@ class ImportTranslationFileAction
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
-
-        return $this;
-    }
-
-    public function getFormat()
-    {
-        return $this->format;
-    }
-
-    public function setFormat($format)
-    {
-        $this->format = $format;
 
         return $this;
     }

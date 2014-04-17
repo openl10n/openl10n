@@ -3,11 +3,12 @@
 namespace Openl10n\Bundle\InfraBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Openl10n\Bundle\InfraBundle\Entity\Resource as ResourceEntity;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Model\Domain;
 use Openl10n\Domain\Translation\Model\Resource;
-use Openl10n\Bundle\InfraBundle\Entity\Resource as ResourceEntity;
 use Openl10n\Domain\Translation\Repository\ResourceRepository as ResourceRepositoryInterface;
+use Openl10n\Domain\Translation\Value\Pathname;
 use Openl10n\Value\String\Slug;
 use Rhumsaa\Uuid\Uuid;
 
@@ -16,25 +17,25 @@ class ResourceRepository extends EntityRepository implements ResourceRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function createNew(Domain $domain, $pattern)
+    public function createNew(Project $project, Pathname $pathname)
     {
-        return new ResourceEntity($domain, $pattern);
+        return new ResourceEntity($project, $pathname);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findByDomain(Domain $domain)
+    public function findByProject(Project $project)
     {
-        return $this->findBy(['domain' => $domain]);
+        return $this->findBy(['project' => $project]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findOneByPathname(Domain $domain, Uuid $uuid)
+    public function findOneByHash(Project $project, $hash)
     {
-        return $this->findOneBy(['domain' => $domain, 'uuid' => $uuid]);
+        return $this->findOneBy(['project' => $project, 'hash' => $hash]);
     }
 
     /**

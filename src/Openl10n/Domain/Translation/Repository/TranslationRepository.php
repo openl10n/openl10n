@@ -8,11 +8,12 @@ use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Domain\Translation\Model\Phrase;
 use Openl10n\Domain\Translation\Model\Resource;
 use Openl10n\Domain\Translation\Specification\TranslationSpecification;
+use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;
 
 interface TranslationRepository
 {
-    public function createNewKey(Resource $resource, $identifier);
+    public function createNewKey(Resource $resource, StringIdentifier $identifier);
 
     public function createNewPhrase(Key $key, Locale $locale, $text = '');
 

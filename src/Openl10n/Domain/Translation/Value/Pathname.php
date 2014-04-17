@@ -8,6 +8,10 @@ class Pathname
 
     public function __construct($value)
     {
+        if (empty($value)) {
+            throw new \InvalidArgumentException('Pathname can not be empty');
+        }
+
         $this->value = ltrim($value, '/');
     }
 

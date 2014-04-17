@@ -22,6 +22,11 @@ class Resource
      */
     protected $hash;
 
+    public static function hash(Pathname $pathname)
+    {
+        return sha1((string) $pathname);
+    }
+
     public function __construct(Project $project, Pathname $pathname)
     {
         $this->project = $project;
@@ -58,6 +63,6 @@ class Resource
 
     private function computeHash()
     {
-        $this->hash = sha1((string) $this->pathname);
+        $this->hash = self::hash($this->pathname);
     }
 }

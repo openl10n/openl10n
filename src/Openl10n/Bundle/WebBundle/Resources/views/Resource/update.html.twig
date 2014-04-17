@@ -1,28 +1,24 @@
 {% extends '@Openl10nWeb/Project/layout.html.twig' %}
 
-{% set active_menu = 'import' %}
+{% set active_menu = 'resources' %}
 
 {% block settings_content %}
   <div class="row">
     <div class="col-sm-12">
       <h3 class="title title-md title-underlined">
-        Import translations in {{ project.name }}
+        Edit resource
       </h3>
     </div>
     <div class="col-sm-8">
-      <form action="{{ path('openl10n_domain_import', {'slug': project.slug}) }}" method="POST" {{ form_enctype(form) }} novalidate>
+      <form action="{{ path('openl10n_resource_update', {project: project.slug, resource: resource.hash}) }}" method="POST" {{ form_enctype(form) }} novalidate>
 
           <div>
-            {{ form_row(form.file) }}
-
-            {{ form_row(form.pathname) }}
-
-            {{ form_rest(form) }}
+            {{ form_widget(form) }}
           </div>
 
           <div>
             <button type="submit" class="btn btn-primary">
-              Import
+              Submit
             </button>
           </div>
       </form>

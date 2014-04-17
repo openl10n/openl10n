@@ -9,6 +9,7 @@
         <parameter key="openl10n.controller.project.class">Openl10n\Bundle\WebBundle\Controller\ProjectController</parameter>
         <parameter key="openl10n.controller.language.class">Openl10n\Bundle\WebBundle\Controller\LanguageController</parameter>
         <parameter key="openl10n.controller.domain.class">Openl10n\Bundle\WebBundle\Controller\DomainController</parameter>
+        <parameter key="openl10n.controller.resource.class">Openl10n\Bundle\WebBundle\Controller\ResourceController</parameter>
         <parameter key="openl10n.controller.translation.class">Openl10n\Bundle\WebBundle\Controller\TranslationController</parameter>
     </parameters>
 
@@ -22,6 +23,7 @@
         <service id="openl10n.controller.homepage" class="%openl10n.controller.homepage.class%" parent="openl10n.controller" />
         <service id="openl10n.controller.project" class="%openl10n.controller.project.class%" parent="openl10n.controller" />
         <service id="openl10n.controller.domain" class="%openl10n.controller.domain.class%" parent="openl10n.controller" />
+        <service id="openl10n.controller.resource" class="%openl10n.controller.resource.class%" parent="openl10n.controller" />
         <service id="openl10n.controller.language" class="%openl10n.controller.language.class%" parent="openl10n.controller" />
         <service id="openl10n.controller.translation" class="%openl10n.controller.translation.class%" parent="openl10n.controller" />
     </services>
