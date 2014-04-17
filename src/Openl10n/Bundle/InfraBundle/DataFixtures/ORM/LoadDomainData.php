@@ -15,6 +15,8 @@ class LoadDomainData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        return;
+
         $basic = new Domain($this->getReference('project_tuto'), new Slug('basic'));
         $advanced = new Domain($this->getReference('project_tuto'), new Slug('advanced'));
 

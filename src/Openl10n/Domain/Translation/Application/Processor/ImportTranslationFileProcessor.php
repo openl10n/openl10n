@@ -22,7 +22,6 @@ class ImportTranslationFileProcessor
 
     public function __construct(
         ResourceRepository $resourceRepository,
-        DomainRepository $domainRepository,
         TranslationRepository $translationRepository,
         FileUploaderInterface $fileUploader,
         TranslationLoaderInterface $translationLoader,
@@ -30,7 +29,6 @@ class ImportTranslationFileProcessor
     )
     {
         $this->resourceRepository = $resourceRepository;
-        $this->domainRepository = $domainRepository;
         $this->translationRepository = $translationRepository;
         $this->fileUploader = $fileUploader;
         $this->translationLoader = $translationLoader;

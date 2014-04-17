@@ -4,16 +4,41 @@ namespace Openl10n\Domain\Translation\Repository;
 
 use Openl10n\Domain\Translation\Model\Domain;
 use Openl10n\Domain\Translation\Model\Resource;
-use Openl10n\Value\String\Slug;
-use Rhumsaa\Uuid\Uuid;
+use Openl10n\Domain\Translation\Value\Pathname;
 
 interface ResourceRepository
 {
-    public function createNew(Domain $domain, $pattern);
+    /**
+     * @param Project  $project
+     * @param Pathname $pathname
+     *
+     * @return Resource
+     */
+    public function createNew(Project $project, Pathname $pathname);
 
-    public function findOneByUuid(Domain $domain, Uuid $uuid);
+    /**
+     * @param Project  $project
+     * @param Pathname $pathname
+     *
+     * @return Resource[]
+     */
+    public function findByProject(Project $project);
 
+    /**
+     * @param Project $project
+     * @param string  $hash
+     *
+     * @return Resource|null
+     */
+    public function findOneByHash(Project $project, $hash);
+
+    /**
+     * @param Resource $resource
+     */
     public function save(Resource $resource);
 
+    /**
+     * @param Resource $resource
+     */
     public function remove(Resource $resource);
 }

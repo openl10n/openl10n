@@ -9,11 +9,6 @@ use Openl10n\Value\String\Slug;
 class Domain
 {
     /**
-     * @var int|string
-     */
-    protected $id;
-
-    /**
      * @var Project
      */
     protected $project;
@@ -33,16 +28,6 @@ class Domain
         $this->project = $project;
         $this->slug = $slug;
         $this->name = new Name((string) $slug);
-    }
-
-    /**
-     * Entity identifiant.
-     *
-     * @return int|string
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

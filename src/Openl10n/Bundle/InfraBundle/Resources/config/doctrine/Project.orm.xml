@@ -7,6 +7,7 @@
         name="Openl10n\Bundle\InfraBundle\Entity\Project"
         repository-class="Openl10n\Bundle\InfraBundle\Repository\ProjectRepository"
         >
+
         <unique-constraints>
             <unique-constraint name="slug" columns="slug" />
         </unique-constraints>
@@ -15,9 +16,9 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="slug" column="slug" type="string" length="255" />
-        <field name="name" column="name" type="string" length="255" />
-        <field name="defaultLocale" column="default_locale" type="string" length="64" />
+        <field name="slug" column="slug" type="string" length="64" />
+        <field name="name" column="name" type="string" length="64" />
+        <field name="defaultLocale" column="default_locale" type="string" length="8" />
 
         <one-to-many field="languages" target-entity="Language" mapped-by="project">
             <cascade>

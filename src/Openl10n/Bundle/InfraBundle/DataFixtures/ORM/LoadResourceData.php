@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Openl10n\Bundle\InfraBundle\Entity\Resource;
+use Openl10n\Domain\Translation\Value\Pathname;
 use Openl10n\Value\String\Slug;
 
 class LoadResourceData extends AbstractFixture implements OrderedFixtureInterface
@@ -15,14 +16,14 @@ class LoadResourceData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        $res1 = new Resource(
-            $this->getReference('domain_basic'),
-            'locales/basic.%locale%.yml'
+        $res = new Resource(
+            $this->getReference('project_demo'),
+            new Pathname('locales/default.en.yml')
         );
 
-        $this->addReference('domain_basic_res1', $res1);
+        $this->addReference('resource_default', $res);
 
-        $manager->persist($res1);
+        $manager->persist($res);
         $manager->flush();
     }
 
@@ -31,6 +32,6 @@ class LoadResourceData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function getOrder()
     {
-        return 3;
+        return 2;
     }
 }

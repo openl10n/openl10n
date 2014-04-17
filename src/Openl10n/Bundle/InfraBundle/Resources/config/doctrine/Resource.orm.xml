@@ -8,17 +8,22 @@
         repository-class="Openl10n\Bundle\InfraBundle\Repository\ResourceRepository"
         >
 
-        <id name="id" type="string" column="id">
+        <unique-constraints>
+            <unique-constraint name="idx_hash" columns="project_id,hash" />
+        </unique-constraints>
+
+        <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="pattern" column="pattern" type="string" length="255" />
-
-        <many-to-one field="domain" target-entity="Domain">
+        <many-to-one field="project" target-entity="Project">
             <join-columns>
-                <join-column name="domain_id" referenced-column-name="id" nullable="false" />
+                <join-column name="project_id" referenced-column-name="id" nullable="false" />
             </join-columns>
         </many-to-one>
+
+        <field name="pathname" column="pathname" type="string" length="255" />
+        <field name="hash" column="hash" type="string" length="40" />
 
         <!-- <one-to-many field="keys" target-entity="TranslationKey" mapped-by="domain">
             <cascade>

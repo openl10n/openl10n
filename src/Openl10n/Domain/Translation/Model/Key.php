@@ -3,22 +3,18 @@
 namespace Openl10n\Domain\Translation\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;
 
 class Key
 {
-    /**
-     * @var int|string
-     */
-    protected $id;
-
     /**
      * @var Resource
      */
     protected $resource;
 
     /**
-     * @var string
+     * @var StringIdentifier
      */
     protected $identifier;
 
@@ -28,29 +24,18 @@ class Key
     protected $hash;
 
     /**
-     * @var array
+     * @var ArrayCollection
      */
     protected $phrases;
 
-    public function __construct(Resource $resource, $identifier)
+    public function __construct(Resource $resource, StringIdentifier $identifier)
     {
         $this->resource = $resource;
         $this->identifier = $identifier;
 
-        // Generate hash
-        $this->hash = sha1(/*$resource->getDomain()->getSlug().*/'#'.$identifier);
+        $this->computeHash();
 
         $this->phrases = new ArrayCollection();
-    }
-
-    /**
-     * Entity identifiant.
-     *
-     * @return int|string
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -69,29 +54,11 @@ class Key
      * This is an unique identifier of the translation in its domain.
      * Once set, the key can not be updated.
      *
-     * @return string The key identifier
+     * @return StringIdentifier The key identifier
      */
     public function getIdentifier()
     {
         return $this->identifier;
-    }
-
-    /**
-     * The translation hash.
-     *
-     * The hash is an unique identifier of the translation in the whole
-     * project. Usually, the hash combines the domain's slug (which is
-     * unique in the project), and the its own key (which is unique in
-     * the domain).
-     *
-     * As the key and domain are immutable, the hash must be set during
-     * object construction and never updated.
-     *
-     * @return string The translation hash.
-     */
-    public function getHash()
-    {
-        return $this->hash;
     }
 
     /**
@@ -152,11 +119,8 @@ class Key
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
+    private function computeHash()
     {
-        return $this->getIdentifier();
+        $this->hash = sha1((string) $this->identifier);
     }
 }

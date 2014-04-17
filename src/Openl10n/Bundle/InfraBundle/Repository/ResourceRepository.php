@@ -18,7 +18,7 @@ class ResourceRepository extends EntityRepository implements ResourceRepositoryI
      */
     public function createNew(Domain $domain, $pattern)
     {
-        return new ResourceEntity(Uuid::uuid1(), $domain, $pattern);
+        return new ResourceEntity($domain, $pattern);
     }
 
     /**
@@ -32,9 +32,9 @@ class ResourceRepository extends EntityRepository implements ResourceRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function findOneByUuid(Domain $domain, Uuid $uuid)
+    public function findOneByPathname(Domain $domain, Uuid $uuid)
     {
-        return $this->findBy(['domain' => $domain, 'uuid' => $uuid]);
+        return $this->findOneBy(['domain' => $domain, 'uuid' => $uuid]);
     }
 
     /**

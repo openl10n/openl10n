@@ -19,12 +19,7 @@ class ImportTranslationFileAction
     /**
      * @var string
      */
-    protected $domain;
-
-    /**
-     * @var string
-     */
-    protected $resource;
+    protected $pathname;
 
     /**
      * @var UploadedFile

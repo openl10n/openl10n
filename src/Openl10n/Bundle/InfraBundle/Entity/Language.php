@@ -7,6 +7,8 @@ use Openl10n\Value\Localization\Locale;
 
 class Language extends BaseLanguage
 {
+    private $id;
+
     public function getLocale()
     {
         if (!$this->locale instanceof Locale) {

@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Openl10n\Bundle\InfraBundle\Entity\Key;
+use Openl10n\Domain\Translation\Value\StringIdentifier;
 
 class LoadKeyData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -14,8 +15,8 @@ class LoadKeyData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $key1 = new Key($this->getReference('domain_basic_res1'), 'example.key1');
-        $key2 = new Key($this->getReference('domain_basic_res1'), 'example.key2');
+        $key1 = new Key($this->getReference('resource_default'), new StringIdentifier('example.key1'));
+        $key2 = new Key($this->getReference('resource_default'), new StringIdentifier('example.key2'));
 
         $this->addReference('key_key1', $key1);
         $this->addReference('key_key2', $key2);
@@ -30,6 +31,6 @@ class LoadKeyData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 4;
+        return 3;
     }
 }

@@ -2,55 +2,62 @@
 
 namespace Openl10n\Domain\Translation\Model;
 
-use Rhumsaa\Uuid\Uuid;
+use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Domain\Translation\Value\Pathname;
 
 class Resource
 {
     /**
-     * @var int|string
+     * @var Project
      */
-    protected $id;
+    protected $project;
 
     /**
-     * @var Domain
+     * @var Pathname
      */
-    protected $domain;
+    protected $pathname;
 
     /**
      * @var string
      */
-    protected $pattern;
+    protected $hash;
 
-    public function __construct(Domain $domain, $pattern)
+    public function __construct(Project $project, Pathname $pathname)
     {
-        $this->domain = $domain;
-        $this->pattern = $pattern;
+        $this->project = $project;
+        $this->pathname = $pathname;
+
+        $this->computeHash();
+    }
+
+    public function getProject()
+    {
+        return $this->project;
     }
 
     /**
-     * Entity identifiant.
-     *
-     * @return int|string
+     * @return string
      */
-    public function getId()
+    public function getHash()
     {
-        return $this->id;
+        return $this->hash;
     }
 
-    public function getDomain()
+    public function getPathname()
     {
-        return $this->domain;
+        return $this->pathname;
     }
 
-    public function getPattern()
+    public function setPathname(Pathname $pathname)
     {
-        return $this->pattern;
-    }
-
-    public function setPattern($pattern)
-    {
-        $this->pattern = $pattern;
+        $this->pathname = $pathname;
+        $this->computeHash();
 
         return $this;
+    }
+
+    private function computeHash()
+    {
+        $this->hash = sha1((string) $this->pathname);
     }
 }
