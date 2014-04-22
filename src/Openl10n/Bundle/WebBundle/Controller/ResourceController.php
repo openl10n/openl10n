@@ -84,6 +84,8 @@ class ResourceController extends Controller
         $resource = $this->findResourceOr404($project, $resource);
 
         $action = new ImportTranslationFileAction($resource);
+        $action->setLocale((string) $project->getDefaultLocale());
+
         $form = $this->createForm('openl10n_import_translation_file', $action);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {

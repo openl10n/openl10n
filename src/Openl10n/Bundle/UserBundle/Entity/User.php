@@ -6,5 +6,4 @@ use Openl10n\Domain\User\Model\User as BaseUser;
 
 class User extends BaseUser
 {
-    private $id;
 }

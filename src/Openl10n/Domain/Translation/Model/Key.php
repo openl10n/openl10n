@@ -9,6 +9,16 @@ use Openl10n\Value\Localization\Locale;
 class Key
 {
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * @var Project
+     */
+    protected $project;
+
+    /**
      * @var Resource
      */
     protected $resource;
@@ -30,12 +40,31 @@ class Key
 
     public function __construct(Resource $resource, StringIdentifier $identifier)
     {
+        $this->project = $resource->getProject();
         $this->resource = $resource;
         $this->identifier = $identifier;
 
         $this->computeHash();
 
         $this->phrases = new ArrayCollection();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * The project where belong the translation .
+     *
+     * @return Project The project
+     */
+    public function getProject()
+    {
+        return $this->project;
     }
 
     /**

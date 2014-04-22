@@ -10,6 +10,11 @@ use Openl10n\Value\String\Slug;
 class Project
 {
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
      * @var Slug
      */
     protected $slug;

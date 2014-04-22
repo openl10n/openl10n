@@ -8,6 +8,11 @@ use Openl10n\Domain\Translation\Value\Pathname;
 class Resource
 {
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
      * @var Project
      */
     protected $project;
@@ -33,6 +38,14 @@ class Resource
         $this->pathname = $pathname;
 
         $this->computeHash();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getProject()

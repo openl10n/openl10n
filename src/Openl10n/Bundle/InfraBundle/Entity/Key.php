@@ -6,5 +6,4 @@ use Openl10n\Domain\Translation\Model\Key as BaseKey;
 
 class Key extends BaseKey
 {
-    private $id;
 }

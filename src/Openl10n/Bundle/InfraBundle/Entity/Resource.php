@@ -6,5 +6,4 @@ use Openl10n\Domain\Translation\Model\Resource as BaseResource;
 
 class Resource extends BaseResource
 {
-    private $id;
 }

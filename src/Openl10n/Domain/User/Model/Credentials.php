@@ -6,6 +6,11 @@ use Openl10n\Domain\User\Model\User;
 
 class Credentials
 {
+    /**
+     * @var int
+     */
+    protected $id;
+
     protected $user;
     protected $password;
     protected $salt;

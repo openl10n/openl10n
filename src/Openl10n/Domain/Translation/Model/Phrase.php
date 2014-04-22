@@ -7,6 +7,11 @@ use Openl10n\Value\Localization\Locale;
 class Phrase
 {
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
      * @var Key
      */
     protected $key;
@@ -53,6 +58,14 @@ class Phrase
         $this->isApproved = false;
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
