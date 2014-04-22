@@ -31,7 +31,7 @@ interface ResourceRepository
      *
      * @return Resource|null
      */
-    public function findOneByHash(Project $project, $hash);
+    public function findOneById(Project $project, $id);
 
     /**
      * @param Resource $resource

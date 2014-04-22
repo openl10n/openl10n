@@ -10,7 +10,7 @@
       </h3>
     </div>
     <div class="col-sm-8">
-      <form action="{{ path('openl10n_resource_export', {project: project.slug, resource: resource.hash}) }}" method="POST" {{ form_enctype(form) }} novalidate>
+      <form action="{{ path('openl10n_resource_export', {project: project.slug, resource: resource.id}) }}" method="POST" {{ form_enctype(form) }} novalidate>
 
           <div>
             {{ form_row(form.locale) }}

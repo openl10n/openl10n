@@ -19,10 +19,10 @@
             <span>
               {{ resource.pathname }}
               (
-                <a href="{{ path('openl10n_resource_update', {project: project.slug, resource: resource.hash}) }}">
+                <a href="{{ path('openl10n_resource_update', {project: project.slug, resource: resource.id}) }}">
                   edit
                 </a> -
-                <a href="{{ path('openl10n_resource_import', {project: project.slug, resource: resource.hash}) }}">
+                <a href="{{ path('openl10n_resource_import', {project: project.slug, resource: resource.id}) }}">
                   import
                 </a>
               )

@@ -138,12 +138,12 @@ class ResourceController extends Controller
         return $project;
     }
 
-    protected function findResourceOr404(Project $project, $hash)
+    protected function findResourceOr404(Project $project, $id)
     {
-        $resource = $this->get('openl10n.repository.resource')->findOneByHash($project, $hash);
+        $resource = $this->get('openl10n.repository.resource')->findOneById($project, $id);
 
         if (null === $resource) {
-            throw $this->createNotFoundException(sprintf('Unable to find resource with hash "%s"', $hash));
+            throw $this->createNotFoundException(sprintf('Unable to find resource with id "%s"', $id));
         }
 
         return $resource;
@@ -152,6 +152,7 @@ class ResourceController extends Controller
     protected function prepareResourceView(Resource $resource)
     {
         $view = new ResourceView();
+        $view->id = (string) $resource->getId();
         $view->hash = (string) $resource->getHash();
         $view->pathname = (string) $resource->getPathname();
 

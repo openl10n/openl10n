@@ -33,9 +33,9 @@ class ResourceRepository extends EntityRepository implements ResourceRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function findOneByHash(Project $project, $hash)
+    public function findOneById(Project $project, $id)
     {
-        return $this->findOneBy(['project' => $project, 'hash' => $hash]);
+        return $this->findOneBy(['project' => $project, 'id' => $id]);
     }
 
     /**
