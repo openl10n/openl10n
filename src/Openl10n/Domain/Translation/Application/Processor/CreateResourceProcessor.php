@@ -40,14 +40,16 @@ class CreateResourceProcessor
         $locale = $project->getDefaultLocale();
         $pathname = new Pathname($action->getPathname());
 
+        // Create resource file
+        $resource = $this->resourceRepository->createNew($project, $pathname);
+        $this->resourceRepository->save($resource);
+
+        return $resource;
+
         // First upload translation file and extract message from it.
         $file = $this->fileUploader->upload($action->getFile());
         $catalogue = $this->translationLoader->loadMessages($file, $locale, 'messages');
         $messages = $catalogue->all('messages');
-
-        // Create resource file
-        $resource = $this->resourceRepository->createNew($project, $pathname);
-        $this->resourceRepository->save($resource);
 
         // Start importing messages
         foreach ($messages as $key => $phrase) {

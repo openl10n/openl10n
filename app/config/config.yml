@@ -79,6 +79,7 @@ fos_rest:
     param_fetcher_listener: true
     routing_loader:
         default_format: json
+        include_format: false
     view:
         view_response_listener: force
         serialize_null: true
@@ -91,9 +92,15 @@ fos_rest:
         rules:
             -
                 path: /api
-                #default_priorities: ['json', html, '*/*']
+                priorities: ['application/json', '*/*']
                 fallback_format: json
                 prefer_extension: true
+            -
+                path: '^/'
+                priorities: [ 'text/html', '*/*']
+                fallback_format: html
+                prefer_extension: true
+
 
 sensio_framework_extra:
     view:    { annotations: false }

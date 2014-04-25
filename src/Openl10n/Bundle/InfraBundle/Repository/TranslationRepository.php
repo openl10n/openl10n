@@ -31,9 +31,14 @@ class TranslationRepository extends EntityRepository implements TranslationRepos
         return new PhraseEntity($key, $locale, $text);
     }
 
-    public function findOneByResource(Resource $resource)
+    public function findByResource(Resource $resource)
     {
         return $this->findBy(['resource' => $resource]);
+    }
+
+    public function findOneById(Project $project, $id)
+    {
+        return $this->findOneBy(['project' => $project, 'id' => $id]);
     }
 
     public function findOneByKey(Resource $resource, $identifier)
