@@ -2,9 +2,9 @@
     "name": "openl10n/openl10n",
     "license": "MIT",
     "type": "project",
-    "description": "The OpenLocalization web site",
+    "description": "The OpenLocalization web app",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": { "Openl10n": "src/" }
     },
     "authors": [
         {
@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4",
         "symfony/symfony": "~2.4",
         "doctrine/orm": "~2.4",
         "doctrine/doctrine-bundle": "~1.2",
@@ -28,9 +28,9 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "*",
-        "friendsofsymfony/rest-bundle": "~0.13",
+        "friendsofsymfony/rest-bundle": "~1.4",
         "jms/serializer-bundle": "~0.12",
-        "friendsofsymfony/jsrouting-bundle": "~1.1",
+        "friendsofsymfony/jsrouting-bundle": "~1.5",
         "pagerfanta/pagerfanta": "~1.0",
         "rhumsaa/uuid": "~2.7"
     },
@@ -43,6 +43,8 @@
         "behat/mink-goutte-driver":     "*",
         "phpspec/phpspec":              "2.0.*@dev"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -62,7 +64,6 @@
     "config": {
         "bin-dir": "bin"
     },
-    "minimum-stability": "dev",
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",

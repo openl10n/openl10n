@@ -73,7 +73,8 @@ swiftmailer:
 
 # REST Configuration
 fos_rest:
-    #body_listener: false
+    body_listener:
+        array_normalizer: fos_rest.normalizer.camel_keys
     allowed_methods_listener: true
     param_fetcher_listener: true
     routing_loader:
@@ -87,9 +88,12 @@ fos_rest:
         templating_formats:
             html: false
     format_listener:
-        default_priorities: ['json', html, '*/*']
-        fallback_format: json
-        prefer_extension: true
+        rules:
+            -
+                path: /api
+                #default_priorities: ['json', html, '*/*']
+                fallback_format: json
+                prefer_extension: true
 
 sensio_framework_extra:
     view:    { annotations: false }
