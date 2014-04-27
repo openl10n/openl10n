@@ -39,8 +39,8 @@ class CustomTranslationSpecification implements DoctrineOrmTranslationSpecificat
             ->addSelect('s, t')
             ->leftJoin('k.phrases', 's', Expr\Join::WITH, 's.locale = :source')
             ->leftJoin('k.phrases', 't', Expr\Join::WITH, 't.locale = :target')
-            ->leftJoin('k.domain', 'd')
-            ->andWhere('d.project = :project')
+            //->leftJoin('k.domain', 'd')
+            ->andWhere('k.project = :project')
             ->orderBy('k.identifier', 'ASC')
             ->setParameters(array(
                 'project' => $this->project,
