@@ -18,7 +18,7 @@ class TranslationPhrase
     public $text;
 
     /**
-     * @Serializer\Type("string")
+     * @Serializer\Type("boolean")
      */
     protected $isApproved;
 

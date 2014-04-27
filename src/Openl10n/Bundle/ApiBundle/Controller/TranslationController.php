@@ -7,10 +7,11 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
 use Openl10n\Bundle\ApiBundle\Facade\Resource as ResourceFacade;
-use Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase as TranslationPhraseFacade;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationKey as TranslationKeyFacade;
+use Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase as TranslationPhraseFacade;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Application\Action\CreateResourceAction;
+use Openl10n\Domain\Translation\Application\Action\EditTranslationPhraseAction;
 use Openl10n\Domain\Translation\Application\Action\UpdateResourceAction;
 use Openl10n\Domain\Translation\Model\Resource;
 use Openl10n\Value\Localization\Locale;
@@ -26,7 +27,7 @@ class TranslationController extends Controller implements ClassResourceInterface
      */
     public function cgetAction($project)
     {
-        // TODO (?)
+        // TODO (?) get all keys
     }
 
     /**
@@ -45,7 +46,7 @@ class TranslationController extends Controller implements ClassResourceInterface
      */
     public function cpostAction(Request $request, $project)
     {
-        // TODO (?)
+        // TODO (?) create new key
     }
 
     /**
@@ -93,7 +94,22 @@ class TranslationController extends Controller implements ClassResourceInterface
      */
     public function postPhrasesAction(Request $request, $project, $translation, $locale)
     {
-        // TODO
+        $project = $this->findProjectOr404($project);
+        $translation = $this->findTranslationOr404($project, $translation);
+        $locale = Locale::parse($locale);
+
+        $action = new EditTranslationPhraseAction($translation, $locale);
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_translation', $action, array(
+            'csrf_protection' => false
+        ));
+
+        if ($form->submit($request->request->all())->isValid()) {
+            $this->get('openl10n.processor.edit_translation')->execute($action);
+
+            return new Response('', 204);
+        }
+
+        return View::create($form, 400);
     }
 
     /**
@@ -101,7 +117,7 @@ class TranslationController extends Controller implements ClassResourceInterface
      */
     public function putPhrasesAction(Request $request, $project, $translation, $locale)
     {
-        // TODO
+        return $this->postPhrasesAction($request, $project, $translation, $locale);
     }
 
     /**
