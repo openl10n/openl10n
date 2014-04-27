@@ -10,11 +10,14 @@ use Openl10n\Bundle\ApiBundle\Facade\Resource as ResourceFacade;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationKey as TranslationKeyFacade;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Application\Action\CreateResourceAction;
+use Openl10n\Domain\Translation\Application\Action\ExportTranslationFileAction;
+use Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction;
 use Openl10n\Domain\Translation\Application\Action\UpdateResourceAction;
 use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Domain\Translation\Model\Resource;
 use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -119,19 +122,57 @@ class ResourceController extends Controller implements ClassResourceInterface
     }
 
     /**
+     * @Rest\Post
      * @Rest\View
      */
-    public function putImportAction(Request $request, $project, $resource)
+    public function importAction(Request $request, $project, $resource)
     {
-        // TODO
+        $project = $this->findProjectOr404($project);
+        $resource = $this->findResourceOr404($project, $resource);
+
+        $action = new ImportTranslationFileAction($resource);
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_import_translation_file', $action, array(
+            'csrf_protection' => false
+        ));
+
+        if ($form->handleRequest($request)->isValid()) {
+            $this->get('openl10n.processor.import_translation_file')->execute($action);
+
+            return new Response('', 204);
+        }
+
+        return View::create($form, 400);
     }
 
     /**
      * @Rest\View
      */
-    public function getExportAction(Request $request, $project, $resource)
+    public function putImportAction(Request $request, $project, $resource)
     {
-        // TODO
+        return $this->importAction($request, $project, $resource);
+    }
+
+    /**
+     * @Rest\Get
+     * @Rest\View
+     */
+    public function exportAction(Request $request, $project, $resource)
+    {
+        $project = $this->findProjectOr404($project);
+        $resource = $this->findResourceOr404($project, $resource);
+
+        $action = new ExportTranslationFileAction($resource);
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_export_translation_file', $action, array(
+            'csrf_protection' => false
+        ));
+
+        if ($form->submit($request->query->all())->isValid()) {
+            $file = $this->get('openl10n.processor.export_translation_file')->execute($action);
+
+            return new BinaryFileResponse($file);
+        }
+
+        return View::create($form, 400);
     }
 
     protected function findProjectOr404($slug)

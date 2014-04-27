@@ -36,8 +36,7 @@ class ExportTranslationFileProcessor
         $project = $resource->getProject();
 
         $locale = Locale::parse($action->getLocale());
-        //$format = $action->getFormat();
-        $format = pathinfo($resource->getPathname(), PATHINFO_EXTENSION);
+        $format = $action->getFormat() ?: pathinfo($resource->getPathname(), PATHINFO_EXTENSION);
 
         // Dump translations has a messages array according to given options
         $translations = $this->translationRepository->findByResource($resource);

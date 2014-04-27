@@ -49,9 +49,9 @@ class ExportTranslationFileType extends AbstractType
                     ))
                 ;
             })
-            // ->add('format', 'choice', array(
-            //     'choices' => $this->getFormats()
-            // ))
+            ->add('format', 'choice', array(
+                'choices' => $this->getFormats()
+            ))
             ->add('options', 'choice', array(
                 'choices' => array(
                     ExportTranslationFileAction::OPTION_REVIEWED => 'Only export reviewed translations',
@@ -70,5 +70,15 @@ class ExportTranslationFileType extends AbstractType
     public function getName()
     {
         return 'openl10n_export_translation_file';
+    }
+
+    protected function getFormats()
+    {
+        $formats = $this->translationDumper->getFormats();
+        $values = array_map(function($format) {
+            return '.'.$format;
+        }, $formats);
+
+        return array_combine($formats, $values);
     }
 }
