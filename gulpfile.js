@@ -41,7 +41,7 @@ gulp.task('build', ['clean'], function() {
 // Watch
 //
 gulp.task('watch', function() {
-  gulp.watch(srcDir + '/scripts/**/*.js', ['scripts']);
+  gulp.watch(srcDir + '/scripts/**/*.{js,tpl}', ['scripts']);
 
   gulp.watch(srcDir + '/styles/**/*.scss', ['styles']);
 

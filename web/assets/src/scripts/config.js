@@ -11,6 +11,7 @@ require.config({
     'marionette': '../vendor/marionette/lib/core/amd/backbone.marionette',
     'underscore': '../vendor/underscore/underscore',
     'text': '../vendor/requirejs-text/text',
+    'tpl': '../vendor/requirejs-tpl/tpl',
     'json': '../vendor/requirejs-plugins/src/json',
   },
   shim: {

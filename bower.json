@@ -20,6 +20,7 @@
     "marionette": "~1.6.4",
     "underscore": "~1.6.0",
     "requirejs-plugins": "~1.0.2",
-    "requirejs-text": "~2.0.10"
+    "requirejs-text": "~2.0.10",
+    "requirejs-tpl": "*"
   }
 }

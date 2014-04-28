@@ -23,6 +23,10 @@ security:
             http_basic:
                 realm: "API access"
 
+        app:
+            pattern:    ^/app
+            security: false
+
         main:
             pattern:    ^/
             form_login:

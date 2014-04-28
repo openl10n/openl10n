@@ -8,6 +8,7 @@ use Openl10n\Domain\Project\Model\Project as ProjectModel;
 class Project
 {
     /**
+     * @Serializer\SerializedName("id")
      * @Serializer\Type("string")
      */
     public $slug;

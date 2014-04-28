@@ -15,10 +15,6 @@
   });
 
   require(['config'], function () {
-    {% if module %}
-      require(['default/init', '{{ module }}']);
-    {% else %}
-      require(['default/init']);
-    {% endif %}
+    require(['init']);
   });
 </script>
