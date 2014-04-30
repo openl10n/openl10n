@@ -1,21 +1,7 @@
-.panel {
-  border-radius: 2px;
-
-  &.project-card {
-    display: block;
-
-    &:hover {
-      background: #F2F2F2;
-    }
-  }
-
-  &.domain-card {
-    display: block;
-
-    &:hover {
-      background: #F2F2F2;
-    }
-  }
+.panel-default {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #E1E1E1;
 }
 
 .panel-flat {

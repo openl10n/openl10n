@@ -10,17 +10,17 @@
   ],
   "dependencies": {
     "bootstrap-sass-official": "~3.1.1",
-    "bourbon": "~3.1.8",
     "bootstrap": "~3.1.1",
+    "bourbon": "~3.1.8",
     "requirejs": "~2.1.11",
     "requirejs-domready": "~2.0.1",
     "font-awesome": "~4.0.3",
     "string": "~1.8.0",
     "backbone": "~1.1.2",
-    "marionette": "~1.6.4",
+    "marionette": "~1.8.3",
     "underscore": "~1.6.0",
     "requirejs-plugins": "~1.0.2",
     "requirejs-text": "~2.0.10",
-    "requirejs-tpl": "*"
+    "requirejs-tpl-jfparadis": "*"
   }
 }

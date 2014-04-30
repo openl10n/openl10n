@@ -11,7 +11,8 @@
       fos_routing: {
         exports: 'fos.Router'
       }
-    }
+    },
+    urlArgs: "bust=" + (new Date()).getTime()
   });
 
   require(['config'], function () {

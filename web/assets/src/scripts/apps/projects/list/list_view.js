@@ -1,6 +1,6 @@
 define(['app',
-  'tpl!apps/projects/list/templates/layout.tpl',
-  'tpl!apps/projects/list/templates/project_item.tpl',
+  'tpl!apps/projects/list/templates/layout',
+  'tpl!apps/projects/list/templates/project_item',
 ], function(app, layoutTpl, itemTpl) {
 
   app.module('ProjectsApp.List.View', function(View, app, Backbone, Marionette, $, _){

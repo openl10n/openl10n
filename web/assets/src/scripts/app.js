@@ -18,7 +18,10 @@ define([
 
   // Initialize application
   app.addInitializer(function(options) {
-    require(['apps/projects/projects_app'], function () {
+    require([
+      'apps/projects/projects_app',
+      'apps/resources/resources_app'
+    ], function () {
       // Start history
       if (!Backbone.history.started) {
         Backbone.history.start({pushState: false});

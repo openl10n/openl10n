@@ -1,21 +1,7 @@
-<div class="ol-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div>
-          <h2 class="title title-lg">
-            Projects
-          </h2>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container">
+<div class="container margin-top-md">
   <div class="row">
 
-    <div class="col-md-4 hidden-xs hidden-sm">
+    <div class="col-md-4">
       <div class="panel panel-default">
         <div class="panel-body">
 
@@ -39,6 +25,10 @@
 
     <div class="col-md-8">
       <div class="row">
+        <div class="col-md-12">
+          <h2 class="title title-xlg">Projects</h2>
+        </div>
+
         <div id="project-list"></div>
       </div>
     </div>

@@ -5,8 +5,13 @@ body {
   height: 100%;
 }
 
+body {
+  background-color: #f8f8f8;
+}
+
 .page-wrapper {
-  padding-top: 70px; /* 50px (navbar) + 20px margin */
+  //padding-top: 70px; /* 50px (navbar) + 20px margin */
+  padding-top: 50px;
 }
 
 a:hover {
@@ -32,6 +37,10 @@ a:hover {
   }
 }
 
+// .container-fullwidth {
+//   padding: 0;
+// }
+
 @import "components/badges";
 @import "components/buttons";
 @import "components/flag";
@@ -46,3 +55,4 @@ a:hover {
 @import "components/tooltip";
 @import "components/typography";
 @import "components/util";
+@import "page";
