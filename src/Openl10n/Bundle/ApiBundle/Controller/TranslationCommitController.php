@@ -4,6 +4,7 @@ namespace Openl10n\Bundle\ApiBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationCommit as TranslationCommitFacade;
@@ -22,14 +23,15 @@ use Symfony\Component\HttpFoundation\Response;
 class TranslationCommitController extends Controller implements ClassResourceInterface
 {
     /**
-     * @Rest\View
      * @Rest\Get("/translation_commits/{source}/{target}")
+     * @Rest\QueryParam(name="project", strict=true, nullable=false)
+     * @Rest\View
      */
-    public function cgetAction(Request $request, $project, $source, $target)
+    public function cgetAction(ParamFetcher $paramFetcher, Request $request, $source, $target)
     {
         $source = Locale::parse($source);
         $target = Locale::parse($target);
-        $project = $this->findProjectOr404($project);
+        $project = $this->findProjectOr404($paramFetcher->get('project'));
 
         $specification = new CustomTranslationSpecification($project, $source, $target);
 
@@ -66,10 +68,9 @@ class TranslationCommitController extends Controller implements ClassResourceInt
      * @Rest\View
      * @Rest\Get("/translation_commits/{source}/{target}/{translation}")
      */
-    public function getAction($project, $source, $target, $translation)
+    public function getAction($source, $target, $translation)
     {
-        $project = $this->findProjectOr404($project);
-        $translation = $this->get('openl10n.repository.translation')->findOneById($project, $translation);
+        $translation = $this->get('openl10n.repository.translation')->find($translation);
 
         $source = Locale::parse($source);
         $target = Locale::parse($target);

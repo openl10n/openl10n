@@ -17,14 +17,11 @@ resource:
 translation:
     type: rest
     resource: Openl10n\Bundle\ApiBundle\Controller\TranslationController
-    parent: project
     name_prefix: openl10n_api_
 
 translation_commit:
     type: rest
     resource: Openl10n\Bundle\ApiBundle\Controller\TranslationCommitController
-    parent: project
-    prefix: /projects/{project} # because parent doen't work here for manual definition
     name_prefix: openl10n_api_
 
 # domain:

@@ -25,7 +25,7 @@ class TranslationController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function cgetAction($project)
+    public function cgetAction()
     {
         // TODO (?) get all keys
     }
@@ -33,10 +33,9 @@ class TranslationController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function getAction($project, $translation)
+    public function getAction($translation)
     {
-        $project = $this->findProjectOr404($project);
-        $translation = $this->findTranslationOr404($project, $translation);
+        $translation = $this->findTranslationOr404($translation);
 
         return new TranslationKeyFacade($translation);
     }
@@ -52,10 +51,9 @@ class TranslationController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function cgetPhrasesAction(Request $request, $project, $translation)
+    public function cgetPhrasesAction(Request $request, $translation)
     {
-        $project = $this->findProjectOr404($project);
-        $translation = $this->findTranslationOr404($project, $translation);
+        $translation = $this->findTranslationOr404($translation);
 
         $facade = new TranslationKeyFacade($translation);
         $facade->phrases = [];
@@ -71,10 +69,9 @@ class TranslationController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function getPhrasesAction(Request $request, $project, $translation, $locale)
+    public function getPhrasesAction(Request $request, $translation, $locale)
     {
-        $project = $this->findProjectOr404($project);
-        $translation = $this->findTranslationOr404($project, $translation);
+        $translation = $this->findTranslationOr404($translation);
 
         $phrase = $translation->getPhrase(Locale::parse($locale));
 
@@ -92,10 +89,9 @@ class TranslationController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function postPhrasesAction(Request $request, $project, $translation, $locale)
+    public function postPhrasesAction(Request $request, $translation, $locale)
     {
-        $project = $this->findProjectOr404($project);
-        $translation = $this->findTranslationOr404($project, $translation);
+        $translation = $this->findTranslationOr404($translation);
         $locale = Locale::parse($locale);
 
         $action = new EditTranslationPhraseAction($translation, $locale);
@@ -115,37 +111,14 @@ class TranslationController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function putPhrasesAction(Request $request, $project, $translation, $locale)
+    public function putPhrasesAction(Request $request, $translation, $locale)
     {
-        return $this->postPhrasesAction($request, $project, $translation, $locale);
+        return $this->postPhrasesAction($request, $translation, $locale);
     }
 
-    /**
-     * Find a project by its slug.
-     *
-     * @param string $slug The project slug
-     *
-     * @return ProjectInterface The project
-     *
-     * @throws NotFoundHttpException If the project is not found
-     */
-    protected function findProjectOr404($slug)
+    protected function findTranslationOr404($id)
     {
-        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug($slug));
-
-        if (null === $project) {
-            throw $this->createNotFoundException(sprintf(
-                'Unable to find project with slug "%s"',
-                $slug
-            ));
-        }
-
-        return $project;
-    }
-
-    protected function findTranslationOr404(Project $project, $id)
-    {
-        $translation = $this->get('openl10n.repository.translation')->findOneById($project, $id);
+        $translation = $this->get('openl10n.repository.translation')->find($id);
 
         if (null === $translation) {
             throw $this->createNotFoundException(sprintf(
