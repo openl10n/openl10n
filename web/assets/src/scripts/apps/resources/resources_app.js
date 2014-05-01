@@ -27,7 +27,7 @@ define(['app'], function(app) {
     var API = {
       listResources: function(projectId) {
         require(['apps/resources/list/list_controller'], function(ListController) {
-          executeAction(ListController.listResources, [projectId]);
+          executeAction(ListController.listResources, projectId);
         });
       },
     };

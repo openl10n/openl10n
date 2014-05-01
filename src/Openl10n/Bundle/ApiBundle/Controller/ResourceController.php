@@ -4,6 +4,7 @@ namespace Openl10n\Bundle\ApiBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
 use Openl10n\Bundle\ApiBundle\Facade\Resource as ResourceFacade;
@@ -24,11 +25,12 @@ use Symfony\Component\HttpFoundation\Response;
 class ResourceController extends Controller implements ClassResourceInterface
 {
     /**
+     * @Rest\QueryParam(name="project", strict=true, nullable=false)
      * @Rest\View
      */
-    public function cgetAction($project)
+    public function cgetAction(ParamFetcher $paramFetcher)
     {
-        $project = $this->findProjectOr404($project);
+        $project = $this->findProjectOr404($paramFetcher->get('project'));
         $resources = $this->get('openl10n.repository.resource')->findByProject($project);
 
         return (new ArrayCollection($resources))->map(function(Resource $resource) {
@@ -39,10 +41,9 @@ class ResourceController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function getAction($project, $resource)
+    public function getAction($resource)
     {
-        $project = $this->findProjectOr404($project);
-        $resource = $this->get('openl10n.repository.resource')->findOneById($project, $resource);
+        $resource = $this->findResourceOr404($resource);
 
         return new ResourceFacade($resource);
     }
@@ -50,11 +51,9 @@ class ResourceController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function cpostAction(Request $request, $project)
+    public function cpostAction(Request $request)
     {
-        $project = $this->findProjectOr404($project);
-
-        $action = new CreateResourceAction($project);
+        $action = new CreateResourceAction();
         $form = $this->get('form.factory')->createNamed('', 'openl10n_create_resource', $action, array(
             'csrf_protection' => false
         ));
@@ -62,9 +61,8 @@ class ResourceController extends Controller implements ClassResourceInterface
         if ($form->handleRequest($request)->isValid()) {
             $resource = $this->get('openl10n.processor.create_resource')->execute($action);
             $url = $this->generateUrl(
-                'openl10n_api_get_project_resource',
+                'openl10n_api_get_resource',
                 array(
-                    'project' => (string) $project->getSlug(),
                     'resource' => $resource->getId(),
                 ),
                 true // absolute
@@ -79,10 +77,9 @@ class ResourceController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function putAction(Request $request, $project, $resource)
+    public function putAction(Request $request, $resource)
     {
-        $project = $this->findProjectOr404($project);
-        $resource = $this->findResourceOr404($project, $resource);
+        $resource = $this->findResourceOr404($resource);
 
         $action = new UpdateResourceAction($resource);
         $form = $this->get('form.factory')->createNamed('', 'openl10n_update_resource', $action, array(
@@ -101,7 +98,7 @@ class ResourceController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View(statusCode=204)
      */
-    public function deleteAction(Request $request, $project, $resource)
+    public function deleteAction(Request $request, $resource)
     {
         // TODO
     }
@@ -109,10 +106,9 @@ class ResourceController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function getTranslationsAction(Request $request, $project, $resource)
+    public function getTranslationsAction(Request $request, $resource)
     {
-        $project = $this->findProjectOr404($project);
-        $resource = $this->findResourceOr404($project, $resource);
+        $resource = $this->findResourceOr404($resource);
 
         $translations = $this->get('openl10n.repository.translation')->findByResource($resource);
 
@@ -125,10 +121,9 @@ class ResourceController extends Controller implements ClassResourceInterface
      * @Rest\Post
      * @Rest\View
      */
-    public function importAction(Request $request, $project, $resource)
+    public function importAction(Request $request, $resource)
     {
-        $project = $this->findProjectOr404($project);
-        $resource = $this->findResourceOr404($project, $resource);
+        $resource = $this->findResourceOr404($resource);
 
         $action = new ImportTranslationFileAction($resource);
         $form = $this->get('form.factory')->createNamed('', 'openl10n_import_translation_file', $action, array(
@@ -147,19 +142,18 @@ class ResourceController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function putImportAction(Request $request, $project, $resource)
+    public function putImportAction(Request $request, $resource)
     {
-        return $this->importAction($request, $project, $resource);
+        return $this->importAction($request, $resource);
     }
 
     /**
      * @Rest\Get
      * @Rest\View
      */
-    public function exportAction(Request $request, $project, $resource)
+    public function exportAction(Request $request, $resource)
     {
-        $project = $this->findProjectOr404($project);
-        $resource = $this->findResourceOr404($project, $resource);
+        $resource = $this->findResourceOr404($resource);
 
         $action = new ExportTranslationFileAction($resource);
         $form = $this->get('form.factory')->createNamed('', 'openl10n_export_translation_file', $action, array(
@@ -189,9 +183,9 @@ class ResourceController extends Controller implements ClassResourceInterface
         return $project;
     }
 
-    protected function findResourceOr404(Project $project, $id)
+    protected function findResourceOr404($id)
     {
-        $resource = $this->get('openl10n.repository.resource')->findOneById($project, $id);
+        $resource = $this->get('openl10n.repository.resource')->find($id);
 
         if (null === $resource) {
             throw $this->createNotFoundException(sprintf(

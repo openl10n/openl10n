@@ -63,6 +63,7 @@
         </service>
 
         <service id="openl10n.form.type.create_resource" class="%openl10n.form.type.create_resource.class%">
+            <argument type="service" id="openl10n.repository.project" />
             <tag name="form.type" alias="openl10n_create_resource" />
         </service>
         <service id="openl10n.form.type.update_resource" class="%openl10n.form.type.update_resource.class%">

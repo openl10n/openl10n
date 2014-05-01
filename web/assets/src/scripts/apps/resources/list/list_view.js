@@ -33,8 +33,6 @@ define(['app',
         var $window = $(window);
         var $el = this.$el;
         function updateBlockHeight() {
-          console.log('updateBlockHeight');
-          console.log($el);
           var height = $window.height() - $el.offset().top;
           $el.height(height);
         }

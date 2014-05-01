@@ -7,10 +7,9 @@ use Openl10n\Domain\Translation\Model\Resource as ResourceModel;
 
 class Resource
 {
-    /**
-     * xSerializer\Type("int")
-     */
     public $id;
+
+    public $project;
 
     /**
      * @Serializer\Type("string")
@@ -20,6 +19,7 @@ class Resource
     public function __construct(ResourceModel $resource)
     {
         $this->id = $resource->getId();
+        $this->project = (string) $resource->getProject()->getSlug();
         $this->pathname = (string) $resource->getPathname();
     }
 }

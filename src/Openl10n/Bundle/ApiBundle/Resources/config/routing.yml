@@ -12,7 +12,6 @@ language:
 resource:
     type: rest
     resource: Openl10n\Bundle\ApiBundle\Controller\ResourceController
-    parent: project
     name_prefix: openl10n_api_
 
 translation:

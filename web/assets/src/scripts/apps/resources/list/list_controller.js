@@ -11,7 +11,7 @@ define(['app', 'apps/resources/list/list_view'], function(app, View) {
 
 
         require(['entities/resource'], function() {
-          var fetchingResources = app.request('resource:entities', [projectId]);
+          var fetchingResources = app.request('resource:entities', projectId);
 
           $.when(fetchingResources).done(function(resources) {
             console.log(resources);

@@ -21,6 +21,8 @@ Openl10n\Domain\Project\Application\Action\EditProjectAction:
 
 Openl10n\Domain\Translation\Application\Action\CreateResourceAction:
     properties:
+        project:
+            - NotBlank: ~
         # file:
         #     - NotBlank: ~
         pathname:

@@ -5,8 +5,7 @@ define([
   app.module('Entities', function(Entities, app, Backbone, Marionette, $, _) {
     Entities.Resource = Backbone.Model.extend({
       url: function() {
-        return backendRouter.generate('openl10n_api_get_project_resource', {
-          'project': this.id,
+        return backendRouter.generate('openl10n_api_get_resource', {
           'resource': this.id
         });
       },
@@ -18,7 +17,7 @@ define([
 
     Entities.ResourceCollection = Backbone.Collection.extend({
       url: function() {
-        return backendRouter.generate('openl10n_api_get_project_resources', {
+        return backendRouter.generate('openl10n_api_get_resources', {
           project: this.projectId
         });
       },
@@ -26,7 +25,6 @@ define([
       initialize: function(models, options) {
         //options = options || {};
         this.projectId = options.projectId;
-        console.log('projectId=' + this.projectId);
       },
 
       model: Entities.Resource,

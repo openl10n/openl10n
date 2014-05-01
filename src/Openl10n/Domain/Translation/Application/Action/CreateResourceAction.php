@@ -12,7 +12,7 @@ class CreateResourceAction
     /**
      * @var Project
      */
-    private $project;
+    protected $project;
 
     /**
      * @var UploadedFile
@@ -29,15 +29,19 @@ class CreateResourceAction
      */
     protected $options;
 
-    public function __construct(Project $project)
+    public function __construct()
     {
-        $this->project = $project;
         $this->options = [];
     }
 
     public function getProject()
     {
         return $this->project;
+    }
+
+    public function setProject(Project $project)
+    {
+        $this->project = $project;
     }
 
     public function getPathname()
