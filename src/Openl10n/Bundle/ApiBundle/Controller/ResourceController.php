@@ -60,15 +60,15 @@ class ResourceController extends Controller implements ClassResourceInterface
 
         if ($form->handleRequest($request)->isValid()) {
             $resource = $this->get('openl10n.processor.create_resource')->execute($action);
+            $facade = new ResourceFacade($resource);
+
             $url = $this->generateUrl(
                 'openl10n_api_get_resource',
-                array(
-                    'resource' => $resource->getId(),
-                ),
+                ['resource' => $resource->getId()],
                 true // absolute
             );
 
-            return new Response('', 201, array('Location' => $url));
+            return View::create($facade, 201, ['Location' => $url]);
         }
 
         return View::create($form, 400);
@@ -88,8 +88,9 @@ class ResourceController extends Controller implements ClassResourceInterface
 
         if ($form->submit($request->request->all(), false)->isValid()) {
             $resource = $this->get('openl10n.processor.update_resource')->execute($action);
+            $facade = new ResourceFacade($resource);
 
-            return new Response('', 204);
+            return View::create($facade, 204);
         }
 
         return View::create($form, 400);
