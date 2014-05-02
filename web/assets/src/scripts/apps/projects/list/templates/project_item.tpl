@@ -26,6 +26,11 @@
       <div class="x-project-list--item--meta">
         <ul class="list-inline">
           <li>
+            <i class="fa fa-globe"></i>
+            3 languages
+          </li>
+
+          <li>
             <i class="fa fa-rocket"></i>
             78%
           </li>
