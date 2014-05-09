@@ -1,3 +1,6 @@
+fos_js:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 openl10n_api:
     type: rest
     resource: "@Openl10nApiBundle/Resources/config/routing.yml"
@@ -5,14 +8,11 @@ openl10n_api:
     options:
         expose: true
 
-fos_js:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-
-# Last route: match all possible pattern
+# Last route: match all possible patterns
 openl10n_index:
     pattern:  /{path}
     requirements:
-        path: ".*"
+        path: "^(?!(api)/).*"
     defaults:
         _controller: FrameworkBundle:Template:template
         template: Openl10nWebBundle::index.html.twig
