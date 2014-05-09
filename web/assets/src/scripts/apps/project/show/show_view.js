@@ -3,8 +3,9 @@ define(['app',
   'tpl!apps/project/show/templates/project_title',
   'tpl!apps/project/show/templates/resource_item',
   'tpl!apps/project/show/templates/language_item',
-  'tpl!apps/project/show/templates/stats'
-], function(app, layoutTpl, projectTitleTpl, resourceItemTpl, languageItemTpl, statsTpl) {
+  'tpl!apps/project/show/templates/stats',
+  'apps/config/data/locale_helper'
+], function(app, layoutTpl, projectTitleTpl, resourceItemTpl, languageItemTpl, statsTpl, localeHelper) {
 
   app.module('ProjectApp.Show.View', function(View, app, Backbone, Marionette, $, _){
     View.Layout = Marionette.Layout.extend({
@@ -48,6 +49,12 @@ define(['app',
     View.LanguageItem = Marionette.ItemView.extend({
       template: languageItemTpl,
       tagName: "li",
+
+      templateHelpers: {
+        region_code: function(locale) {
+          return localeHelper.getRegion(locale).toLowerCase();
+        }
+      },
     });
 
     View.LanguageList = Marionette.CollectionView.extend({

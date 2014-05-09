@@ -1,6 +1,6 @@
 <div>
   <p class="main">
-    <span class="flag flag-gb"></span>
+    <span class="flag flag-<%= region_code(locale) %>"></span>
     <a href="#">
       <%- name %>
     </a>
