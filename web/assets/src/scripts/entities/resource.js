@@ -18,21 +18,21 @@ define([
     Entities.ResourceCollection = Backbone.Collection.extend({
       url: function() {
         return backendRouter.generate('openl10n_api_get_resources', {
-          project: this.projectId
+          project: this.projectSlug
         });
       },
 
       initialize: function(models, options) {
         //options = options || {};
-        this.projectId = options.projectId;
+        this.projectSlug = options.projectSlug;
       },
 
       model: Entities.Resource,
     });
 
     var API = {
-      getResourceEntities: function(projectId) {
-        var projects = new Entities.ResourceCollection([], {projectId: projectId});
+      getResourceEntities: function(projectSlug) {
+        var projects = new Entities.ResourceCollection([], {projectSlug: projectSlug});
         var defer = $.Deferred();
 
         projects.fetch({
@@ -53,9 +53,9 @@ define([
         return promise;
       },
 
-      getResourceEntity: function(projectId, resourceId) {
+      getResourceEntity: function(projectSlug, resourceId) {
         return null;
-        var project = new Entities.Resource({id: projectId});
+        var project = new Entities.Resource({id: projectSlug});
         var defer = $.Deferred();
 
         project.fetch({
@@ -71,8 +71,8 @@ define([
       }
     };
 
-    app.reqres.setHandler('resource:entities', function(projectId) {
-      return API.getResourceEntities(projectId);
+    app.reqres.setHandler('resource:entities', function(projectSlug) {
+      return API.getResourceEntities(projectSlug);
     });
 
     app.reqres.setHandler('resource:entity', function(id) {
@@ -83,6 +83,4 @@ define([
       return new Entities.Resource();
     });
   });
-
-  return;
 });

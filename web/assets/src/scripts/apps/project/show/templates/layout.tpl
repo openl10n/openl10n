@@ -21,50 +21,6 @@
         </div>
 
         <ul id="languages-list" class="x-project-show--languages-list list-unstyled" style="height:590px">
-          <li class="active">
-            <div>
-              <p class="main">
-                <span class="flag flag-gb"></span>
-                <a href="#">
-                  English
-                </a>
-              </p>
-
-              <p class="meta">
-                42% translated – 12% reviewed
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div>
-              <p class="main">
-                <span class="flag flag-fr"></span>
-                <a href="#">
-                  French
-                </a>
-              </p>
-
-              <p class="meta">
-                22% translated – 0% reviewed
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div>
-              <p class="main">
-                <span class="flag flag-es"></span>
-                <a href="#">
-                  Spanish
-                </a>
-              </p>
-
-              <p class="meta">
-                10% translated – 0% reviewed
-              </p>
-            </div>
-          </li>
         </ul>
       </div>
     </div>

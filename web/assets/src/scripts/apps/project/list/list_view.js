@@ -1,9 +1,9 @@
 define(['app',
-  'tpl!apps/projects/list/templates/layout',
-  'tpl!apps/projects/list/templates/project_item',
+  'tpl!apps/project/list/templates/layout',
+  'tpl!apps/project/list/templates/project_item',
 ], function(app, layoutTpl, itemTpl) {
 
-  app.module('ProjectsApp.List.View', function(View, app, Backbone, Marionette, $, _){
+  app.module('ProjectApp.List.View', function(View, app, Backbone, Marionette, $, _){
     View.Layout = Marionette.Layout.extend({
       template: layoutTpl,
 
@@ -21,5 +21,5 @@ define(['app',
     });
   });
 
-  return app.ProjectsApp.List.View;
+  return app.ProjectApp.List.View;
 });

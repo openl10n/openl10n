@@ -1,5 +1,5 @@
-define(['app', 'apps/projects/list/list_view'], function(app, View) {
-  app.module('ProjectsApp.List', function(List, app, Backbone, Marionette, $, _) {
+define(['app', 'apps/project/list/list_view'], function(app, View) {
+  app.module('ProjectApp.List', function(List, app, Backbone, Marionette, $, _) {
     List.Controller = {
       listProjects: function() {
         var layout = new View.Layout();
@@ -9,16 +9,13 @@ define(['app', 'apps/projects/list/list_view'], function(app, View) {
           var fetchingProjects = app.request('project:entities');
 
           $.when(fetchingProjects).done(function(projects) {
-            console.log(projects);
-
             var view = new View.List({collection: projects});
             layout.projectListRegion.show(view);
-
           });
         });
       }
     }
   });
 
-  return app.ProjectsApp.List.Controller;
+  return app.ProjectApp.List.Controller;
 });

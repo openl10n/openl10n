@@ -1,15 +1,16 @@
 define(['app',
-  'tpl!apps/resources/list/templates/layout',
-  'tpl!apps/resources/list/templates/resource_item',
-  'tpl!apps/resources/list/templates/language_item',
-  'tpl!apps/resources/list/templates/stats'
+  'tpl!apps/project/show/templates/layout',
+  'tpl!apps/project/show/templates/resource_item',
+  'tpl!apps/project/show/templates/language_item',
+  'tpl!apps/project/show/templates/stats'
 ], function(app, layoutTpl, resourceItemTpl, languageItemTpl, statsTpl) {
 
-  app.module('ResourcesApp.List.View', function(View, app, Backbone, Marionette, $, _){
+  app.module('ProjectApp.Show.View', function(View, app, Backbone, Marionette, $, _){
     View.Layout = Marionette.Layout.extend({
       template: layoutTpl,
 
       regions: {
+        languageListRegion: '#languages-list',
         resourceListRegion: '#resource-list',
         statsRegion: '#stats',
       }
@@ -24,6 +25,17 @@ define(['app',
       itemView: View.ResourceItem,
       tagName: "ul",
       className: "list-unstyled",
+    });
+
+    View.LanguageItem = Marionette.ItemView.extend({
+      template: languageItemTpl,
+      tagName: "li",
+    });
+
+    View.LanguageList = Marionette.CollectionView.extend({
+      itemView: View.LanguageItem,
+      tagName: "ul",
+      className: "x-project-show--languages-list list-unstyled",
     });
 
     View.Stats = Marionette.ItemView.extend({
@@ -42,5 +54,5 @@ define(['app',
     });
   });
 
-  return app.ResourcesApp.List.View;
+  return app.ProjectApp.Show.View;
 });

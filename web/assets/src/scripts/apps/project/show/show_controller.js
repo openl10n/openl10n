@@ -1,0 +1,34 @@
+define(['app', 'apps/project/show/show_view'], function(app, View) {
+  app.module('ProjectApp.Show', function(Show, app, Backbone, Marionette, $, _) {
+    Show.Controller = {
+      showProject: function(projectSlug) {
+        var layout = new View.Layout();
+        app.mainRegion.show(layout);
+
+        var statsView = new View.Stats();
+        layout.statsRegion.show(statsView);
+
+        require(['entities/resource'], function() {
+          var fetchingResources = app.request('resource:entities', projectSlug);
+
+          $.when(fetchingResources).done(function(resources) {
+            var resourcesView = new View.ResourceList({collection: resources});
+            layout.resourceListRegion.show(resourcesView);
+          });
+        });
+
+        require(['entities/language'], function() {
+          var fetchingLanguages = app.request('language:entities', projectSlug);
+
+          $.when(fetchingLanguages).done(function(languages) {
+
+            var languagesView = new View.LanguageList({collection: languages});
+            layout.languageListRegion.show(languagesView);
+          });
+        });
+      }
+    }
+  });
+
+  return app.ProjectApp.Show.Controller;
+});

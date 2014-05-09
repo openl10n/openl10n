@@ -19,8 +19,7 @@ define([
   // Initialize application
   app.addInitializer(function(options) {
     require([
-      'apps/projects/projects_app',
-      'apps/resources/resources_app'
+      'apps/project/project_app',
     ], function () {
       // Start history
       if (!Backbone.history.started) {
@@ -28,7 +27,7 @@ define([
       }
 
       if (app.getCurrentRoute() === '') {
-        app.trigger('projects:list');
+        app.trigger('project:list');
       }
     });
   });
