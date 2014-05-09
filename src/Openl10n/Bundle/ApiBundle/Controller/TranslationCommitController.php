@@ -13,7 +13,7 @@ use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Application\Action\CreateResourceAction;
 use Openl10n\Domain\Translation\Application\Action\UpdateResourceAction;
 use Openl10n\Domain\Translation\Model\Key;
-use Openl10n\Domain\Translation\Model\Resource;
+use Openl10n\Domain\Resource\Model\Resource;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

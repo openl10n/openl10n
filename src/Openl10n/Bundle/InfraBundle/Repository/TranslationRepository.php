@@ -8,7 +8,7 @@ use Openl10n\Bundle\InfraBundle\Entity\Phrase as PhraseEntity;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Domain\Translation\Model\Phrase;
-use Openl10n\Domain\Translation\Model\Resource;
+use Openl10n\Domain\Resource\Model\Resource;
 use Openl10n\Domain\Translation\Repository\TranslationRepository as TranslationRepositoryInterface;
 use Openl10n\Domain\Translation\Specification\DoctrineOrmTranslationSpecification;
 use Openl10n\Domain\Translation\Specification\TranslationSpecification;

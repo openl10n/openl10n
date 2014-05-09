@@ -1,6 +1,6 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Service\Loader;
+namespace Openl10n\Domain\Resource\Service\Loader;
 
 use Symfony\Component\Translation\Loader\LoaderInterface;
 

@@ -1,16 +1,15 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Application\Processor;
+namespace Openl10n\Domain\Resource\Application\Processor;
 
-use Openl10n\Domain\Translation\Application\Action\ExportTranslationFileAction;
+use Openl10n\Domain\Resource\Application\Action\ExportTranslationFileAction;
+use Openl10n\Domain\Resource\Service\Dumper\TranslationDumperInterface;
+use Openl10n\Domain\Translation\Repository\TranslationRepository;
+use Openl10n\Value\Localization\Locale;
+use Openl10n\Value\String\Slug;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Translation\MessageCatalogue;
-use Openl10n\Value\String\Slug;
-use Openl10n\Value\Localization\Locale;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Openl10n\Domain\Translation\Repository\DomainRepository;
-use Openl10n\Domain\Translation\Repository\TranslationRepository;
-use Openl10n\Domain\Translation\Service\Dumper\TranslationDumperInterface;
 
 class ExportTranslationFileProcessor
 {

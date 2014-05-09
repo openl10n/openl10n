@@ -1,14 +1,12 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Application\Processor;
+namespace Openl10n\Domain\Resource\Application\Processor;
 
-use Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction;
-use Openl10n\Domain\Translation\Repository\DomainRepository;
-use Openl10n\Domain\Translation\Repository\ResourceRepository;
+use Openl10n\Domain\Resource\Application\Action\ImportTranslationFileAction;
+use Openl10n\Domain\Resource\Service\Loader\TranslationLoaderInterface;
+use Openl10n\Domain\Resource\Service\Uploader\FileUploaderInterface;
+use Openl10n\Domain\Resource\Repository\ResourceRepository;
 use Openl10n\Domain\Translation\Repository\TranslationRepository;
-use Openl10n\Domain\Translation\Service\Loader\TranslationLoaderInterface;
-use Openl10n\Domain\Translation\Service\Uploader\FileUploaderInterface;
-use Openl10n\Domain\Translation\Value\Pathname;
 use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Slug;
@@ -16,7 +14,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ImportTranslationFileProcessor
 {
-    protected $domainRepository;
     protected $translationRepository;
     protected $fileUploader;
     protected $translationLoader;

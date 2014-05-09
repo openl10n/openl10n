@@ -1,9 +1,9 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Model;
+namespace Openl10n\Domain\Resource\Model;
 
 use Openl10n\Domain\Project\Model\Project;
-use Openl10n\Domain\Translation\Value\Pathname;
+use Openl10n\Domain\Resource\Value\Pathname;
 
 class Resource
 {

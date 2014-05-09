@@ -8,7 +8,7 @@ use Openl10n\Domain\Translation\Application\Action\CreateResourceAction;
 use Openl10n\Domain\Translation\Application\Action\ExportTranslationFileAction;
 use Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction;
 use Openl10n\Domain\Translation\Application\Action\UpdateResourceAction;
-use Openl10n\Domain\Translation\Model\Resource;
+use Openl10n\Domain\Resource\Model\Resource;
 use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;

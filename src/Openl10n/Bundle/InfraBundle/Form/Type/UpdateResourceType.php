@@ -2,7 +2,6 @@
 
 namespace Openl10n\Bundle\InfraBundle\Form\Type;
 
-use Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 

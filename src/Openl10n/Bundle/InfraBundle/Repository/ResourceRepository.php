@@ -5,10 +5,10 @@ namespace Openl10n\Bundle\InfraBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Openl10n\Bundle\InfraBundle\Entity\Resource as ResourceEntity;
 use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Domain\Resource\Model\Resource;
+use Openl10n\Domain\Resource\Repository\ResourceRepository as ResourceRepositoryInterface;
+use Openl10n\Domain\Resource\Value\Pathname;
 use Openl10n\Domain\Translation\Model\Domain;
-use Openl10n\Domain\Translation\Model\Resource;
-use Openl10n\Domain\Translation\Repository\ResourceRepository as ResourceRepositoryInterface;
-use Openl10n\Domain\Translation\Value\Pathname;
 use Openl10n\Value\String\Slug;
 use Rhumsaa\Uuid\Uuid;
 

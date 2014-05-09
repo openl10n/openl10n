@@ -23,11 +23,11 @@
         <parameter key="openl10n.processor.delete_project.class">Openl10n\Domain\Project\Application\Processor\DeleteProjectProcessor</parameter>
         <parameter key="openl10n.processor.create_language.class">Openl10n\Domain\Project\Application\Processor\CreateLanguageProcessor</parameter>
         <parameter key="openl10n.processor.delete_language.class">Openl10n\Domain\Project\Application\Processor\DeleteLanguageProcessor</parameter>
-        <parameter key="openl10n.processor.import_translation_file.class">Openl10n\Domain\Translation\Application\Processor\ImportTranslationFileProcessor</parameter>
-        <parameter key="openl10n.processor.export_translation_file.class">Openl10n\Domain\Translation\Application\Processor\ExportTranslationFileProcessor</parameter>
+        <parameter key="openl10n.processor.import_translation_file.class">Openl10n\Domain\Resource\Application\Processor\ImportTranslationFileProcessor</parameter>
+        <parameter key="openl10n.processor.export_translation_file.class">Openl10n\Domain\Resource\Application\Processor\ExportTranslationFileProcessor</parameter>
+        <parameter key="openl10n.processor.create_resource.class">Openl10n\Domain\Resource\Application\Processor\CreateResourceProcessor</parameter>
+        <parameter key="openl10n.processor.update_resource.class">Openl10n\Domain\Resource\Application\Processor\UpdateResourceProcessor</parameter>
         <parameter key="openl10n.processor.edit_translation.class">Openl10n\Domain\Translation\Application\Processor\EditTranslationPhraseProcessor</parameter>
-        <parameter key="openl10n.processor.create_resource.class">Openl10n\Domain\Translation\Application\Processor\CreateResourceProcessor</parameter>
-        <parameter key="openl10n.processor.update_resource.class">Openl10n\Domain\Translation\Application\Processor\UpdateResourceProcessor</parameter>
 
         <!-- Listener -->
         <parameter key="openl10n.listener.language_listener.class">Openl10n\Bundle\InfraBundle\Listener\LanguageListener</parameter>
@@ -36,11 +36,11 @@
         <parameter key="openl10n.repository.locale.class">Openl10n\Bundle\InfraBundle\Repository\BuiltInLocaleRepository</parameter>
 
         <!-- File -->
-        <parameter key="openl10n.uploader.file.class">Openl10n\Domain\Translation\Service\Uploader\FileUploader</parameter>
+        <parameter key="openl10n.uploader.file.class">Openl10n\Domain\Resource\Service\Uploader\FileUploader</parameter>
 
         <!-- Translation -->
-        <parameter key="openl10n.translation.loader.class">Openl10n\Domain\Translation\Service\Loader\TranslationLoader</parameter>
-        <parameter key="openl10n.translation.dumper.class">Openl10n\Domain\Translation\Service\Dumper\TranslationDumper</parameter>
+        <parameter key="openl10n.translation.loader.class">Openl10n\Domain\Resource\Service\Loader\TranslationLoader</parameter>
+        <parameter key="openl10n.translation.dumper.class">Openl10n\Domain\Resource\Service\Dumper\TranslationDumper</parameter>
 
         <!-- Validator -->
         <parameter key="openl10n.validator.project_unique.class">Openl10n\Bundle\InfraBundle\Validator\Constraints\UniqueProjectValidator</parameter>

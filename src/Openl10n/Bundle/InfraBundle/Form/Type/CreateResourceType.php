@@ -4,7 +4,7 @@ namespace Openl10n\Bundle\InfraBundle\Form\Type;
 
 use Openl10n\Bundle\InfraBundle\Form\Transformer\ProjectTransformer;
 use Openl10n\Domain\Project\Repository\ProjectRepository;
-use Openl10n\Domain\Translation\Application\Action\CreateResourceAction;
+use Openl10n\Domain\Resource\Application\Action\CreateResourceAction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 

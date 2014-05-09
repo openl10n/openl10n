@@ -6,7 +6,7 @@ use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Model\Domain;
 use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Domain\Translation\Model\Phrase;
-use Openl10n\Domain\Translation\Model\Resource;
+use Openl10n\Domain\Resource\Model\Resource;
 use Openl10n\Domain\Translation\Specification\TranslationSpecification;
 use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Application\Action;
+namespace Openl10n\Domain\Resource\Application\Action;
 
-use Openl10n\Domain\Translation\Model\Resource;
+use Openl10n\Domain\Resource\Model\Resource;
 
 class ExportTranslationFileAction
 {

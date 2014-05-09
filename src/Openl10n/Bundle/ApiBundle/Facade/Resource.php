@@ -3,7 +3,7 @@
 namespace Openl10n\Bundle\ApiBundle\Facade;
 
 use JMS\Serializer\Annotation as Serializer;
-use Openl10n\Domain\Translation\Model\Resource as ResourceModel;
+use Openl10n\Domain\Resource\Model\Resource as ResourceModel;
 
 class Resource
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Service\Uploader;
+namespace Openl10n\Domain\Resource\Service\Uploader;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;

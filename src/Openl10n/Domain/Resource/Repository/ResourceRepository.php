@@ -1,11 +1,11 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Repository;
+namespace Openl10n\Domain\Resource\Repository;
 
 use Openl10n\Domain\Project\Model\Project;
+use Openl10n\Domain\Resource\Model\Resource;
+use Openl10n\Domain\Resource\Value\Pathname;
 use Openl10n\Domain\Translation\Model\Domain;
-use Openl10n\Domain\Translation\Model\Resource;
-use Openl10n\Domain\Translation\Value\Pathname;
 
 interface ResourceRepository
 {

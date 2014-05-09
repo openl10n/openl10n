@@ -6,7 +6,7 @@ use Openl10n\Bundle\WebBundle\View\DomainView;
 use Openl10n\Bundle\WebBundle\View\ResourceView;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Model\Domain;
-use Openl10n\Domain\Translation\Model\Resource;
+use Openl10n\Domain\Resource\Model\Resource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 

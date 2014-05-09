@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Openl10n\Bundle\InfraBundle\Entity\Resource;
-use Openl10n\Domain\Translation\Value\Pathname;
+use Openl10n\Domain\Resource\Value\Pathname;
 use Openl10n\Value\String\Slug;
 
 class LoadResourceData extends AbstractFixture implements OrderedFixtureInterface

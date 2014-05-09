@@ -1,10 +1,10 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Application\Processor;
+namespace Openl10n\Domain\Resource\Application\Processor;
 
-use Openl10n\Domain\Translation\Application\Action\UpdateResourceAction;
-use Openl10n\Domain\Translation\Repository\ResourceRepository;
-use Openl10n\Domain\Translation\Value\Pathname;
+use Openl10n\Domain\Resource\Value\Pathname;
+use Openl10n\Domain\Resource\Application\Action\UpdateResourceAction;
+use Openl10n\Domain\Resource\Repository\ResourceRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class UpdateResourceProcessor

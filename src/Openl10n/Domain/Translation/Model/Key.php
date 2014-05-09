@@ -3,6 +3,7 @@
 namespace Openl10n\Domain\Translation\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Openl10n\Domain\Resource\Model\Resource;
 use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;
 

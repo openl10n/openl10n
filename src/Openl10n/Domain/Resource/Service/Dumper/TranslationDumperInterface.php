@@ -1,6 +1,6 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Service\Dumper;
+namespace Openl10n\Domain\Resource\Service\Dumper;
 
 use Symfony\Component\Translation\MessageCatalogue;
 

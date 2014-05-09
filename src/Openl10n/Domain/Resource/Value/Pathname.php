@@ -1,6 +1,6 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Value;
+namespace Openl10n\Domain\Resource\Value;
 
 class Pathname
 {

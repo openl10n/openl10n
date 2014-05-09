@@ -1,13 +1,13 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Application\Processor;
+namespace Openl10n\Domain\Resource\Application\Processor;
 
-use Openl10n\Domain\Translation\Application\Action\CreateResourceAction;
-use Openl10n\Domain\Translation\Repository\ResourceRepository;
+use Openl10n\Domain\Resource\Application\Action\CreateResourceAction;
+use Openl10n\Domain\Resource\Repository\ResourceRepository;
+use Openl10n\Domain\Resource\Service\Loader\TranslationLoaderInterface;
+use Openl10n\Domain\Resource\Service\Uploader\FileUploaderInterface;
+use Openl10n\Domain\Resource\Value\Pathname;
 use Openl10n\Domain\Translation\Repository\TranslationRepository;
-use Openl10n\Domain\Translation\Service\Loader\TranslationLoaderInterface;
-use Openl10n\Domain\Translation\Service\Uploader\FileUploaderInterface;
-use Openl10n\Domain\Translation\Value\Pathname;
 use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

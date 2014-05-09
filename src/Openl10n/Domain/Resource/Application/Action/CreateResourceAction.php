@@ -1,6 +1,6 @@
 <?php
 
-namespace Openl10n\Domain\Translation\Application\Action;
+namespace Openl10n\Domain\Resource\Application\Action;
 
 use Openl10n\Domain\Project\Model\Project;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
