@@ -41,6 +41,7 @@
         "behat/mink-browserkit-driver": "*",
         "behat/mink-selenium2-driver":  "*",
         "behat/mink-goutte-driver":     "*",
+        "sanpi/behatch-contexts":       "*",
         "phpspec/phpspec":              "2.0.*@dev"
     },
     "minimum-stability": "dev",

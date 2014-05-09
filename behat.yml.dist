@@ -6,3 +6,9 @@ default:
             files_path: features/files
             default_session: selenium2
             selenium2: ~
+        Sanpi\Behatch\Extension:
+            contexts:
+                debug: ~
+                system: ~
+                json: ~
+                rest: ~
