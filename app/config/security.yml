@@ -23,25 +23,10 @@ security:
             http_basic:
                 realm: "API access"
 
-        app:
-            pattern:    ^/app
-            security: false
-
         main:
             pattern:    ^/
-            form_login:
-                check_path: openl10n_security_check
-                login_path: openl10n_security_login
-            logout:
-                path:   openl10n_security_logout
-                target: openl10n_homepage
-            anonymous: ~
-            remember_me:
-                name:     __remember_me
-                key:      %secret%
-                lifetime: 2592000 # 30 days in seconds
+            security: false
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: ROLE_USER }
         - { path: ^/, roles: ROLE_USER }

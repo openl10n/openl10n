@@ -45,34 +45,5 @@ class CreateResourceProcessor
         $this->resourceRepository->save($resource);
 
         return $resource;
-
-        // First upload translation file and extract message from it.
-        $file = $this->fileUploader->upload($action->getFile());
-        $catalogue = $this->translationLoader->loadMessages($file, $locale, 'messages');
-        $messages = $catalogue->all('messages');
-
-        // Start importing messages
-        foreach ($messages as $key => $phrase) {
-            $identifier = new StringIdentifier($key);
-            $translationKey = $this->translationRepository->createNewKey($resource, $identifier);
-
-            $translationPhrase = $this->translationRepository->createNewPhrase($translationKey, $locale);
-            $translationKey->addPhrase($translationPhrase);
-            $translationPhrase->setText($phrase);
-
-            // If reviewed option is set, then automatically mark
-            // translation phrase as approved.
-            if ($action->hasOptionReviewed()) {
-                $translationPhrase->setApproved(true);
-            }
-
-            $this->translationRepository->saveKey($translationKey);
-            $this->translationRepository->savePhrase($translationPhrase);
-        }
-
-        // Finally remove temporary file.
-        $this->fileUploader->remove($file);
-
-        return $resource;
     }
 }

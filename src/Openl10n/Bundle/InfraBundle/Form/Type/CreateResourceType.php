@@ -25,15 +25,7 @@ class CreateResourceType extends AbstractType
                 ->create('project', 'text')
                 ->addModelTransformer(new ProjectTransformer($this->projectRepository))
             )
-            ->add('file', 'file')
             ->add('pathname', 'text')
-            ->add('options', 'choice', array(
-                'choices' => array(
-                    CreateResourceAction::OPTION_REVIEWED => 'Mark translations as reviewed',
-                ),
-                'multiple' => true,
-                'expanded' => true,
-            ))
         ;
     }
 

@@ -5,14 +5,15 @@ openl10n_api:
     options:
         expose: true
 
-openl10n_web:
-    resource: "@Openl10nWebBundle/Resources/config/routing.yml"
-
-openl10n_user:
-    resource: "@Openl10nUserBundle/Resources/config/routing.yml"
-
-openl10n_editor:
-    resource: "@Openl10nEditorBundle/Resources/config/routing.yml"
-
 fos_js:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+# Last route: match all possible pattern
+openl10n_index:
+    pattern:  /{path}
+    requirements:
+        _locale: ".*"
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: Openl10nWebBundle::index.html.twig
+        path: ~
