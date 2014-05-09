@@ -5,7 +5,7 @@ define(['app', 'apps/project/list/list_view'], function(app, View) {
         var layout = new View.Layout();
         app.mainRegion.show(layout);
 
-        require(['entities/project'], function() {
+        require(['entities/project/collection'], function() {
           var fetchingProjects = app.request('project:entities');
 
           $.when(fetchingProjects).done(function(projects) {

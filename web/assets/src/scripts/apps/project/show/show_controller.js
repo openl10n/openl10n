@@ -5,8 +5,18 @@ define(['app', 'apps/project/show/show_view'], function(app, View) {
         var layout = new View.Layout();
         app.mainRegion.show(layout);
 
-        var statsView = new View.Stats();
-        layout.statsRegion.show(statsView);
+        //var statsView = new View.Stats();
+        //layout.statsRegion.show(statsView);
+
+        require(['entities/project/model'], function() {
+          var fetchingProject = app.request('project:entity', projectSlug);
+
+          $.when(fetchingProject).done(function(project) {
+            var projectView = new View.ProjectTitle({model: project});
+            layout.projectTitleRegion.show(projectView);
+          });
+        });
+
 
         require(['entities/resource'], function() {
           var fetchingResources = app.request('resource:entities', projectSlug);
