@@ -16,7 +16,7 @@
     <nav class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
         <li>
-          <a href="#projects">
+          <a href="/projects">
             Projects
           </a>
         </li>
