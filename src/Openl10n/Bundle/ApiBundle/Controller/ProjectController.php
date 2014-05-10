@@ -53,13 +53,15 @@ class ProjectController extends Controller implements ClassResourceInterface
 
         if ($form->handleRequest($request)->isValid()) {
             $project = $this->get('openl10n.processor.create_project')->execute($action);
+            $facade = new ProjectFacade($project);
+
             $url = $this->generateUrl(
                 'openl10n_api_get_project',
                 array('project' => (string) $project->getSlug()),
                 true // absolute
             );
 
-            return new Response('', 201, array('Location' => $url));
+            return View::create($facade, 201, ['Location' => $url]);
         }
 
         return View::create($form, 400);

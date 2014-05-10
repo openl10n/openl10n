@@ -6,6 +6,8 @@ define([
 ], function($, Backbone, app, backendRouter) {
 
   var Project = Backbone.Model.extend({
+    idAttribute: 'slug',
+
     url: function() {
       return backendRouter.generate('openl10n_api_get_project', {
         'project': this.id,
@@ -13,6 +15,7 @@ define([
     },
 
     defaults: {
+      slug: '', // to be replaced by slug
       name: '',
       default_locale: 'en',
     },
@@ -32,7 +35,7 @@ define([
 
   var API = {
     getProjectEntity: function(projectSlug) {
-      var project = new Project({id: projectSlug});
+      var project = new Project({slug: projectSlug});
       var defer = $.Deferred();
 
       project.fetch({

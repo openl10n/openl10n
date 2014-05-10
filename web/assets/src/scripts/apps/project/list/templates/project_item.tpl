@@ -7,13 +7,11 @@
         </span>
 
         <div class="media-body">
-          <a href="#projects/<%= id %>">
-            <h3 class="x-project-list--item--title title">
-              <%- name %>
-            </h3>
-          </a>
+          <h3 class="x-project-list--item--title title">
+            <%- name %>
+          </h3>
           <p class="x-project-list--item--category">
-            <%- id %>
+            <%- slug %>
           </p>
         </div>
       </div>

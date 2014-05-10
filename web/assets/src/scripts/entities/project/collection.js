@@ -33,4 +33,6 @@ define([
   app.reqres.setHandler('project:entities', function() {
     return API.getProjectEntities();
   });
+
+  return ProjectCollection;
 });

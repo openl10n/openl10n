@@ -9,7 +9,7 @@
       <i class="fa fa-ellipsis-h"></i>
     </h2>
     <p class="x-project-show--project-id">
-      <%- id %>
+      <%- slug %>
     </p>
   </div>
 </div>

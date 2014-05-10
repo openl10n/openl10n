@@ -14,6 +14,7 @@ define(['app'], function(app) {
   app.module('Routers.ProjectApp', function(ProjectsAppRouter, app, Backbone, Marionette, $, _) {
     ProjectsAppRouter.Router = Marionette.AppRouter.extend({
       appRoutes: {
+        'new': 'newProject',
         'projects': 'listProjects',
         'projects/:projectSlug': 'showProject'
       }
@@ -31,6 +32,11 @@ define(['app'], function(app) {
           executeAction(ListController.listProjects);
         });
       },
+      newProject: function() {
+        require(['apps/project/new/new_controller'], function(NewController) {
+          executeAction(NewController.newProject);
+        });
+      },
       showProject: function(projectSlug) {
         require(['apps/project/show/show_controller'], function(ShowController) {
           executeAction(ShowController.showProject, projectSlug);
@@ -42,6 +48,11 @@ define(['app'], function(app) {
     app.on('project:list', function() {
       app.navigate('projects');
       API.listProjects();
+    });
+
+    app.on('project:new', function(projectSlug) {
+      app.navigate('projects/_new');
+      API.newProject();
     });
 
     app.on('project:show', function(projectSlug) {

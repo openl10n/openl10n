@@ -1,3 +1,5 @@
+@import "variables";
+
 //
 // Project list
 //
@@ -8,6 +10,14 @@
     display: block;
     background: #ddd;
   }
+
+  &:hover {
+    cursor: pointer;
+
+    .x-project-list--item--title {
+      color: $link-hover-color;
+    }
+  }
 }
 
 .x-project-list--item--title {
@@ -15,6 +25,7 @@
   font-size: 26px;
   margin-bottom: 2px;
   margin-top: 0;
+  color: $link-color;
 }
 
 .x-project-list--item--category {

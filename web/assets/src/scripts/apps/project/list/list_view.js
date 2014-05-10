@@ -14,6 +14,14 @@ define(['app',
 
     View.Item = Marionette.ItemView.extend({
       template: itemTpl,
+
+      events: {
+        'click': 'showProject'
+      },
+
+      showProject: function() {
+        app.trigger('project:show', this.model.id);
+      }
     });
 
     View.List = Marionette.CollectionView.extend({
