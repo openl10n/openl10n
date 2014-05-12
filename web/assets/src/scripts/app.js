@@ -63,6 +63,7 @@ define([
   app.on('initialize:after', function(options) {
     require([
       'apps/project/app',
+      'apps/editor/app',
     ], function () {
       // Start history
       if (!Backbone.history.started) {
