@@ -29,9 +29,9 @@ define(['app', 'apps/project/show/views'], function(app, View) {
       var fetchingLanguages = app.request('language:entities', projectSlug);
 
       $.when(fetchingLanguages).done(function(languages) {
-
         var languagesView = new View.LanguageList({collection: languages});
         layout.languageListRegion.show(languagesView);
+
       });
     });
   }

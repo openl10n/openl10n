@@ -12,8 +12,8 @@ define(['marionette', 'app'], function(Marionette, app) {
       });
     },
     newProject: function() {
-      require(['apps/project/new/new_controller'], function(NewController) {
-        executeAction(NewController.newProject);
+      require(['apps/project/new/controller'], function(controller) {
+        executeAction(controller);
       });
     },
     showProject: function(projectSlug) {
