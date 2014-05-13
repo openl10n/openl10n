@@ -1,5 +1,4 @@
 .ol-editor-layout {
-  background-color: #fafafa;
   height: 100%;
 
   .fullheight {
@@ -41,7 +40,7 @@
 }
 
 .ol-editor-header-inner {
-  padding-left: 40px;
+  //padding-left: 40px;
   padding-right: 10px;
 }
 
@@ -53,23 +52,9 @@
 
   .project-name {
     padding-left: 15px;
-    padding-right: 5px;
+    padding-right: 15px;
     background-color: #ddd;
     position: relative;
-    margin-right: 35px;
-
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: -1px;
-      right: -31px;
-      width: 0;
-      height: 0;
-      border-top: 31px solid transparent;
-      border-bottom: 31px solid transparent;
-      border-left: 31px solid #ddd;
-    }
   }
 
   > a {
