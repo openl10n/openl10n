@@ -4,6 +4,7 @@ define(['marionette'], function(Marionette) {
       'projects/:projectSlug/translate': 'translate',
       'projects/:projectSlug/translate/:source': 'translate',
       'projects/:projectSlug/translate/:source/:target': 'translate',
+      'projects/:projectSlug/translate/:source/:target/:translationId': 'translate',
     }
   });
 

@@ -6,9 +6,9 @@ define(['marionette', 'app'], function(Marionette, app) {
   };
 
   return Marionette.Controller.extend({
-    translate: function(projectSlug, source, target) {
+    translate: function(projectSlug, source, target, translationId) {
       require(['apps/editor/translate/controller'], function(controller) {
-        controller(projectSlug, source, target);
+        controller(projectSlug, source, target, translationId);
       });
     }
   });

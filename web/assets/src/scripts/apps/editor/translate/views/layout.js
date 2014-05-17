@@ -14,6 +14,10 @@ define([
       translationListRegion: '#ol-editor-translation-list',
     },
 
+    modelEvents: {
+      "change": "modelChanged"
+    },
+
     onShow: function() {
       var $window = $(window);
       var $el = this.$el.find('.js-fullheight');
@@ -21,8 +25,13 @@ define([
         var height = $window.height() - $el.offset().top;
         $el.height(height);
       }
-      updateBlockHeight();
+
+      setTimeout(updateBlockHeight, 200); // hack
       $(window).resize(updateBlockHeight);
+    },
+
+    modelChanged: function() {
+
     }
   });
 

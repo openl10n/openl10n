@@ -1,19 +1,26 @@
-<div href="#" class="item-wrapper active ">
-  <span class="status status-approved"></span>
+<div href="#" class="item-wrapper <% if (selected) { %>active<% } %> <% if (!source_phrase) { %>text-muted<% } %>">
+  <span class="status <% if (is_approved) { %>status-approved<% } else if (is_translated) { %>status-translated<% } %>">
+  </span>
 
   <!-- <p class="domain pull-right">
-    basic
+    domain
   </p> -->
 
   <p class="key">
-    <span class="text-success">
-      <i class="fa fa-check"></i>
+    <span class="text-<% if (is_translated) { %>success<% } else { %>danger<% } %>">
+      <i class="fa <% if (is_approved) { %>fa-check<% } else { %>fa-circle<% } %>"></i>
     </span>
 
-    example.key1
+    <%- key %>
   </p>
 
-  <p class="extract text-default">
-    This is a first example
-  </p>
+  <% if (source_phrase) { %>
+    <p class="extract text-default">
+      <%- S(source_phrase).truncate(100, '…') %>
+    </p>
+  <% } else { %>
+    <p class="extract text-danger">
+      <em>undefined</em>
+    </p>
+  <% } %>
 </div>

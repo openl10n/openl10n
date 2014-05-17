@@ -21,6 +21,7 @@
     "underscore": "~1.6.0",
     "requirejs-plugins": "~1.0.2",
     "requirejs-text": "~2.0.10",
-    "requirejs-tpl-jfparadis": "*"
+    "requirejs-tpl-jfparadis": "*",
+    "backbone.select": "~1.2.6"
   }
 }

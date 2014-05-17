@@ -98,7 +98,7 @@ class TranslationController extends Controller implements ClassResourceInterface
             'csrf_protection' => false
         ));
 
-        if ($form->submit($request->request->all())->isValid()) {
+        if ($form->submit($request->request->all(), false)->isValid()) {
             $this->get('openl10n.processor.edit_translation')->execute($action);
 
             return new Response('', 204);

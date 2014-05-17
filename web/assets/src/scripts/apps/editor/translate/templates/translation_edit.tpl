@@ -4,7 +4,7 @@
       <i class="fa fa-check"></i>
     </span>
 
-    <span>example.key1</span>
+    <span><%- key %></span>
     <!-- <span class="meta-domain">(basic)</span> -->
   </div>
 
@@ -14,10 +14,10 @@
 
 
   <p class="phrase text-default">
-    This is a first example!
+    <%- source_phrase %>
   </p>
 </div>
 
 <div class="ol-editor-target-area">
-  <textarea class="form-control phrase-editor" placeholder="Translate here…">This is a first example</textarea>
+  <textarea class="form-control phrase-editor" placeholder="Translate here…"><%- target_phrase %></textarea>
 </div>

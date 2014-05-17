@@ -8,6 +8,7 @@ require.config({
     'backbone': '../vendor/backbone/backbone',
     'backbone.wreqr': '../vendor/backbone.wreqr/lib/backbone.wreqr',
     'backbone.babysitter': '../vendor/backbone.babysitter/lib/backbone.babysitter',
+    'backbone.select': '../vendor/backbone.select/dist/amd/backbone.select',
     'marionette': '../vendor/marionette/lib/core/amd/backbone.marionette',
     'underscore': '../vendor/underscore/underscore',
     'text': '../vendor/requirejs-text/text',

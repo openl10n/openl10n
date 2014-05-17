@@ -39,6 +39,9 @@ define([
         languages.fetch({
           success: function(data) {
             defer.resolve(data);
+          },
+          error: function() {
+            alert('Unable to fetch language for project ' + projectSlug);
           }
         });
 
