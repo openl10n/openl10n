@@ -2,7 +2,7 @@
   <p class="main">
     <span class="flag flag-<%= region_code(locale) %>"></span>
     <a href="#">
-      <%- name %>
+      <%- name %> (<%- locale %>)
     </a>
   </p>
 

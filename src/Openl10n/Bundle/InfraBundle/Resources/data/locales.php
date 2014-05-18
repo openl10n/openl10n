@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'af',
     'ar', 'ar_AE', 'ar_BH', 'ar_DZ', 'ar_EG', 'ar_IQ', 'ar_JO', 'ar_KW', 'ar_LB', 'ar_LY', 'ar_MA', 'ar_OM', 'ar_QA', 'ar_SA', 'ar_SD', 'ar_SY', 'ar_TN', 'ar_YE',
     'be', 'be_BY',
     'bg', 'bg_BG',
@@ -12,12 +13,15 @@ return array(
     'en', 'en_AU', 'en_CA', 'en_GB', 'en_IE', 'en_IN', 'en_MT', 'en_NZ', 'en_PH', 'en_SG', 'en_US', 'en_ZA',
     'es', 'es_AR', 'es_BO', 'es_CL', 'es_CO', 'es_CR', 'es_DO', 'es_EC', 'es_ES', 'es_GT', 'es_HN', 'es_MX', 'es_NI', 'es_PA', 'es_PE', 'es_PR', 'es_PY', 'es_SV', 'es_US', 'es_UY', 'es_VE',
     'et', 'et_EE',
+    'fa_IR',
     'fi', 'fi_FI',
     'fr', 'fr_BE', 'fr_CA', 'fr_CH', 'fr_FR', 'fr_LU',
     'ga', 'ga_IE',
+    'he',
     'hi_IN',
     'hr', 'hr_HR',
     'hu', 'hu_HU',
+    'id',
     'in', 'in_ID',
     'is', 'is_IS',
     'it', 'it_CH', 'it_IT',

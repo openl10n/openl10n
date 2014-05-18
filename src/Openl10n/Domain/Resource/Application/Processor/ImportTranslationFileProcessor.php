@@ -59,11 +59,13 @@ class ImportTranslationFileProcessor
                 // attach the given text.
                 $translationPhrase = $this->translationRepository->createNewPhrase($translationKey, $locale);
                 $translationKey->addPhrase($translationPhrase);
-                $translationPhrase->setText($phrase);
+
+                $resourceId = $resource->getPathname();
+                $translationPhrase->setText($phrase ?: '');
             } elseif ($action->hasOptionErase()) {
                 // If phrase already exist, then ecrase text only
                 // if option is declared.
-                $translationPhrase->setText($phrase);
+                $translationPhrase->setText($phrase ?: '');
             }
 
             // If reviewed option is set, then automatically mark
