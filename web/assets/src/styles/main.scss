@@ -14,6 +14,11 @@ body {
   padding-top: 50px;
   height: 100%;
   //border-top: 50px solid transparent;
+  min-width: 970px;
+}
+
+.container {
+  min-width: 970px !important;
 }
 
 a:hover {
