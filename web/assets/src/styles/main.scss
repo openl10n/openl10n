@@ -9,9 +9,11 @@ body {
   background-color: #f8f8f8;
 }
 
-.page-wrapper {
+#main {
   //padding-top: 70px; /* 50px (navbar) + 20px margin */
   padding-top: 50px;
+  height: 100%;
+  //border-top: 50px solid transparent;
 }
 
 a:hover {
@@ -57,3 +59,5 @@ a:hover {
 @import "components/util";
 @import "page";
 @import "editor";
+
+@import "pages/project_show";

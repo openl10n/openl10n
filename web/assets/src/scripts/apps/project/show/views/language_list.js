@@ -1,12 +1,14 @@
 define([
   'marionette',
-  'apps/project/show/views/language_item'
-], function(Marionette, LanguageItem) {
+  'apps/project/show/views/language_item',
+  'tpl!apps/project/show/templates/language_list',
+], function(Marionette, LanguageItem, languageListTpl) {
 
-  return Marionette.CollectionView.extend({
+  return Marionette.CompositeView.extend({
     itemView: LanguageItem,
-    tagName: "ul",
-    className: "list-unstyled x-project-show--languages-list",
+    template: languageListTpl,
+    //className: "list-unstyled x-project-show--languages-list",
+    itemViewContainer: "ul"
   });
 
 });

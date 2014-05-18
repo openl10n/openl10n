@@ -1,10 +1,13 @@
-define(['app', 'apps/project/show/views'], function(app, View) {
+define([
+  'backbone',
+  'app',
+  'apps/project/show/models',
+  'apps/project/show/views'
+], function(Backbone, app, Model, View) {
+
   return function(projectSlug) {
     var layout = new View.Layout();
     app.mainRegion.show(layout);
-
-    //var statsView = new View.Stats();
-    //layout.statsRegion.show(statsView);
 
     require(['entities/project/model'], function() {
       var fetchingProject = app.request('project:entity', projectSlug);
@@ -14,7 +17,6 @@ define(['app', 'apps/project/show/views'], function(app, View) {
         layout.projectTitleRegion.show(projectView);
       });
     });
-
 
     require(['entities/resource'], function() {
       var fetchingResources = app.request('resource:entities', projectSlug);
@@ -29,7 +31,13 @@ define(['app', 'apps/project/show/views'], function(app, View) {
       var fetchingLanguages = app.request('language:entities', projectSlug);
 
       $.when(fetchingLanguages).done(function(languages) {
-        var languagesView = new View.LanguageList({collection: languages});
+        var languagesView = new View.LanguageList({
+          collection: languages,
+          model: new Backbone.Model({
+            count: languages.length
+          }),
+        });
+
         layout.languageListRegion.show(languagesView);
 
       });

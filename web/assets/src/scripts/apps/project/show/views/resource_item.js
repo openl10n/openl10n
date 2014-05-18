@@ -6,5 +6,6 @@ define([
   return Marionette.ItemView.extend({
     template: resourceItemTpl,
     tagName: "li",
+    className: "resources--item",
   });
 });

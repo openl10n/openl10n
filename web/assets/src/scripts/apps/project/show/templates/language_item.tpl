@@ -1,12 +1,13 @@
-<div>
-  <p class="main">
-    <span class="flag flag-<%= region_code(locale) %>"></span>
-    <a href="#">
-      <%- name %> (<%- locale %>)
-    </a>
-  </p>
+<a href="#" class="languages--item">
+  <div class="media">
+    <span class="pull-left language-flag">
+      <i></i>
+      <!-- <span class="flag flag-<%= region_code(locale) %>"></span> -->
+    </span>
 
-  <p class="meta">
-    xx% translated – xx% reviewed
-  </p>
-</div>
+    <div class="media-body">
+      <p class="language-name"><%- name %></p>
+      <p class="language-locale"><%- locale %></p>
+    </div>
+  </div>
+</a>

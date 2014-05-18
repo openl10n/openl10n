@@ -5,6 +5,7 @@ define([
 
   return Marionette.ItemView.extend({
     template: projectTitleTpl,
-    className: 'x-project-show--project-header'
+    tagName: 'span',
+    //className: 'x-project-show--project-header'
   });
 });
