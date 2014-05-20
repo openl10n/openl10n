@@ -11,6 +11,16 @@
       <span class="item-name">Resources</span>
     </a>
 
+    <a href="#" class="sidebar-menu--item editor-special">
+      <i class="item-icon fa fa-language"></i>
+      <span class="item-name">Translate</span>
+    </a>
+
+    <a href="#" class="sidebar-menu--item editor-special">
+      <i class="item-icon fa fa-eye-slash"></i>
+      <span class="item-name">Proofread</span>
+    </a>
+
     <a href="#" class="sidebar-menu--item">
       <i class="item-icon fa fa-upload"></i>
       <span class="item-name">Releases</span>

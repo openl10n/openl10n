@@ -14,7 +14,7 @@
     "bourbon": "~3.1.8",
     "requirejs": "~2.1.11",
     "requirejs-domready": "~2.0.1",
-    "font-awesome": "~4.0.3",
+    "font-awesome": "~4.1",
     "string": "~1.8.0",
     "backbone": "~1.1.2",
     "marionette": "~1.8.3",

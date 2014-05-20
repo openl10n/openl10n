@@ -24,6 +24,8 @@ define([
     layout = new View.Layout({model: context});
     app.mainRegion.show(layout);
 
+    return;
+
     //
     // Initialize header (static part)
     //
