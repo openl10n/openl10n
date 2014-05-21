@@ -6,7 +6,7 @@ define([
   return Marionette.Layout.extend({
     template: layoutTpl,
     tagName: 'div',
-    className: 'layout-fixed x-project-show',
+    className: '',
 
     regions: {
       projectTitleRegion: '#project-title',

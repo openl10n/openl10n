@@ -1,19 +1,16 @@
 define([
   'marionette',
-  'tpl!apps/editor/translate/templates/layout'
-], function(Marionette, layoutTpl) {
+  'tpl!apps/common/templates/project_layout',
+], function(Marionette, projectLayoutTpl) {
 
   return Marionette.Layout.extend({
-    template: layoutTpl,
+    template: projectLayoutTpl,
     tagName: 'div',
-    className: '',
+    className: 'layout-fixed x-project-show x-editor--layout',
 
     regions: {
-      headerRegion: '#ol-editor-header',
-      actionBarRegion: '#ol-editor-actionbar',
-      filtersRegion: '#ol-editor-filters',
-      translationEditRegion: '#ol-editor-translation-edit',
-      translationListRegion: '#ol-editor-translation-list',
+      contentRegion: '#content',
+      sidebarRegion: '#sidebar',
     },
 
     modelEvents: {
@@ -23,17 +20,24 @@ define([
     onShow: function() {
       var _this = this;
 
+      // Display briefly the sidebar
+      this.$el.addClass('sidebar-hover');
+      setTimeout(function() {
+        _this.$el.removeClass('sidebar-hover');
+      }, 200);
+
       var $window = $(window);
       var $el = this.$el.find('.js-scrollable');
+
       var updateBlockHeight = function UpdateBlockHeight() {
-        $el.each(function() {
-          var $this = $(this);
-          var height = $window.height() - $(this).offset().top;
-          $(this).height(height);
-        });
+        if (!$el.length)
+          return;
+
+        var height = $window.height() - $el.offset().top;
+        $el.height(height);
       }
 
-      setTimeout(updateBlockHeight, 200); // hack
+      updateBlockHeight();
       $(window).resize(updateBlockHeight);
 
       this.$('.sidebar').hover(function() {

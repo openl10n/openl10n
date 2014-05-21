@@ -18,11 +18,14 @@ define([
       return;
     }
 
-    //
-    // Display Layout
-    //
-    layout = new View.Layout({model: context});
-    app.mainRegion.show(layout);
+    var renderingLayout = app.request('layout:project', projectSlug);
+    $.when(renderingLayout).done(function(projectLayout) {
+      //
+      // Display Layout
+      //
+      layout = new View.Layout({model: context});
+      projectLayout.contentRegion.show(layout);
+    });
 
     return;
 

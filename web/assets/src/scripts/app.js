@@ -62,6 +62,7 @@ define([
 
   app.on('initialize:after', function(options) {
     require([
+      'apps/common/init',
       'apps/project/app',
       'apps/editor/app',
     ], function () {
