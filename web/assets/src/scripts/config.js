@@ -7,7 +7,7 @@ require.config({
     'string': '../vendor/string/lib/string',
     'backbone': '../vendor/backbone/backbone',
     'backbone.wreqr': '../vendor/backbone.wreqr/lib/amd/backbone.wreqr',
-    'backbone.babysitter': '../vendor/backbone.babysitter/lib/amd/backbone.babysitter',
+    'backbone.babysitter': '../vendor/backbone.babysitter/lib/backbone.babysitter',
     'marionette': '../vendor/marionette/lib/core/amd/backbone.marionette',
     'underscore': '../vendor/underscore/underscore',
     'text': '../vendor/requirejs-text/text',
