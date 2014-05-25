@@ -11,8 +11,8 @@ define([
     url: function() {
       return backendRouter.generate('openl10n_api_get_translation_commits', {
         'project': this.projectSlug,
-        'source': this.sourceLocale,
-        'target': this.targetLocale,
+        'source': this.context.get('source'),
+        'target': this.context.get('target'),
       });
     },
 
@@ -20,12 +20,17 @@ define([
       BackboneSelect.One.applyTo(this, models, options);
 
       this.projectSlug = options.projectSlug;
-      this.sourceLocale = options.sourceLocale;
-      this.targetLocale = options.targetLocale;
+      this.context = options.context;
     },
 
     model: Model,
-    //comparator: 'name'
+    //comparator: 'name',
+
+    parse: function(response) {
+      this.count = response.length;
+
+      return response;
+    }
   });
 
   var API = {

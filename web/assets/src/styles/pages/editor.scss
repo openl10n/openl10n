@@ -132,6 +132,8 @@
 }
 
 .x-editor--translation-edit {
+  height: 800px;
+
   transition: transform .75s, width .75s;
   -webkit-transition: -webkit-transform .75s,width .75s;
 
@@ -179,6 +181,10 @@
   span {
     padding-left: 30px;
   }
+}
+
+.x-editor--resource-chooser {
+  color: #444;
 }
 
 .x-editor--subheader {
@@ -256,7 +262,7 @@
 .x-editor--translations-list {
   // Avoid clipping effect by setting a large width
   // It will be overwritten by javascript
-  height: 900px;
+  height: 800px;
 
   background-color: #dee7ed;
 

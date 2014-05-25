@@ -22,11 +22,13 @@ define([
     // method, to be processed by the router. If the link has a `data-bypass`
     // attribute, bypass the delegation completely.
     $('body').on('click', 'a[href]:not([data-bypass])', function(evt) {
+      var $this = $(this);
+
       // Get the absolute anchor href.
       // this.router.previousRoute = location.href;
       var href = {
-        prop: $(this).prop("href"),
-        attr: $(this).attr("href")
+        prop: $this.prop("href"),
+        attr: $this.attr("href")
       };
 
       // Get the absolute root.
@@ -65,6 +67,7 @@ define([
       'apps/common/init',
       'apps/project/app',
       'apps/editor/app',
+      'bundle/editor/init',
     ], function () {
       // Start history
       if (!Backbone.history.started) {

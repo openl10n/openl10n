@@ -1,6 +1,7 @@
 <div class="x-editor--header">
   <div class="pull-right x-editor--locales-chooser form-inline">
     <select name="source" class="form-control">
+      <option value=""></option>
       <option value="en">English (en)</option>
       <option value="fr">French (fr)</option>
     </select>
@@ -8,15 +9,22 @@
     <span class="fa fa-chevron-right"></span>
 
     <select name="target" class="form-control">
+      <option value=""></option>
       <option value="en">English (en)</option>
-      <option value="fr" selected>French (fr)</option>
+      <option value="fr">French (fr)</option>
     </select>
   </div>
 
   <div class="x-editor--resources-list">
-    <i class="fa fa-cube"></i>
-    <span>All phrases</span>
-    <i class="fa fa-angle-down"></i>
+    <a href="#" data-toggle="dropdown" data-bypass class="x-editor--resource-chooser">
+      <i class="fa fa-cube"></i>
+      <span>All phrases</span>
+      <i class="fa fa-angle-down"></i>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="#">src/messages.en.yml</a></li>
+      <li><a href="#">src/Openl10n/Bundle/CoreBundle/Resources/translations/messages.en.yml</a></li>
+    </ul>
   </div>
 </div>
 

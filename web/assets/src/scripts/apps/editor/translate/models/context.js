@@ -4,7 +4,7 @@ define(['app'], function(app) {
     defaults: {
       // Models (project slug + translation id)
       project: null,
-      translation: null,
+      //translation: null,
 
       // Locales
       source: null,

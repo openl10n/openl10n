@@ -19,12 +19,9 @@ define([
     }
 
     var renderingLayout = app.request('layout:project', projectSlug);
-    $.when(renderingLayout).done(function(projectLayout) {
-      //
-      // Display Layout
-      //
-      layout = new View.Layout({model: context});
-      projectLayout.contentRegion.show(layout);
+    var renderingEditorLayout = app.request('layout:editor', projectSlug);
+    $.when(renderingLayout, renderingEditorLayout).done(function(projectLayout, editorLayout) {
+      projectLayout.contentRegion.show(editorLayout);
     });
 
     return;
@@ -101,6 +98,20 @@ define([
   }
 
   return function(projectSlug, source, target, translationId) {
+    var renderingLayout = app.request('layout:project', projectSlug);
+    var renderingEditorLayout = app.request('layout:editor', projectSlug);
+    $.when(renderingLayout, renderingEditorLayout).done(function(projectLayout, editorLayout) {
+      projectLayout.contentRegion.show(editorLayout);
+
+      app.Editor.context.set({
+        source: source || null,
+        target: target || null,
+      })
+
+      // translationId ???
+    });
+
+    return;
     // Unbind previous events
     if (context)
       context.off();
@@ -112,7 +123,7 @@ define([
       project: projectSlug
     });
 
-    initApp();
+    //initApp();
 
     context.set({
       source: source || null,

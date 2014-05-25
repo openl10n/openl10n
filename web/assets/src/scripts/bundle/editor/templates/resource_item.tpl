@@ -1,0 +1,3 @@
+<a href="#">
+  <%- pathname %>
+</a>

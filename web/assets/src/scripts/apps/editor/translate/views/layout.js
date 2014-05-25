@@ -1,7 +1,8 @@
 define([
   'marionette',
-  'tpl!apps/editor/translate/templates/layout'
-], function(Marionette, layoutTpl) {
+  'apps/editor/translate/views/translation_list',
+  'tpl!apps/editor/translate/templates/layout',
+], function(Marionette, TranslationListView, layoutTpl) {
 
   return Marionette.Layout.extend({
     template: layoutTpl,
@@ -13,11 +14,19 @@ define([
       actionBarRegion: '#ol-editor-actionbar',
       filtersRegion: '#ol-editor-filters',
       translationEditRegion: '#ol-editor-translation-edit',
-      translationListRegion: '#ol-editor-translation-list',
+      translationListRegion: '#translations-list',
     },
 
     modelEvents: {
       "change": "modelChanged"
+    },
+
+    initialize: function() {
+      this.translationListView = new TranslationListView({collection: this.collection});
+    },
+
+    onRender: function() {
+      this.translationListRegion.show(this.translationListView);
     },
 
     onShow: function() {

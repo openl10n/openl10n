@@ -1,5 +1,3 @@
-<div href="#" class="item-wrapper <% if (selected) { %>active<% } %> <% if (!source_phrase) { %>text-muted<% } %>">
-
 <span class="status <% if (is_approved) { %>status-approved<% } else if (is_translated) { %>status-translated<% } %>"></span>
 
 <p class="key">

@@ -6,7 +6,7 @@ define([
   return Marionette.CollectionView.extend({
     itemView: TranslationItem,
     tagName: "ul",
-    className: "list-unstyled"
+    className: "list-unstyled",
   });
 
 });
