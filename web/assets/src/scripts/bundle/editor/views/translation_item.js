@@ -28,6 +28,11 @@ define([
       'deselected': 'onDeselect',
     },
 
+    onRender: function() {
+      if (this.model.selected)
+        this.$el.addClass('active');
+    },
+
     onSelect: function() {
       this.$el.addClass('active');
     },
