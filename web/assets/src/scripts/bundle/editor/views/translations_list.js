@@ -30,10 +30,10 @@ define([
     },
 
     // Display a loading animation
-    loading: function(requestEvent) {
+    loading: function(target) {
       // Ensure the request event comes from collection and not one of its models
       // (because of event bubbling)
-      if (requestEvent !== this.collection) {
+      if (target && target !== this.collection) {
         return;
       }
 
@@ -41,7 +41,11 @@ define([
     },
 
     // Overwrite render method to stop loading animation
-    render: function() {
+    render: function(target) {
+      if (target && target !== this.collection) {
+        return;
+      }
+
       this.$el.removeClass('loading');
       Marionette.CompositeView.prototype.render.call(this);
       return this;
