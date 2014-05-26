@@ -3,16 +3,19 @@ define([
   'marionette',
   'bundle/editor/views/translation_item',
   'bundle/editor/views/translations_empty',
-], function(_, Marionette, TranslationView, TranslationsEmptyView) {
+  'tpl!bundle/editor/templates/translations_list',
+], function(_, Marionette, TranslationView, TranslationsEmptyView, translationsListTpl) {
 
-  var TranslationListView = Marionette.CollectionView.extend({
+  var TranslationListView = Marionette.CompositeView.extend({
+    template: translationsListTpl,
     itemView: TranslationView,
     emptyView: TranslationsEmptyView,
-    tagName: 'ul',
-    className: 'list-unstyled',
+    itemViewContainer: 'ul',
+    className: 'x-editor--translations-list',
 
     collectionEvents: {
-      'sync': 'render'
+      'request': 'loading',
+      'sync': 'render',
     },
 
     initialize: function() {
@@ -24,6 +27,42 @@ define([
       // msgBus.events.on('translations:select-next', function() {
       //   _this.collection.selectNextItem();
       // });
+    },
+
+    // Display a loading animation
+    loading: function(requestEvent) {
+      // Ensure the request event comes from collection and not one of its models
+      // (because of event bubbling)
+      if (requestEvent !== this.collection) {
+        return;
+      }
+
+      this.$el.addClass('loading');
+    },
+
+    // Overwrite render method to stop loading animation
+    render: function() {
+      this.$el.removeClass('loading');
+      Marionette.CompositeView.prototype.render.call(this);
+      return this;
+    },
+
+    // Scrollable behaviour
+    onRender: function() {
+      var _this = this;
+
+      var $window = $(window);
+      var $el = this.$el.find('.js-scrollable');
+      var updateBlockHeight = function UpdateBlockHeight() {
+        $el.each(function() {
+          var $this = $(this);
+          var height = $window.height() - $(this).offset().top;
+          $(this).height(height);
+        });
+      }
+
+      setTimeout(updateBlockHeight, 200); // hack
+      $(window).resize(updateBlockHeight);
     },
 
     // override remove to also unbind events

@@ -1,8 +1,4 @@
 .x-editor--layout {
-  .spinner > div {
-    background-color: #407394;
-  }
-
   .sidebar {
     height: 100%;
     background-color: #407394;
@@ -315,9 +311,34 @@
 .x-editor--translations-list {
   // Avoid clipping effect by setting a large width
   // It will be overwritten by javascript
-  height: 800px;
+
+  .js-scrollable {
+    height: 800px;
+  }
 
   background-color: #dee7ed;
+
+  &.loading {
+    .translations-list--loader {
+      display: block;
+    }
+    .translations-list {
+      display: none;
+    }
+  }
+
+  .translations-list--loader {
+    display: none;
+
+    .spinner {
+      margin-top: 0;
+      padding: 100px 0;
+    }
+    .spinner > div {
+      background-color: #407394;
+    }
+  }
+
 
   .x-editor--translations-empty {
     text-align: center;
@@ -343,6 +364,7 @@
     padding-right: 25px;
     border-bottom: 1px solid #cddbe4;
     position: relative;
+    color: #666;
 
     &:hover {
       cursor: pointer;
@@ -399,7 +421,6 @@
 
     .extract {
       font-size: 13px;
-      color: #666;
       margin: 0;
     }
   }
