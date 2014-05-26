@@ -319,6 +319,20 @@
 
   background-color: #dee7ed;
 
+  .x-editor--translations-empty {
+    text-align: center;
+    padding-top: 50px;
+    color: #888;
+
+    .fa {
+      font-size: 70px;
+    }
+
+    p {
+      text-transform: uppercase;
+    }
+  }
+
   .translations-list {
   }
 

@@ -2,10 +2,12 @@ define([
   'underscore',
   'marionette',
   'bundle/editor/views/translation_item',
-], function(_, Marionette, TranslationView) {
+  'bundle/editor/views/translations_empty',
+], function(_, Marionette, TranslationView, TranslationsEmptyView) {
 
   var TranslationListView = Marionette.CollectionView.extend({
     itemView: TranslationView,
+    emptyView: TranslationsEmptyView,
     tagName: 'ul',
     className: 'list-unstyled',
 
