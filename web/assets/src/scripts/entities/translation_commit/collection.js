@@ -21,13 +21,21 @@ define([
 
       this.projectSlug = options.projectSlug;
       this.context = options.context;
+
+      this.stats = {
+        all: 0,
+        untranslated: 0,
+        unapproved: 0
+      };
     },
 
     model: Model,
     //comparator: 'name',
 
     parse: function(response) {
-      this.count = response.length;
+      this.stats.all = response.length;
+      this.stats.untranslated = _(response).where({'is_translated': false}).length;
+      this.stats.unapproved = _(response).where({'is_approved': false}).length;
 
       return response;
     }

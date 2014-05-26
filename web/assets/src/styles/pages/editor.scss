@@ -116,6 +116,10 @@
     .ol-editor-source-area, .ol-editor-target-area {
       display: none;
     }
+
+    .x-editor--actions {
+      display: none;
+    }
   }
 }
 
@@ -256,6 +260,51 @@
       background-color: #fff;
       outline: 0;
     }
+  }
+}
+
+.x-editor--stats {
+  //padding: 5px 15px;
+  margin-top: 0;
+  //cursor: pointer;
+  height: 50px;
+  text-align: center;
+  max-width: 33.3333%;
+  line-height: 22px;
+
+  li {
+    float: left;
+  }
+
+  a {
+    float: left;
+    display: block;
+    padding: 5px 15px;
+    height: 50px;
+
+    &:hover {
+      background-color: darken(#dee7ed, 2%);
+    }
+  }
+
+  .count {
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    white-space: nowrap;
+  }
+
+  .name {
+    display: block;
+    width: 100%;
+    height: 16px;
+    line-height: 16px;
+    font-size: .837em;
+    margin: 0;
+    color: #223f53;
+    text-transform: uppercase;
+    background-color: transparent;
   }
 }
 

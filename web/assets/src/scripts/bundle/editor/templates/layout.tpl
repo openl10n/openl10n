@@ -13,6 +13,29 @@
 <div class="x-editor--subheader">
   <div class="x-editor--filters" id="filters"></div>
 
+  <div class="x-editor--stats pull-left" id="stats">
+    <ul class="list-unstyled">
+      <li>
+        <a href="#" data-bypass>
+          <span class="count">XXX</span>
+          <span class="name">all</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-bypass>
+          <span class="count">19</span>
+          <span class="name">untranslated</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-bypass>
+          <span class="count">123</span>
+          <span class="name">unapproved</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
   <div class="x-editor--actions pull-right" id="actionbar"></div>
 </div>
 

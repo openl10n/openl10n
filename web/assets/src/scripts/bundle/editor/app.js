@@ -11,6 +11,7 @@ define([
   'bundle/editor/views/layout',
   'bundle/editor/views/locale_chooser',
   'bundle/editor/views/resources_list',
+  'bundle/editor/views/stats',
   'bundle/editor/views/translate/layout',
   'bundle/editor/views/translations_list',
   'bundle/editor/views/translate/tabs',
@@ -32,6 +33,7 @@ define([
   Layout,
   LocaleChooserView,
   ResourcesListView,
+  StatsView,
   TranslationEditView,
   TranslationsListView,
   TranslateTabsView,
@@ -148,6 +150,9 @@ define([
       var filtersView = new FiltersView({
         model: this.context
       });
+      var stastsView = new StatsView({
+        collection: this.translationsList
+      })
       var translationsListView = new TranslationsListView({
         collection: this.translationsList
       });
@@ -158,6 +163,7 @@ define([
       this.layout.targetChooserRegion.show(targetChooserView);
       this.layout.resourcesListRegion.show(resourcesListView);
       this.layout.translationsListRegion.show(translationsListView);
+      this.layout.statsRegion.show(stastsView);
     },
 
     //

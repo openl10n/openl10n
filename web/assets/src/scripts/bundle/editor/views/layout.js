@@ -13,6 +13,7 @@ define([
       resourcesListRegion: '#resources-list',
       filtersRegion: '#filters',
       actionBarRegion: '#actionbar',
+      statsRegion: '#stats',
       translationsListRegion: '#translations-list',
       translationEditRegion: '#translations-edit'
     },
