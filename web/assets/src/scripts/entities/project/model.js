@@ -51,11 +51,11 @@ define([
     }
   };
 
-  app.reqres.setHandler('project:entity', function(id) {
-    return API.getProjectEntity(id);
+  app.reqres.setHandler('project:entity', function(projectSlug) {
+    return API.getProjectEntity(projectSlug);
   });
 
-  app.reqres.setHandler('project:entity:new', function(id) {
+  app.reqres.setHandler('project:entity:new', function() {
     return new Project();
   });
 

@@ -45,6 +45,15 @@ define([
         // Set filters.
         editorApp.filters.set(filters);
 
+        if (!source) {
+          var fetchingProject = app.reqres.request('project:entity', projectSlug);
+          $.when(fetchingProject).done(function(project) {
+            editorApp.context.set({
+              source: project.get('default_locale'),
+            });
+          });
+        }
+
         // Select given translation
         if (translationId) {
           editorApp.translationId = translationId;
