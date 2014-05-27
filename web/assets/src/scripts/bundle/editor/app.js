@@ -193,14 +193,19 @@ define([
     updateRoute: function() {
       var path = ['projects', this.projectSlug, 'translate'];
 
-      if (this.context.get('source')){
-        path.push(this.context.get('source'));
-      }
-      if (this.context.get('target')){
-        path.push(this.context.get('target'));
-      }
-      if (this.translationId) {
-        path.push(this.translationId);
+      var parts = [
+        this.context.get('source'),
+        this.context.get('target'),
+        this.translationId
+      ];
+
+      for (var i in parts) {
+        var part = parts[i];
+        if (part) {
+          path.push(part);
+        } else {
+          break;
+        }
       }
 
       var params = {};
