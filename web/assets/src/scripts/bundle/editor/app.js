@@ -107,6 +107,7 @@ define([
       // instanciate models
       this.context = new Context();
       this.filters = new FilterBag();
+      this.translationId = null;
 
       this.resourcesList = new ResourcesList([], {
         projectSlug: this.projectSlug
@@ -174,11 +175,12 @@ define([
     //
     _initEvents: function() {
       // Local models events
-      this.listenTo(this.context, 'change', this.updateRoute);
       this.listenTo(this.context, 'change', this.updateTranslations);
-      this.listenTo(this.filters, 'change', this.updateRoute);
+      this.listenTo(this.context, 'change', this.updateRoute);
       this.listenTo(this.filters, 'change', this.updateTranslations);
+      this.listenTo(this.filters, 'change', this.updateRoute);
       this.listenTo(this.translationsList, 'select:one', this.showTranslation);
+      this.listenTo(this.translationsList, 'select:one', this.updateRoute);
 
       // Global events (namespaced)
       this.listenTo(msgbus.events, 'editor:previous', this.selectPreviousTranslation);
@@ -196,6 +198,9 @@ define([
       }
       if (this.context.get('target')){
         path.push(this.context.get('target'));
+      }
+      if (this.translationId) {
+        path.push(this.translationId);
       }
 
       var params = {};
@@ -223,6 +228,8 @@ define([
     // Update the translations list when the context of the Editor changes.
     //
     updateTranslations: function() {
+      var _this = this;
+
       if (!this.context.get('source') || !this.context.get('target')) {
         this.translationsList.reset();
         this.layout.actionBarRegion.close();
@@ -230,13 +237,29 @@ define([
         return;
       }
 
-      this.translationsList.fetch();
+      this.translationsList.fetch().done(function() {
+        if (!_this.translationId) {
+          msgbus.events.trigger('editor:next');
+          return;
+        }
+
+        var translation = _this.translationsList.get(_this.translationId);
+        if (!translation && _this.translationsList.length > 0) {
+          // If given translation is not found on current list, then select first one
+          translation = _this.translationsList.at(0);
+        }
+        if (translation) {
+          translation.select();
+        }
+      });
     },
 
     //
     // Render the views for the selected translation.
     //
     showTranslation: function(translation) {
+      this.translationId = translation.id;
+
       var actionBarView = new ActionBarView({model: translation});
       var translationEditView = new TranslationEditView({model: translation});
       var tabsView = new TranslateTabsView();

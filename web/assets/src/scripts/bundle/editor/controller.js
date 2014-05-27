@@ -21,9 +21,13 @@ define([
       return this._initialize('proofread', projectSlug, source, target, translationId, filters);
     },
 
+    //
+    // Initialize the editor application
+    //
     _initialize: function(mode, projectSlug, source, target, translationId, filters) {
       app.startSubApp('EditorBundle');
 
+      // Read filters from query string (injected as the last defined parameters)
       var parameters = [source, target, translationId];
       for (var i in parameters) {
         var param = parameters[i];
@@ -39,7 +43,12 @@ define([
         editorApp.setMode(mode);
 
         // Set filters.
-        editorApp.filters.set(filters)
+        editorApp.filters.set(filters);
+
+        // Select given translation
+        if (translationId) {
+          editorApp.translationId = translationId;
+        }
 
         // Set context attributes.
         // Be sure to set context at the end in order to don't fetch
@@ -48,11 +57,6 @@ define([
           source: source || null,
           target: target || null,
         });
-
-        // Select given translation
-        if (translationId) {
-          // TODO
-        }
       });
     },
 
