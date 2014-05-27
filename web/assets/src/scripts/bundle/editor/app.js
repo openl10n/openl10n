@@ -150,7 +150,7 @@ define([
         collection: this.resourcesList
       });
       var filtersView = new FiltersView({
-        model: this.context
+        model: this.filters
       });
       var stastsView = new StatsView({
         translationsList: this.translationsList,

@@ -236,13 +236,26 @@
   height: 100%;
   float: left;
 
-  i {
+  .fa, .clear {
     z-index: 10;
     color: #666;
     position: absolute;
+  }
+
+  .fa-search {
     top: 14px;
     left: 10px;
     font-size: 20px;
+  }
+
+  .clear {
+    top: -2px; // meh??
+    right: 10px;
+    font-size: 28px;
+  }
+
+  form {
+    display: inline;
   }
 
   input.search-input {
