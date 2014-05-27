@@ -10,6 +10,7 @@ define([
   'bundle/editor/views/actionbar',
   'bundle/editor/views/filters',
   'bundle/editor/views/layout',
+  'bundle/editor/views/language_overlay',
   'bundle/editor/views/locale_chooser',
   'bundle/editor/views/resources_list',
   'bundle/editor/views/stats',
@@ -33,6 +34,7 @@ define([
   ActionBarView,
   FiltersView,
   Layout,
+  LanguageOverlayView,
   LocaleChooserView,
   ResourcesListView,
   StatsView,
@@ -147,6 +149,9 @@ define([
         context: this.context,
         languagesList: this.languagesList
       });
+      var languageOverlayView = new LanguageOverlayView({
+        model: this.context
+      });
       var resourcesListView = new ResourcesListView({
         collection: this.resourcesList
       });
@@ -162,6 +167,7 @@ define([
       });
 
       // render views
+      this.layout.languageOverlayRegion.show(languageOverlayView);
       this.layout.filtersRegion.show(filtersView);
       this.layout.sourceChooserRegion.show(sourceChooserView);
       this.layout.targetChooserRegion.show(targetChooserView);

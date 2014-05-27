@@ -8,6 +8,7 @@ define([
     tagName: 'div',
 
     regions: {
+      languageOverlayRegion: '#language-overlay',
       sourceChooserRegion: '#source-chooser',
       targetChooserRegion: '#target-chooser',
       resourcesListRegion: '#resources-list',

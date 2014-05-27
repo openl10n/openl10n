@@ -66,7 +66,7 @@ define([
         });
       }
 
-      updateBlockHeight();
+      setTimeout(function() { updateBlockHeight(); }, 200);
       $window.resize(updateBlockHeight);
     },
 

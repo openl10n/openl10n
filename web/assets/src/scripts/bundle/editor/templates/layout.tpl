@@ -23,3 +23,5 @@
 
   <div class="x-editor--translation-edit js-scrollable" id="translations-edit"></div>
 </div>
+
+<div id="language-overlay"></div>
