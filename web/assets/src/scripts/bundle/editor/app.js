@@ -5,6 +5,7 @@ define([
   'msgbus',
 
   'bundle/editor/models/context',
+  'bundle/editor/models/filter_bag',
 
   'bundle/editor/views/actionbar',
   'bundle/editor/views/filters',
@@ -27,6 +28,7 @@ define([
   msgbus,
 
   Context,
+  FilterBag,
 
   ActionBarView,
   FiltersView,
@@ -104,7 +106,7 @@ define([
     _initModels: function() {
       // instanciate models
       this.context = new Context();
-      // this.filters = new FilterBag();
+      this.filters = new FilterBag();
 
       this.resourcesList = new ResourcesList([], {
         projectSlug: this.projectSlug
@@ -117,7 +119,7 @@ define([
       this.translationsList = new TranslationsList([], {
         projectSlug: this.projectSlug,
         context: this.context,
-        //filters: this.filters
+        filters: this.filters
       });
 
       // sync models
@@ -151,7 +153,8 @@ define([
         model: this.context
       });
       var stastsView = new StatsView({
-        collection: this.translationsList
+        translationsList: this.translationsList,
+        filters: this.filters
       })
       var translationsListView = new TranslationsListView({
         collection: this.translationsList
@@ -173,6 +176,8 @@ define([
       // Local models events
       this.listenTo(this.context, 'change', this.updateRoute);
       this.listenTo(this.context, 'change', this.updateTranslations);
+      this.listenTo(this.filters, 'change', this.updateRoute);
+      this.listenTo(this.filters, 'change', this.updateTranslations);
       this.listenTo(this.translationsList, 'select:one', this.showTranslation);
 
       // Global events (namespaced)
@@ -184,16 +189,34 @@ define([
     // Update the route based on the context, selected translation and filters
     //
     updateRoute: function() {
-      var parts = ['projects', this.projectSlug, 'translate'];
+      var path = ['projects', this.projectSlug, 'translate'];
 
       if (this.context.get('source')){
-        parts.push(this.context.get('source'));
+        path.push(this.context.get('source'));
       }
       if (this.context.get('target')){
-        parts.push(this.context.get('target'));
+        path.push(this.context.get('target'));
       }
 
-      Backbone.history.navigate(parts.join('/'), {replace: true});
+      var params = {};
+      var filters = this.filters.toJSON();
+
+      // Build query params
+      for (var name in filters) {
+        var value = filters[name];
+        if (null !== value) {
+          params[name] = value;
+        }
+      }
+
+      // Build full URL
+      var url = path.join('/');
+      if (Object.keys(params).length > 0) {
+        url += '?' + $.param(params);
+      }
+
+      // Navigate "silently" to the given URL
+      Backbone.history.navigate(url, {replace: true});
     },
 
     //

@@ -9,6 +9,7 @@ require.config({
     'backbone.wreqr': '../vendor/backbone.wreqr/lib/backbone.wreqr',
     'backbone.babysitter': '../vendor/backbone.babysitter/lib/backbone.babysitter',
     'backbone.select': '../vendor/backbone.select/dist/amd/backbone.select',
+    'backbone.queryparams': '../vendor/backbone-query-parameters/backbone.queryparams',
     'marionette': '../vendor/marionette/lib/core/amd/backbone.marionette',
     'underscore': '../vendor/underscore/underscore',
     'text': '../vendor/requirejs-text/text',
@@ -23,6 +24,9 @@ require.config({
     'backbone': {
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
+    },
+    'backbone.queryparams': {
+      deps: ['backbone'],
     }
   },
   tpl: {

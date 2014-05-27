@@ -9,11 +9,24 @@ define([
 
   var Collection = Backbone.Collection.extend({
     url: function() {
-      return backendRouter.generate('openl10n_api_get_translation_commits', {
+      var attributes = {
         'project': this.projectSlug,
         'source': this.context.get('source'),
         'target': this.context.get('target'),
-      });
+      };
+
+      // Manage filters
+      if (null !== this.filters.get('translated')) {
+        attributes.translated = this.filters.get('translated');
+      }
+      if (null !== this.filters.get('approved')) {
+        attributes.approved = this.filters.get('approved');
+      }
+      if (this.filters.get('text')) {
+        attributes.text = this.filters.get('text');
+      }
+
+      return backendRouter.generate('openl10n_api_get_translation_commits', attributes);
     },
 
     initialize: function(models, options) {
@@ -21,6 +34,7 @@ define([
 
       this.projectSlug = options.projectSlug;
       this.context = options.context;
+      this.filters = options.filters;
 
       this.stats = {
         all: 0,
@@ -35,7 +49,7 @@ define([
     parse: function(response) {
       this.stats.all = response.length;
       this.stats.untranslated = _(response).where({'is_translated': false}).length;
-      this.stats.unapproved = _(response).where({'is_approved': false}).length;
+      this.stats.unapproved = _(response).where({'is_translated': true, 'is_approved': false}).length;
 
       return response;
     },

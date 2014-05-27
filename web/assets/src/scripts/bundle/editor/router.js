@@ -2,7 +2,8 @@ define([
   'underscore',
   'backbone',
   'marionette',
-  'msgbus'
+  'msgbus',
+  'backbone.queryparams'
 ], function(_, Backbone, Marionette, msgbus) {
 
   var Router = Marionette.AppRouter.extend({
