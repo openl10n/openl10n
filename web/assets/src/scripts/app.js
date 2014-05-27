@@ -55,7 +55,7 @@ define([
       },
 
       index: function() {
-        app.trigger('project:list');
+        Backbone.history.navigate('projects', {trigger: true, replace: true});
       }
     });
 
