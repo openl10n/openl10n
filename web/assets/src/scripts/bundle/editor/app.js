@@ -171,12 +171,29 @@ define([
     //
     _initEvents: function() {
       // Local models events
+      this.listenTo(this.context, 'change', this.updateRoute);
       this.listenTo(this.context, 'change', this.updateTranslations);
       this.listenTo(this.translationsList, 'select:one', this.showTranslation);
 
       // Global events (namespaced)
       // this.listenTo(msgbus.vent, 'editor:previous', this.selectPreviousTranslation);
       // this.listenTo(msgbus.vent, 'editor:next', this.selectNextTranslation);
+    },
+
+    //
+    // Update the route based on the context, selected translation and filters
+    //
+    updateRoute: function() {
+      var parts = ['projects', this.projectSlug, 'translate'];
+
+      if (this.context.get('source')){
+        parts.push(this.context.get('source'));
+      }
+      if (this.context.get('target')){
+        parts.push(this.context.get('target'));
+      }
+
+      Backbone.history.navigate(parts.join('/'), {replace: true});
     },
 
     //

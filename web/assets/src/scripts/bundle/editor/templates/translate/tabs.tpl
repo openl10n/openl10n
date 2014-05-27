@@ -7,14 +7,20 @@
   </li>
   <li>
     <a href="#" data-bypass>
+      <i class="fa fa-quote-right"></i>
+      <span>Suggestions</span>
+    </a>
+  </li>
+  <li>
+    <a href="#" data-bypass>
       <i class="fa fa-recycle"></i>
       <span>History</span>
     </a>
   </li>
   <li>
     <a href="#" data-bypass>
-      <i class="fa fa-quote-right"></i>
-      <span>Suggestions</span>
+      <i class="fa fa-book"></i>
+      <span>Glossary</span>
     </a>
   </li>
   <li>
