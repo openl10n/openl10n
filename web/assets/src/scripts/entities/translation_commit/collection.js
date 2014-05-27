@@ -38,6 +38,14 @@ define([
       this.stats.unapproved = _(response).where({'is_approved': false}).length;
 
       return response;
+    },
+
+    reset: function(models, options) {
+      this.stats.all = 0;
+      this.stats.untranslated = 0;
+      this.stats.unapproved = 0;
+
+      return Backbone.Collection.prototype.reset.call(this, models, options);
     }
   });
 
