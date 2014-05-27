@@ -67,6 +67,7 @@ define([
       'apps/common/init',
       'apps/project/app',
       'apps/editor/app',
+      'bundle/common/init',
       'bundle/editor/init',
     ], function () {
       // Start history

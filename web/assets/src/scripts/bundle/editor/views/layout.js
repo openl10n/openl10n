@@ -18,21 +18,12 @@ define([
       translationEditRegion: '#translations-edit'
     },
 
+    behaviors: {
+      Scrollable: {}
+    },
+
     onShow: function() {
       var _this = this;
-
-      var $window = $(window);
-      var $el = this.$el.find('.js-scrollable');
-      var updateBlockHeight = function UpdateBlockHeight() {
-        $el.each(function() {
-          var $this = $(this);
-          var height = $window.height() - $(this).offset().top;
-          $(this).height(height);
-        });
-      }
-
-      setTimeout(updateBlockHeight, 200); // hack
-      $(window).resize(updateBlockHeight);
 
       this.$('.sidebar').hover(function() {
         _this.$el.addClass('sidebar-hover');

@@ -56,20 +56,18 @@ define([
 
     // Scrollable behaviour
     onRender: function() {
-      var _this = this;
-
       var $window = $(window);
       var $el = this.$el.find('.js-scrollable');
       var updateBlockHeight = function UpdateBlockHeight() {
         $el.each(function() {
           var $this = $(this);
-          var height = $window.height() - $(this).offset().top;
-          $(this).height(height);
+          var height = $window.height() - $this.offset().top;
+          $this.height(height);
         });
       }
 
-      setTimeout(updateBlockHeight, 200); // hack
-      $(window).resize(updateBlockHeight);
+      updateBlockHeight();
+      $window.resize(updateBlockHeight);
     },
 
     onKeydown: function(evt) {
