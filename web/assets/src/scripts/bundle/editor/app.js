@@ -176,8 +176,8 @@ define([
       this.listenTo(this.translationsList, 'select:one', this.showTranslation);
 
       // Global events (namespaced)
-      // this.listenTo(msgbus.vent, 'editor:previous', this.selectPreviousTranslation);
-      // this.listenTo(msgbus.vent, 'editor:next', this.selectNextTranslation);
+      this.listenTo(msgbus.events, 'editor:previous', this.selectPreviousTranslation);
+      this.listenTo(msgbus.events, 'editor:next', this.selectNextTranslation);
     },
 
     //
@@ -231,12 +231,38 @@ define([
     // Select the preivous translation of the list
     //
     selectPreviousTranslation: function() {
+      var selectedTranslation = this.translationsList.selected;
+      var previousTranslation = null;
+
+      // If no translation is currently selected, then select the first one (if any)
+      if (!selectedTranslation && this.translationsList.length > 0) {
+        previousTranslation = this.translationsList.at(0);
+      } else {
+        previousTranslation = this.translationsList.at(this.translationsList.indexOf(selectedTranslation) - 1)
+      }
+
+      if (previousTranslation) {
+        previousTranslation.select();
+      }
     },
 
     //
     // Select the next translation of the list
     //
     selectNextTranslation: function() {
+      var selectedTranslation = this.translationsList.selected;
+      var nextTranslation = null;
+
+      // If no translation is currently selected, then select the first one (if any)
+      if (!selectedTranslation && this.translationsList.length > 0) {
+        nextTranslation = this.translationsList.at(0);
+      } else {
+        nextTranslation = this.translationsList.at(this.translationsList.indexOf(selectedTranslation) + 1)
+      }
+
+      if (nextTranslation) {
+        nextTranslation.select();
+      }
     },
 
   });

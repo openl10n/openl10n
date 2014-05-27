@@ -1,10 +1,11 @@
 define([
   'underscore',
   'marionette',
+  'msgbus',
   'bundle/editor/views/translation_item',
   'bundle/editor/views/translations_empty',
   'tpl!bundle/editor/templates/translations_list',
-], function(_, Marionette, TranslationView, TranslationsEmptyView, translationsListTpl) {
+], function(_, Marionette, msgbus, TranslationView, TranslationsEmptyView, translationsListTpl) {
 
   var TranslationListView = Marionette.CompositeView.extend({
     template: translationsListTpl,
@@ -14,19 +15,21 @@ define([
     className: 'x-editor--translations-list',
 
     collectionEvents: {
+      'select:one': 'adjustPosition',
       'request': 'loading',
       'sync': 'render',
     },
 
     initialize: function() {
-      var _this = this;
+      _.bindAll(this, 'onKeydown');
+      $(document).on('keydown', this.onKeydown);
+    },
 
-      // _.bindAll(this, 'keydown');
-      // $(document).on('keydown', this.keydown);
+    // override remove to also unbind events
+    remove: function() {
+      $(document).off('keydown', this.onKeydown);
 
-      // msgBus.events.on('translations:select-next', function() {
-      //   _this.collection.selectNextItem();
-      // });
+      Backbone.View.prototype.remove.call(this);
     },
 
     // Display a loading animation
@@ -69,59 +72,77 @@ define([
       $(window).resize(updateBlockHeight);
     },
 
-    // override remove to also unbind events
-    // remove: function() {
-    //   $(document).off('keydown', this.keydown);
+    onKeydown: function(evt) {
+      if (window.event) {
+        key = window.event.keyCode;
+        isShift = window.event.shiftKey;
+        isCtrl = window.event.ctrlKey;
+      } else {
+        key = evt.which;
+        isShift = evt.shiftKey;
+        isCtrl = evt.ctrlKey;
+      }
 
-    //   Backbone.View.prototype.remove.call(this);
-    // },
+      // If pressed TAB key
+      if (key === 9) {
+        evt.preventDefault();
 
-    // keydown: function(evt) {
-    //   if (window.event) {
-    //     key = window.event.keyCode;
-    //     isShift = window.event.shiftKey;
-    //     isCtrl = window.event.ctrlKey;
-    //   } else {
-    //     key = evt.which;
-    //     isShift = evt.shiftKey;
-    //     isCtrl = evt.ctrlKey;
-    //   }
+        // var translation = this.collection.selectedItem;
+        // if (null !== translation && translation.get('is_dirty'))
+        //   translation.save({is_translated: true});
 
-    //   // If pressed TAB key
-    //   if (key === 9) {
-    //     evt.preventDefault();
+        if (isShift)
+          msgbus.events.trigger('editor:previous');
+        else
+          msgbus.events.trigger('editor:next');
+      }
 
-    //     var translation = this.collection.selectedItem;
-    //     if (null !== translation && translation.get('is_dirty'))
-    //       translation.save({is_translated: true});
+      return;
 
-    //     if (isShift)
-    //       this.collection.selectPreviousItem();
-    //     else
-    //       this.collection.selectNextItem();
-    //   }
+      // If pressed ENTER key
+      // if (key === 13 && isCtrl) {
+      //   evt.preventDefault();
 
-    //   // If pressed ENTER key
-    //   if (key === 13 && isCtrl) {
-    //     evt.preventDefault();
+      //   var translation = this.collection.selectedItem;
+      //   if (null === translation)
+      //     return;
 
-    //     var translation = this.collection.selectedItem;
-    //     if (null === translation)
-    //       return;
+      //   if (isShift)
+      //     translation.save({
+      //       is_translated: true,
+      //       is_approved: true
+      //     });
+      //   else
+      //     translation.save({
+      //       is_translated: true,
+      //     });
 
-    //     if (isShift)
-    //       translation.save({
-    //         is_translated: true,
-    //         is_approved: true
-    //       });
-    //     else
-    //       translation.save({
-    //         is_translated: true,
-    //       });
+      //   this.collection.selectNextItem();
+      // }
+    },
 
-    //     this.collection.selectNextItem();
-    //   }
-    // },
+    adjustPosition: function() {
+      var selectedTranslation = this.collection.selected;
+      if (!selectedTranslation)
+        return;
+
+      var $translationList = this.$el.find('.js-scrollable');
+      var $selectedTranslation = this.children.findByModel(selectedTranslation).$el;
+
+      var docViewTop = $translationList.offset().top;
+      var docViewBottom = docViewTop + $translationList.height();
+
+      var elemTop = $selectedTranslation.offset().top;
+      var elemBottom = elemTop + $selectedTranslation.height();
+
+      if (!(elemBottom <= docViewBottom && elemTop >= docViewTop)) {
+        var scrollTop = elemTop - docViewTop + $translationList.scrollTop() - $translationList.height() / 2 + 100;
+
+        $translationList.animate({
+          scrollTop: scrollTop
+        }, 200);
+      }
+    }
   });
 
   return TranslationListView;
