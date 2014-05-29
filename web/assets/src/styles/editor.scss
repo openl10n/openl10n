@@ -476,6 +476,7 @@
       border-style: solid;
       border-color: transparent;
       border-bottom: 0;
+      z-index: 5;
     }
 
     /* Stroke */
@@ -523,9 +524,11 @@
     padding: 0;
     background-color: #fff;
     //border-bottom: 1px solid #eee;
+    z-index: 1;
 
     textarea.phrase-editor {
         padding: 10px;
+        padding-bottom: 20px;
         border: none;
         box-shadow: none;
         font-size: 16px;
@@ -534,6 +537,14 @@
         overflow-x: hidden;
         overflow-y: scroll;
         word-wrap: break-word;
-        height: 110px;
+        height: 120px;
+    }
+
+    .meta {
+      background-color: #fff;
+      margin: 0;
+      padding: 3px 10px;
+      color: #999;
+      font-size: 12px;
     }
 }
