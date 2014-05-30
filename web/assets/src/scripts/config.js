@@ -1,6 +1,7 @@
 require.config({
   baseUrl: '/assets/dist/js',
   paths: {
+    // Librairies
     'jquery': '../vendor/jquery/dist/jquery.min',
     'bootstrap': '../vendor/bootstrap/dist/js/bootstrap.min',
     'domReady': '../vendor/requirejs-domready/domReady',
@@ -15,6 +16,9 @@ require.config({
     'text': '../vendor/requirejs-text/text',
     'tpl': '../vendor/requirejs-tpl-jfparadis/tpl',
     'json': '../vendor/requirejs-plugins/src/json',
+    // Stubs
+    'fos_routing': "stubs/fos_routing",
+    'fos_routing_data': "stubs/fos_routing_data",
   },
   shim: {
     'bootstrap': ['jquery'],

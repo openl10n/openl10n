@@ -12,7 +12,7 @@ openl10n_api:
 openl10n_index:
     pattern:  /{path}
     requirements:
-        path: "^(?!(api)/).*"
+        path: "^(?!(api|assets)/).*"
     defaults:
         _controller: FrameworkBundle:Template:template
         template: Openl10nWebBundle::index.html.twig
