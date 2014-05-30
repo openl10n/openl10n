@@ -7,20 +7,33 @@ define([
     template: translateEditTpl,
 
     ui: {
-      textarea: 'textarea.phrase-editor'
+      copy: '.action-copy',
+      textarea: 'textarea.phrase-editor',
     },
 
     events: {
+      'click @ui.copy': 'copySource',
       'keyup @ui.textarea': 'recordEditing',
     },
 
     modelEvents: {
-      'sync': 'render'
+      'change:source_phrase': 'render',
+      'change:target_phrase': 'render',
+      'change:is_translated': 'render',
+      'change:is_approved': 'render',
     },
 
-    onRender: function() {
+    onShow: function() {
       // this.ui.textarea.get(0).focus();
       this.ui.textarea.select();
+    },
+
+    copySource: function() {
+      var phrase = this.model.get('source_phrase');
+      this.model.set({
+        'target_phrase': phrase,
+        'edited': true
+      });
     },
 
     recordEditing: function() {

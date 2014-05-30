@@ -497,6 +497,15 @@
       border-width: 8px;
     }
 
+    .action-copy {
+      padding-left: 5px;
+      font-size: 0.9em;
+      color: #999;
+      &:hover {
+        color: #666;
+      }
+    }
+
     .title {
         margin: 0 0 5px;
         font-size: 15px;

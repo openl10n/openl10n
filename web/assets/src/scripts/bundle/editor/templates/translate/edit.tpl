@@ -1,7 +1,7 @@
 <div class="ol-editor-source-area">
   <div class="meta pull-right">
     <span class="text-success">
-      <i class="fa fa-check"></i>
+      <i class="icon-status text-<% if (is_translated) { %>success<% } else { %>danger<% } %> fa <% if (is_approved) { %>fa-check<% } else { %>fa-circle<% } %>"></i>
     </span>
 
     <span><%- key %></span>
@@ -10,6 +10,10 @@
 
   <h4 class="title">
     Original phrase
+
+    <a href="#" class="action-copy" data-bypass>
+      <i class="fa fa-copy"></i>
+    </a>
   </h4>
 
   <p class="phrase text-default">
