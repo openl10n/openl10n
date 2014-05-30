@@ -11,8 +11,8 @@ define([
 
     modelEvents: {
       'change': 'render',
-      'selected': 'render',
-      'deselected': 'render'
+      'selected': 'onSelect',
+      'deselected': 'onDeselect',
     },
 
     templateHelpers: {
@@ -21,11 +21,6 @@ define([
 
     events: {
       'click': 'selectTranslation'
-    },
-
-    modelEvents: {
-      'selected': 'onSelect',
-      'deselected': 'onDeselect',
     },
 
     onRender: function() {

@@ -25,7 +25,7 @@ define([
       target_phrase: '',
       is_translated: false,
       is_approved: false,
-      selected: false
+      edited: false
     },
 
     initialize: function(options) {
@@ -35,30 +35,6 @@ define([
       this.sourceLocale = options.sourceLocale;
       this.targetLocale = options.targetLocale;
     },
-  });
-
-  var API = {
-    getEntity: function(translationId, source, target) {
-      throw "Not implemented";
-
-      var translationCommit = new Model({slug: projectSlug});
-      var defer = $.Deferred();
-
-      project.fetch({
-        success: function(data) {
-          defer.resolve(data);
-        },
-        error: function(data) {
-          defer.resolve(undefined);
-        }
-      });
-
-      return defer.promise();
-    }
-  };
-
-  app.reqres.setHandler('translation_commit:entity', function(id) {
-    return API.getEntity(id);
   });
 
   return Model;

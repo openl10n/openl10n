@@ -6,20 +6,12 @@ define([
   var TranslateLayoutView = Marionette.Layout.extend({
     template: translateLayoutTpl,
 
-    ui: {
-      textarea: 'textarea.phrase-editor'
-    },
-
     regions: {
+      editRegion: '#translation-edit',
       tabsRegion: '#edit-tabs',
       informationTabRegion: '#tab-information',
       historyTabRegion: '#tab-history',
     },
-
-    onShow: function() {
-      // this.ui.textarea.get(0).focus();
-      this.ui.textarea.select();
-    }
   });
 
   return TranslateLayoutView;

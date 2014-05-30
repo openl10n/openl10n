@@ -214,9 +214,9 @@
 
   i {
     //position: absolute;
-    height: 50px;
     //width: 25px;
-    line-height: 50px;
+    // height: 50px;
+    // line-height: 50px;
     text-align: center;
   }
   span {
@@ -228,12 +228,18 @@
     margin: 0;
     border-radius: 0;
     border: none;
+    max-height: 400px;
+    overflow: auto;
+
+    i.fa {
+      padding-right: 5px;
+    }
 
     a {
       color: #2a6496;
-      padding: 7px 20px;
-      background-color: #dee7ed;
-      font-size: 14px;
+      padding: 8px 15px;
+      background-color: #f2f2f2;
+      font-size: 16px;
 
       &:hover {
         background-color: darken(#dee7ed, 5%);
@@ -270,8 +276,18 @@
 
   .btn-default {
     border: 0;
-    //background-color: transparent;
-    background-color: darken(#dee7ed, 2%);
+    background-color: transparent;
+    //background-color: darken(#dee7ed, 5%);
+
+    &.text-default {
+      color: #666;
+    }
+    &.text-success {
+      color: #5cb85c;
+    }
+    &.text-danger {
+      color: #d9534f;
+    }
 
     &:hover {
       background-color: darken(#dee7ed, 5%);
@@ -488,6 +504,9 @@
       i {
         position: absolute;
         top: 3px;
+      }
+      i.icon-edit {
+        //color: #666;
       }
       .identifier {
         padding-left: 20px;

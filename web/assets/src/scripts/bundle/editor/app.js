@@ -15,6 +15,7 @@ define([
   'bundle/editor/views/resources_list',
   'bundle/editor/views/stats',
   'bundle/editor/views/translate/layout',
+  'bundle/editor/views/translate/edit',
   'bundle/editor/views/translations_list',
   'bundle/editor/views/translate/tabs',
   'bundle/editor/views/translate/information_tab',
@@ -38,6 +39,7 @@ define([
   LocaleChooserView,
   ResourcesListView,
   StatsView,
+  TranslationTranslateView,
   TranslationEditView,
   TranslationsListView,
   TranslateTabsView,
@@ -63,7 +65,7 @@ define([
   // [x] layout.show(filterFormView)
   // [x] on context change, translationsList.fetch
   // [x] on translationsList select one,
-  //   layout.show(translationEditView)
+  //   layout.show(translationTranslateView)
   //   + layout.show(translationHistoryView) + other tabs
   //   + layout.show(translationActionBar)
   //   + layout.show(translationEditTabs)
@@ -272,16 +274,20 @@ define([
       this.translationId = translation.id;
 
       var actionBarView = new ActionBarView({model: translation});
+      var translationTranslateView = new TranslationTranslateView();
       var translationEditView = new TranslationEditView({model: translation});
       var tabsView = new TranslateTabsView();
       var informationTabView = new TranslateInformationTabView({model: translation});
 
       this.layout.actionBarRegion.show(actionBarView);
-      this.layout.translationEditRegion.show(translationEditView);
-      translationEditView.tabsRegion.show(tabsView);
-      translationEditView.informationTabRegion.show(informationTabView);
+      this.layout.translationEditRegion.show(translationTranslateView);
+      translationTranslateView.editRegion.show(translationEditView);
+      translationTranslateView.tabsRegion.show(tabsView);
+      translationTranslateView.informationTabRegion.show(informationTabView);
 
-      translation.fetch();
+      if (!translation.get('edited')) {
+        translation.fetch();
+      }
     },
 
     //

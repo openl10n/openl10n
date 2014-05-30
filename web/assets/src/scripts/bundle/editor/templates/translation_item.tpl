@@ -1,9 +1,11 @@
 <span class="status <% if (is_approved) { %>status-approved<% } else if (is_translated) { %>status-translated<% } %>"></span>
 
 <p class="key">
-  <span class="text-<% if (is_translated) { %>success<% } else { %>danger<% } %>">
-    <i class="fa <% if (is_approved) { %>fa-check<% } else { %>fa-circle<% } %>"></i>
-  </span>
+  <% if (edited) { %>
+    <i class="icon-edit text-success fa fa-pencil"></i>
+  <% } else { %>
+    <i class="icon-status text-<% if (is_translated) { %>success<% } else { %>danger<% } %> fa <% if (is_approved) { %>fa-check<% } else { %>fa-circle<% } %>"></i>
+  <% } %>
 
   <span class="identifier">
     <%- key %>
