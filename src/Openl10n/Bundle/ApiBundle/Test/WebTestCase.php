@@ -24,9 +24,12 @@ class WebTestCase extends BaseWebTestCase
             $statusCode, $response->getStatusCode(),
             $response->getContent()
         );
+
         $this->assertTrue(
             $response->headers->contains('Content-Type', 'application/json'),
             $response->headers
         );
+
+        return json_decode($response->getContent(), true);
     }
 }
