@@ -45,8 +45,8 @@ before_script:
     - ./reset.sh
 
 script:
-    - bin/phpspec
-    - bin/behat
+    # - bin/phpspec
+    # - bin/behat
 
 after_failure:
     # Dump log
