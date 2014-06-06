@@ -1,6 +1,9 @@
 imports:
     - { resource: config_dev.yml }
 
+parameters:
+    test.client.class: Openl10n\Bundle\ApiBundle\Test\Client
+
 framework:
     test: ~
     session:

@@ -45,6 +45,7 @@ before_script:
     - ./reset.sh
 
 script:
+    - bin/phpunit -c app
     # - bin/phpspec
     # - bin/behat
 
