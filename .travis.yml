@@ -6,39 +6,40 @@ php:
 
 before_install:
     # Update system
-    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-    - sudo apt-get update -qq
+    # - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    # - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    # - sudo apt-get update -qq
     - composer self-update
 
 install:
     # Dependencies
-    - sudo apt-get install -qq -y --force-yes php5-curl php5-mysql php5-intl php5-sqlite sqlite3
-    - gem install compass
+    #- sudo apt-get install -qq -y --force-yes php5-curl php5-mysql php5-intl php5-sqlite sqlite3
+    #- gem install compass
 
     # Web server
-    - phpenv config-add app/travis-ci/php-config.ini
-    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - php -S localhost:8080 -t web/ > /dev/null 2>&1 &
+    #- phpenv config-add app/travis-ci/php-config.ini
+    #- echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    #- php -S localhost:8080 -t web/ > /dev/null 2>&1 &
 
     # XVFB
-    - sh -e /etc/init.d/xvfb start
-    - export DISPLAY=:99.0
+    #- sh -e /etc/init.d/xvfb start
+    #- export DISPLAY=:99.0
 
     # Selenium server (with chrome driver)
-    - sudo apt-get install google-chrome-stable
-    - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar
-    - wget http://chromedriver.storage.googleapis.com/2.4/chromedriver_linux32.zip
-    - unzip chromedriver_linux32.zip
-    - sudo mv chromedriver /usr/bin
-    - java -jar selenium-server-standalone-2.35.0.jar > /dev/null 2>&1 &
+    #- sudo apt-get install google-chrome-stable
+    #- wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar
+    #- wget http://chromedriver.storage.googleapis.com/2.4/chromedriver_linux32.zip
+    #- unzip chromedriver_linux32.zip
+    #- sudo mv chromedriver /usr/bin
+    #- java -jar selenium-server-standalone-2.35.0.jar > /dev/null 2>&1 &
 
     # App configuration
     - cp app/travis-ci/parameters.yml app/config/parameters.yml
-    - cp app/travis-ci/behat.yml behat.yml
+    #- cp app/travis-ci/behat.yml behat.yml
 
     # App install
-    - SYMFONY_ENV=prod composer install --prefer-dist --no-progress --no-interaction
+    #- SYMFONY_ENV=prod composer install --prefer-dist --no-progress --no-interaction
+    - SYMFONY_ENV=test composer install --prefer-dist --no-progress --no-interaction
 
 before_script:
     # Init backend data

@@ -35,14 +35,8 @@
         "rhumsaa/uuid": "~2.7"
     },
     "require-dev": {
-        "behat/behat":                  "~2.4",
-        "behat/symfony2-extension":     "*",
-        "behat/mink-extension":         "*",
-        "behat/mink-browserkit-driver": "*",
-        "behat/mink-selenium2-driver":  "*",
-        "behat/mink-goutte-driver":     "*",
-        "sanpi/behatch-contexts":       "*",
-        "phpspec/phpspec":              "2.0.*@dev"
+        "phpspec/phpspec": "~2.0",
+        "phpunit/phpunit": "~4.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
