@@ -3,6 +3,7 @@
 namespace Openl10n\Bundle\ApiBundle\Tests\Controller;
 
 use Openl10n\Bundle\ApiBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProjectControllerTest extends WebTestCase
 {
@@ -31,9 +32,9 @@ class ProjectControllerTest extends WebTestCase
 
         $crawler = $client->jsonRequest('GET', '/api/projects');
         $response = $client->getResponse();
-        $content = $this->assertJsonResponse($response, 200);
+        $data = $this->assertJsonResponse($response, 200);
 
-        $this->assertCount(3, $content, 'There should be 3 projects');
+        $this->assertCount(3, $data, 'There should be 3 projects');
     }
 
     /**
@@ -54,14 +55,14 @@ class ProjectControllerTest extends WebTestCase
 
         $crawler = $client->jsonRequest('GET', '/api/projects/demo');
         $response = $client->getResponse();
-        $content = $this->assertJsonResponse($response, 200);
+        $data = $this->assertJsonResponse(
+            $response,
+            Response::HTTP_OK,
+            'file://'.realpath(__DIR__.'/../Fixtures/schemas/project.json')
+        );
 
-        $this->assertArrayHasKey('slug', $content, 'Project has a slug');
-        $this->assertArrayHasKey('name', $content, 'Project has a name');
-        $this->assertArrayHasKey('default_locale', $content, 'Project has a default_locale');
-
-        $this->assertEquals('demo', $content['slug'], 'Project\'s slug should be "demo"');
-        $this->assertEquals('Demo', $content['name'], 'Project\'s name should be "Demo"');
-        $this->assertEquals('en', $content['default_locale'], 'Project\'s default locale should be "en"');
+        $this->assertEquals('demo', $data->slug, 'Project\'s slug should be "demo"');
+        $this->assertEquals('Demo', $data->name, 'Project\'s name should be "Demo"');
+        $this->assertEquals('en', $data->default_locale, 'Project\'s default locale should be "en"');
     }
 }

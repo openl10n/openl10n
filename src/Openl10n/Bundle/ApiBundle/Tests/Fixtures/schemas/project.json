@@ -1,0 +1,22 @@
+{
+   "name": "Project",
+   "type": "object",
+   "properties": {
+       "name": {
+           "type": "string",
+           "description": "Project name",
+           "required": true
+       },
+       "slug": {
+           "type": "string",
+           "description": "Project slug",
+           "required": true
+       },
+       "default_locale": {
+           "type": "string",
+           "description": "Project default locale",
+           "required": true
+       }
+   },
+   "additionalProperties" : false
+}
