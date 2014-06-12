@@ -1,5 +1,0 @@
-openl10n_index:
-    pattern:  /
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template: Openl10nWebBundle::index.html.twig

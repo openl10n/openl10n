@@ -2,52 +2,29 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
-services:
-    twig.extension.text:
-       class: Twig_Extensions_Extension_Text
-       tags:
-           - { name: twig.extension }
-
+# Framework Configuration
 framework:
-    #esi:             ~
     translator:      { fallback: %locale% }
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
     form:            ~
-    csrf_protection: ~
+    csrf_protection: false
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_proxies: ~
-    session:
-        name: __sess_id
-        cookie_lifetime: 108000 # 30 minutes
-        save_path: "%kernel.root_dir%/sessions/"
-    fragments:       ~
+    session: false
+    fragments: false
     http_method_override: true
 
 # Twig Configuration
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
-    form:
-        resources:
-            - "@Openl10nWeb/layout/form.html.twig"
-
-# Assetic Configuration
-assetic:
-    debug:          %kernel.debug%
-    use_controller: false
-    bundles:
-        - Openl10nWebBundle
-        - Openl10nEditorBundle
-    filters:
-        cssrewrite: ~
-        sass: { apply_to: "\.scss$" }
 
 # Doctrine Configuration
 doctrine:
@@ -62,14 +39,6 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
-
-# Swiftmailer Configuration
-swiftmailer:
-    transport: %mailer_transport%
-    host:      %mailer_host%
-    username:  %mailer_user%
-    password:  %mailer_password%
-    spool:     { type: memory }
 
 # REST Configuration
 fos_rest:
@@ -101,12 +70,13 @@ fos_rest:
                 fallback_format: html
                 prefer_extension: true
 
-
+# Framework Extra Configuration
 sensio_framework_extra:
     view:    { annotations: false }
     router:  { annotations: true }
     request: { converters: true }
 
+# Serializer Configuration
 jms_serializer:
     metadata:
         auto_detection: true

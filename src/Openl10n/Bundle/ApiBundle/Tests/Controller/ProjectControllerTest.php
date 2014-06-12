@@ -25,7 +25,7 @@ class ProjectControllerTest extends WebTestCase
      *       }
      *     ]
      */
-    public function testGetProjects()
+    public function testGetProjectsList()
     {
         $client = $this->getClient();
         $client->setCredentials('user', 'user');
@@ -48,7 +48,7 @@ class ProjectControllerTest extends WebTestCase
      *       "default_locale": "en"
      *     }
      */
-    public function testGetProjectDemo()
+    public function testGetProject()
     {
         $client = $this->getClient();
         $client->setCredentials('user', 'user');
@@ -64,5 +64,45 @@ class ProjectControllerTest extends WebTestCase
         $this->assertEquals('demo', $data->slug, 'Project\'s slug should be "demo"');
         $this->assertEquals('Demo', $data->name, 'Project\'s name should be "Demo"');
         $this->assertEquals('en', $data->default_locale, 'Project\'s default locale should be "en"');
+    }
+
+    /**
+     * Test to get a non existing project.
+     */
+    public function testGetProjectNotFound()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * Test to create a new project.
+     */
+    public function testCreateNewProject()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * Test to create an existing project (identified by slug).
+     */
+    public function testCreateExistingProject()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * Test to update an existing project.
+     */
+    public function testUpdateProject()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * Test to delete an existing project.
+     */
+    public function testDeleteProject()
+    {
+        $this->markTestIncomplete();
     }
 }

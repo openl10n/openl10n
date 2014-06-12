@@ -23,13 +23,3 @@ translation_commit:
     type: rest
     resource: Openl10n\Bundle\ApiBundle\Controller\TranslationCommitController
     name_prefix: openl10n_api_
-
-# domain:
-#     type: rest
-#     resource: Openl10n\Bundle\ApiBundle\Controller\DomainController
-#     parent: project
-#     name_prefix: openl10n_api_
-
-# openl10n_api_export:
-#     path: /projects/{project}/domains/{domain}/translations.{locale}.{_format}
-#     defaults: { _controller: Openl10nApiBundle:Export:export }

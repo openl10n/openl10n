@@ -15,5 +15,5 @@ openl10n_index:
         path: "^(?!(api|assets)/).*"
     defaults:
         _controller: FrameworkBundle:Template:template
-        template: Openl10nWebBundle::index.html.twig
+        template: ::index.html.twig
         path: ~

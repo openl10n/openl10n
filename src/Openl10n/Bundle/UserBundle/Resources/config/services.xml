@@ -10,9 +10,6 @@
         <parameter key="openl10n.form.type.user.class">Openl10n\Bundle\UserBundle\Form\Type\UserType</parameter>
         <parameter key="openl10n.form.type.password_user.class">Openl10n\Bundle\UserBundle\Form\Type\PasswordUserType</parameter>
 
-        <!-- Twig -->
-        <parameter key="openl10n.twig.extension.user.class">Openl10n\Bundle\UserBundle\Twig\Extension\UserExtension</parameter>
-
         <!-- Processor -->
         <parameter key="openl10n.processor.register_user.class">Openl10n\Domain\User\Application\Processor\RegisterUserProcessor</parameter>
         <parameter key="openl10n.processor.edit_profile.class">Openl10n\Domain\User\Application\Processor\EditProfileProcessor</parameter>
@@ -21,10 +18,6 @@
 
         <!-- Validator -->
         <parameter key="openl10n.validator.user_unique.class">Openl10n\Bundle\UserBundle\Validator\Constraints\UniqueUserValidator</parameter>
-
-        <!-- Controller -->
-        <parameter key="openl10n.controller.user_settings.class">Openl10n\Bundle\UserBundle\Controller\SettingsController</parameter>
-        <parameter key="openl10n.controller.user_profile.class">Openl10n\Bundle\UserBundle\Controller\ProfileController</parameter>
     </parameters>
 
     <services>
@@ -65,15 +58,6 @@
             <tag name="validator.constraint_validator" alias="openl10n.validator.user_unique" />
             <argument type="service" id="openl10n.repository.user" />
         </service>
-
-        <!-- Twig -->
-        <service id="openl10n.twig.extension.user" class="%openl10n.twig.extension.user.class%">
-            <tag name="twig.extension" />
-        </service>
-
-        <!-- Controller -->
-        <service id="openl10n.controller.user_settings" class="%openl10n.controller.user_settings.class%" parent="openl10n.controller" />
-        <service id="openl10n.controller.user_profile" class="%openl10n.controller.user_profile.class%" parent="openl10n.controller" />
 
         <!-- Security -->
         <service id="openl10n.security.user_provider" class="Openl10n\Bundle\UserBundle\Security\User\UserProvider">

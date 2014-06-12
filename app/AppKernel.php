@@ -12,8 +12,6 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
@@ -21,9 +19,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
             new Openl10n\Bundle\InfraBundle\Openl10nInfraBundle(),
-            new Openl10n\Bundle\WebBundle\Openl10nWebBundle(),
             new Openl10n\Bundle\UserBundle\Openl10nUserBundle(),
-            new Openl10n\Bundle\EditorBundle\Openl10nEditorBundle(),
             new Openl10n\Bundle\ApiBundle\Openl10nApiBundle(),
         );
 
