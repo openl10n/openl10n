@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Openl10n\Domain\Translation\Service\Uploader;
+namespace spec\Openl10n\Domain\Resource\Service\Uploader;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -17,7 +17,7 @@ class FileUploaderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Openl10n\Domain\Translation\Service\Uploader\FileUploader');
+        $this->shouldHaveType('Openl10n\Domain\Resource\Service\Uploader\FileUploader');
     }
 
     // function it_can_move_uploaded_file(UploadedFile $file)
