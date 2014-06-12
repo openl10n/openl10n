@@ -11,8 +11,8 @@ use Openl10n\Bundle\ApiBundle\Facade\TranslationKey as TranslationKeyFacade;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase as TranslationPhraseFacade;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Resource\Application\Action\CreateResourceAction;
-use Openl10n\Domain\Translation\Application\Action\EditTranslationPhraseAction;
 use Openl10n\Domain\Resource\Application\Action\UpdateResourceAction;
+use Openl10n\Domain\Translation\Application\Action\EditTranslationPhraseAction;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -94,9 +94,7 @@ class TranslationController extends Controller implements ClassResourceInterface
         $locale = Locale::parse($locale);
 
         $action = new EditTranslationPhraseAction($translation, $locale);
-        $form = $this->get('form.factory')->createNamed('', 'openl10n_translation', $action, array(
-            'csrf_protection' => false
-        ));
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_translation', $action);
 
         if ($form->submit($request->request->all(), false)->isValid()) {
             $this->get('openl10n.processor.edit_translation')->execute($action);

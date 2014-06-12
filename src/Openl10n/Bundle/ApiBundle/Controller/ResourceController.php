@@ -54,9 +54,7 @@ class ResourceController extends Controller implements ClassResourceInterface
     public function cpostAction(Request $request)
     {
         $action = new CreateResourceAction();
-        $form = $this->get('form.factory')->createNamed('', 'openl10n_create_resource', $action, array(
-            'csrf_protection' => false
-        ));
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_create_resource', $action);
 
         if ($form->handleRequest($request)->isValid()) {
             $resource = $this->get('openl10n.processor.create_resource')->execute($action);
@@ -82,9 +80,7 @@ class ResourceController extends Controller implements ClassResourceInterface
         $resource = $this->findResourceOr404($resource);
 
         $action = new UpdateResourceAction($resource);
-        $form = $this->get('form.factory')->createNamed('', 'openl10n_update_resource', $action, array(
-            'csrf_protection' => false
-        ));
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_update_resource', $action);
 
         if ($form->submit($request->request->all(), false)->isValid()) {
             $resource = $this->get('openl10n.processor.update_resource')->execute($action);
@@ -127,9 +123,7 @@ class ResourceController extends Controller implements ClassResourceInterface
         $resource = $this->findResourceOr404($resource);
 
         $action = new ImportTranslationFileAction($resource);
-        $form = $this->get('form.factory')->createNamed('', 'openl10n_import_translation_file', $action, array(
-            'csrf_protection' => false
-        ));
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_import_translation_file', $action);
 
         if ($form->handleRequest($request)->isValid()) {
             $this->get('openl10n.processor.import_translation_file')->execute($action);
@@ -157,9 +151,7 @@ class ResourceController extends Controller implements ClassResourceInterface
         $resource = $this->findResourceOr404($resource);
 
         $action = new ExportTranslationFileAction($resource);
-        $form = $this->get('form.factory')->createNamed('', 'openl10n_export_translation_file', $action, array(
-            'csrf_protection' => false
-        ));
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_export_translation_file', $action);
 
         if ($form->submit($request->query->all())->isValid()) {
             $file = $this->get('openl10n.processor.export_translation_file')->execute($action);

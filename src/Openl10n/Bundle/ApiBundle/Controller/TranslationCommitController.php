@@ -8,7 +8,7 @@ use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationCommit as TranslationCommitFacade;
-use Openl10n\Bundle\EditorBundle\Translation\CustomTranslationSpecification;
+use Openl10n\Bundle\InfraBundle\Specification\CustomTranslationSpecification;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Application\Action\CreateResourceAction;
 use Openl10n\Domain\Translation\Application\Action\UpdateResourceAction;
