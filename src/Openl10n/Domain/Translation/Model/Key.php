@@ -3,17 +3,29 @@
 namespace Openl10n\Domain\Translation\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Openl10n\Domain\Resource\Model\Resource;
+use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;
 
 class Key
 {
     /**
-     * @var Domain
+     * @var int
      */
-    protected $domain;
+    protected $id;
 
     /**
-     * @var string
+     * @var Project
+     */
+    protected $project;
+
+    /**
+     * @var Resource
+     */
+    protected $resource;
+
+    /**
+     * @var StringIdentifier
      */
     protected $identifier;
 
@@ -23,29 +35,47 @@ class Key
     protected $hash;
 
     /**
-     * @var array
+     * @var ArrayCollection
      */
     protected $phrases;
 
-    public function __construct(Domain $domain, $identifier)
+    public function __construct(Resource $resource, StringIdentifier $identifier)
     {
-        $this->domain = $domain;
+        $this->project = $resource->getProject();
+        $this->resource = $resource;
         $this->identifier = $identifier;
 
-        // Generate hash
-        $this->hash = sha1($domain->getSlug().'#'.$identifier);
+        $this->computeHash();
 
         $this->phrases = new ArrayCollection();
     }
 
     /**
-     * The translation domain.
-     *
-     * @return Domain The translation domain
+     * @return int
      */
-    public function getDomain()
+    public function getId()
     {
-        return $this->domain;
+        return $this->id;
+    }
+
+    /**
+     * The project where belong the translation .
+     *
+     * @return Project The project
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * The translation resource.
+     *
+     * @return Resource The translation resource
+     */
+    public function getResource()
+    {
+        return $this->resource;
     }
 
     /**
@@ -54,29 +84,11 @@ class Key
      * This is an unique identifier of the translation in its domain.
      * Once set, the key can not be updated.
      *
-     * @return string The key identifier
+     * @return StringIdentifier The key identifier
      */
     public function getIdentifier()
     {
         return $this->identifier;
-    }
-
-    /**
-     * The translation hash.
-     *
-     * The hash is an unique identifier of the translation in the whole
-     * project. Usually, the hash combines the domain's slug (which is
-     * unique in the project), and the its own key (which is unique in
-     * the domain).
-     *
-     * As the key and domain are immutable, the hash must be set during
-     * object construction and never updated.
-     *
-     * @return string The translation hash.
-     */
-    public function getHash()
-    {
-        return $this->hash;
     }
 
     /**
@@ -137,11 +149,8 @@ class Key
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
+    private function computeHash()
     {
-        return $this->getIdentifier();
+        $this->hash = sha1((string) $this->identifier);
     }
 }

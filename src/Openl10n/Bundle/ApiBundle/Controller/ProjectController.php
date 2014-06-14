@@ -47,19 +47,19 @@ class ProjectController extends Controller implements ClassResourceInterface
     public function cpostAction(Request $request)
     {
         $action = new CreateProjectAction();
-        $form = $this->get('form.factory')->createNamed('', 'openl10n_project', $action, array(
-            'csrf_protection' => false
-        ));
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_project', $action);
 
         if ($form->handleRequest($request)->isValid()) {
             $project = $this->get('openl10n.processor.create_project')->execute($action);
+            $facade = new ProjectFacade($project);
+
             $url = $this->generateUrl(
                 'openl10n_api_get_project',
                 array('project' => (string) $project->getSlug()),
                 true // absolute
             );
 
-            return new Response('', 201, array('Location' => $url));
+            return View::create($facade, 201, ['Location' => $url]);
         }
 
         return View::create($form, 400);
@@ -73,9 +73,7 @@ class ProjectController extends Controller implements ClassResourceInterface
         $project = $this->findProjectOr404($project);
 
         $action = new EditProjectAction($project);
-        $form = $this->get('form.factory')->createNamed('', 'openl10n_project', $action, array(
-            'csrf_protection' => false
-        ));
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_project', $action);
 
         if ($form->submit($request->request->all())->isValid()) {
             $this->get('openl10n.processor.edit_project')->execute($action);
@@ -94,9 +92,7 @@ class ProjectController extends Controller implements ClassResourceInterface
         $project = $this->findProjectOr404($project);
 
         $action = new EditProjectAction($project);
-        $form = $this->get('form.factory')->createNamed('', 'openl10n_project', $action, array(
-            'csrf_protection' => false
-        ));
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_project', $action);
 
         if ($form->submit($request->request->all(), false)->isValid()) {
             $this->get('openl10n.processor.edit_project')->execute($action);

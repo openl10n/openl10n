@@ -14,7 +14,7 @@ class TranslationType extends AbstractType
     {
         $builder
             ->add('text', 'textarea')
-            ->add('isApproved', 'checkbox')
+            ->add('approved', 'checkbox')
         ;
     }
 

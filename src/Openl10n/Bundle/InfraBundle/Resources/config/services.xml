@@ -12,6 +12,10 @@
         <parameter key="openl10n.form.type.export_domain.class">Openl10n\Bundle\InfraBundle\Form\Type\ExportDomainType</parameter>
         <parameter key="openl10n.form.type.translation.class">Openl10n\Bundle\InfraBundle\Form\Type\TranslationType</parameter>
         <parameter key="openl10n.form.type.translation_context.class">Openl10n\Bundle\InfraBundle\Form\Type\TranslationContextType</parameter>
+        <parameter key="openl10n.form.type.create_resource.class">Openl10n\Bundle\InfraBundle\Form\Type\CreateResourceType</parameter>
+        <parameter key="openl10n.form.type.update_resource.class">Openl10n\Bundle\InfraBundle\Form\Type\UpdateResourceType</parameter>
+        <parameter key="openl10n.form.type.import_translation_file.class">Openl10n\Bundle\InfraBundle\Form\Type\ImportTranslationFileType</parameter>
+        <parameter key="openl10n.form.type.export_translation_file.class">Openl10n\Bundle\InfraBundle\Form\Type\ExportTranslationFileType</parameter>
 
         <!-- Processor -->
         <parameter key="openl10n.processor.create_project.class">Openl10n\Domain\Project\Application\Processor\CreateProjectProcessor</parameter>
@@ -19,8 +23,10 @@
         <parameter key="openl10n.processor.delete_project.class">Openl10n\Domain\Project\Application\Processor\DeleteProjectProcessor</parameter>
         <parameter key="openl10n.processor.create_language.class">Openl10n\Domain\Project\Application\Processor\CreateLanguageProcessor</parameter>
         <parameter key="openl10n.processor.delete_language.class">Openl10n\Domain\Project\Application\Processor\DeleteLanguageProcessor</parameter>
-        <parameter key="openl10n.processor.import_translation_file.class">Openl10n\Domain\Translation\Application\Processor\ImportTranslationFileProcessor</parameter>
-        <parameter key="openl10n.processor.export_translation_file.class">Openl10n\Domain\Translation\Application\Processor\ExportTranslationFileProcessor</parameter>
+        <parameter key="openl10n.processor.import_translation_file.class">Openl10n\Domain\Resource\Application\Processor\ImportTranslationFileProcessor</parameter>
+        <parameter key="openl10n.processor.export_translation_file.class">Openl10n\Domain\Resource\Application\Processor\ExportTranslationFileProcessor</parameter>
+        <parameter key="openl10n.processor.create_resource.class">Openl10n\Domain\Resource\Application\Processor\CreateResourceProcessor</parameter>
+        <parameter key="openl10n.processor.update_resource.class">Openl10n\Domain\Resource\Application\Processor\UpdateResourceProcessor</parameter>
         <parameter key="openl10n.processor.edit_translation.class">Openl10n\Domain\Translation\Application\Processor\EditTranslationPhraseProcessor</parameter>
 
         <!-- Listener -->
@@ -30,11 +36,11 @@
         <parameter key="openl10n.repository.locale.class">Openl10n\Bundle\InfraBundle\Repository\BuiltInLocaleRepository</parameter>
 
         <!-- File -->
-        <parameter key="openl10n.uploader.file.class">Openl10n\Domain\Translation\Service\Uploader\FileUploader</parameter>
+        <parameter key="openl10n.uploader.file.class">Openl10n\Domain\Resource\Service\Uploader\FileUploader</parameter>
 
         <!-- Translation -->
-        <parameter key="openl10n.translation.loader.class">Openl10n\Domain\Translation\Service\Loader\TranslationLoader</parameter>
-        <parameter key="openl10n.translation.dumper.class">Openl10n\Domain\Translation\Service\Dumper\TranslationDumper</parameter>
+        <parameter key="openl10n.translation.loader.class">Openl10n\Domain\Resource\Service\Loader\TranslationLoader</parameter>
+        <parameter key="openl10n.translation.dumper.class">Openl10n\Domain\Resource\Service\Dumper\TranslationDumper</parameter>
 
         <!-- Validator -->
         <parameter key="openl10n.validator.project_unique.class">Openl10n\Bundle\InfraBundle\Validator\Constraints\UniqueProjectValidator</parameter>
@@ -55,11 +61,28 @@
         <service id="openl10n.form.type.import_domain" class="%openl10n.form.type.import_domain.class%">
             <tag name="form.type" alias="openl10n_import_domain" />
         </service>
-        <service id="openl10n.form.type.export_domain" class="%openl10n.form.type.export_domain.class%">
+
+        <service id="openl10n.form.type.create_resource" class="%openl10n.form.type.create_resource.class%">
+            <argument type="service" id="openl10n.repository.project" />
+            <tag name="form.type" alias="openl10n_create_resource" />
+        </service>
+        <service id="openl10n.form.type.update_resource" class="%openl10n.form.type.update_resource.class%">
+            <tag name="form.type" alias="openl10n_update_resource" />
+        </service>
+        <service id="openl10n.form.type.import_translation_file" class="%openl10n.form.type.import_translation_file.class%">
+            <argument type="service" id="openl10n.repository.language" />
+            <tag name="form.type" alias="openl10n_import_translation_file" />
+        </service>
+        <service id="openl10n.form.type.export_translation_file" class="%openl10n.form.type.export_translation_file.class%">
+            <argument type="service" id="openl10n.repository.language" />
+            <argument type="service" id="openl10n.translation.dumper" />
+            <tag name="form.type" alias="openl10n_export_translation_file" />
+        </service>
+        <!-- <service id="openl10n.form.type.export_domain" class="%openl10n.form.type.export_domain.class%">
             <argument type="service" id="openl10n.repository.domain" />
             <argument type="service" id="openl10n.translation.dumper" />
             <tag name="form.type" alias="openl10n_export_domain" />
-        </service>
+        </service> -->
         <service id="openl10n.form.type.translation" class="%openl10n.form.type.translation.class%">
             <tag name="form.type" alias="openl10n_translation" />
         </service>
@@ -93,20 +116,31 @@
             <argument type="service" id="event_dispatcher" />
         </service>
         <service id="openl10n.processor.import_translation_file" class="%openl10n.processor.import_translation_file.class%">
-            <argument type="service" id="openl10n.repository.domain" />
+            <argument type="service" id="openl10n.repository.resource" />
+            <argument type="service" id="openl10n.repository.translation" />
+            <argument type="service" id="openl10n.uploader.file" />
+            <argument type="service" id="openl10n.translation.loader" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.create_resource" class="%openl10n.processor.create_resource.class%">
+            <argument type="service" id="openl10n.repository.resource" />
             <argument type="service" id="openl10n.repository.translation" />
             <argument type="service" id="openl10n.uploader.file" />
             <argument type="service" id="openl10n.translation.loader" />
             <argument type="service" id="event_dispatcher" />
         </service>
         <service id="openl10n.processor.export_translation_file" class="%openl10n.processor.export_translation_file.class%">
-            <argument type="service" id="openl10n.repository.domain" />
             <argument type="service" id="openl10n.repository.translation" />
             <argument type="service" id="openl10n.translation.dumper" />
             <argument type="service" id="event_dispatcher" />
         </service>
         <service id="openl10n.processor.edit_translation" class="%openl10n.processor.edit_translation.class%">
             <argument type="service" id="openl10n.repository.translation" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="openl10n.processor.update_resource" class="%openl10n.processor.update_resource.class%">
+            <argument type="service" id="openl10n.repository.resource" />
             <argument type="service" id="event_dispatcher" />
         </service>
 

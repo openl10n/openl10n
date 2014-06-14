@@ -12,6 +12,13 @@
       margin-right: 7px;
     }
   }
+
+  &.wide-border {
+    border-bottom-color: rgba(0,0,0,.1);
+    border-bottom-width: 5px;
+    background-clip: padding-box;
+    border-bottom-style: solid;
+  }
 }
 
 .navbar-user-dropdown {

@@ -9,6 +9,11 @@ use Openl10n\Value\String\Name;
 
 class User
 {
+    /**
+     * @var int
+     */
+    protected $id;
+
     protected $username;
     protected $email;
     protected $name;

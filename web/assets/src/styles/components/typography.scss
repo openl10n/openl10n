@@ -1,6 +1,23 @@
 .title {
   font-weight: 300;
   margin-top: 0;
+  //color: #636664;
+}
+
+.title-xlg {
+  font-size: 30px;
+}
+
+.title-lg {
+  font-size: 26px;
+}
+
+.title-md {
+  font-size: 22px;
+}
+
+.title-sm {
+  font-size: 18px;
 }
 
 .title-underlined {
@@ -9,10 +26,6 @@
   border-bottom: 1px solid #ddd;
 }
 
-.title-lg {
-  font-size: 29px;
-}
-
-.title-md {
-  font-size: 22px;
+.title-uppercase {
+  text-transform: uppercase;
 }

@@ -1,8 +1,0 @@
-default:
-    extensions:
-        Behat\MinkExtension\Extension:
-            base_url: "http://localhost:8080/app.php/"
-            #browser_name: chrome
-            files_path: features/files
-            default_session: selenium2
-            selenium2: ~

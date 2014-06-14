@@ -1,0 +1,36 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity
+        table="resources"
+        name="Openl10n\Bundle\InfraBundle\Entity\Resource"
+        repository-class="Openl10n\Bundle\InfraBundle\Repository\ResourceRepository"
+        >
+
+        <unique-constraints>
+            <unique-constraint name="idx_hash" columns="project_id,hash" />
+        </unique-constraints>
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+
+        <many-to-one field="project" target-entity="Project">
+            <join-columns>
+                <join-column name="project_id" referenced-column-name="id" nullable="false" />
+            </join-columns>
+        </many-to-one>
+
+        <field name="pathname" column="pathname" type="string" length="255" />
+        <field name="hash" column="hash" type="string" length="40" />
+
+        <!-- <one-to-many field="keys" target-entity="TranslationKey" mapped-by="domain">
+            <cascade>
+                <cascade-persist />
+                <cascade-remove />
+            </cascade>
+        </one-to-many> -->
+    </entity>
+
+</doctrine-mapping>

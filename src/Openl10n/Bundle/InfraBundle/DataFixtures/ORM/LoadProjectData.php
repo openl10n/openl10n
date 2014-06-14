@@ -17,9 +17,9 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $tutorial = new Project(new Slug('tutorial'));
-        $tutorial
-            ->setName(new Name('Tutorial'))
+        $demo = new Project(new Slug('demo'));
+        $demo
+            ->setName(new Name('Demo'))
             ->setDefaultLocale(Locale::parse('en'))
         ;
 
@@ -35,10 +35,10 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
             ->setDefaultLocale(Locale::parse('en'))
         ;
 
-        $this->addReference('project_tuto', $tutorial);
-        $this->addReference('project_empty', $tutorial);
+        $this->addReference('project_demo', $demo);
+        $this->addReference('project_empty', $empty);
 
-        $manager->persist($tutorial);
+        $manager->persist($demo);
         $manager->persist($empty);
         $manager->persist($todelete);
         $manager->flush();

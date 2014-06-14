@@ -9,8 +9,6 @@ use Openl10n\Value\Localization\Locale;
 
 class Project extends BaseProject
 {
-    private $id;
-
     public function getDefaultLocale()
     {
         if (!$this->defaultLocale instanceof Locale) {

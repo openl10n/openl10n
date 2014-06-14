@@ -52,9 +52,7 @@ class LanguageController extends Controller implements ClassResourceInterface
         $project = $this->findProjectOr404($project);
 
         $action = new CreateLanguageAction($project);
-        $form = $this->get('form.factory')->createNamed('', 'openl10n_language', $action, array(
-            'csrf_protection' => false
-        ));
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_language', $action);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $language = $this->get('openl10n.processor.create_language')->execute($action);

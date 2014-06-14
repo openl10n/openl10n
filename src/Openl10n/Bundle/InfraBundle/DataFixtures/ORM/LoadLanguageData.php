@@ -15,9 +15,9 @@ class LoadLanguageData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        $tutoEn = new Language($this->getReference('project_tuto'), Locale::parse('en'));
-        $tutoFrFr = new Language($this->getReference('project_tuto'), Locale::parse('fr_FR'));
-        $tutoItIt = new Language($this->getReference('project_tuto'), Locale::parse('it_IT'));
+        $tutoEn = new Language($this->getReference('project_demo'), Locale::parse('en'));
+        $tutoFrFr = new Language($this->getReference('project_demo'), Locale::parse('fr_FR'));
+        $tutoItIt = new Language($this->getReference('project_demo'), Locale::parse('it_IT'));
 
         $emptyEnGb = new Language($this->getReference('project_empty'), Locale::parse('en_GB'));
 

@@ -9,6 +9,13 @@ use Openl10n\Value\String\Slug;
 
 class Project
 {
+    const DEFAULT_LOCALE = 'en';
+
+    /**
+     * @var int
+     */
+    protected $id;
+
     /**
      * @var Slug
      */
@@ -34,6 +41,8 @@ class Project
         $this->slug = $slug;
 
         // Default attributes
+        $this->name = new Name((string) $slug);
+        $this->defaultLocale = Locale::parse(self::DEFAULT_LOCALE);
         $this->languages = new ArrayCollection();
     }
 

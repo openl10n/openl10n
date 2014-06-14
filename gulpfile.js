@@ -41,7 +41,7 @@ gulp.task('build', ['clean'], function() {
 // Watch
 //
 gulp.task('watch', function() {
-  gulp.watch(srcDir + '/scripts/**/*.js', ['scripts']);
+  gulp.watch(srcDir + '/scripts/**/*.{js,tpl}', ['scripts']);
 
   gulp.watch(srcDir + '/styles/**/*.scss', ['styles']);
 
@@ -73,15 +73,15 @@ gulp.task('scripts', function(cb) {
     //preserveLicenseComments: false,
     //useSourceUrl: true,
     modules: [{
-        name: 'config',
+        name: 'config'
       }, {
-        name: 'default/init',
-        exclude: ['config']
-      }, {
-        name: 'editor/init',
-        exclude: ['config']
+        name: 'init',
+        exclude: ['config', 'fos_routing'],
+        //excludeShallow: ['fos_routing'],
+        //stubModules: ['underscore', 'text', 'tpl']
       }
-    ]
+    ],
+    removeCombined: true,
   };
 
   stream.on('end', function() {
@@ -90,9 +90,9 @@ gulp.task('scripts', function(cb) {
       function(buildResponse) {
         cb();
       }, function(err) {
+        console.log(err)
         cb();
       });
-
   });
 
 });

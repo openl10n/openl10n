@@ -1,0 +1,139 @@
+@import "variables";
+
+//
+// Project list
+//
+.x-project-list--item {
+  .default-avatar {
+    width: 48px;
+    height: 48px;
+    display: block;
+    background: #ddd;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    .x-project-list--item--title {
+      color: $link-hover-color;
+    }
+  }
+}
+
+.x-project-list--item--title {
+  //text-transform: uppercase;
+  font-size: 26px;
+  margin-bottom: 2px;
+  margin-top: 0;
+  color: $link-color;
+}
+
+.x-project-list--item--category {
+  font-size: 14px;
+  margin-bottom: 0;
+  color: #777;
+}
+
+.x-project-list--item--description {
+  margin-bottom: 0;
+  color: #777;
+  height: 40px;
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  //white-space: nowrap;
+}
+
+.x-project-list--item--meta {
+  font-size: 0.9em;
+  margin-top: 5px;
+  margin-bottom: 0;
+  color: #636664;
+
+  ul {
+    margin-bottom: 0;
+  }
+}
+
+
+//
+// Project show
+//
+.x-project-show--col-languages {
+  color: #fff;
+  background-color: #34495e;
+  height: 100%;
+  border-right: 1px solid #f8f8f8;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.x-project-show--project-header {
+  padding: 15px;
+  //background-color: rgb(64, 175, 152);
+
+  .default-avatar {
+    width: 48px;
+    height: 48px;
+    display: block;
+    background: #ddd;
+  }
+}
+
+.x-project-show--project-title {
+  margin-bottom: 0;
+
+  i.fa {
+    font-weight:400;
+    font-size:18px;
+  }
+}
+
+.x-project-show--project-id {
+  color: #eee;
+  font-size: 0.9em;
+  margin-bottom: 0;
+}
+
+.x-project-show--languages-list {
+  li {
+    padding: 10px 15px;
+
+    &.active {
+      background: #2c3e50;
+    }
+  }
+  .main {
+    font-size: 16px;
+    //font-weight: 300;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+  a {
+    color: #fff;
+  }
+  .meta {
+    font-size: 13px;
+    font-weight: 300;
+    color: #ddd;
+    margin: 0;
+  }
+}
+
+.x-project-show--col-resources {
+  margin: 20px 5px;
+}
+
+.x-project-show--resource-item {
+  background-color: #fff;
+  padding: 10px 15px;
+  font-size: 18px;
+  border-radius: 0;
+  border: 1px solid #f2f2f2;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 10px;
+
+  a {
+    padding-left: 5px;
+  }
+}

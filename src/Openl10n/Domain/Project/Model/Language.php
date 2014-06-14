@@ -6,7 +6,13 @@ use Openl10n\Value\Localization\Locale;
 
 class Language
 {
+    /**
+     * @var int
+     */
+    protected $id;
+
     protected $project;
+
     protected $locale;
 
     public function __construct(Project $project, Locale $locale)

@@ -1,5 +1,4 @@
 .ol-editor-layout {
-  background-color: #fafafa;
   height: 100%;
 
   .fullheight {
@@ -41,7 +40,7 @@
 }
 
 .ol-editor-header-inner {
-  padding-left: 40px;
+  //padding-left: 40px;
   padding-right: 10px;
 }
 
@@ -53,23 +52,9 @@
 
   .project-name {
     padding-left: 15px;
-    padding-right: 5px;
+    padding-right: 15px;
     background-color: #ddd;
     position: relative;
-    margin-right: 35px;
-
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: -1px;
-      right: -31px;
-      width: 0;
-      height: 0;
-      border-top: 31px solid transparent;
-      border-bottom: 31px solid transparent;
-      border-left: 31px solid #ddd;
-    }
   }
 
   > a {
@@ -491,6 +476,7 @@
       border-style: solid;
       border-color: transparent;
       border-bottom: 0;
+      z-index: 5;
     }
 
     /* Stroke */
@@ -509,6 +495,15 @@
       left: 22px;
       border-top-color: #fafafa;
       border-width: 8px;
+    }
+
+    .action-copy {
+      padding-left: 5px;
+      font-size: 0.9em;
+      color: #999;
+      &:hover {
+        color: #666;
+      }
     }
 
     .title {
@@ -537,10 +532,12 @@
 .ol-editor-target-area {
     padding: 0;
     background-color: #fff;
-    border-bottom: 1px solid #eee;
+    //border-bottom: 1px solid #eee;
+    z-index: 1;
 
     textarea.phrase-editor {
         padding: 10px;
+        padding-bottom: 20px;
         border: none;
         box-shadow: none;
         font-size: 16px;
@@ -549,6 +546,14 @@
         overflow-x: hidden;
         overflow-y: scroll;
         word-wrap: break-word;
-        height: 110px;
+        height: 120px;
+    }
+
+    .meta {
+      background-color: #fff;
+      margin: 0;
+      padding: 3px 10px;
+      color: #999;
+      font-size: 12px;
     }
 }

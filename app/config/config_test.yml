@@ -1,16 +1,14 @@
 imports:
     - { resource: config_dev.yml }
 
+parameters:
+    test.client.class: Openl10n\Bundle\ApiBundle\Test\Client
+
 framework:
     test: ~
-    session:
-        storage_id: session.storage.mock_file
     profiler:
         enabled: false
 
 web_profiler:
     toolbar: false
     intercept_redirects: false
-
-swiftmailer:
-    disable_delivery: true

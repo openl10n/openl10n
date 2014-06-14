@@ -5,8 +5,20 @@ body {
   height: 100%;
 }
 
-.page-wrapper {
-  padding-top: 70px; /* 50px (navbar) + 20px margin */
+body {
+  background-color: #f8f8f8;
+}
+
+#main {
+  //padding-top: 70px; /* 50px (navbar) + 20px margin */
+  padding-top: 50px;
+  height: 100%;
+  //border-top: 50px solid transparent;
+  min-width: 970px;
+}
+
+.container {
+  min-width: 970px !important;
 }
 
 a:hover {
@@ -32,6 +44,10 @@ a:hover {
   }
 }
 
+// .container-fullwidth {
+//   padding: 0;
+// }
+
 @import "components/badges";
 @import "components/buttons";
 @import "components/flag";
@@ -43,6 +59,12 @@ a:hover {
 @import "components/nav";
 @import "components/navbar";
 @import "components/panel";
+@import "components/spinner";
 @import "components/tooltip";
 @import "components/typography";
 @import "components/util";
+@import "page";
+@import "editor";
+
+@import "pages/project_show";
+@import "pages/editor";

@@ -1,8 +1,0 @@
-default:
-    extensions:
-        Behat\MinkExtension\Extension:
-            base_url: "http://openl10n.dev/app_dev.php/"
-            #browser_name: chrome
-            files_path: features/files
-            default_session: selenium2
-            selenium2: ~
