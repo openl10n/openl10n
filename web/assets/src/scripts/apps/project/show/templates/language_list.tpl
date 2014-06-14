@@ -1,13 +1,8 @@
-<a href="#" class="languages--item">
-  <div class="media">
-    <span class="pull-left language-flag">
-      <i><%= count %></i>
-    </span>
-
-    <div class="media-body">
-      <p class="language-name">Languages</p>
-    </div>
-  </div>
+<a href="#" class="languages--item" data-bypass>
+  <h4 class="languages-count">
+    <span class="counter"><%= count %> </span>
+    Languages
+  </h4>
 </a>
 
 <ul class="list-unstyled"></ul>

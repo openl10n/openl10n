@@ -122,19 +122,37 @@
     padding: 10px;
     border-bottom: 1px solid darken(#dee7ed, 5%);
 
+    .media,
+    .media-body {
+      overflow: visible;
+    }
+
+    .languages-count {
+      line-height: 30px;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: normal;
+      color: #38617d;
+      margin: 0;
+      padding: 0;
+
+      .counter {
+        display: inline-block;
+        width: 48px;
+        text-align: center;
+      }
+    }
+
     .language-flag {
       vertical-align: middle;
-      width: 40px;
+      width: 48px;
+      padding-top: 4px;
 
-      i {
+      i.flag {
+        border: 1px solid #444;
+        border-color: rgba(0, 0, 0, 0.3);
         display:block;
-        width:40px;
-        height:40px;
-        background:#aaa;
-        border-radius: 2px;
-
         color: #38617d;
-        font-size: 24px;
         text-align: center;
         font-style: normal;
         padding: 2px;

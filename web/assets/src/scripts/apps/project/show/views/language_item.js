@@ -10,7 +10,7 @@ define([
 
     templateHelpers: {
       region_code: function(locale) {
-        return localeHelper.getRegion(locale).toLowerCase();
+        return localeHelper.getRegion(locale).toUpperCase();
       }
     },
   });
