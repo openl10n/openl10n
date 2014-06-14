@@ -18,6 +18,7 @@ define([], function () {
     'hi': 'IN',
     'hr': 'HR',
     'hu': 'HU',
+    'id': 'ID',
     'in': 'ID',
     'is': 'IS',
     'it': 'IT',
