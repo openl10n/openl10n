@@ -1,2 +1,0 @@
-define(['default/ui'], function() {
-});
