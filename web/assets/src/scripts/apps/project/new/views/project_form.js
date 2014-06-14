@@ -1,19 +1,29 @@
 define([
   'marionette',
+  'string',
   'app',
   'tpl!apps/project/new/templates/project_form',
   'apps/config/backend/router'
-], function(Marionette, app, projectFormTpl, backendRouter) {
+], function(Marionette, S, app, projectFormTpl, backendRouter) {
 
   return Marionette.ItemView.extend({
     template: projectFormTpl,
 
     events: {
-      'submit form': 'createProject'
+      'keyup @ui.inputName': 'updateSlug',
+      'submit @ui.form': 'createProject'
     },
 
     ui: {
-      form: 'form'
+      form: 'form',
+      inputName: 'input[name="name"]',
+      inputSlug: 'input[name="slug"]',
+    },
+
+    updateSlug: function(evt) {
+      console.log('update slug')
+      var slug = S(this.ui.inputName.val()).slugify().s;
+      this.ui.inputSlug.val(slug);
     },
 
     createProject: function(evt) {
