@@ -3,7 +3,6 @@
 namespace Openl10n\Bundle\ApiBundle\Tests\Controller;
 
 use Openl10n\Bundle\ApiBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Response;
 
 class LanguageControllerTest extends WebTestCase
 {

@@ -2,12 +2,8 @@
 
 namespace Openl10n\Bundle\UserBundle\Form\Type;
 
-use Openl10n\Bundle\UserBundle\Action\CreateUserAction;
-use Openl10n\Bundle\UserBundle\Action\EditUserAction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PasswordUserType extends AbstractType

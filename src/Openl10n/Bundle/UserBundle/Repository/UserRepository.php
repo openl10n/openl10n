@@ -3,9 +3,7 @@
 namespace Openl10n\Bundle\UserBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Openl10n\Domain\User\Model\User;
-use Openl10n\Domain\User\Model\SecurityUser;
 use Openl10n\Bundle\UserBundle\Entity\User as UserEntity;
 use Openl10n\Domain\User\Repository\UserRepository as UserRepositoryInterface;
 use Openl10n\Domain\User\Value\Username;

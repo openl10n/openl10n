@@ -9,8 +9,6 @@ use Openl10n\Domain\Resource\Model\Resource;
 use Openl10n\Domain\Resource\Repository\ResourceRepository as ResourceRepositoryInterface;
 use Openl10n\Domain\Resource\Value\Pathname;
 use Openl10n\Domain\Translation\Model\Domain;
-use Openl10n\Value\String\Slug;
-use Rhumsaa\Uuid\Uuid;
 
 class ResourceRepository extends EntityRepository implements ResourceRepositoryInterface
 {

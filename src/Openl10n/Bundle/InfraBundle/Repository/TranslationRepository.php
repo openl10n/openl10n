@@ -14,7 +14,6 @@ use Openl10n\Domain\Translation\Specification\DoctrineOrmTranslationSpecificatio
 use Openl10n\Domain\Translation\Specification\TranslationSpecification;
 use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;
-use Openl10n\Value\String\Slug;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;

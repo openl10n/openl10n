@@ -21,7 +21,6 @@ class LoadPhraseData extends AbstractFixture implements OrderedFixtureInterface
             ->setApproved(true)
         ;
 
-
         $target1b = new Phrase($this->getReference('key_key1'), Locale::parse('fr-FR'));
         $target1b
             ->setText('Ceci est un premier example')
@@ -32,7 +31,6 @@ class LoadPhraseData extends AbstractFixture implements OrderedFixtureInterface
         $target2
             ->setText('This is a second example')
         ;
-
 
         $manager->persist($target1a);
         $manager->persist($target1b);
