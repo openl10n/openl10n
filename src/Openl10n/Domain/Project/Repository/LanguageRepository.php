@@ -5,7 +5,6 @@ namespace Openl10n\Domain\Project\Repository;
 use Openl10n\Domain\Project\Model\Language;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Value\Localization\Locale;
-use Openl10n\Value\String\Slug;
 
 interface LanguageRepository
 {
@@ -32,7 +31,7 @@ interface LanguageRepository
      * Find one project's language.
      *
      * @param Project $project
-     * @param Locale $locale
+     * @param Locale  $locale
      *
      * @return array Array of project's languages
      */

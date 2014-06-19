@@ -9,7 +9,6 @@ use Openl10n\Domain\Resource\Repository\ResourceRepository;
 use Openl10n\Domain\Translation\Repository\TranslationRepository;
 use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;
-use Openl10n\Value\String\Slug;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ImportTranslationFileProcessor

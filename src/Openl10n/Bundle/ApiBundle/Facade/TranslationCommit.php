@@ -51,7 +51,6 @@ class TranslationCommit
      */
     public $isApproved;
 
-
     public function __construct(Key $key, Locale $source, Locale $target)
     {
         $source = $key->getPhrase($source) ?: new Phrase($key, $source);

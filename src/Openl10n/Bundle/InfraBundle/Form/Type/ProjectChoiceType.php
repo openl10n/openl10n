@@ -2,12 +2,9 @@
 
 namespace Openl10n\Bundle\InfraBundle\Form\Type;
 
-use Openl10n\Domain\Project\Application\Action\CreateProjectAction;
 use Openl10n\Domain\Project\Repository\ProjectRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 
 class ProjectChoiceType extends AbstractType
 {

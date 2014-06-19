@@ -10,15 +10,11 @@ use FOS\RestBundle\View\View;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationCommit as TranslationCommitFacade;
 use Openl10n\Bundle\InfraBundle\Specification\CustomTranslationSpecification;
 use Openl10n\Domain\Project\Model\Project;
-use Openl10n\Domain\Translation\Application\Action\CreateResourceAction;
-use Openl10n\Domain\Translation\Application\Action\UpdateResourceAction;
 use Openl10n\Domain\Translation\Model\Key;
-use Openl10n\Domain\Resource\Model\Resource;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class TranslationCommitController extends Controller implements ClassResourceInterface
 {

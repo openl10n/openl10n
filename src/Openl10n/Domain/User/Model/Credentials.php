@@ -2,8 +2,6 @@
 
 namespace Openl10n\Domain\User\Model;
 
-use Openl10n\Domain\User\Model\User;
-
 class Credentials
 {
     /**

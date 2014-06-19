@@ -8,7 +8,6 @@ use Openl10n\Domain\Resource\Service\Loader\TranslationLoaderInterface;
 use Openl10n\Domain\Resource\Service\Uploader\FileUploaderInterface;
 use Openl10n\Domain\Resource\Value\Pathname;
 use Openl10n\Domain\Translation\Repository\TranslationRepository;
-use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CreateResourceProcessor
