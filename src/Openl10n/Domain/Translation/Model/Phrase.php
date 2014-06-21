@@ -154,5 +154,7 @@ class Phrase
     public function setApproved($isApproved)
     {
         $this->isApproved = $isApproved;
+
+        return $this;
     }
 }

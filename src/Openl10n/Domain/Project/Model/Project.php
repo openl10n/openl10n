@@ -127,6 +127,8 @@ class Project
     public function addLanguage(Language $language)
     {
         $this->languages->add($language);
+
+        return $this;
     }
 
     /**
@@ -139,5 +141,7 @@ class Project
     public function removeLanguage(Language $language)
     {
         $this->languages->removeElement($language);
+
+        return $this;
     }
 }
