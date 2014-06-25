@@ -1,0 +1,19 @@
+build:
+  - mysqladmin create openl10n
+  - apt-get update -y
+  - apt-get install -y software-properties-common python-software-properties python g++ make
+  - apt-add-repository ppa:chris-lea/node.js
+  - apt-get update -y
+  - apt-get install -y nodejs
+  - composer install --ansi --no-progress --dev --prefer-dist --no-interaction
+  - app/console doctrine:schema:update --force
+  - app/console assets:install web/
+  - app/console doctrine:fixtures:load --env=dev --no-interaction
+  - npm install
+  - npm install -g gulp bower
+  - bower install --allow-root
+  - gulp build --prod
+
+writable:
+  - app/logs
+  - app/cache
