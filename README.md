@@ -9,6 +9,10 @@ PHP dependencies are managed via Composer:
     curl -sS https://getcomposer.org/installer | php
     composer.phar install
 
+Gulp need to have Sass installed (which requires Ruby):
+
+    gem install sass
+
 Assets are compiled using Gulp (which requires Node and NPM):
 
     # Install node and npm on your system, then run
