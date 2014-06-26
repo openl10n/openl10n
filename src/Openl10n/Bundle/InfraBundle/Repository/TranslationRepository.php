@@ -32,7 +32,7 @@ class TranslationRepository extends EntityRepository implements TranslationRepos
 
     public function findByResource(Resource $resource)
     {
-        return $this->findBy(['resource' => $resource]);
+        return $this->findBy(['resource' => $resource], ['identifier' => 'ASC']);
     }
 
     public function findOneById(Project $project, $id)
