@@ -7,7 +7,6 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationKey as TranslationKeyFacade;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase as TranslationPhraseFacade;
-use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Application\Action\EditTranslationPhraseAction;
 use Openl10n\Value\Localization\Locale;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
