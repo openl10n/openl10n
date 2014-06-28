@@ -81,3 +81,8 @@ sensio_framework_extra:
 jms_serializer:
     metadata:
         auto_detection: true
+
+# Nelmio API documentation
+nelmio_api_doc:
+    name: 'OpenLocalization API documentation'
+    request_listener: false

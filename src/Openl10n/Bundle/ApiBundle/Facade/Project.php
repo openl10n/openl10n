@@ -8,16 +8,22 @@ use Openl10n\Domain\Project\Model\Project as ProjectModel;
 class Project
 {
     /**
+     * Identifier of the project.
+     *
      * @Serializer\Type("string")
      */
     public $slug;
 
     /**
+     * Displayed name of the project.
+     *
      * @Serializer\Type("string")
      */
     public $name;
 
     /**
+     * The reference locale used to identify resources.
+     *
      * @Serializer\Type("string")
      */
     public $defaultLocale;

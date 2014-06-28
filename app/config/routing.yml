@@ -1,9 +1,14 @@
-# API routes
+# API docs
+nelmio_api_docs:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix: /api/docs
+
+# API entry points
 openl10n_api:
     resource: "@Openl10nApiBundle/Resources/config/routing.yml"
     prefix:   /api
 
-# Last route: match all possible patterns
+# App (must be last route, ie. match all other patterns)
 openl10n_index:
     pattern:  /{path}
     requirements:
