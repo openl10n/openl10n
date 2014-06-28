@@ -6,13 +6,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Routing\ClassResourceInterface;
-use FOS\RestBundle\View\View;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationCommit as TranslationCommitFacade;
 use Openl10n\Bundle\InfraBundle\Specification\CustomTranslationSpecification;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Slug;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,9 +31,6 @@ class TranslationCommitController extends Controller implements ClassResourceInt
 
         $specification = new CustomTranslationSpecification($project, $source, $target);
 
-        // if ($request->query->has('domain')) {
-        //     $specification->domain = $request->query->get('domain');
-        // }
         if ($request->query->has('translated')) {
             $specification->translated = $request->query->get('translated');
         }

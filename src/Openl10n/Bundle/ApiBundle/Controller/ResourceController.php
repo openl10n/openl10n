@@ -9,7 +9,6 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
 use Openl10n\Bundle\ApiBundle\Facade\Resource as ResourceFacade;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationKey as TranslationKeyFacade;
-use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Resource\Application\Action\CreateResourceAction;
 use Openl10n\Domain\Resource\Application\Action\ExportTranslationFileAction;
 use Openl10n\Domain\Resource\Application\Action\ImportTranslationFileAction;

@@ -59,7 +59,6 @@ class ImportTranslationFileProcessor
                 $translationPhrase = $this->translationRepository->createNewPhrase($translationKey, $locale);
                 $translationKey->addPhrase($translationPhrase);
 
-                $resourceId = $resource->getPathname();
                 $translationPhrase->setText($phrase ?: '');
             } elseif ($action->hasOptionErase()) {
                 // If phrase already exist, then ecrase text only

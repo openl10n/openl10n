@@ -36,7 +36,6 @@ class CreateResourceProcessor
     public function execute(CreateResourceAction $action)
     {
         $project = $action->getProject();
-        $locale = $project->getDefaultLocale();
         $pathname = new Pathname($action->getPathname());
 
         // Create resource file
