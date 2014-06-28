@@ -1,4 +1,4 @@
-# OpenLocalization [![Build status...](https://secure.travis-ci.org/openl10n/openl10n.png?branch=master)](http://travis-ci.org/openl10n/openl10n)
+# OpenLocalization [![Build status...](https://img.shields.io/travis/openl10n/openl10n.svg?style=flat)](http://travis-ci.org/openl10n/openl10n)
 
 A translation center for your applications.
 
