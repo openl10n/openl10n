@@ -93,7 +93,23 @@ class ProjectControllerTest extends WebTestCase
      */
     public function testCreateNewProject()
     {
-        $this->markTestIncomplete();
+        $client = $this->getClient();
+        $client->jsonRequest('POST', '/api/projects', [
+            'name' => 'New Project',
+            'slug' => 'new-project',
+            'default_locale' => 'en',
+        ]);
+
+        $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_CREATED
+        );
+
+        // Ensure project has been created
+        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug('new-project'));
+        $this->assertNotNull($project, 'Project "new-project" should exist');
+        $this->assertEquals((string) $project->getName(), 'New Project', 'Project\'s name should be "New Project"');
+        $this->assertEquals((string) $project->getDefaultLocale(), 'en', 'Project\'s locale should be "en"');
     }
 
     /**
@@ -101,7 +117,17 @@ class ProjectControllerTest extends WebTestCase
      */
     public function testCreateExistingProject()
     {
-        $this->markTestIncomplete();
+        $client = $this->getClient();
+        $client->jsonRequest('POST', '/api/projects', [
+            'name' => 'New Project',
+            'slug' => 'demo',
+            'default_locale' => 'en',
+        ]);
+
+        $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_BAD_REQUEST
+        );
     }
 
     /**
@@ -109,7 +135,22 @@ class ProjectControllerTest extends WebTestCase
      */
     public function testUpdateProject()
     {
-        $this->markTestIncomplete();
+        $client = $this->getClient();
+        $client->jsonRequest('PUT', '/api/projects/demo', [
+            'name' => 'Foobar',
+            'default_locale' => 'fr',
+        ]);
+
+        $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_NO_CONTENT
+        );
+
+        // Ensure project has been created
+        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug('demo'));
+        $this->assertNotNull($project, 'Project "demo" should exist');
+        $this->assertEquals((string) $project->getName(), 'Foobar', 'Project\'s name should be "Foobar"');
+        $this->assertEquals((string) $project->getDefaultLocale(), 'fr', 'Project\'s locale should be "fr"');
     }
 
     /**
