@@ -3,10 +3,19 @@
 namespace Openl10n\Bundle\ApiBundle\Tests\Controller;
 
 use Openl10n\Bundle\ApiBundle\Test\WebTestCase;
+use Openl10n\Value\String\Slug;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProjectControllerTest extends WebTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        $client = $this->getClient();
+        $client->setCredentials('user', 'user');
+    }
+
     /**
      * Test projects list response.
      *
@@ -28,11 +37,12 @@ class ProjectControllerTest extends WebTestCase
     public function testGetProjectsList()
     {
         $client = $this->getClient();
-        $client->setCredentials('user', 'user');
+        $client->jsonRequest('GET', '/api/projects');
 
-        $crawler = $client->jsonRequest('GET', '/api/projects');
-        $response = $client->getResponse();
-        $data = $this->assertJsonResponse($response, 200);
+        $data = $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_OK
+        );
 
         $this->assertCount(3, $data, 'There should be 3 projects');
     }
@@ -51,14 +61,12 @@ class ProjectControllerTest extends WebTestCase
     public function testGetProject()
     {
         $client = $this->getClient();
-        $client->setCredentials('user', 'user');
+        $client->jsonRequest('GET', '/api/projects/demo');
 
-        $crawler = $client->jsonRequest('GET', '/api/projects/demo');
-        $response = $client->getResponse();
         $data = $this->assertJsonResponse(
-            $response,
+            $client->getResponse(),
             Response::HTTP_OK,
-            'file://'.realpath(__DIR__.'/../Fixtures/schemas/project.json')
+            'project'
         );
 
         $this->assertEquals('demo', $data->slug, 'Project\'s slug should be "demo"');
@@ -71,7 +79,13 @@ class ProjectControllerTest extends WebTestCase
      */
     public function testGetProjectNotFound()
     {
-        $this->markTestIncomplete();
+        $client = $this->getClient();
+        $client->jsonRequest('GET', '/api/projects/not-found');
+
+        $data = $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_NOT_FOUND
+        );
     }
 
     /**
@@ -103,6 +117,17 @@ class ProjectControllerTest extends WebTestCase
      */
     public function testDeleteProject()
     {
-        $this->markTestIncomplete();
+        $client = $this->getClient();
+        $client->jsonRequest('DELETE', '/api/projects/todelete');
+
+        $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_NO_CONTENT
+        );
+
+        $this->assertNull(
+            $this->get('openl10n.repository.project')->findOneBySlug(new Slug('todelete')),
+            'Project "todelete" should not exist'
+        );
     }
 }

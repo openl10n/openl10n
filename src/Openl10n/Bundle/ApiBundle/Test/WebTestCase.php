@@ -10,16 +10,29 @@ class WebTestCase extends BaseWebTestCase
 {
     protected $client;
 
+    public function tearDown()
+    {
+        if (null !== $this->client) {
+            $this->client->stopIsolation();
+        }
+    }
+
     public function getClient()
     {
         if (null === $this->client) {
             $this->client = static::createClient();
+            $this->client->startIsolation();
         }
 
         return $this->client;
     }
 
-    protected function assertJsonResponse($response, $statusCode = Response::HTTP_OK, $schemaUri = null)
+    public function get($serviceName)
+    {
+        return $this->getClient()->getContainer()->get($serviceName);
+    }
+
+    protected function assertJsonResponse($response, $statusCode = Response::HTTP_OK, $schemaName = null)
     {
         // Assert HTTP response status code
         $this->assertEquals(
@@ -37,7 +50,9 @@ class WebTestCase extends BaseWebTestCase
         $data = json_decode($response->getContent());
 
         // Validate JSON data with given schema
-        if (null !== $schemaUri) {
+        if (null !== $schemaName) {
+            $schemaUri = 'file://'.realpath(__DIR__.'/../Resources/json_schemas/'.$schemaName.'.json');
+
             $retriever = new JsonSchema\Uri\UriRetriever;
             $schema = $retriever->retrieve($schemaUri);
 
