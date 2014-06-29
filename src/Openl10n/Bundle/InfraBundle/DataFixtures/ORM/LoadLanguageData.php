@@ -2,25 +2,18 @@
 
 namespace Openl10n\Bundle\InfraBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Openl10n\Value\Localization\Locale;
-use Openl10n\Bundle\InfraBundle\Entity\Language;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Openl10n\Bundle\InfraBundle\Entity\Language;
+use Openl10n\Value\Localization\Locale;
 
-class LoadLanguageData extends AbstractFixture implements OrderedFixtureInterface
+class LoadLanguageData extends AbstractFixtureLoader
 {
     /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        $data = [
-            'foobar' => ['en', 'es', 'fr', 'it'],
-            'empty'  => ['fr-FR'],
-        ];
-
-        foreach ($data as $project => $locales) {
+        foreach ($this->getData('languages') as $project => $locales) {
             foreach ($locales as $locale) {
                 $language = $this->createLanguage($project, $locale);
                 $manager->persist($language);

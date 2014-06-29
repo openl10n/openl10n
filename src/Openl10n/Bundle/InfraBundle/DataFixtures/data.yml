@@ -1,0 +1,34 @@
+projects:
+    foobar:
+        name: Foobar
+        locale: en
+    empty:
+        name: Empty
+        locale: fr-FR
+
+languages:
+    foobar: [ 'en', 'es', 'fr', 'it' ]
+    empty:  [ 'fr-FR' ]
+
+resources:
+    foobar:
+        messages: app/Resources/translations/messages.en.yml
+
+translation_keys:
+    foobar-messages:
+        - example.key1
+        - example.key2
+
+translation_phrases:
+    foobar-messages-example.key1:
+        en:
+            text: "This is a first example"
+            is_approved: true
+        fr:
+            text: "Ceci est un premier example"
+            is_approved: false
+
+    foobar-messages-example.key2:
+        en:
+            text: "This is a second example"
+            is_approved: false

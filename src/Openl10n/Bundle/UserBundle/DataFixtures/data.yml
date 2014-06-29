@@ -1,0 +1,8 @@
+users:
+    user:
+        name: User
+        email: user@example.org
+        locale: en
+
+credentials:
+    user: userpass

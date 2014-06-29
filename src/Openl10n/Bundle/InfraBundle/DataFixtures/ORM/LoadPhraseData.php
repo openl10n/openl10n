@@ -2,30 +2,18 @@
 
 namespace Openl10n\Bundle\InfraBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Openl10n\Value\Localization\Locale;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Openl10n\Bundle\InfraBundle\Entity\Phrase;
+use Openl10n\Value\Localization\Locale;
 
-class LoadPhraseData extends AbstractFixture implements OrderedFixtureInterface
+class LoadPhraseData extends AbstractFixtureLoader
 {
     /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        $data = [
-            'foobar-default-example.key1' => [
-                'en' => ['text' => 'This is a first example', 'is_approved' => true],
-                'fr' => ['text' => 'Ceci est un premier example', 'is_approved' => false],
-            ],
-            'foobar-default-example.key2' => [
-                'en' => ['text' => 'This is a second example', 'is_approved' => false],
-            ],
-        ];
-
-        foreach ($data as $keyRef => $phrases) {
+        foreach ($this->getData('translation_phrases') as $keyRef => $phrases) {
             foreach ($phrases as $locale => $phraseData) {
                 $phrase = $this->createPhrase($keyRef, $locale, $phraseData);
                 $this->addReference('phrase-'.$keyRef.'-'.$locale, $phrase);
