@@ -15,14 +15,21 @@ class LoadKeyData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $key1 = new Key($this->getReference('resource_default'), new StringIdentifier('example.key1'));
-        $key2 = new Key($this->getReference('resource_default'), new StringIdentifier('example.key2'));
+        $data = [
+            'foobar-default' => [
+                'example.key1',
+                'example.key2',
+            ]
+        ];
 
-        $this->addReference('key_key1', $key1);
-        $this->addReference('key_key2', $key2);
+        foreach ($data as $resource => $keys) {
+            foreach ($keys as $keyId) {
+                $key = $this->createKey($resource, $keyId);
+                $this->addReference('key-'.$resource.'-'.$keyId, $key);
+                $manager->persist($key);
+            }
+        }
 
-        $manager->persist($key1);
-        $manager->persist($key2);
         $manager->flush();
     }
 
@@ -32,5 +39,13 @@ class LoadKeyData extends AbstractFixture implements OrderedFixtureInterface
     public function getOrder()
     {
         return 3;
+    }
+
+    private function createKey($resource, $keyId)
+    {
+        return new Key(
+            $this->getReference('resource-'.$resource),
+            new StringIdentifier($keyId)
+        );
     }
 }

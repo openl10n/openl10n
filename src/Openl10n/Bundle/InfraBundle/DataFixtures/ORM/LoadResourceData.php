@@ -15,14 +15,20 @@ class LoadResourceData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        $res = new Resource(
-            $this->getReference('project_demo'),
-            new Pathname('locales/default.en.yml')
-        );
+        $data = [
+            'foobar' => [
+                'default' => 'locales/default.en.yml',
+            ],
+        ];
 
-        $this->addReference('resource_default', $res);
+        foreach ($data as $project => $resources) {
+            foreach ($resources as $id => $pathname) {
+                $resource = $this->createResource($project, $pathname);
+                $this->addReference('resource-'.$project.'-'.$id, $resource);
+                $manager->persist($resource);
+            }
+        }
 
-        $manager->persist($res);
         $manager->flush();
     }
 
@@ -32,5 +38,13 @@ class LoadResourceData extends AbstractFixture implements OrderedFixtureInterfac
     public function getOrder()
     {
         return 2;
+    }
+
+    private function createResource($project, $pathname)
+    {
+        return new Resource(
+            $this->getReference('project-'.$project),
+            new Pathname($pathname)
+        );
     }
 }

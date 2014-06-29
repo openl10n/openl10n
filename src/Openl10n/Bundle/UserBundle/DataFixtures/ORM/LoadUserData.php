@@ -15,25 +15,20 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $user = new User(new Username('user'));
-        $user
-            ->setName(new Name('User'))
-            ->setEmail(new Email('user@example.org'))
-            ->setPreferedLocale(Locale::parse('fr-FR'))
-        ;
+        $users = [
+            'user' => [
+                'name'   => 'User',
+                'email'  => 'user@example.org',
+                'locale' => 'en'
+            ],
+        ];
 
-        $john = new User(new Username('johndoe'));
-        $john
-            ->setName(new Name('John Doe'))
-            ->setEmail(new Email('john.doe@example.org'))
-            ->setPreferedLocale(Locale::parse('en-US'))
-        ;
+        foreach ($users as $username => $data) {
+            $user = $this->createUser($username, $data);
+            $this->addReference('user-'.$username, $user);
+            $manager->persist($user);
+        }
 
-        $this->addReference('user_user', $user);
-        $this->addReference('user_john', $john);
-
-        $manager->persist($user);
-        $manager->persist($john);
         $manager->flush();
     }
 
@@ -43,5 +38,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     public function getOrder()
     {
         return 1;
+    }
+
+    private function createUser($username, $data)
+    {
+        return (new User(new Username($username)))
+            ->setName(new Name($data['name']))
+            ->setEmail(new Email($data['email']))
+            ->setPreferedLocale(Locale::parse($data['locale']))
+        ;
     }
 }

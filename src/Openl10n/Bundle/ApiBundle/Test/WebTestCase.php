@@ -10,8 +10,18 @@ class WebTestCase extends BaseWebTestCase
 {
     protected $client;
 
+    public function setUp()
+    {
+        parent::setUp();
+
+        $client = $this->getClient();
+        $client->setCredentials('user', 'userpass');
+    }
+
     public function tearDown()
     {
+        parent::tearDown();
+
         if (null !== $this->client) {
             $this->client->stopIsolation();
         }

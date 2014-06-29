@@ -17,30 +17,17 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $demo = new Project(new Slug('demo'));
-        $demo
-            ->setName(new Name('Demo'))
-            ->setDefaultLocale(Locale::parse('en'))
-        ;
+        $projects = [
+            'foobar' => ['name' => 'Foobar', 'locale' => 'en'],
+            'empty'  => ['name' => 'Empty', 'locale' => 'fr-FR'],
+        ];
 
-        $empty = new Project(new Slug('empty'));
-        $empty
-            ->setName(new Name('Empty Project'))
-            ->setDefaultLocale(Locale::parse('en_GB'))
-        ;
+        foreach ($projects as $slug => $data) {
+            $project = $this->createProject($slug, $data);
+            $this->addReference('project-'.$slug, $project);
+            $manager->persist($project);
+        }
 
-        $todelete = new Project(new Slug('todelete'));
-        $todelete
-            ->setName(new Name('To Delete'))
-            ->setDefaultLocale(Locale::parse('en'))
-        ;
-
-        $this->addReference('project_demo', $demo);
-        $this->addReference('project_empty', $empty);
-
-        $manager->persist($demo);
-        $manager->persist($empty);
-        $manager->persist($todelete);
         $manager->flush();
     }
 
@@ -50,5 +37,13 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
     public function getOrder()
     {
         return 1;
+    }
+
+    private function createProject($slug, array $data)
+    {
+        return (new Project(new Slug($slug)))
+            ->setName(new Name($data['name']))
+            ->setDefaultLocale(Locale::parse($data['locale']))
+        ;
     }
 }

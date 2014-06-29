@@ -20,32 +20,16 @@ class LoadCredentialsData extends AbstractFixture implements OrderedFixtureInter
 
     public function load(ObjectManager $manager)
     {
-        $factory = $this->container->get('security.encoder_factory');
+        $credentials = [
+            'user' => 'userpass',
+        ];
 
-        $user = $this->getReference('user_user');
-        $encoder = $factory->getEncoder($user);
-        $salt = md5(uniqid(null, true));
-        $password = $encoder->encodePassword('user', $salt);
+        foreach ($credentials as $username => $password) {
+            $credential = $this->createCredentials($username, $password);
+            $manager->persist($credential);
+        }
 
-        $userCredentials = new Credentials(
-            $this->getReference('user_user'),
-            $password,
-            $salt
-        );
-
-        $user = $this->getReference('user_john');
-        $encoder = $factory->getEncoder($user);
-        $salt = md5(uniqid(null, true));
-        $password = $encoder->encodePassword('johndoe', $salt);
-
-        $johnCredentials = new Credentials(
-            $this->getReference('user_john'),
-            $password,
-            $salt
-        );
-
-        $manager->persist($userCredentials);
-        $manager->persist($johnCredentials);
+        $manager->persist($credential);
         $manager->flush();
     }
 
@@ -55,5 +39,18 @@ class LoadCredentialsData extends AbstractFixture implements OrderedFixtureInter
     public function getOrder()
     {
         return 2;
+    }
+
+    private function createCredentials($username, $password)
+    {
+        $user = $this->getReference('user-'.$username);
+
+        $factory = $this->container->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($user);
+
+        $salt = md5(uniqid(null, true));
+        $password = $encoder->encodePassword($password, $salt);
+
+        return new Credentials($user, $password, $salt);
     }
 }
