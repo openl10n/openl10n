@@ -7,20 +7,21 @@
 
 A translation center for your applications.
 
-## Requirements
+## Installation
 
-PHP dependencies are managed via Composer:
+See detailled instructions on the [official documentation](http://docs.openl10n.io/page/getting-started/installation.html).
 
-    curl -sS https://getcomposer.org/installer | php
-    composer.phar install
+**TL;DR**: you will need [Composer](https://getcomposer.org/doc/00-intro.md#installation-nix)
+to install PHP dependencies, and [NPM](https://www.npmjs.org/) + [Sass](http://sass-lang.com/install)
+for the front-end part.
 
-Assets are compiled using Gulp (which requires Node and NPM):
+    # PHP dependencies
+    composer install
 
-    # Install node and npm on your system, then run
+    # Javascript dependencies
     npm install
-    npm install -g gulp bower
-    bower install
-    gulp build --prod
+    ./node_modules/.bin/bower install
+    ./node_modules/.bin/gulp build --prod
 
 ## Deployment
 
