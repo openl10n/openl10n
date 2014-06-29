@@ -1,0 +1,17 @@
+{
+    "name": "Language",
+    "type": "object",
+    "properties": {
+        "locale": {
+            "type": "string",
+            "description": "Language locale identifier",
+            "required": true
+        },
+        "name": {
+            "type": "string",
+            "description": "Language name",
+            "required": true
+        }
+    },
+    "additionalProperties" : false
+}

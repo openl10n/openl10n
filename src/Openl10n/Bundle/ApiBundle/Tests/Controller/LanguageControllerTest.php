@@ -3,6 +3,9 @@
 namespace Openl10n\Bundle\ApiBundle\Tests\Controller;
 
 use Openl10n\Bundle\ApiBundle\Test\WebTestCase;
+use Openl10n\Value\Localization\Locale;
+use Openl10n\Value\String\Slug;
+use Symfony\Component\HttpFoundation\Response;
 
 class LanguageControllerTest extends WebTestCase
 {
@@ -11,7 +14,15 @@ class LanguageControllerTest extends WebTestCase
      */
     public function testGetProjectLanguagesList()
     {
-        $this->markTestIncomplete();
+        $client = $this->getClient();
+        $client->jsonRequest('GET', '/api/projects/foobar/languages');
+
+        $data = $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_OK
+        );
+
+        $this->assertCount(4, $data, 'There should be 4 languages in "foobar" projects');
     }
 
     /**
@@ -19,7 +30,16 @@ class LanguageControllerTest extends WebTestCase
      */
     public function testGetProjectLanguage()
     {
-        $this->markTestIncomplete();
+        $client = $this->getClient();
+        $client->jsonRequest('GET', '/api/projects/foobar/languages/en');
+
+        $data = $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_OK,
+            'language'
+        );
+
+        $this->assertEquals('en', $data->locale);
     }
 
     /**
@@ -27,7 +47,13 @@ class LanguageControllerTest extends WebTestCase
      */
     public function testGetProjectLanguageNotFound()
     {
-        $this->markTestIncomplete();
+        $client = $this->getClient();
+        $client->jsonRequest('GET', '/api/projects/foobar/languages/pt_BR');
+
+        $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_NOT_FOUND
+        );
     }
 
     /**
@@ -35,7 +61,21 @@ class LanguageControllerTest extends WebTestCase
      */
     public function testCreateNewProjectLanguage()
     {
-        $this->markTestIncomplete();
+        $client = $this->getClient();
+        $client->jsonRequest('POST', '/api/projects/foobar/languages', [
+            'locale' => 'pt_BR'
+        ]);
+
+        $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_CREATED
+        );
+
+        // Ensure project has been created
+        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug('foobar'));
+        $language = $this->get('openl10n.repository.language')->findOneByProject($project, Locale::parse('pt-BR'));
+
+        $this->assertNotNull($language, 'Language "pt-BR" should exist in project "foobar"');
     }
 
     /**
@@ -51,7 +91,19 @@ class LanguageControllerTest extends WebTestCase
      */
     public function testDeleteProjectLanguage()
     {
-        $this->markTestIncomplete();
+        $client = $this->getClient();
+        $client->jsonRequest('DELETE', '/api/projects/foobar/languages/fr');
+
+        $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_NO_CONTENT
+        );
+
+        // Ensure project has been created
+        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug('foobar'));
+        $language = $this->get('openl10n.repository.language')->findOneByProject($project, Locale::parse('fr'));
+
+        $this->assertNull($language, 'Language "fr" should not exist after a DELETE in project "foobar"');
     }
 
     /**
@@ -59,6 +111,12 @@ class LanguageControllerTest extends WebTestCase
      */
     public function testDeleteProjectDefaultLanguageMustFail()
     {
-        $this->markTestIncomplete();
+        $client = $this->getClient();
+        $client->jsonRequest('DELETE', '/api/projects/foobar/languages/en');
+
+        $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_BAD_REQUEST
+        );
     }
 }
