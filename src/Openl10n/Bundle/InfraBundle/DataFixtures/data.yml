@@ -13,6 +13,7 @@ languages:
 resources:
     foobar:
         messages: app/Resources/translations/messages.en.yml
+        validators: app/Resources/translations/validators.en.xlf
 
 translation_keys:
     foobar-messages:

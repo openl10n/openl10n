@@ -1,20 +1,20 @@
 {
-    "name": "Project",
+    "name": "Resource",
     "type": "object",
     "properties": {
-        "name": {
-            "type": "string",
-            "description": "Project name",
+        "id": {
+            "type": "integer",
+            "description": "Resource identifier",
             "required": true
         },
-        "slug": {
+        "project": {
             "type": "string",
             "description": "Project slug",
             "required": true
         },
-        "default_locale": {
+        "pathname": {
             "type": "string",
-            "description": "Project default locale",
+            "description": "Resource pathname",
             "required": true
         }
     },
