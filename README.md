@@ -5,7 +5,7 @@
 [![License MIT](https://img.shields.io/packagist/l/openl10n/openl10n.svg?style=flat)](https://github.com/openl10n/openl10n/blob/master/LICENSE)
 [![GitHub Tag](http://img.shields.io/github/tag/openl10n/openl10n.svg?style=flat)](https://github.com/openl10n/openl10n/releases)
 
-OpenLocalization is a **localization mangement web-app** to help you translate
+OpenLocalization is a **localization management web-app** to help you translate
 any of your projects. Its main goal is to provide an UX friendly tool to easily
 edit and deploy your application translations.
 
