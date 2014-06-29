@@ -25,7 +25,7 @@ Copy the `deploy.rb.dist` file and add your environment configuration.
 
     cp app/deploy/deploy.rb.dist app/deploy/deploy.rb
 
-## License
+## License ![License MIT](https://img.shields.io/packagist/l/openl10n/openl10n.svg?style=flat)
 
 OpenLocalization is released under the MIT License. See the bundled LICENSE file
 for details.
