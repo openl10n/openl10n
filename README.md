@@ -32,5 +32,5 @@ Copy the `deploy.rb.dist` file and add your environment configuration.
 
 ## License
 
-OpenLocalization is released under the MIT License. See the bundled LICENSE file
+OpenLocalization is released under the MIT License. See the [bundled LICENSE file](LICENSE)
 for details.
