@@ -3,7 +3,6 @@
 namespace spec\Openl10n\Value\String;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class SlugSpec extends ObjectBehavior
 {

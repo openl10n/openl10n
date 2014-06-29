@@ -175,6 +175,9 @@ class ResourceController extends Controller implements ClassResourceInterface
         return $project;
     }
 
+    /**
+     * @return Resource
+     */
     protected function findResourceOr404($id)
     {
         $resource = $this->get('openl10n.repository.resource')->find($id);

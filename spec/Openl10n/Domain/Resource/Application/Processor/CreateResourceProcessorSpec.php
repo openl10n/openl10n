@@ -7,7 +7,6 @@ use Openl10n\Domain\Resource\Service\Loader\TranslationLoaderInterface;
 use Openl10n\Domain\Resource\Service\Uploader\FileUploaderInterface;
 use Openl10n\Domain\Translation\Repository\TranslationRepository;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CreateResourceProcessorSpec extends ObjectBehavior

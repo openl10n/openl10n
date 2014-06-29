@@ -112,6 +112,9 @@ class LanguageController extends Controller implements ClassResourceInterface
         return $project;
     }
 
+    /**
+     * @return Language
+     */
     protected function findLanguageOr404(Project $project, $locale)
     {
         $language = $this->get('openl10n.repository.language')

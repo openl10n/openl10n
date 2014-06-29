@@ -37,11 +37,17 @@ class WebTestCase extends BaseWebTestCase
         return $this->client;
     }
 
+    /**
+     * @param string $serviceName
+     */
     public function get($serviceName)
     {
         return $this->getClient()->getContainer()->get($serviceName);
     }
 
+    /**
+     * @param string $schemaName
+     */
     protected function assertJsonResponse($response, $statusCode = Response::HTTP_OK, $schemaName = null)
     {
         // Assert HTTP response status code

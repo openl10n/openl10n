@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\File\File;
 
 interface FileUploaderInterface
 {
+    /**
+     * @return File
+     */
     public function upload(UploadedFile $file);
     public function remove(File $file);
 }

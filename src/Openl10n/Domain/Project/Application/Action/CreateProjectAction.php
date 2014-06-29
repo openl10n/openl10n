@@ -18,6 +18,9 @@ class CreateProjectAction
         $this->name = $name;
     }
 
+    /**
+     * @return string
+     */
     public function getSlug()
     {
         return $this->slug;
@@ -30,6 +33,9 @@ class CreateProjectAction
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getDefaultLocale()
     {
         return $this->defaultLocale;

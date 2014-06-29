@@ -12,14 +12,26 @@ use Openl10n\Value\Localization\Locale;
 
 interface TranslationRepository
 {
+    /**
+     * @return \Openl10n\Bundle\InfraBundle\Entity\Key
+     */
     public function createNewKey(Resource $resource, StringIdentifier $identifier);
 
+    /**
+     * @return \Openl10n\Bundle\InfraBundle\Entity\Phrase
+     */
     public function createNewPhrase(Key $key, Locale $locale, $text = '');
 
+    /**
+     * @param StringIdentifier $identifier
+     */
     public function findOneByKey(Resource $resource, $identifier);
 
     public function findOneByHash(Project $project, $hash);
 
+    /**
+     * @return \Pagerfanta\Pagerfanta
+     */
     public function findSatisfying(TranslationSpecification $specification);
 
     public function saveKey(Key $key);

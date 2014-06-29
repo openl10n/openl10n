@@ -71,7 +71,7 @@ class Phrase
     /**
      * Translation key.
      *
-     * @return TranslationKey The translation key
+     * @return Key The translation key
      */
     public function getKey()
     {
@@ -125,7 +125,7 @@ class Phrase
      *
      * @param string $text The translation text
      *
-     * @return TranslationInterface The instance of this object
+     * @return Phrase The instance of this object
      */
     public function setText($text)
     {
@@ -149,7 +149,7 @@ class Phrase
      *
      * @param boolean $isApproved The approval status
      *
-     * @return TranslationInterface The instance of this object
+     * @return Phrase The instance of this object
      */
     public function setApproved($isApproved)
     {

@@ -7,7 +7,6 @@ use Openl10n\Value\Localization\Locale;
 use Openl10n\Domain\Project\Model\Language;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Project\Repository\LanguageRepository;
-use Openl10n\Value\String\Slug;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

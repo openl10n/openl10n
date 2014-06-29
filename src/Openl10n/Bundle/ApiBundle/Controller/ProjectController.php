@@ -118,7 +118,7 @@ class ProjectController extends Controller implements ClassResourceInterface
      *
      * @param string $slug The project slug
      *
-     * @return ProjectInterface The project
+     * @return Project The project
      *
      * @throws NotFoundHttpException If the project is not found
      */

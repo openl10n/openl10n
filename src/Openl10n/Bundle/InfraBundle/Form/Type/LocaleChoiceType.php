@@ -52,7 +52,7 @@ class LocaleChoiceType extends AbstractType
     /**
      * Build a choice list object.
      *
-     * @return ChoiceListInterface
+     * @return SimpleChoiceList
      */
     public function getChoiceList(array $restrict = array())
     {

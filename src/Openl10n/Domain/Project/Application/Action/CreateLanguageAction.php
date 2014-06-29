@@ -19,6 +19,9 @@ class CreateLanguageAction
         return $this->project;
     }
 
+    /**
+     * @return string
+     */
     public function getLocale()
     {
         return $this->locale;

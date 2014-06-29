@@ -18,15 +18,12 @@ interface ResourceRepository
 
     /**
      * @param Project  $project
-     * @param Pathname $pathname
      *
      * @return Resource[]
      */
     public function findByProject(Project $project);
 
     /**
-     * @param Project $project
-     * @param string  $hash
      *
      * @return Resource|null
      */

@@ -2,13 +2,9 @@
 
 namespace spec\Openl10n\Domain\Translation\Application\Processor;
 
-use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Resource\Service\Dumper\TranslationDumperInterface;
-use Openl10n\Domain\Translation\Application\Action\ExportTranslationFileAction;
-use Openl10n\Domain\Translation\Repository\DomainRepository;
 use Openl10n\Domain\Translation\Repository\TranslationRepository;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ExportTranslationFileProcessorSpec extends ObjectBehavior

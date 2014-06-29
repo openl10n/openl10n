@@ -8,7 +8,6 @@ use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Domain\Translation\Model\Phrase;
 use Openl10n\Domain\Translation\Repository\TranslationRepository;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EditTranslationPhraseProcessorSpec extends ObjectBehavior

@@ -83,7 +83,7 @@ class Client extends BaseClient
      * @param string $endpoint
      * @param array  $data
      *
-     * @return Response
+     * @return \Symfony\Component\DomCrawler\Crawler|null
      *
      * @see self::request()
      */

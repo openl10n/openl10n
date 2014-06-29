@@ -60,7 +60,6 @@ class Locale
     /**
      * Build a locale object with a valid string.
      *
-     * @param string $locale The locale description
      */
     public function __construct(Language $language, Region $region = null, array $variants = array())
     {
@@ -96,7 +95,7 @@ class Locale
      */
     public function getVariants()
     {
-        return $this->region;
+        return $this->variants;
     }
 
     /**

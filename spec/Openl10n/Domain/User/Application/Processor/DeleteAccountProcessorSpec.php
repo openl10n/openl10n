@@ -6,7 +6,6 @@ use Openl10n\Domain\User\Application\Action\DeleteAccountAction;
 use Openl10n\Domain\User\Model\User;
 use Openl10n\Domain\User\Repository\UserRepository;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DeleteAccountProcessorSpec extends ObjectBehavior

@@ -16,7 +16,7 @@ class UniqueProjectValidator extends ConstraintValidator
     private $projectRepository;
 
     /**
-     * @param ProjectRepositoryInterface $projectRepository
+     * @param ProjectRepository $projectRepository
      */
     public function __construct(ProjectRepository $projectRepository)
     {

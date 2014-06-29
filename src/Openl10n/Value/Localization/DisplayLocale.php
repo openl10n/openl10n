@@ -18,7 +18,7 @@ class DisplayLocale
      * @param Locale $locale
      * @param string $inLocale
      *
-     * @return Locale
+     * @return DisplayLocale
      */
     public static function createFromLocale(Locale $locale, $inLocale = null)
     {
@@ -32,7 +32,7 @@ class DisplayLocale
     /**
      * @param string $value (eg. anglais (Royaume-Uni) (en_GB))
      *
-     * @return Locale
+     * @return DisplayLocale
      */
     public static function parse($value)
     {

@@ -3,10 +3,8 @@
 namespace spec\Openl10n\Domain\Resource\Service\Uploader;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploaderSpec extends ObjectBehavior
 {

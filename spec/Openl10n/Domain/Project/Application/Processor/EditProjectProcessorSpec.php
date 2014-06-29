@@ -5,7 +5,6 @@ namespace spec\Openl10n\Domain\Project\Application\Processor;
 use Openl10n\Domain\Project\Repository\ProjectRepository;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Name;
-use Openl10n\Value\String\Slug;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Project\Application\Action\EditProjectAction;
 use Openl10n\Domain\Project\Application\Event\EditProjectEvent;

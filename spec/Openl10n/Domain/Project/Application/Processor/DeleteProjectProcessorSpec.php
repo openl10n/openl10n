@@ -5,9 +5,7 @@ namespace spec\Openl10n\Domain\Project\Application\Processor;
 use Openl10n\Domain\Project\Application\Action\DeleteProjectAction;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Project\Repository\ProjectRepository;
-use Openl10n\Value\String\Slug;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DeleteProjectProcessorSpec extends ObjectBehavior
