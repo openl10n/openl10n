@@ -20,7 +20,7 @@ class WebTestCase extends BaseWebTestCase
 
     public function tearDown()
     {
-        parent::tearDown();
+        //parent::tearDown();
 
         if (null !== $this->client) {
             $this->client->stopIsolation();
