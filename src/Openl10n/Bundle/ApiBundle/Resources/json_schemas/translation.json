@@ -1,0 +1,22 @@
+{
+    "name": "Translation",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer",
+            "description": "Translation primary id",
+            "required": true
+        },
+        "identifier": {
+            "type": "string",
+            "description": "Translation key identifier",
+            "required": true
+        },
+        "phrases": {
+            "type": "object",
+            "description": "Translation phrases",
+            "required": false
+        }
+    },
+    "additionalProperties": false
+}

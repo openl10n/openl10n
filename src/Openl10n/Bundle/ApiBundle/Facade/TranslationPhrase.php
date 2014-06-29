@@ -23,12 +23,12 @@ class TranslationPhrase
     protected $isApproved;
 
     /**
-     * @Serializer\Type("datetime")
+     * @Serializer\Type("DateTime")
      */
     protected $createdAt;
 
     /**
-     * @Serializer\Type("datetime")
+     * @Serializer\Type("DateTime")
      */
     protected $updatedAt;
 

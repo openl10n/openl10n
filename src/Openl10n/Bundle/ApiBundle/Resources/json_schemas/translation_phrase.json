@@ -1,0 +1,32 @@
+{
+    "name": "Translation",
+    "type": "object",
+    "properties": {
+        "locale": {
+            "type": "string",
+            "description": "Phrase locale identifier",
+            "required": true
+        },
+        "text": {
+            "type": "string",
+            "description": "Text of the phrase",
+            "required": true
+        },
+        "is_approved": {
+            "type": "boolean",
+            "description": "True if phrase has been approved",
+            "required": true
+        },
+        "created_at": {
+            "type": "string",
+            "description": "Datetime of the phrase creation",
+            "required": true
+        },
+        "updated_at": {
+            "type": "string",
+            "description": "Datetime of the last phrase update",
+            "required": true
+        }
+    },
+    "additionalProperties": true
+}
