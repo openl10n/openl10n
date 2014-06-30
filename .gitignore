@@ -1,8 +1,8 @@
 /app/cache/*
 /app/bootstrap.php.cache
 /app/config/parameters.yml
-/app/deploy/*
-!/app/deploy/deploy.rb.dist
+/app/capistrano/stages/*
+!/app/capistrano/stages/deploy.rb.dist
 /app/logs/*
 /app/sessions/
 

@@ -29,11 +29,11 @@ for the front-end part.
 
 ## Deployment
 
-[Capifony](http://capifony.org/) is the recommended way to deploy the project.
+[Capistrano](http://capistranorb.com/) is the recommended way to deploy the project.
 
 Copy the `deploy.rb.dist` file and add your environment configuration.
 
-    cp app/deploy/deploy.rb.dist app/deploy/deploy.rb
+    cp app/capistrano/stages/deploy.rb.dist app/capistrano/stages/deploy.rb
 
 ## License
 
