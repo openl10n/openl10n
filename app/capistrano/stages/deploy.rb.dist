@@ -1,0 +1,24 @@
+# Stage name
+set :stage, :production
+
+# Github repository
+set :repo_url, 'git@github.com:openl10n/openl10n.git'
+set :branch, 'master'
+
+# Deploy directory
+set :deploy_to, '/var/www/translate.mydomain.tld'
+
+# SSHKit configuration
+SSHKit.config.command_map[:composer] = "#{shared_path.join("composer.phar")}"
+set :default_env, {
+  path: ["#{shared_path}/node_modules/.bin", "$PATH"].join(":")
+}
+
+# Define servers
+server 'translate.mydomain.tld', user: 'root', roles: %w{php_fpm nginx}
+
+set :composer_install_flags, '--no-dev --verbose --prefer-dist --optimize-autoloader --no-progress'
+
+# If you are not using nginx with php-fpm you can remove theses lines an replace it by an apache graceful command
+after 'deploy:finishing', 'php_fpm:reload'
+after 'deploy:finishing', 'nginx:reload'

@@ -25,11 +25,13 @@ else
 endif
 	@ npm install
 	@ node_modules/.bin/bower install
+	@ bundle install
 
 update:
 	@ echo "❯ Updating..."
 	@ npm update
 	@ node_modules/.bin/bower update
+	@ bundle update
 
 watch:
 	@ echo "❯ Watching..."
