@@ -94,7 +94,7 @@ class ResourceControllerTest extends WebTestCase
         $this->assertEquals((string) $resource->getPathname(), 'update.en.yml');
     }
 
-    public function testDeleteProject()
+    public function testDeleteResource()
     {
         $this->markTestIncomplete('Not implemented yet');
 
@@ -110,5 +110,101 @@ class ResourceControllerTest extends WebTestCase
             $this->get('openl10n.repository.resource')->findOneBySlug(1),
             'Resource should not exist after a DELETE'
         );
+    }
+
+    public function testImportResource()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    /**
+     * @dataProvider dataProviderExportFormat
+     */
+    public function testExportResource($format)
+    {
+        $url = '/api/resources/1/export?locale=en';
+        if (null !== $format) {
+            $url .= '&format='.$format;
+        }
+
+        $client = $this->getClient();
+        $client->request('GET', $url);
+
+        $response = $client->getResponse();
+        $content = trim(file_get_contents($response->getFile()->getPathname()));
+
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertEquals($this->getExportContent($format), $content);
+    }
+
+    public function dataProviderExportFormat()
+    {
+        return [
+            [null],
+            ['yml'],
+            ['ini'],
+            ['csv'],
+            ['json'],
+            ['xlf'],
+        ];
+    }
+
+    /**
+     * Get export content of resource 1 in different format
+     *
+     * @param string $format The format of the export
+     *
+     * @return string The content as text
+     */
+    private function getExportContent($format)
+    {
+        switch ($format) {
+            case 'ini':
+                return <<<EOF
+example.key1="This is a first example"
+example.key2="This is a second example"
+EOF;
+
+            case 'csv':
+                return <<<EOF
+example.key1;"This is a first example"
+example.key2;"This is a second example"
+EOF;
+
+            case 'json':
+                return <<<EOF
+{
+    "example.key1": "This is a first example",
+    "example.key2": "This is a second example"
+}
+EOF;
+
+            case 'xlf':
+                return <<<EOF
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="03fdeaf5007f7e942ebcf2d1a5803b84" resname="example.key1">
+        <source>example.key1</source>
+        <target>This is a first example</target>
+      </trans-unit>
+      <trans-unit id="a4cfdcd4f5cd9e1d18fc4aef6fcac406" resname="example.key2">
+        <source>example.key2</source>
+        <target>This is a second example</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
+EOF;
+
+            // default format is Yaml
+            case 'yml':
+            default:
+                return <<<EOF
+example.key1: 'This is a first example'
+example.key2: 'This is a second example'
+EOF;
+        }
     }
 }
