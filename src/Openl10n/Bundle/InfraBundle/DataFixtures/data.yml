@@ -14,6 +14,7 @@ resources:
     foobar:
         messages: app/Resources/translations/messages.en.yml
         validators: app/Resources/translations/validators.en.xlf
+        empty: empty.en.json
 
 translation_keys:
     foobar-messages:

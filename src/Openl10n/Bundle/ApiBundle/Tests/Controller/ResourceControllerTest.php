@@ -3,6 +3,9 @@
 namespace Openl10n\Bundle\ApiBundle\Tests\Controller;
 
 use Openl10n\Bundle\ApiBundle\Test\WebTestCase;
+use Openl10n\Value\Localization\Locale;
+use Openl10n\Value\String\Slug;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
 class ResourceControllerTest extends WebTestCase
@@ -17,7 +20,7 @@ class ResourceControllerTest extends WebTestCase
             Response::HTTP_OK
         );
 
-        $this->assertCount(2, $data, 'There should be 2 resources in "foobar" project');
+        $this->assertCount(3, $data, 'There should be 3 resources in "foobar" project');
     }
 
     public function testGetResource()
@@ -114,7 +117,54 @@ class ResourceControllerTest extends WebTestCase
 
     public function testImportResource()
     {
-        $this->markTestIncomplete('');
+        // Retrieve id of the "empty" resource in foobar project
+        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug('foobar'));
+        $resources = $this->get('openl10n.repository.resource')->findByProject($project);
+        $emptyResource = array_filter($resources, function($resource) {
+            return 'empty.en.json' === (string) $resource->getPathname();
+        });
+        $emptyResource = end($emptyResource);
+        $resourceId = $emptyResource->getId();
+
+        // Create dummy json file
+        $tempname = sys_get_temp_dir().'/'.mt_rand(0, 9999).'_dummy.en.json';
+        $content = json_encode([
+            'key1' => 'value1',
+            'key2' => 'value2',
+            'key3' => 'value3',
+        ]);
+        file_put_contents($tempname, $content);
+        $uploadedFile = new UploadedFile(
+            $tempname,
+            'dummy.en.json',
+            'application/json',
+            strlen($content)
+        );
+
+        $client = $this->getClient();
+
+        // Upload resource file
+        $client->request(
+            'POST',
+            '/api/resources/'.$resourceId.'/import',
+            ['locale' => 'en'],
+            ['file' => $uploadedFile]
+        );
+
+        $response = $client->getResponse();
+        $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
+
+        // Assert content has been inserted in database
+        $translationKeys = $this->get('openl10n.repository.translation')->findByResource($emptyResource);
+        $this->assertCount(3, $translationKeys);
+
+        $this->assertEquals('key1', $translationKeys[0]->getIdentifier());
+        $this->assertEquals('key2', $translationKeys[1]->getIdentifier());
+        $this->assertEquals('key3', $translationKeys[2]->getIdentifier());
+
+        $this->assertEquals('value1', $translationKeys[0]->getPhrase(Locale::parse('en'))->getText());
+        $this->assertEquals('value2', $translationKeys[1]->getPhrase(Locale::parse('en'))->getText());
+        $this->assertEquals('value3', $translationKeys[2]->getPhrase(Locale::parse('en'))->getText());
     }
 
     /**
