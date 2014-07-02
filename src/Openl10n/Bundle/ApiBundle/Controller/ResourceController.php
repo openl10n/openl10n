@@ -13,13 +13,15 @@ use Openl10n\Domain\Resource\Application\Action\CreateResourceAction;
 use Openl10n\Domain\Resource\Application\Action\ExportTranslationFileAction;
 use Openl10n\Domain\Resource\Application\Action\ImportTranslationFileAction;
 use Openl10n\Domain\Resource\Application\Action\UpdateResourceAction;
-use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Domain\Resource\Model\Resource;
+use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Value\String\Slug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\Exception\InvalidResourceException;
 
 class ResourceController extends Controller implements ClassResourceInterface
 {
@@ -124,8 +126,13 @@ class ResourceController extends Controller implements ClassResourceInterface
         $action = new ImportTranslationFileAction($resource);
         $form = $this->get('form.factory')->createNamed('', 'openl10n_import_translation_file', $action);
 
+
         if ($form->handleRequest($request)->isValid()) {
-            $this->get('openl10n.processor.import_translation_file')->execute($action);
+            try {
+                $this->get('openl10n.processor.import_translation_file')->execute($action);
+            } catch (InvalidResourceException $e) {
+                return $form->addError(new FormError($e->getMessage()));
+            }
 
             return new Response('', 204);
         }

@@ -118,12 +118,7 @@ class ResourceControllerTest extends WebTestCase
     public function testImportResource()
     {
         // Retrieve id of the "empty" resource in foobar project
-        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug('foobar'));
-        $resources = $this->get('openl10n.repository.resource')->findByProject($project);
-        $emptyResource = array_filter($resources, function($resource) {
-            return 'empty.en.json' === (string) $resource->getPathname();
-        });
-        $emptyResource = end($emptyResource);
+        $emptyResource = $this->getEmptyResourceInFoobarProject();
         $resourceId = $emptyResource->getId();
 
         // Create dummy json file
@@ -170,6 +165,37 @@ class ResourceControllerTest extends WebTestCase
         $this->assertEquals('value3', $translationKeys[2]->getPhrase(Locale::parse('en'))->getText());
     }
 
+    public function testImportMalFormattedJsonResource()
+    {
+        // Retrieve id of the "empty" resource in foobar project
+        $emptyResource = $this->getEmptyResourceInFoobarProject();
+        $resourceId = $emptyResource->getId();
+
+        // Create a malformatted json file
+        $tempname = sys_get_temp_dir().'/'.mt_rand(0, 9999).'_dummy.en.json';
+        $content = '{"key": "value", }';
+        file_put_contents($tempname, $content);
+        $uploadedFile = new UploadedFile(
+            $tempname,
+            'dummy.en.json',
+            'application/json',
+            strlen($content)
+        );
+
+        $client = $this->getClient();
+
+        // Upload resource file
+        $client->request(
+            'POST',
+            '/api/resources/'.$resourceId.'/import',
+            ['locale' => 'en'],
+            ['file' => $uploadedFile]
+        );
+
+        $response = $client->getResponse();
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+    }
+
     /**
      * @dataProvider dataProviderExportFormat
      */
@@ -200,6 +226,18 @@ class ResourceControllerTest extends WebTestCase
             ['json'],
             ['xlf'],
         ];
+    }
+
+    private function getEmptyResourceInFoobarProject()
+    {
+        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug('foobar'));
+        $resources = $this->get('openl10n.repository.resource')->findByProject($project);
+        $emptyResource = array_filter($resources, function($resource) {
+            return 'empty.en.json' === (string) $resource->getPathname();
+        });
+        $emptyResource = end($emptyResource);
+
+        return $emptyResource;
     }
 
     /**
