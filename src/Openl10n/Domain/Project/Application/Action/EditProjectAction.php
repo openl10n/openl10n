@@ -9,12 +9,14 @@ class EditProjectAction
     protected $project;
     protected $name;
     protected $defaultLocale;
+    protected $description;
 
     public function __construct(Project $project)
     {
         $this->project = $project;
         $this->name = (string) $project->getName();
         $this->defaultLocale = (string) $project->getDefaultLocale();
+        $this->description = (string) $project->getDescription();
     }
 
     public function getProject()
@@ -42,5 +44,15 @@ class EditProjectAction
         $this->defaultLocale = $locale;
 
         return $this;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }

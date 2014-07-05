@@ -37,12 +37,16 @@ class EditProjectProcessorSpec extends ObjectBehavior
         $action->getProject()->willReturn($project);
         $action->getName()->willReturn('Foo Bar');
         $action->getDefaultLocale()->willReturn('fr_FR');
+        $action->getDescription()->willReturn('Description');
 
         $project
             ->setName(Argument::exact(new Name('Foo Bar')))
             ->shouldBeCalled();
         $project
             ->setDefaultLocale(Argument::exact(Locale::parse('fr_FR')))
+            ->shouldBeCalled();
+        $project
+            ->setDescription(Argument::exact('Description'))
             ->shouldBeCalled();
 
         $projectRepository->save($project)->shouldBeCalled();

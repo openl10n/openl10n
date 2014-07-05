@@ -37,6 +37,7 @@ class LoadProjectData extends AbstractFixtureLoader
         return (new Project(new Slug($slug)))
             ->setName(new Name($data['name']))
             ->setDefaultLocale(Locale::parse($data['locale']))
+            ->setDescription($data['description'])
         ;
     }
 }

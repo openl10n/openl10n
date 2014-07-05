@@ -29,10 +29,12 @@ class CreateProjectProcessor
         $name = new Name($action->getName());
         $slug = new Slug($action->getSlug());
         $locale = Locale::parse($action->getDefaultLocale());
+        $description = $action->getDescription();
 
         $project = $this->projectRepository->createNew($slug);
         $project->setName($name);
         $project->setDefaultLocale($locale);
+        $project->setDescription($description);
 
         $this->projectRepository->save($project);
 

@@ -2,9 +2,11 @@ projects:
     foobar:
         name: Foobar
         locale: en
+        description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do elusmod tempor incididunt ut labore.
     empty:
         name: Empty
         locale: fr-FR
+        description: ~
 
 languages:
     foobar: [ 'en', 'es', 'fr', 'it' ]

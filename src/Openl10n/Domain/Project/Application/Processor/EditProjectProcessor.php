@@ -27,12 +27,14 @@ class EditProjectProcessor
     {
         $name = new Name($action->getName());
         $locale = Locale::parse($action->getDefaultLocale());
+        $description = $action->getDescription();
 
         $project = $action->getProject();
         $oldProject = clone $project;
 
         $project->setName($name);
         $project->setDefaultLocale($locale);
+        $project->setDescription($description);
 
         $this->projectRepository->save($project);
 

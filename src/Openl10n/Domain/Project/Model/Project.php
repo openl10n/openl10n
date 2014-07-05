@@ -32,6 +32,11 @@ class Project
     protected $defaultLocale;
 
     /**
+     * @var Description
+     */
+    protected $description;
+
+    /**
      * @var ArrayCollection
      */
     protected $languages;
@@ -103,6 +108,30 @@ class Project
     public function setDefaultLocale(Locale $locale)
     {
         $this->defaultLocale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * The project description.
+     *
+     * @return Description The project description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set the project description.
+     *
+     * @param string $description The project description
+     *
+     * @return Project The instance of this project
+     */
+    public function setDescription($description)
+    {
+        $this->description = (string) $description;
 
         return $this;
     }
