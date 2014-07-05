@@ -18,6 +18,7 @@ class ProjectType extends AbstractType
         $builder
             ->add('name', 'text')
             ->add('defaultLocale', 'openl10n_locale_choice')
+            ->add('description', 'text')
         ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {

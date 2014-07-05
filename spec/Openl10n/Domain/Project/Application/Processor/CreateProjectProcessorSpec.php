@@ -36,6 +36,7 @@ class CreateProjectProcessorSpec extends ObjectBehavior
         $action->getName()->willReturn('Foo bar');
         $action->getSlug()->willReturn('foobar');
         $action->getDefaultLocale()->willReturn('fr_FR');
+        $action->getDescription()->willReturn('');
 
         $projectRepository
             ->createNew(Argument::exact(new Slug('foobar')))

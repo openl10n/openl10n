@@ -7,6 +7,7 @@ use Openl10n\Bundle\InfraBundle\Entity\Project;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Name;
 use Openl10n\Value\String\Slug;
+use Openl10n\Value\String\Description;
 
 class LoadProjectData extends AbstractFixtureLoader
 {
@@ -37,6 +38,7 @@ class LoadProjectData extends AbstractFixtureLoader
         return (new Project(new Slug($slug)))
             ->setName(new Name($data['name']))
             ->setDefaultLocale(Locale::parse($data['locale']))
+            ->setDescription(new Description($data['description']))
         ;
     }
 }

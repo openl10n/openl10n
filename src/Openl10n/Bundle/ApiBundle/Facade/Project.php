@@ -22,10 +22,16 @@ class Project
      */
     public $defaultLocale;
 
+    /**
+     * @Serializer\Type("string")
+     */
+    public $description;
+
     public function __construct(ProjectModel $project)
     {
         $this->slug = (string) $project->getSlug();
         $this->name = (string) $project->getName();
         $this->defaultLocale = (string) $project->getDefaultLocale();
+        $this->description = (string) $project->getDescription();
     }
 }
