@@ -1,17 +1,21 @@
+var async = require('async');
+var browserify = require('browserify');
+var rimraf = require('rimraf');
+var concat = require('gulp-concat');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var prettyHrtime = require('pretty-hrtime');
 var sass = require('gulp-ruby-sass');
-var clean = require('gulp-clean');
-var concat = require('gulp-concat');
-var requirejs = require('requirejs');
-var async = require('async');
+var source = require('vinyl-source-stream');
+var watchify = require('watchify');
 
 //
 // Variables
 //
-var srcDir = './web/assets/src';
+var srcDir = './client';
 var distDir = './web/assets/dist';
 var isDebug = !gutil.env.prod;
+var isWatching = false;
 
 //
 // Default
@@ -24,10 +28,7 @@ gulp.task('default', function() {
 // Clean
 //
 gulp.task('clean', function(cb) {
-  gulp
-    .src(distDir, {read: false})
-    .pipe(clean())
-    .on('end', cb);
+  rimraf(distDir, cb);
 });
 
 //
@@ -41,7 +42,7 @@ gulp.task('build', ['clean'], function() {
 // Watch
 //
 gulp.task('watch', function() {
-  gulp.watch(srcDir + '/scripts/**/*.{js,tpl}', ['scripts']);
+  runBrowerify(true); // Run Watchify
 
   gulp.watch(srcDir + '/styles/**/*.scss', ['styles']);
 
@@ -51,50 +52,51 @@ gulp.task('watch', function() {
 //
 // Javascripts
 //
-gulp.task('scripts', function(cb) {
-  // Copy all javascripts files
-  var stream = gulp.src(srcDir + '/scripts/**/*')
-    .pipe(gulp.dest(distDir + '/js'));
-
-  if (isDebug) {
-    stream.on('end', cb);
-    return;
-  }
-
-  // If no debug, then optimize javascript with requirejs optimizer
-  var requirejsConfig = {
-    mainConfigFile: srcDir + '/scripts/config.js',
-    //appDir: srcDir + 'scripts',
-    baseUrl: srcDir + '/scripts',
-    dir: distDir + '/js',
-    optimize: 'uglify2',
-    //optimizeCss: 'none',
-    //generateSourceMaps: true,
-    //preserveLicenseComments: false,
-    //useSourceUrl: true,
-    modules: [{
-        name: 'config'
-      }, {
-        name: 'init',
-        exclude: ['config', 'fos_routing'],
-        //excludeShallow: ['fos_routing'],
-        //stubModules: ['underscore', 'text', 'tpl']
-      }
-    ],
-    removeCombined: true,
+function runBrowerify(isWatching) {
+  var params = {
+    entries: [srcDir + '/src/init.js'],
+    extensions: ['.coffee', '.hbs'],
   };
 
-  stream.on('end', function() {
-    requirejs.optimize(
-      requirejsConfig,
-      function(buildResponse) {
-        cb();
-      }, function(err) {
-        console.log(err)
-        cb();
-      });
-  });
+  // Core script
+  var methodName = isWatching ? watchify : browserify;
+  var bundler = methodName(params);
 
+  // Logger
+  var startTime;
+  var logger = {
+    start: function() {
+      startTime = process.hrtime();
+      gutil.log('Running', gutil.colors.cyan("'browserify'") + '...');
+    },
+
+    end: function() {
+      var taskTime = process.hrtime(startTime);
+      var prettyTime = prettyHrtime(taskTime);
+      gutil.log('Finished', gutil.colors.cyan("'browserify'"), 'in', gutil.colors.magenta(prettyTime));
+    }
+  };
+
+  // Wrapper
+  var rebundle = function() {
+    logger.start();
+
+    return bundler
+      .bundle({debug: isDebug})
+      .pipe(source('js/app.js'))
+      .pipe(gulp.dest(distDir))
+      .on('end', logger.end);
+  }
+
+  // Watching mode
+  if (isWatching)
+    bundler.on('update', rebundle);
+
+  return rebundle();
+}
+
+gulp.task('scripts', function() {
+  runBrowerify(false);
 });
 
 //
@@ -102,13 +104,13 @@ gulp.task('scripts', function(cb) {
 //
 gulp.task('styles', function (cb) {
   gulp
-    .src([srcDir + '/styles/*.scss', '!**/vendor.scss'])
+    .src([srcDir + '/styles/[^_]*.scss', '!**/vendor.scss'])
     .pipe(sass({
       style: isDebug ? 'compressed' : 'nested',
       sourcemap: isDebug,
       loadPath: [
-        srcDir + '/vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/',
-        srcDir + '/vendor/font-awesome/scss/'
+        __dirname + '/node_modules/bootstrap-sass/assets/stylesheets/bootstrap/',
+        __dirname + '/node_modules/font-awesome/scss/'
       ]
     }))
     .pipe(gulp.dest(distDir + '/css'))
@@ -122,13 +124,7 @@ gulp.task('vendor', function (cb) {
   async.parallel([
     function(callback) {
       gulp
-        .src(srcDir + '/vendor/**/*.{js,map}')
-        .pipe(gulp.dest(distDir + '/vendor'))
-        .on('end', callback)
-    },
-    function(callback) {
-      gulp
-        .src(srcDir + '/vendor/font-awesome/fonts/*')
+        .src(__dirname + '/node_modules/font-awesome/fonts/*')
         .pipe(gulp.dest(distDir + '/fonts/font-awesome'))
         .on('end', callback)
     },
@@ -138,8 +134,8 @@ gulp.task('vendor', function (cb) {
         .pipe(sass({
           style: isDebug ? 'compressed' : 'nested',
           loadPath: [
-            srcDir + '/vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/',
-            srcDir + '/vendor/font-awesome/scss/'
+            __dirname + '/node_modules/bootstrap-sass/assets/stylesheets/bootstrap/',
+            __dirname + '/node_modules/font-awesome/scss/'
           ]
         }))
         .pipe(gulp.dest(distDir + '/css'))
