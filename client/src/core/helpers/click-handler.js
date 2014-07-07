@@ -2,7 +2,6 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 
 module.exports = function(evt) {
-  console.log('click not:data-bypass')
   var $this = $(this);
 
   // Get the absolute anchor href.
