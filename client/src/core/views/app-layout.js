@@ -1,9 +1,10 @@
 var Marionette = require('backbone.marionette');
 
 module.exports = Marionette.LayoutView.extend({
-  template: require('../templates/site'),
+  template: require('../templates/app-layout'),
+  el: 'body',
+  className: 'app-layout',
   regions: {
-    headerRegion: '#header',
-    mainRegion: '#main',
+    bodyRegion: 'div.body',
   }
 })
