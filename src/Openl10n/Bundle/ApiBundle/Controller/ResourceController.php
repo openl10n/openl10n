@@ -94,7 +94,7 @@ class ResourceController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View(statusCode=204)
      */
-    public function deleteAction(Request $request, $resource)
+    public function deleteAction($resource)
     {
         // TODO
     }
@@ -102,7 +102,7 @@ class ResourceController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function getTranslationsAction(Request $request, $resource)
+    public function getTranslationsAction($resource)
     {
         $resource = $this->findResourceOr404($resource);
 

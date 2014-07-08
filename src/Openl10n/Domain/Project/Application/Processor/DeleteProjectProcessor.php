@@ -9,6 +9,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class DeleteProjectProcessor
 {
     protected $projectRepository;
+    protected $eventDispatcher;
 
     public function __construct(
         ProjectRepository $projectRepository,

@@ -9,6 +9,10 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class ChangePasswordProcessor
 {
+    protected $credentialsRepository;
+    protected $encoderFactory;
+    protected $eventDispatcher;
+
     public function __construct(
         CredentialsRepository $credentialsRepository,
         EncoderFactoryInterface $encoderFactory,

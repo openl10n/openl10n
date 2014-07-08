@@ -9,7 +9,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class UpdateResourceProcessor
 {
-    protected $projectRepository;
+    protected $resourceRepository;
+    protected $eventDispatcher;
 
     public function __construct(
         ResourceRepository $resourceRepository,

@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormEvents;
 
 class ExportTranslationFileType extends AbstractType
 {
-    protected $domainRepository;
+    protected $languageRepository;
     protected $translationDumper;
 
     public function __construct(LanguageRepository $languageRepository, TranslationDumperInterface $translationDumper)

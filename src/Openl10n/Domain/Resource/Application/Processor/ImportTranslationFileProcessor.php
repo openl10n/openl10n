@@ -13,6 +13,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ImportTranslationFileProcessor
 {
+    protected $resourceRepository;
     protected $translationRepository;
     protected $fileUploader;
     protected $translationLoader;

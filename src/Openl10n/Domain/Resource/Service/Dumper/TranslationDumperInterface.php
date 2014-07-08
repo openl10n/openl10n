@@ -11,11 +11,11 @@ interface TranslationDumperInterface
      *
      * @param MessageCatalogue $catalogue The message catalogue to dump
      * @param string           $directory The directory where to dump the translation files
-     * @param string|null      $format    The format to use to dump the messages, or null to guess with file extension
+     * @param string           $format    The format to use to dump the messages, or null to guess with file extension
      *
      * @throws \InvalidArgumentException
      */
-    public function dumpMessages(MessageCatalogue $catalogue, $directory, $format = null);
+    public function dumpMessages(MessageCatalogue $catalogue, $directory, $format);
 
     /**
      * Obtains the list of supported formats.

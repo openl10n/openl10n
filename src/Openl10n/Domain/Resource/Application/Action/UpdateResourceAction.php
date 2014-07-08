@@ -6,7 +6,7 @@ use Openl10n\Domain\Resource\Model\Resource;
 
 class UpdateResourceAction
 {
-    protected $resouce;
+    protected $resource;
     protected $pathname;
 
     public function __construct(Resource $resource)

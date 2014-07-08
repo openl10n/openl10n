@@ -43,15 +43,12 @@ class TranslationDumper implements TranslationDumperInterface
     /**
      * {@inheritdoc}
      */
-    public function dumpMessages(MessageCatalogue $catalogue, $directory , $format = null)
+    public function dumpMessages(MessageCatalogue $catalogue, $directory, $format)
     {
-        $format = $format ?: $file->getExtension();
-
         if (!isset($this->dumpers[$format])) {
             throw new \InvalidArgumentException(sprintf(
-                'Unable to export into file %s: '.
+                'Unable to export message catallogue: '.
                 'there is no dumper associated with format "%s".',
-                $file->getPathname(),
                 $format
             ));
         }

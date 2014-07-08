@@ -54,6 +54,10 @@ class Locale
             }
         }
 
+        if (null === $language) {
+            throw new \RuntimeException(sprintf('Unable to retrieve a valid language for locale "%s"', $locale));
+        }
+
         return new self($language, $region, $variants);
     }
 

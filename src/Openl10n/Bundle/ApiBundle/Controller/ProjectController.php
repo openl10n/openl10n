@@ -106,7 +106,7 @@ class ProjectController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View(statusCode=204)
      */
-    public function deleteAction(Request $request, $project)
+    public function deleteAction($project)
     {
         $project = $this->findProjectOr404($project);
         $action = new DeleteProjectAction($project);

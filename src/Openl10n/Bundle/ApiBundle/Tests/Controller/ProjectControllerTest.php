@@ -51,7 +51,7 @@ class ProjectControllerTest extends WebTestCase
         $client = $this->getClient();
         $client->jsonRequest('GET', '/api/projects/not-found');
 
-        $data = $this->assertJsonResponse(
+        $this->assertJsonResponse(
             $client->getResponse(),
             Response::HTTP_NOT_FOUND
         );

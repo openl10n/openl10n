@@ -57,7 +57,7 @@ class TranslationCommit
         $target = $key->getPhrase($target) ?: new Phrase($key, $target);
 
         $this->id = $key->getId();
-        $this->resouceId = $key->getResource()->getId();
+        $this->resourceId = $key->getResource()->getId();
         $this->key = (string) $key->getIdentifier();
         $this->sourcePhrase = (string) $source->getText();
         $this->sourceLocale = (string) $source->getLocale();

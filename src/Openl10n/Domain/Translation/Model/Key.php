@@ -15,7 +15,7 @@ class Key
     protected $id;
 
     /**
-     * @var Project
+     * @var \Openl10n\Domain\Project\Model\Project
      */
     protected $project;
 

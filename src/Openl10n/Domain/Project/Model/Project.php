@@ -32,7 +32,7 @@ class Project
     protected $defaultLocale;
 
     /**
-     * @var array
+     * @var ArrayCollection
      */
     protected $languages;
 

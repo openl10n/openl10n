@@ -74,7 +74,7 @@ class LanguageController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View(statusCode=204)
      */
-    public function deleteAction(Request $request, $project, $locale)
+    public function deleteAction($project, $locale)
     {
         $project = $this->findProjectOr404($project);
         $language = $this->findLanguageOr404($project, $locale);

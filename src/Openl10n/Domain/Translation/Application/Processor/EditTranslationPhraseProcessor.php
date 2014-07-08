@@ -9,6 +9,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class EditTranslationPhraseProcessor
 {
     protected $translationRepository;
+    protected $eventDispatcher;
 
     public function __construct(
         TranslationRepository $translationRepository,
@@ -24,10 +25,9 @@ class EditTranslationPhraseProcessor
         $key = $action->getKey();
         $locale = $action->getLocale();
 
-        if (!$key->hasPhrase($locale)) {
+        $phrase = $key->getPhrase($locale);
+        if (null === $phrase) {
             $phrase = $this->translationRepository->createNewPhrase($key, $locale);
-        } else {
-            $phrase = $key->getPhrase($locale);
         }
 
         $phrase->setText($action->getText());

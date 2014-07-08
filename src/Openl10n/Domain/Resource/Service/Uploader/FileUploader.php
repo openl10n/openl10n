@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader implements FileUploaderInterface
 {
+    protected $filesystem;
+
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;

@@ -14,7 +14,6 @@ class LoadCredentialsData extends AbstractFixtureLoader
             $manager->persist($credential);
         }
 
-        $manager->persist($credential);
         $manager->flush();
     }
 

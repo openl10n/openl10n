@@ -10,6 +10,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class CreateLanguageProcessor
 {
     protected $languageRepository;
+    protected $eventDispatcher;
 
     public function __construct(
         LanguageRepository $languageRepository,

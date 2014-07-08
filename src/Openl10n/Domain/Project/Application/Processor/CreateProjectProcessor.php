@@ -13,6 +13,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class CreateProjectProcessor
 {
     protected $projectRepository;
+    protected $eventDispatcher;
 
     public function __construct(
         ProjectRepository $projectRepository,

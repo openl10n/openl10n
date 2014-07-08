@@ -11,7 +11,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class UniqueProjectValidator extends ConstraintValidator
 {
     /**
-     * @var ProjectRepositoryInterface
+     * @var ProjectRepository
      */
     private $projectRepository;
 
@@ -49,7 +49,9 @@ class UniqueProjectValidator extends ConstraintValidator
         $project = $this->projectRepository->findOneBySlug(new Slug($value));
 
         if (null !== $project) {
-            $this->context->addViolation($constraint->message);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->addViolation();
         }
     }
 }

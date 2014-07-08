@@ -9,6 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class CreateResourceType extends AbstractType
 {
+    protected $projectRepository;
+
     public function __construct(ProjectRepository $projectRepository)
     {
         $this->projectRepository = $projectRepository;

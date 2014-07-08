@@ -32,12 +32,12 @@ class Phrase
     protected $isApproved;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     protected $updatedAt;
 

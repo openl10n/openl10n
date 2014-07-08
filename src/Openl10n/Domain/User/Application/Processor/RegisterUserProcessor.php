@@ -14,6 +14,11 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class RegisterUserProcessor
 {
+    protected $userRepository;
+    protected $credentialsRepository;
+    protected $encoderFactory;
+    protected $eventDispatcher;
+
     public function __construct(
         UserRepository $userRepository,
         CredentialsRepository $credentialsRepository,

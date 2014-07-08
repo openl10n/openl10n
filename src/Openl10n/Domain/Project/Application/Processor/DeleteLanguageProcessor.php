@@ -9,6 +9,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class DeleteLanguageProcessor
 {
     protected $languageRepository;
+    protected $eventDispatcher;
 
     public function __construct(
         LanguageRepository $languageRepository,

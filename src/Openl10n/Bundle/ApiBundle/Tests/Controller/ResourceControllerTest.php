@@ -85,7 +85,7 @@ class ResourceControllerTest extends WebTestCase
             'pathname' => 'update.en.yml',
         ]);
 
-        $data = $this->assertJsonResponse(
+        $this->assertJsonResponse(
             $client->getResponse(),
             Response::HTTP_NO_CONTENT
         );

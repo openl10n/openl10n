@@ -12,7 +12,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CreateResourceProcessor
 {
-    protected $domainRepository;
+    protected $resourceRepository;
     protected $translationRepository;
     protected $fileUploader;
     protected $translationLoader;

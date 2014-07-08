@@ -11,6 +11,8 @@ use Symfony\Component\Form\FormEvents;
 
 class ImportTranslationFileType extends AbstractType
 {
+    protected $languageRepository;
+
     public function __construct(LanguageRepository $languageRepository)
     {
         $this->languageRepository = $languageRepository;

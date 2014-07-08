@@ -50,7 +50,9 @@ class UniqueUserValidator extends ConstraintValidator
 
         $user = $this->userRepository->findOneByUsername(new Username($value));
         if (null !== $user) {
-            $this->context->addViolation($constraint->message);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->addViolation();
         }
     }
 }

@@ -44,7 +44,7 @@ class TranslationController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function cgetPhrasesAction(Request $request, $translation)
+    public function cgetPhrasesAction($translation)
     {
         $translation = $this->findTranslationOr404($translation);
 
@@ -62,7 +62,7 @@ class TranslationController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function getPhrasesAction(Request $request, $translation, $locale)
+    public function getPhrasesAction($translation, $locale)
     {
         $translation = $this->findTranslationOr404($translation);
 

@@ -15,6 +15,7 @@ class EditProjectEvent extends Event
     public function __construct(Project $project, Project $oldProject)
     {
         $this->project = $project;
+        $this->oldProject = $oldProject;
     }
 
     public function getProject()
