@@ -3,6 +3,7 @@ var Marionette = require('backbone.marionette');
 var msgbus = require('msgbus');
 
 var EditorLayoutView = require('./views/editor-layout-view');
+var TranslationListView = require('./views/translation-list-view');
 
 module.exports = Marionette.Controller.extend({
   translate: function(projectSlug, source, target, translationId, filters) {
@@ -12,8 +13,10 @@ module.exports = Marionette.Controller.extend({
       .when(projectViewRendering)
       .done(function(projectView, languages, resources) {
         var editorView = new EditorLayoutView();
+        var translationListView = new TranslationListView();
 
         projectView.contentRegion.show(editorView);
+        editorView.translationsListRegion.show(translationListView);
       });
   },
 
