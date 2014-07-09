@@ -3,7 +3,7 @@ var Language = require('./language');
 
 module.exports = Backbone.Collection.extend({
   url: function() {
-    return '/api/projects/' + this.projectSlug + '/languages'
+    return '/projects/' + this.projectSlug + '/languages'
   },
 
   initialize: function(models, options) {

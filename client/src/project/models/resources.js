@@ -3,7 +3,7 @@ var Resource = require('./resource');
 
 module.exports = Backbone.Collection.extend({
   url: function() {
-    return '/api/resources?project=' + this.projectSlug
+    return '/resources?project=' + this.projectSlug
   },
   model: Resource,
   comparator: 'pathname',

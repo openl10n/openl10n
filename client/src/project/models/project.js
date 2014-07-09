@@ -3,7 +3,7 @@ var Backbone = require('backbone');
 module.exports = Backbone.Model.extend({
   idAttribute: 'slug',
 
-  urlRoot: '/api/projects',
+  urlRoot: '/projects',
 
   defaults: {
     slug: '',
