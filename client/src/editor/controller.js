@@ -11,7 +11,9 @@ module.exports = Marionette.Controller.extend({
 
     $
       .when(projectViewRendering)
-      .done(function(projectView, languages, resources) {
+      .done(function(projectView) {
+        msgbus.vent.trigger('menu:project:select', 'translate');
+
         var editorView = new EditorLayoutView();
         var translationListView = new TranslationListView();
 

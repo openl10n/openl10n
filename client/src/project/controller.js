@@ -16,6 +16,8 @@ module.exports = Marionette.Controller.extend({
     $
       .when(projectViewRendering, languagesFetching, resourcesFetching)
       .done(function(projectView, languages, resources) {
+        msgbus.vent.trigger('menu:project:select', 'resources')
+
         var indexView = new IndexView();
         var languageListView = new LanguageListView({collection: languages});
         var resourceListView = new ResourceListView({collection: resources});
