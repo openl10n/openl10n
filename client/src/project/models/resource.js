@@ -1,7 +1,7 @@
 var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
-  urlRoot: '/resource',
+  urlRoot: '/api/resource',
 
   defaults: {
     pathname: '',

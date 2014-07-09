@@ -4,7 +4,7 @@ module.exports = Backbone.Model.extend({
   idAttribute: 'locale',
 
   urlRoot: function() {
-    return '/projects/' + this.projectSlug + '/languages'
+    return '/api/projects/' + this.projectSlug + '/languages'
   },
 
   defaults: {

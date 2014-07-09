@@ -25,15 +25,7 @@ function bindEvents() {
   require('./events/view-events');
 }
 
-// Custom ajax options
-function initAjaxOptions() {
-  $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-    options.url = '/api' + options.url;
-  });
-}
-
 module.exports = function(options) {
-  initAjaxOptions();
   handleClickEvents();
   aggregateMarionetteBehaviors();
   bindEvents();
