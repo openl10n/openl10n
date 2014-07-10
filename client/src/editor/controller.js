@@ -3,6 +3,7 @@ var $ = require('jquery');
 var Controller = require('../framework/controller');
 var EditorLayoutView = require('./views/editor-layout-view');
 var TranslationListView = require('./views/translation-list-view');
+var ResourceListView = require('./views/resource-list-view');
 var LocaleChooserView = require('./views/locale-chooser-view');
 var Context = require('./models/context');
 
@@ -35,8 +36,8 @@ module.exports = Controller.extend({
     var languagesFetching = modelChannel.reqres.request('languages', projectSlug);
 
     $
-      .when(projectViewRendering, languagesFetching)
-      .done(function(projectView, languages) {
+      .when(projectViewRendering, languagesFetching, resourcesFetching)
+      .done(function(projectView, languages, resources) {
         // layoutChannel.vent.trigger('project:menu', 'translate');
 
         // Layout
@@ -56,6 +57,10 @@ module.exports = Controller.extend({
         });
         editorView.sourceChooserRegion.show(sourceLocaleChooserView);
         editorView.targetChooserRegion.show(targetLocaleChooserView);
+
+        // Resource list
+        var resourceListView = new ResourceListView({collection: resources});
+        editorView.resourcesListRegion.show(resourceListView);
 
         // Translation list
         var translationListView = new TranslationListView();

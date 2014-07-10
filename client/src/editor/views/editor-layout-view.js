@@ -8,12 +8,12 @@ module.exports = Marionette.LayoutView.extend({
     // languageOverlayRegion: '#language-overlay',
     sourceChooserRegion: '#source-chooser',
     targetChooserRegion: '#target-chooser',
-    // resourcesListRegion: '#resources-list',
-    // filtersRegion: '#filters',
-    // actionBarRegion: '#actionbar',
-    // statsRegion: '#stats',
+    resourcesListRegion: '#resources-list',
+    filtersRegion: '#filters',
+    actionBarRegion: '#actionbar',
+    statsRegion: '#stats',
     translationsListRegion: '#translations-list',
-    // translationEditRegion: '#translations-edit'
+    translationEditRegion: '#translations-edit'
   },
 
   behaviors: {
