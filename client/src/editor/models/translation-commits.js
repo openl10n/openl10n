@@ -1,12 +1,12 @@
 var $ = require('jquery');
+var _ = require('underscore');
 var Backbone = require('backbone');
+var TranslationCommit = require('./translation-commit');
 
 module.exports = Backbone.Collection.extend({
   url: function() {
     var attributes = {
-      'project': this.projectSlug,
-      'source': this.context.get('source'),
-      'target': this.context.get('target'),
+      'project': this.projectSlug
     };
 
     // Manage filters
@@ -20,8 +20,11 @@ module.exports = Backbone.Collection.extend({
       attributes.text = this.filters.get('text');
     }
 
-    return '/api/translation_commits?' + $.param(attributes);
-  }
+    return '/api/translation_commits/'
+      + this.context.get('source') + '/'
+      + this.context.get('target') + '?'
+      + $.param(attributes);
+  },
 
   defaults: {
     key: '',
@@ -34,7 +37,9 @@ module.exports = Backbone.Collection.extend({
     edited: false
   },
 
-  initialize: function(options) {
+  model: TranslationCommit,
+
+  initialize: function(models, options) {
     // BackboneSelect.One.applyTo(this, models, options);
 
     this.projectSlug = options.projectSlug;
@@ -47,5 +52,21 @@ module.exports = Backbone.Collection.extend({
       unapproved: 0
     };
   },
+
+  parse: function(response) {
+    this.stats.all = response.length;
+    this.stats.untranslated = _(response).where({'is_translated': false}).length;
+    this.stats.unapproved = _(response).where({'is_translated': true, 'is_approved': false}).length;
+
+    return response;
+  },
+
+  reset: function(models, options) {
+    this.stats.all = 0;
+    this.stats.untranslated = 0;
+    this.stats.unapproved = 0;
+
+    return Backbone.Collection.prototype.reset.call(this, models, options);
+  }
 
 })
