@@ -1,6 +1,6 @@
-var Marionette = require('backbone.marionette');
+var Router = require('../framework/router');
 
-module.exports = Marionette.AppRouter.extend({
+module.exports = Router.extend({
   appRoutes: {
     '': 'index'
   }

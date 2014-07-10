@@ -1,6 +1,5 @@
 var $ = require('jquery');
 var Marionette = require('backbone.marionette');
-var msgbus = require('msgbus');
 
 module.exports = Marionette.ItemView.extend({
   template: require('../templates/project-sidebar'),
@@ -8,7 +7,7 @@ module.exports = Marionette.ItemView.extend({
   className: 'sidebar-menu',
 
   initialize: function() {
-    this.listenTo(msgbus.vent, 'menu:project:select', this.selectMenu);
+    //this.listenTo(msgbus.vent, 'menu:project:select', this.selectMenu);
   },
 
   selectMenu: function(itemName) {

@@ -1,4 +1,3 @@
-var msgbus = require('msgbus');
 var Controller = require('./controller');
 var Router = require('./router');
 

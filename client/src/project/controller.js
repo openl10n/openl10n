@@ -1,22 +1,26 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
-var Marionette = require('backbone.marionette');
-var msgbus = require('msgbus');
+var Controller = require('../framework/controller');
+
+var layoutChannel = require('../framework/radio').channel('layout');
+var modelChannel = require('../framework/radio').channel('model');
 
 var IndexView = require('./views/index-view');
 var LanguageListView = require('./views/language-list-view');
 var ResourceListView = require('./views/resource-list-view');
 
-module.exports = Marionette.Controller.extend({
+module.exports = Controller.extend({
+  channelName: 'project',
+
   index: function(projectSlug) {
-    var projectViewRendering = msgbus.reqres.request('view:project', projectSlug);
-    var languagesFetching = msgbus.reqres.request('model:languages', projectSlug);
-    var resourcesFetching = msgbus.reqres.request('model:resources', projectSlug);
+    var projectViewRendering = layoutChannel.reqres.request('project', projectSlug);
+    var languagesFetching = modelChannel.reqres.request('languages', projectSlug);
+    var resourcesFetching = modelChannel.reqres.request('resources', projectSlug);
 
     $
       .when(projectViewRendering, languagesFetching, resourcesFetching)
       .done(function(projectView, languages, resources) {
-        msgbus.vent.trigger('menu:project:select', 'resources')
+        modelChannel.vent.trigger('menu:project:select', 'resources')
 
         var indexView = new IndexView();
         var languageListView = new LanguageListView({collection: languages});

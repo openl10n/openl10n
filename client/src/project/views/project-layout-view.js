@@ -6,6 +6,10 @@ module.exports = Marionette.LayoutView.extend({
   tagName: 'div',
   className: 'layout-fixed x-project-show x-editor--layout',
 
+  behaviors: {
+    Scrollable: {}
+  },
+
   regions: {
     sidebarRegion: '#sidebar',
     contentRegion: '#content',

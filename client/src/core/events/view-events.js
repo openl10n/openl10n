@@ -1,5 +1,5 @@
 var $ = require('jquery');
-var msgbus = require('msgbus');
+var layoutChannel = require('../../framework/radio').channel('layout');
 
 var AppLayout = require('../views/app-layout');
 var SiteView = require('../views/site-view');
@@ -10,7 +10,7 @@ var appLayout = null;
 var siteView = null;
 var headerView = null;
 
-msgbus.reqres.setHandler('view:app-layout', function() {
+layoutChannel.reqres.setHandler('app-layout', function() {
   var defer = $.Deferred();
 
   if (null === appLayout || appLayout.isDestroyed) {
@@ -24,7 +24,7 @@ msgbus.reqres.setHandler('view:app-layout', function() {
 })
 
 
-msgbus.reqres.setHandler('view:site', function() {
+layoutChannel.reqres.setHandler('site', function() {
   var defer = $.Deferred();
 
   if (null === siteView || siteView.isDestroyed) {
@@ -32,7 +32,7 @@ msgbus.reqres.setHandler('view:site', function() {
     headerView = new HeaderView();
   }
 
-  var renderingAppLayout = msgbus.reqres.request('view:app-layout');
+  var renderingAppLayout = layoutChannel.reqres.request('app-layout');
 
   $.when(renderingAppLayout).done(function(appLayout) {
     appLayout.bodyRegion.show(siteView);

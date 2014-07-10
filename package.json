@@ -4,7 +4,6 @@
   "author": "Matthieu Moquet <matthieu@moquet.net>",
   "license": "MIT",
   "browser": {
-    "msgbus": "./client/lib/msgbus.js"
   },
   "browserify": {
     "transform": [
@@ -14,9 +13,6 @@
     ]
   },
   "browserify-shim": {
-    "msgbus-shim": {
-      "exports": "msgbus"
-    }
   },
   "dependencies": {
     "async": "^0.2.10",

@@ -1,12 +1,12 @@
 var $ = require('jquery');
-var msgbus = require('msgbus');
+var modelChannel = require('../../framework/radio').channel('model');
 
-var ProjectCollection = require('../models/projects');
 var Project = require('../models/project');
+var ProjectCollection = require('../models/projects');
 var LanguageCollection = require('../models/languages');
 var ResourceCollection = require('../models/resources');
 
-msgbus.reqres.setHandler('model:projects', function() {
+modelChannel.reqres.setHandler('projects', function() {
   var projects = new ProjectCollection();
   var defer = $.Deferred();
 
@@ -19,7 +19,7 @@ msgbus.reqres.setHandler('model:projects', function() {
   return defer.promise();
 });
 
-msgbus.reqres.setHandler('model:project', function(projectSlug) {
+modelChannel.reqres.setHandler('project', function(projectSlug) {
   var project = new Project({slug: projectSlug});
   var defer = $.Deferred();
 
@@ -35,7 +35,7 @@ msgbus.reqres.setHandler('model:project', function(projectSlug) {
   return defer.promise();
 });
 
-msgbus.reqres.setHandler('model:languages', function(projectSlug) {
+modelChannel.reqres.setHandler('languages', function(projectSlug) {
   var languages = new LanguageCollection([], {projectSlug: projectSlug});
   var defer = $.Deferred();
 
@@ -48,7 +48,7 @@ msgbus.reqres.setHandler('model:languages', function(projectSlug) {
   return defer.promise();
 });
 
-msgbus.reqres.setHandler('model:resources', function(projectSlug) {
+modelChannel.reqres.setHandler('resources', function(projectSlug) {
   var resources = new ResourceCollection([], {projectSlug: projectSlug});
   var defer = $.Deferred();
 

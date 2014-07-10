@@ -1,9 +1,8 @@
-var _ = require('underscore');
 var Backbone = require('backbone');
-var Marionette = require('backbone.marionette');
+var Application = require('./framework/application');
 
 // Application instance
-var app = new Marionette.Application();
+var app = new Application();
 
 // Initialize application modules
 app.addInitializer(require('./core'));
@@ -12,7 +11,7 @@ app.addInitializer(require('./editor'));
 app.addInitializer(require('./project'));
 
 // Start history
-app.addInitializer(function(options) {
+app.on('start', function(options) {
   if (!Backbone.history.started) {
     Backbone.history.start({pushState: false});
   }
