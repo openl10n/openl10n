@@ -33,7 +33,7 @@ module.exports = Marionette.ItemView.extend({
   },
 
   selectTranslation: function() {
-    this.model.select();
+    // this.model.select();
   },
 
 });

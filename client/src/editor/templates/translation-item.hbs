@@ -1,1 +1,24 @@
-translation item
+<span class="status {{#if is_approved }}status-approved{{else}}{{#if is_translated}}status-translated{{/if}}{{/if}}"></span>
+
+<p class="key">
+  {{#if edited}}
+    <i class="icon-edit text-success fa fa-pencil"></i>
+  {{else}}
+    <i class="icon-status text-{{#if is_translated}}success{{else}}danger{{/if}} fa {{#if is_approved}}fa-check{{else}}fa-circle{{/if}}"></i>
+  {{/if}}
+
+  <span class="identifier">
+    {{key}}
+  </span>
+</p>
+
+{{#if source_phrase}}
+  <p class="extract text-default">
+    {{!-- <%- S(source_phrase).truncate(100, '…') %> --}}
+    {{source_phrase}}
+  </p>
+{{else}}
+  <p class="extract text-danger">
+    <em>undefined</em>
+  </p>
+{{/if}}
