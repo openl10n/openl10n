@@ -6,8 +6,8 @@ module.exports = Marionette.LayoutView.extend({
 
   regions: {
     // languageOverlayRegion: '#language-overlay',
-    // sourceChooserRegion: '#source-chooser',
-    // targetChooserRegion: '#target-chooser',
+    sourceChooserRegion: '#source-chooser',
+    targetChooserRegion: '#target-chooser',
     // resourcesListRegion: '#resources-list',
     // filtersRegion: '#filters',
     // actionBarRegion: '#actionbar',
