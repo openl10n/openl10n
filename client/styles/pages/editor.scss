@@ -404,6 +404,7 @@
   // It will be overwritten by javascript
 
   .js-scrollable {
+    overflow-x: hidden;
     height: 800px;
   }
 
