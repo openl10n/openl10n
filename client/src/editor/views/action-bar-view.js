@@ -1,5 +1,7 @@
 var Marionette = require('backbone.marionette');
 
+var TranslationPhrase = require('../models/translation-phrase');
+
 module.exports = Marionette.ItemView.extend({
   template: require('../templates/action-bar'),
 
@@ -27,9 +29,8 @@ module.exports = Marionette.ItemView.extend({
     if (!this.model.get('edited'))
       return;
 
-    return;
     var _this = this;
-    var translation = new Translation({
+    var translation = new TranslationPhrase({
       text: _this.model.get('target_phrase'),
       approved: false
     });
@@ -51,7 +52,7 @@ module.exports = Marionette.ItemView.extend({
       return;
 
     var _this = this;
-    var translation = new Translation({
+    var translation = new TranslationPhrase({
       text: _this.model.get('target_phrase'),
       approved: true
     });
@@ -71,7 +72,7 @@ module.exports = Marionette.ItemView.extend({
       return;
 
     var _this = this;
-    var translation = new Translation({
+    var translation = new TranslationPhrase({
       text: _this.model.get('target_phrase'),
       approved: false
     });
