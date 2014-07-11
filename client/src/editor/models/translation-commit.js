@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var BackboneSelect = require('backbone.select');
 
 module.exports = Backbone.Model.extend({
   urlRoot: function() {
@@ -17,6 +18,6 @@ module.exports = Backbone.Model.extend({
   },
 
   initialize: function(options) {
-    // BackboneSelect.Me.applyTo(this);
+    BackboneSelect.Me.applyTo(this);
   }
 })

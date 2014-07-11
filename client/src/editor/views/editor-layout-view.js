@@ -5,7 +5,7 @@ module.exports = Marionette.LayoutView.extend({
   tagName: 'div',
 
   regions: {
-    // languageOverlayRegion: '#language-overlay',
+    languageOverlayRegion: '#language-overlay',
     sourceChooserRegion: '#source-chooser',
     targetChooserRegion: '#target-chooser',
     resourcesListRegion: '#resources-list',

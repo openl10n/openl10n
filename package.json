@@ -4,7 +4,8 @@
   "author": "Matthieu Moquet <matthieu@moquet.net>",
   "license": "MIT",
   "browser": {
-    "bootstrap": "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js"
+    "bootstrap": "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js",
+    "backbone.select": "./client/lib/backbone.select.js"
   },
   "browserify": {
     "transform": [
@@ -15,9 +16,16 @@
   },
   "browserify-shim": {
     "bootstrap": {
-      "exports": "bootstrap",
+      "exports": null,
       "depends": [
         "jquery:jQuery"
+      ]
+    },
+    "backbone.select": {
+      "exports": "Backbone.Select",
+      "depends": [
+        "backbone:Backbone",
+        "underscore:_"
       ]
     }
   },

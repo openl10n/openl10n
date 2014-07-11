@@ -4,6 +4,7 @@ var Backbone = require('backbone');
 var Controller = require('../framework/controller');
 var EditorLayoutView = require('./views/editor-layout-view');
 var TranslationListView = require('./views/translation-list-view');
+var LanguageOverlayView = require('./views/language-overlay-view');
 var ResourceListView = require('./views/resource-list-view');
 var LocaleChooserView = require('./views/locale-chooser-view');
 var FiltersView = require('./views/filters-view');
@@ -49,25 +50,35 @@ module.exports = Controller.extend({
       filters: this.filters
     });
 
-    this.updateTranslations();
-
     this.listenTo(this.context, 'change', this.updateTranslations);
     this.listenTo(this.context, 'change', this.updateRoute);
     this.listenTo(this.filters, 'change', this.updateTranslations);
+    this.listenTo(this.filters, 'change', this.updateRoute);
+    this.listenTo(this.translations, 'select:one', this.showTranslation);
+    this.listenTo(this.translations, 'select:one', this.updateRoute);
 
     var projectViewRendering = layoutChannel.reqres.request('project', projectSlug);
+    var projectFetching = modelChannel.reqres.request('project', projectSlug);
     var resourcesFetching = modelChannel.reqres.request('resources', projectSlug);
     var languagesFetching = modelChannel.reqres.request('languages', projectSlug);
 
     $
-      .when(projectViewRendering, languagesFetching, resourcesFetching)
-      .done(function(projectView, languages, resources) {
+      .when(projectViewRendering, projectFetching, languagesFetching, resourcesFetching)
+      .done(function(projectView, project, languages, resources) {
         _this.languages = languages;
         _this.resources = resources;
+
+        if (!_this.context.get('source')) {
+          _this.context.set('source', project.get('default_locale'))
+        }
 
         // Layout
         _this.layout = new EditorLayoutView();
         projectView.contentRegion.show(_this.layout);
+
+        // Language overlay
+        var languageOverlayView = new LanguageOverlayView({model: _this.context});
+        _this.layout.languageOverlayRegion.show(languageOverlayView);
 
         // Filters
         var filtersView = new FiltersView({model: _this.filters});
@@ -98,6 +109,9 @@ module.exports = Controller.extend({
         // Translation list
         var translationListView = new TranslationListView({collection: _this.translations});
         _this.layout.translationsListRegion.show(translationListView);
+
+        // Finally
+        _this.updateTranslations();
       });
   },
 
@@ -151,8 +165,8 @@ module.exports = Controller.extend({
 
     if (!this.context.get('source') || !this.context.get('target')) {
       this.translations.reset();
-      this.layout.actionBarRegion.close();
-      this.layout.translationEditRegion.close();
+      // this.layout.actionBarRegion.close();
+      // this.layout.translationEditRegion.close();
       return;
     }
 
@@ -171,5 +185,28 @@ module.exports = Controller.extend({
         // translation.select();
       }
     });
+  },
+
+  //
+  // Render the views for the selected translation.
+  //
+  showTranslation: function(translation) {
+    this.translationId = translation.id;
+
+    // var actionBarView = new ActionBarView({model: translation});
+    // var translationTranslateView = new TranslationTranslateView();
+    // var translationEditView = new TranslationEditView({model: translation});
+    // var tabsView = new TranslateTabsView();
+    // var informationTabView = new TranslateInformationTabView({model: translation});
+
+    // this.layout.actionBarRegion.show(actionBarView);
+    // this.layout.translationEditRegion.show(translationTranslateView);
+    // translationTranslateView.editRegion.show(translationEditView);
+    // translationTranslateView.tabsRegion.show(tabsView);
+    // translationTranslateView.informationTabRegion.show(informationTabView);
+
+    // if (!translation.get('edited')) {
+    //   translation.fetch();
+    // }
   },
 });
