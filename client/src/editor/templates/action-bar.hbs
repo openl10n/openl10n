@@ -1,0 +1,23 @@
+<div class="btn-group pull-right">
+  {{#if edited}}
+    <button class="btn btn-lg btn-default text-default action-cancel">
+      Cancel
+    </button>
+  {{else}}
+
+    {{#if approved}}
+      <button class="btn btn-lg btn-default text-danger action-unapprove">
+        Unapprove
+      </button>
+    {{else}}
+      <button class="btn btn-lg btn-default text-success action-approve">
+        Approve
+      </button>
+    {{/if}}
+
+  {{/if}}
+
+  <button class="btn btn-lg btn-wide btn-success action-save {{#if edited}}{{else}}disabled{{/if}}">
+    Save
+  </button>
+</div>

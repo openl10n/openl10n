@@ -7,6 +7,9 @@ var TranslationListView = require('./views/translation-list-view');
 var LanguageOverlayView = require('./views/language-overlay-view');
 var ResourceListView = require('./views/resource-list-view');
 var LocaleChooserView = require('./views/locale-chooser-view');
+var ActionBarView = require('./views/action-bar-view');
+var TranslationEditView = require('./views/translation-edit-view');
+var TranslationMetaTabsView = require('./views/translation-meta-tabs-view');
 var FiltersView = require('./views/filters-view');
 var StatsView = require('./views/stats-view');
 var Context = require('./models/context');
@@ -42,6 +45,7 @@ module.exports = Controller.extend({
     var _this = this;
 
     this.projectSlug = projectSlug;
+    this.translationId = translationId;
     this.context = new Context({source: source, target: target});
     this.filters = new FilterBag();
     this.translations = new TranslationCommitCollection([], {
@@ -182,7 +186,7 @@ module.exports = Controller.extend({
         translation = _this.translations.at(0);
       }
       if (translation) {
-        // translation.select();
+        translation.select();
       }
     });
   },
@@ -193,20 +197,17 @@ module.exports = Controller.extend({
   showTranslation: function(translation) {
     this.translationId = translation.id;
 
-    // var actionBarView = new ActionBarView({model: translation});
-    // var translationTranslateView = new TranslationTranslateView();
-    // var translationEditView = new TranslationEditView({model: translation});
-    // var tabsView = new TranslateTabsView();
+    var actionBarView = new ActionBarView({model: translation});
+    var translationEditView = new TranslationEditView({model: translation});
+    var tabsView = new TranslationMetaTabsView();
     // var informationTabView = new TranslateInformationTabView({model: translation});
 
-    // this.layout.actionBarRegion.show(actionBarView);
-    // this.layout.translationEditRegion.show(translationTranslateView);
-    // translationTranslateView.editRegion.show(translationEditView);
-    // translationTranslateView.tabsRegion.show(tabsView);
-    // translationTranslateView.informationTabRegion.show(informationTabView);
+    this.layout.actionBarRegion.show(actionBarView);
+    this.layout.translationEditRegion.show(translationEditView);
+    this.layout.translationMetaTabsRegion.show(tabsView);
 
-    // if (!translation.get('edited')) {
-    //   translation.fetch();
-    // }
+    if (!translation.get('edited')) {
+      translation.fetch();
+    }
   },
 });

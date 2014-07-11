@@ -89,10 +89,10 @@ module.exports = Marionette.CompositeView.extend({
       // if (null !== translation && translation.get('is_dirty'))
       //   translation.save({is_translated: true});
 
-      if (isShift)
-        msgbus.events.trigger('editor:previous');
-      else
-        msgbus.events.trigger('editor:next');
+      // if (isShift)
+      //   msgbus.events.trigger('editor:previous');
+      // else
+      //   msgbus.events.trigger('editor:next');
     }
 
     return;

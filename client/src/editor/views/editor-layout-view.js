@@ -13,7 +13,8 @@ module.exports = Marionette.LayoutView.extend({
     actionBarRegion: '#actionbar',
     statsRegion: '#stats',
     translationsListRegion: '#translations-list',
-    translationEditRegion: '#translations-edit'
+    translationEditRegion: '#translation-edit',
+    translationMetaTabsRegion: '#edit-tabs'
   },
 
   behaviors: {
