@@ -5,7 +5,8 @@
   "license": "MIT",
   "browser": {
     "bootstrap": "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js",
-    "backbone.select": "./client/lib/backbone.select.js"
+    "backbone.select": "./client/lib/backbone.select.js",
+    "backbone.cycle": "./client/lib/backbone.cycle.js"
   },
   "browserify": {
     "transform": [
@@ -26,6 +27,14 @@
       "depends": [
         "backbone:Backbone",
         "underscore:_"
+      ]
+    },
+    "backbone.cycle": {
+      "exports": "Backbone.Cycle",
+      "depends": [
+        "backbone:Backbone",
+        "underscore:_",
+        "backbone.select:Backbone.Select"
       ]
     }
   },

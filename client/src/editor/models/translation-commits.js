@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var _ = require('underscore');
 var Backbone = require('backbone');
-var BackboneSelect = require('backbone.select');
+var BackboneCycle = require('backbone.cycle');
 var TranslationCommit = require('./translation-commit');
 
 module.exports = Backbone.Collection.extend({
@@ -41,7 +41,8 @@ module.exports = Backbone.Collection.extend({
   model: TranslationCommit,
 
   initialize: function(models, options) {
-    BackboneSelect.One.applyTo(this, models, options);
+    BackboneCycle.SelectableCollection.applyTo( this, models, options );
+
 
     this.projectSlug = options.projectSlug;
     this.context = options.context;

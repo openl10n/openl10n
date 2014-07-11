@@ -49,9 +49,13 @@ module.exports = Controller.extend({
     this.context = new Context({source: source, target: target});
     this.filters = new FilterBag();
     this.translations = new TranslationCommitCollection([], {
+      // Models
       projectSlug: this.projectSlug,
       context: this.context,
-      filters: this.filters
+      filters: this.filters,
+      // Backbone.Cycle options
+      // initialSelection: 'first',
+      // selectIfRemoved: "next"
     });
 
     this.listenTo(this.context, 'change', this.updateTranslations);
@@ -175,16 +179,19 @@ module.exports = Controller.extend({
     }
 
     this.translations.fetch().done(function() {
-      if (!_this.translationId) {
-        // msgbus.events.trigger('editor:next');
-        return;
+      var translation;
+
+      // If we get an id, try to retrieve it
+      if (_this.translationId) {
+        translation = _this.translations.get(_this.translationId);
       }
 
-      var translation = _this.translations.get(_this.translationId);
+      // If given translation is not found on current list, then select first one
       if (!translation && _this.translations.length > 0) {
-        // If given translation is not found on current list, then select first one
         translation = _this.translations.at(0);
       }
+
+      // Select translation if any
       if (translation) {
         translation.select();
       }
