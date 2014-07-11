@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var _ = require('underscore');
 
 var Backbone = require('backbone');
 var Controller = require('../framework/controller');
@@ -47,7 +48,7 @@ module.exports = Controller.extend({
     this.projectSlug = projectSlug;
     this.translationId = translationId;
     this.context = new Context({source: source, target: target});
-    this.filters = new FilterBag();
+    this.filters = new FilterBag(filters);
     this.translations = new TranslationCommitCollection([], {
       // Models
       projectSlug: this.projectSlug,

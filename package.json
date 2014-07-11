@@ -5,6 +5,7 @@
   "license": "MIT",
   "browser": {
     "bootstrap": "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js",
+    "backbone.queryparams": "./client/lib/backbone.queryparams.js",
     "backbone.select": "./client/lib/backbone.select.js",
     "backbone.cycle": "./client/lib/backbone.cycle.js"
   },
@@ -20,6 +21,13 @@
       "exports": null,
       "depends": [
         "jquery:jQuery"
+      ]
+    },
+    "backbone.queryparams": {
+      "exports": null,
+      "depends": [
+        "backbone:Backbone",
+        "underscore:_"
       ]
     },
     "backbone.select": {

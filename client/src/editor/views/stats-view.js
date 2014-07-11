@@ -31,28 +31,24 @@ module.exports = Marionette.ItemView.extend({
     this.collection = options.collection;
 
     // Filter bag
-    this.model = options.filters;
+    this.model = options.model;
   },
 
   serializeData: function() {
-    // var currentFilter = '';
-    // if (null === this.filters.get('translated') && null === this.filters.get('approved')) {
-    //   currentFilter = 'all';
-    // } else if ('0' === this.filters.get('translated') && null === this.filters.get('approved')) {
-    //   currentFilter = 'untranslated';
-    // } else if ('1' === this.filters.get('translated') && '0' === this.filters.get('approved')) {
-    //   currentFilter = 'unapproved';
-    // }
-
     // Stats of translationsList collection
     return {
       stats: this.collection.stats,
+      filter: {
+        all: (null === this.model.get('translated') && null === this.model.get('approved')),
+        untranslated: ('0' === this.model.get('translated') && null === this.model.get('approved')),
+        unapproved: ('1' === this.model.get('translated') && '0' === this.model.get('approved'))
+      }
     };
   },
 
   selectAll: function(evt) {
     evt.preventDefault();
-    this.filters.set({
+    this.model.set({
       approved: null,
       translated: null,
     });
@@ -60,7 +56,7 @@ module.exports = Marionette.ItemView.extend({
 
   selectUntranslated: function(evt) {
     evt.preventDefault();
-    this.filters.set({
+    this.model.set({
       approved: null,
       translated: '0',
     });
@@ -68,7 +64,7 @@ module.exports = Marionette.ItemView.extend({
 
   selectUnapproved: function(evt) {
     evt.preventDefault();
-    this.filters.set({
+    this.model.set({
       approved: '0',
       translated: '1',
     });
