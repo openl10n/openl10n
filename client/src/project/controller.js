@@ -4,10 +4,13 @@ var Controller = require('../framework/controller');
 
 var layoutChannel = require('../framework/radio').channel('layout');
 var modelChannel = require('../framework/radio').channel('model');
+var Project = require('./models/project');
 
 var IndexView = require('./views/index-view');
 var LanguageListView = require('./views/language-list-view');
 var ResourceListView = require('./views/resource-list-view');
+var CreateProjectView = require('./views/create-project-view');
+var ProjectFormView = require('./views/project-form-view');
 
 module.exports = Controller.extend({
   channelName: 'project',
@@ -29,6 +32,21 @@ module.exports = Controller.extend({
         projectView.contentRegion.show(indexView);
         indexView.languageListRegion.show(languageListView);
         indexView.resourceListRegion.show(resourceListView);
+      });
+  },
+
+  new: function() {
+    var siteViewRendering = layoutChannel.reqres.request('site');
+
+    $
+      .when(siteViewRendering)
+      .done(function(siteView) {
+        var project = new Project();
+        var createProjectView = new CreateProjectView();
+        var projectFormView = new ProjectFormView({model: project});
+
+        siteView.mainRegion.show(createProjectView);
+        createProjectView.projectFormRegion.show(projectFormView);
       });
   },
 

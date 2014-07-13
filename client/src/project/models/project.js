@@ -9,7 +9,7 @@ module.exports = Backbone.Model.extend({
     slug: '',
     name: '',
     default_locale: 'en',
-    description: '',
+    //description: '',
   }
 
 })
