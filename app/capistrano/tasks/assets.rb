@@ -4,7 +4,6 @@ namespace :assets do
     on release_roles :all do
       within release_path do
         execute :npm, "install"
-        execute :bower, "install --allow-root"
       end
     end
   end
