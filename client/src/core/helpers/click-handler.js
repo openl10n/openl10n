@@ -11,6 +11,11 @@ module.exports = function(evt) {
     attr: $this.attr('href')
   };
 
+  if ('' === href.attr || '#' === href.attr) {
+    evt.preventDefault();
+    return;
+  }
+
   // Get the absolute root.
   var root = location.protocol + '//' + location.host;
 
