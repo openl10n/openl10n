@@ -10,8 +10,7 @@ build:
   - app/console assets:install web/
   - app/console doctrine:fixtures:load --env=dev --no-interaction
   - npm install
-  - npm install -g gulp bower
-  - bower install --allow-root
+  - npm install -g gulp
   - gulp build --prod
 
 writable:
