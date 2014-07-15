@@ -5,9 +5,7 @@
   "license": "MIT",
   "browser": {
     "bootstrap": "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js",
-    "backbone.queryparams": "./client/lib/backbone.queryparams.js",
-    "backbone.select": "./client/lib/backbone.select.js",
-    "backbone.cycle": "./client/lib/backbone.cycle.js"
+    "backbone.queryparams": "./client/lib/backbone.queryparams.js"
   },
   "browserify": {
     "transform": [
@@ -29,28 +27,15 @@
         "backbone:Backbone",
         "underscore:_"
       ]
-    },
-    "backbone.select": {
-      "exports": "Backbone.Select",
-      "depends": [
-        "backbone:Backbone",
-        "underscore:_"
-      ]
-    },
-    "backbone.cycle": {
-      "exports": "Backbone.Cycle",
-      "depends": [
-        "backbone:Backbone",
-        "underscore:_",
-        "backbone.select:Backbone.Select"
-      ]
     }
   },
   "dependencies": {
     "async": "^0.2.10",
     "backbone": "^1.1.2",
     "backbone.babysitter": "^0.1.4",
+    "backbone.cycle": "^1.0.8",
     "backbone.marionette": "^2.0.1",
+    "backbone.select": "^1.2.7",
     "backbone.wreqr": "^1.3.1",
     "bootstrap-sass": "^3.2.0",
     "font-awesome": "^4.1.0",
