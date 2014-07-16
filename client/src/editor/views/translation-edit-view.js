@@ -25,7 +25,9 @@ module.exports = Marionette.ItemView.extend({
     this.ui.textarea.select();
   },
 
-  copySource: function() {
+  copySource: function(evt) {
+    evt.preventDefault();
+
     var phrase = this.model.get('source_phrase');
     this.model.set({
       'target_phrase': phrase,
