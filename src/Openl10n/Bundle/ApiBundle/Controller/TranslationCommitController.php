@@ -42,7 +42,7 @@ class TranslationCommitController extends Controller implements ClassResourceInt
         }
 
         $pager = $this->get('openl10n.repository.translation')->findSatisfying($specification);
-        $pager->setMaxPerPage(1000);
+        $pager->setMaxPerPage(2000);
 
         try {
             $pager->setCurrentPage($request->query->get('page', 1));
