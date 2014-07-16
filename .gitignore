@@ -4,15 +4,11 @@
 /app/capistrano/stages/*
 !/app/capistrano/stages/deploy.rb.dist
 /app/logs/*
-/app/sessions/
 
 /.sass-cache/
 /node_modules/
 /web/assets/dist/
-/web/assets/src/vendor/
 /web/bundles/
-/web/css/
-/web/js/
 
 /bin/
 /build/
