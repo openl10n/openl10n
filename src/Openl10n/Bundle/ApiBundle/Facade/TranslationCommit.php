@@ -63,7 +63,7 @@ class TranslationCommit
         $this->sourceLocale = (string) $sourcePhrase->getLocale();
         $this->targetPhrase = (string) $targetPhrase->getText();
         $this->targetLocale = (string) $targetPhrase->getLocale();
-        $this->isTranslated = (null !== $key->getPhrase($source));
+        $this->isTranslated = (null !== $key->getPhrase($target));
         $this->isApproved = $targetPhrase->isApproved();
     }
 }
