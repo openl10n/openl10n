@@ -53,17 +53,17 @@ class TranslationCommit
 
     public function __construct(Key $key, Locale $source, Locale $target)
     {
-        $source = $key->getPhrase($source) ?: new Phrase($key, $source);
-        $target = $key->getPhrase($target) ?: new Phrase($key, $target);
+        $sourcePhrase = $key->getPhrase($source) ?: new Phrase($key, $source);
+        $targetPhrase = $key->getPhrase($target) ?: new Phrase($key, $target);
 
         $this->id = $key->getId();
         $this->resourceId = $key->getResource()->getId();
         $this->key = (string) $key->getIdentifier();
-        $this->sourcePhrase = (string) $source->getText();
-        $this->sourceLocale = (string) $source->getLocale();
-        $this->targetPhrase = (string) $target->getText();
-        $this->targetLocale = (string) $target->getLocale();
-        $this->isTranslated = !empty($this->targetPhrase);
-        $this->isApproved = $target->isApproved();
+        $this->sourcePhrase = (string) $sourcePhrase->getText();
+        $this->sourceLocale = (string) $sourcePhrase->getLocale();
+        $this->targetPhrase = (string) $targetPhrase->getText();
+        $this->targetLocale = (string) $targetPhrase->getLocale();
+        $this->isTranslated = (null !== $key->getPhrase($source));
+        $this->isApproved = $targetPhrase->isApproved();
     }
 }
