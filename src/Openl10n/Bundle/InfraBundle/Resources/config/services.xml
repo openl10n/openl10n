@@ -28,6 +28,8 @@
         <parameter key="openl10n.processor.create_resource.class">Openl10n\Domain\Resource\Application\Processor\CreateResourceProcessor</parameter>
         <parameter key="openl10n.processor.update_resource.class">Openl10n\Domain\Resource\Application\Processor\UpdateResourceProcessor</parameter>
         <parameter key="openl10n.processor.edit_translation.class">Openl10n\Domain\Translation\Application\Processor\EditTranslationPhraseProcessor</parameter>
+        <parameter key="openl10n.processor.create_translation_key.class">Openl10n\Domain\Translation\Application\Processor\CreateTranslationKeyProcessor</parameter>
+        <parameter key="openl10n.processor.delete_translation_key.class">Openl10n\Domain\Translation\Application\Processor\DeleteTranslationKeyProcessor</parameter>
 
         <!-- Listener -->
         <parameter key="openl10n.listener.language_listener.class">Openl10n\Bundle\InfraBundle\Listener\LanguageListener</parameter>
@@ -120,6 +122,9 @@
             <argument type="service" id="openl10n.repository.translation" />
             <argument type="service" id="openl10n.uploader.file" />
             <argument type="service" id="openl10n.translation.loader" />
+            <argument type="service" id="openl10n.processor.create_translation_key" />
+            <argument type="service" id="openl10n.processor.edit_translation" />
+            <argument type="service" id="openl10n.processor.delete_translation_key" />
             <argument type="service" id="event_dispatcher" />
         </service>
         <service id="openl10n.processor.create_resource" class="%openl10n.processor.create_resource.class%">
@@ -135,6 +140,14 @@
             <argument type="service" id="event_dispatcher" />
         </service>
         <service id="openl10n.processor.edit_translation" class="%openl10n.processor.edit_translation.class%">
+            <argument type="service" id="openl10n.repository.translation" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.create_translation_key" class="%openl10n.processor.create_translation_key.class%">
+            <argument type="service" id="openl10n.repository.translation" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.delete_translation_key" class="%openl10n.processor.delete_translation_key.class%">
             <argument type="service" id="openl10n.repository.translation" />
             <argument type="service" id="event_dispatcher" />
         </service>

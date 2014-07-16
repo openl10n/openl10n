@@ -24,13 +24,6 @@
 
         <field name="pathname" column="pathname" type="string" length="255" />
         <field name="hash" column="hash" type="string" length="40" />
-
-        <!-- <one-to-many field="keys" target-entity="TranslationKey" mapped-by="domain">
-            <cascade>
-                <cascade-persist />
-                <cascade-remove />
-            </cascade>
-        </one-to-many> -->
     </entity>
 
 </doctrine-mapping>

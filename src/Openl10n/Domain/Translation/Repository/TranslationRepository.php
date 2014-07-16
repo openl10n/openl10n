@@ -36,5 +36,9 @@ interface TranslationRepository
 
     public function saveKey(Key $key);
 
+    public function removeKey(Key $key);
+
     public function savePhrase(Phrase $phrase);
+
+    public function removePhrase(Phrase $phrase);
 }

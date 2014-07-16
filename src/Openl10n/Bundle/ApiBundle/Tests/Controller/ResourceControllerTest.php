@@ -154,6 +154,9 @@ class ResourceControllerTest extends WebTestCase
         $response = $client->getResponse();
         $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
 
+        // Here I'm force to clear the EntityManager to be sure the `Key::getPhrase()`
+        $this->get('doctrine.orm.entity_manager')->clear();
+
         // Assert content has been inserted in database
         $translationKeys = $this->get('openl10n.repository.translation')->findByResource($emptyResource);
         $this->assertCount(3, $translationKeys);

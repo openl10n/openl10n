@@ -102,4 +102,16 @@ class TranslationRepository extends EntityRepository implements TranslationRepos
         $this->_em->persist($phrase);
         $this->_em->flush($phrase);
     }
+
+    public function removeKey(Key $key)
+    {
+        $this->_em->remove($key);
+        $this->_em->flush($key);
+    }
+
+    public function removePhrase(Phrase $phrase)
+    {
+        $this->_em->remove($phrase);
+        $this->_em->flush($phrase);
+    }
 }
