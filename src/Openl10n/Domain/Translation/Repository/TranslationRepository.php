@@ -22,6 +22,8 @@ interface TranslationRepository
      */
     public function createNewPhrase(Key $key, Locale $locale, $text = '');
 
+    public function findOneById($id);
+
     /**
      * @param StringIdentifier $identifier
      */

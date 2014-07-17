@@ -33,6 +33,22 @@ class TranslationControllerTest extends WebTestCase
         $this->markTestIncomplete('Not implemented yet');
     }
 
+    public function testDeleteTranslation()
+    {
+        $client = $this->getClient();
+        $client->jsonRequest('DELETE', '/api/translations/1');
+
+        $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_NO_CONTENT
+        );
+
+        $this->assertNull(
+            $this->get('openl10n.repository.translation')->findOneById(1),
+            'Translation 1 should not exist anymore'
+        );
+    }
+
     public function testGetTranslationPhrasesList()
     {
         $client = $this->getClient();

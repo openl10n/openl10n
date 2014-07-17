@@ -7,6 +7,7 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationKey as TranslationKeyFacade;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase as TranslationPhraseFacade;
+use Openl10n\Domain\Translation\Application\Action\DeleteTranslationKeyAction;
 use Openl10n\Domain\Translation\Application\Action\EditTranslationPhraseAction;
 use Openl10n\Value\Localization\Locale;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,9 +37,19 @@ class TranslationController extends Controller implements ClassResourceInterface
     /**
      * @Rest\View
      */
-    public function cpostAction(Request $request, $project)
+    public function cpostAction(Request $request)
     {
         // TODO (?) create new key
+    }
+
+    /**
+     * @Rest\View(statusCode=204)
+     */
+    public function deleteAction($translation)
+    {
+        $translationKey = $this->findTranslationOr404($translation);
+        $action = new DeleteTranslationKeyAction($translationKey);
+        $this->get('openl10n.processor.delete_translation_key')->execute($action);
     }
 
     /**
@@ -109,7 +120,7 @@ class TranslationController extends Controller implements ClassResourceInterface
 
     protected function findTranslationOr404($id)
     {
-        $translation = $this->get('openl10n.repository.translation')->find($id);
+        $translation = $this->get('openl10n.repository.translation')->findOneById($id);
 
         if (null === $translation) {
             throw $this->createNotFoundException(sprintf(

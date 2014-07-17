@@ -63,7 +63,7 @@ class TranslationCommitController extends Controller implements ClassResourceInt
      */
     public function getAction($source, $target, $translation)
     {
-        $translation = $this->get('openl10n.repository.translation')->find($translation);
+        $translation = $this->findTranslationOr404($translation);
 
         $source = Locale::parse($source);
         $target = Locale::parse($target);
@@ -94,9 +94,9 @@ class TranslationCommitController extends Controller implements ClassResourceInt
         return $project;
     }
 
-    protected function findTranslationOr404(Project $project, $id)
+    protected function findTranslationOr404($id)
     {
-        $translation = $this->get('openl10n.repository.translation')->findOneById($project, $id);
+        $translation = $this->get('openl10n.repository.translation')->findOneById($id);
 
         if (null === $translation) {
             throw $this->createNotFoundException(sprintf(
