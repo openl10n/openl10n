@@ -37,15 +37,4 @@ class CreateResourceType extends AbstractType
     {
         return 'openl10n_create_resource';
     }
-
-    protected function getProjectChoices()
-    {
-        $projects = $this->projectRepository->findAll();
-
-        $keys = array_map(function($project) {
-            return (string) $project->getSlug();
-        }, $projects);
-
-        return array_combine($keys, $keys);
-    }
 }

@@ -7,6 +7,7 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationKey as TranslationKeyFacade;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase as TranslationPhraseFacade;
+use Openl10n\Domain\Translation\Application\Action\CreateTranslationKeyAction;
 use Openl10n\Domain\Translation\Application\Action\DeleteTranslationKeyAction;
 use Openl10n\Domain\Translation\Application\Action\EditTranslationPhraseAction;
 use Openl10n\Value\Localization\Locale;
@@ -39,7 +40,23 @@ class TranslationController extends Controller implements ClassResourceInterface
      */
     public function cpostAction(Request $request)
     {
-        // TODO (?) create new key
+        $action = new CreateTranslationKeyAction();
+        $form = $this->get('form.factory')->createNamed('', 'openl10n_create_translation_key', $action);
+
+        if ($form->handleRequest($request)->isValid()) {
+            $translation = $this->get('openl10n.processor.create_translation_key')->execute($action);
+            $facade = new TranslationKeyFacade($translation);
+
+            $url = $this->generateUrl(
+                'openl10n_api_get_translation',
+                ['translation' => $translation->getId()],
+                true // absolute
+            );
+
+            return View::create($facade, 201, ['Location' => $url]);
+        }
+
+        return View::create($form, 400);
     }
 
     /**

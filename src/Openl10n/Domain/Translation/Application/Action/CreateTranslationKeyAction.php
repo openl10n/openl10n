@@ -18,14 +18,16 @@ class CreateTranslationKeyAction
      */
     protected $identifier;
 
-    public function __construct(Resource $resource)
-    {
-        $this->resource = $resource;
-    }
-
     public function getResource()
     {
         return $this->resource;
+    }
+
+    public function setResource(Resource $resource)
+    {
+        $this->resource = $resource;
+
+        return $this;
     }
 
     public function getIdentifier()

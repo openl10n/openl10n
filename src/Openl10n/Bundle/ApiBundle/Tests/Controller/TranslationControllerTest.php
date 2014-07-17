@@ -30,7 +30,29 @@ class TranslationControllerTest extends WebTestCase
 
     public function testCreateNewTranslation()
     {
-        $this->markTestIncomplete('Not implemented yet');
+        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug('foobar'));
+        $resources = $this->get('openl10n.repository.resource')->findByProject($project);
+        $resource = $resources[0];
+
+        $client = $this->getClient();
+        $client->jsonRequest('POST', '/api/translations', [
+            'resource' => $resource->getId(),
+            'identifier' => 'new.translation.key',
+        ]);
+
+        $data = $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_CREATED
+        );
+
+        $this->assertObjectHasAttribute('id', $data);
+
+        // Ensure translation has been created
+        $translation = $this->get('openl10n.repository.translation')->findOneById($data->id);
+
+        $this->assertNotNull($translation, 'New translation should exist');
+        $this->assertEquals($translation->getResource()->getId(), $resource->getId());
+        $this->assertEquals((string) $translation->getIdentifier(), 'new.translation.key');
     }
 
     public function testDeleteTranslation()

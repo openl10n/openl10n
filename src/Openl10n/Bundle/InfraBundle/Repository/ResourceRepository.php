@@ -32,7 +32,7 @@ class ResourceRepository extends EntityRepository implements ResourceRepositoryI
      */
     public function findOneById($id)
     {
-        return $this->find($id);
+        return $this->find((int) $id);
     }
 
     /**

@@ -115,7 +115,8 @@ class ImportTranslationFileProcessor
         //
         foreach ($messages as $key => $phrase) {
             // Create the translation key
-            $createKeyAction = new CreateTranslationKeyAction($resource);
+            $createKeyAction = new CreateTranslationKeyAction();
+            $createKeyAction->setResource($resource);
             $createKeyAction->setIdentifier($key);
             $key = $this->createTranslationKeyProcessor->execute($createKeyAction);
 

@@ -13,6 +13,7 @@
         <parameter key="openl10n.form.type.update_resource.class">Openl10n\Bundle\InfraBundle\Form\Type\UpdateResourceType</parameter>
         <parameter key="openl10n.form.type.import_translation_file.class">Openl10n\Bundle\InfraBundle\Form\Type\ImportTranslationFileType</parameter>
         <parameter key="openl10n.form.type.export_translation_file.class">Openl10n\Bundle\InfraBundle\Form\Type\ExportTranslationFileType</parameter>
+        <parameter key="openl10n.form.type.openl10n_create_translation_key.class">Openl10n\Bundle\InfraBundle\Form\Type\CreateTranslationKeyType</parameter>
 
         <!-- Processor -->
         <parameter key="openl10n.processor.create_project.class">Openl10n\Domain\Project\Application\Processor\CreateProjectProcessor</parameter>
@@ -73,6 +74,10 @@
             <argument type="service" id="openl10n.repository.language" />
             <argument type="service" id="openl10n.translation.dumper" />
             <tag name="form.type" alias="openl10n_export_translation_file" />
+        </service>
+        <service id="openl10n.form.type.openl10n_create_translation_key" class="%openl10n.form.type.openl10n_create_translation_key.class%">
+            <argument type="service" id="openl10n.repository.resource" />
+            <tag name="form.type" alias="openl10n_create_translation_key" />
         </service>
         <service id="openl10n.form.type.translation" class="%openl10n.form.type.translation.class%">
             <tag name="form.type" alias="openl10n_translation" />
