@@ -82,7 +82,7 @@ class ImportTranslationFileProcessor
                 // otherwise you may delete all translations which have not been translated yet.
                 if ($action->hasOptionClean()) {
                     $deleteKeyAction = new DeleteTranslationKeyAction($key);
-                    $this->deleteTranslationKeyProcessor->execute($key);
+                    $this->deleteTranslationKeyProcessor->execute($deleteKeyAction);
                 }
 
                 continue;

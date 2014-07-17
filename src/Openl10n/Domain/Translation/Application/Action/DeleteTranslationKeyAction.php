@@ -10,7 +10,7 @@ class DeleteTranslationKeyAction
     /**
      * @var Key
      */
-    protected $resource;
+    protected $key;
 
     public function __construct(Key $key)
     {
