@@ -8,10 +8,7 @@
         <parameter key="openl10n.form.type.project.class">Openl10n\Bundle\InfraBundle\Form\Type\ProjectType</parameter>
         <parameter key="openl10n.form.type.language.class">Openl10n\Bundle\InfraBundle\Form\Type\LanguageType</parameter>
         <parameter key="openl10n.form.type.locale_choice.class">Openl10n\Bundle\InfraBundle\Form\Type\LocaleChoiceType</parameter>
-        <parameter key="openl10n.form.type.import_domain.class">Openl10n\Bundle\InfraBundle\Form\Type\ImportDomainType</parameter>
-        <parameter key="openl10n.form.type.export_domain.class">Openl10n\Bundle\InfraBundle\Form\Type\ExportDomainType</parameter>
         <parameter key="openl10n.form.type.translation.class">Openl10n\Bundle\InfraBundle\Form\Type\TranslationType</parameter>
-        <parameter key="openl10n.form.type.translation_context.class">Openl10n\Bundle\InfraBundle\Form\Type\TranslationContextType</parameter>
         <parameter key="openl10n.form.type.create_resource.class">Openl10n\Bundle\InfraBundle\Form\Type\CreateResourceType</parameter>
         <parameter key="openl10n.form.type.update_resource.class">Openl10n\Bundle\InfraBundle\Form\Type\UpdateResourceType</parameter>
         <parameter key="openl10n.form.type.import_translation_file.class">Openl10n\Bundle\InfraBundle\Form\Type\ImportTranslationFileType</parameter>
@@ -60,9 +57,6 @@
             <argument type="service" id="openl10n.repository.locale" />
             <tag name="form.type" alias="openl10n_locale_choice" />
         </service>
-        <service id="openl10n.form.type.import_domain" class="%openl10n.form.type.import_domain.class%">
-            <tag name="form.type" alias="openl10n_import_domain" />
-        </service>
 
         <service id="openl10n.form.type.create_resource" class="%openl10n.form.type.create_resource.class%">
             <argument type="service" id="openl10n.repository.project" />
@@ -80,16 +74,8 @@
             <argument type="service" id="openl10n.translation.dumper" />
             <tag name="form.type" alias="openl10n_export_translation_file" />
         </service>
-        <!-- <service id="openl10n.form.type.export_domain" class="%openl10n.form.type.export_domain.class%">
-            <argument type="service" id="openl10n.repository.domain" />
-            <argument type="service" id="openl10n.translation.dumper" />
-            <tag name="form.type" alias="openl10n_export_domain" />
-        </service> -->
         <service id="openl10n.form.type.translation" class="%openl10n.form.type.translation.class%">
             <tag name="form.type" alias="openl10n_translation" />
-        </service>
-        <service id="openl10n.form.type.translation_context" class="%openl10n.form.type.translation_context.class%">
-            <tag name="form.type" alias="openl10n_translation_context" />
         </service>
 
         <!-- Repository -->
