@@ -59,6 +59,7 @@ module.exports = Backbone.Collection.extend({
     this.stats.all = response.length;
     this.stats.untranslated = _(response).where({'is_translated': false}).length;
     this.stats.unapproved = _(response).where({'is_translated': true, 'is_approved': false}).length;
+    this.stats.approved = _(response).where({'is_translated': true, 'is_approved': true}).length;
 
     return response;
   },
@@ -67,6 +68,7 @@ module.exports = Backbone.Collection.extend({
     this.stats.all = 0;
     this.stats.untranslated = 0;
     this.stats.unapproved = 0;
+    this.stats.approved = 0;
 
     return Backbone.Collection.prototype.reset.call(this, models, options);
   }

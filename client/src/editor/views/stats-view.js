@@ -9,6 +9,7 @@ module.exports = Marionette.ItemView.extend({
     'all': 'a.filter-all',
     'untranslated': 'a.filter-untranslated',
     'unapproved': 'a.filter-unapproved',
+    'approved': 'a.filter-approved',
   },
 
   collectionEvents: {
@@ -24,6 +25,7 @@ module.exports = Marionette.ItemView.extend({
     'click @ui.all': 'selectAll',
     'click @ui.untranslated': 'selectUntranslated',
     'click @ui.unapproved': 'selectUnapproved',
+    'click @ui.approved': 'selectApproved',
   },
 
   initialize: function(options) {
@@ -41,7 +43,8 @@ module.exports = Marionette.ItemView.extend({
       filter: {
         all: (null === this.model.get('translated') && null === this.model.get('approved')),
         untranslated: ('0' === this.model.get('translated') && null === this.model.get('approved')),
-        unapproved: ('1' === this.model.get('translated') && '0' === this.model.get('approved'))
+        unapproved: ('1' === this.model.get('translated') && '0' === this.model.get('approved')),
+        approved: ('1' === this.model.get('translated') && '1' === this.model.get('approved'))
       }
     };
   },
@@ -66,6 +69,14 @@ module.exports = Marionette.ItemView.extend({
     evt.preventDefault();
     this.model.set({
       approved: '0',
+      translated: '1',
+    });
+  },
+
+  selectApproved: function(evt) {
+    evt.preventDefault();
+    this.model.set({
+      approved: '1',
       translated: '1',
     });
   },
