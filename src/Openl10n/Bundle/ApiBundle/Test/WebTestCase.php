@@ -56,14 +56,19 @@ class WebTestCase extends BaseWebTestCase
             $response->getContent()
         );
 
-        // Assert response is JSON content-type
-        $this->assertTrue(
-            $response->headers->contains('Content-Type', 'application/json'),
-            $response->headers
-        );
+        $content = $response->getContent();
+        $data = null;
 
-        // Parse the response body
-        $data = json_decode($response->getContent());
+        if ($content) {
+            // Assert response is JSON content-type (unless response content is empty)
+            $this->assertTrue(
+                $response->headers->contains('Content-Type', 'application/json'),
+                $response->headers
+            );
+
+            // Parse the response body
+            $data = json_decode($response->getContent());
+        }
 
         // Validate JSON data with given schema
         if (null !== $schemaName) {
