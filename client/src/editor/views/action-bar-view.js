@@ -29,21 +29,22 @@ module.exports = Marionette.ItemView.extend({
     if (!this.model.get('edited'))
       return;
 
-    var _this = this;
     var translation = new TranslationPhrase({
-      text: _this.model.get('target_phrase'),
+      text: this.model.get('target_phrase'),
       approved: false
     });
 
-    translation.id = _this.model.id;
-    translation.locale = _this.model.get('target_locale');
+    translation.id = this.model.id;
+    translation.locale = this.model.get('target_locale');
 
-    translation.save().done(function() {
-      _this.model.set({
-        'is_translated': true,
-        'is_approved': false,
-        'edited': false,
-      });
+    this.model.set({
+      'is_translated': true,
+      'is_approved': false,
+      'edited': false,
+    });
+
+    translation.save().fail(function() {
+      alert('Unable to save translation');
     });
   },
 
@@ -51,19 +52,20 @@ module.exports = Marionette.ItemView.extend({
     if (!this.model.get('is_translated'))
       return;
 
-    var _this = this;
     var translation = new TranslationPhrase({
-      text: _this.model.get('target_phrase'),
+      text: this.model.get('target_phrase'),
       approved: true
     });
 
-    translation.id = _this.model.id;
-    translation.locale = _this.model.get('target_locale');
+    translation.id = this.model.id;
+    translation.locale = this.model.get('target_locale');
 
-    translation.save().done(function() {
-      _this.model.set({
-        'is_approved': true
-      });
+    this.model.set({
+      'is_approved': true
+    });
+
+    translation.save().fail(function() {
+      alert('Unable to approve translation');
     });
   },
 

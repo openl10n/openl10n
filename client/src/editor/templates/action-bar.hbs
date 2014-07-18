@@ -3,21 +3,23 @@
     <button class="btn btn-lg btn-default text-default action-cancel">
       Cancel
     </button>
+
+    <button class="btn btn-lg btn-wide btn-success action-save">
+      Save
+    </button>
   {{else}}
 
     {{#if is_approved}}
       <button class="btn btn-lg btn-default text-danger action-unapprove">
+        <i class="fa fa-thumbs-o-down"></i>
         Unapprove
       </button>
     {{else}}
       <button class="btn btn-lg btn-default text-success action-approve">
+        <i class="fa fa-thumbs-up"></i>
         Approve
       </button>
     {{/if}}
 
   {{/if}}
-
-  <button class="btn btn-lg btn-wide btn-success action-save {{#if edited}}{{else}}disabled{{/if}}">
-    Save
-  </button>
 </div>
