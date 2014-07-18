@@ -28,6 +28,7 @@
         <parameter key="openl10n.processor.edit_translation.class">Openl10n\Domain\Translation\Application\Processor\EditTranslationPhraseProcessor</parameter>
         <parameter key="openl10n.processor.create_translation_key.class">Openl10n\Domain\Translation\Application\Processor\CreateTranslationKeyProcessor</parameter>
         <parameter key="openl10n.processor.delete_translation_key.class">Openl10n\Domain\Translation\Application\Processor\DeleteTranslationKeyProcessor</parameter>
+        <parameter key="openl10n.processor.delete_translation_phrase.class">Openl10n\Domain\Translation\Application\Processor\DeleteTranslationPhraseProcessor</parameter>
 
         <!-- Listener -->
         <parameter key="openl10n.listener.language_listener.class">Openl10n\Bundle\InfraBundle\Listener\LanguageListener</parameter>
@@ -139,6 +140,10 @@
             <argument type="service" id="event_dispatcher" />
         </service>
         <service id="openl10n.processor.delete_translation_key" class="%openl10n.processor.delete_translation_key.class%">
+            <argument type="service" id="openl10n.repository.translation" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.delete_translation_phrase" class="%openl10n.processor.delete_translation_phrase.class%">
             <argument type="service" id="openl10n.repository.translation" />
             <argument type="service" id="event_dispatcher" />
         </service>

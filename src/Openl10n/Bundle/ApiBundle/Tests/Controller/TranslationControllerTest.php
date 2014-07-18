@@ -153,4 +153,26 @@ class TranslationControllerTest extends WebTestCase
         $this->assertNotNull($phrase, '"en" phrase for translation 1 should be defined');
         $this->assertEquals((string) $phrase->getText(), 'This is the updated phrase');
     }
+
+    public function testDeleteTranslationPhrase()
+    {
+        $client = $this->getClient();
+        $client->jsonRequest('DELETE', '/api/translations/1/phrases/fr');
+
+        $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_NO_CONTENT
+        );
+
+        // Here I'm force to clear the EntityManager to be sure the `Key::getPhrase()`
+        // method refresh its relations.
+        $this->get('doctrine.orm.entity_manager')->clear();
+
+        $translation = $this->get('openl10n.repository.translation')->findOneById(1);
+
+        $this->assertNull(
+            $translation->getPhrase(Locale::parse('fr')),
+            'French phrase of translation 1 should not exist anymore'
+        );
+    }
 }

@@ -9,6 +9,7 @@ use Openl10n\Bundle\ApiBundle\Facade\TranslationKey as TranslationKeyFacade;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase as TranslationPhraseFacade;
 use Openl10n\Domain\Translation\Application\Action\CreateTranslationKeyAction;
 use Openl10n\Domain\Translation\Application\Action\DeleteTranslationKeyAction;
+use Openl10n\Domain\Translation\Application\Action\DeleteTranslationPhraseAction;
 use Openl10n\Domain\Translation\Application\Action\EditTranslationPhraseAction;
 use Openl10n\Value\Localization\Locale;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -133,6 +134,26 @@ class TranslationController extends Controller implements ClassResourceInterface
     public function putPhrasesAction(Request $request, $translation, $locale)
     {
         return $this->postPhrasesAction($request, $translation, $locale);
+    }
+
+    /**
+     * @Rest\View(statusCode=204)
+     */
+    public function deletePhrasesAction($translation, $locale)
+    {
+        $translationKey = $this->findTranslationOr404($translation);
+        $translationPhrase = $translationKey->getPhrase(Locale::parse($locale));
+
+        if (null === $translationPhrase) {
+            throw $this->createNotFoundException(sprintf(
+                'Unable to find a "%s" phrase for translation #%s',
+                $locale,
+                $translationKey->getId()
+            ));
+        }
+
+        $action = new DeleteTranslationPhraseAction($translationPhrase);
+        $this->get('openl10n.processor.delete_translation_phrase')->execute($action);
     }
 
     protected function findTranslationOr404($id)
