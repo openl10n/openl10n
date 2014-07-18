@@ -8,7 +8,6 @@ use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationCommit as TranslationCommitFacade;
 use Openl10n\Bundle\InfraBundle\Specification\CustomTranslationSpecification;
-use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Slug;

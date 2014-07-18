@@ -3,7 +3,6 @@
 namespace Openl10n\Domain\Translation\Application\Action;
 
 use Openl10n\Domain\Translation\Model\Key;
-use Openl10n\Value\Localization\Locale;
 
 class DeleteTranslationKeyAction
 {

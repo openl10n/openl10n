@@ -14,7 +14,6 @@ use Openl10n\Domain\Translation\Application\Processor\CreateTranslationKeyProces
 use Openl10n\Domain\Translation\Application\Processor\DeleteTranslationKeyProcessor;
 use Openl10n\Domain\Translation\Application\Processor\EditTranslationPhraseProcessor;
 use Openl10n\Domain\Translation\Repository\TranslationRepository;
-use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
