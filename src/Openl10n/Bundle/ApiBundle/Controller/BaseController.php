@@ -2,7 +2,6 @@
 
 namespace Openl10n\Bundle\ApiBundle\Controller;
 
-use Openl10n\Domain\Project\Model\Language;
 use Openl10n\Domain\Project\Model\Project;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Slug;
@@ -15,9 +14,9 @@ abstract class BaseController extends Controller
      *
      * @param string $slug The project slug
      *
-     * @return ProjectInterface The project
+     * @return Project The project
      *
-     * @throws NotFoundHttpException If the project is not found
+     * @throws NotFoundHttpException If the entity is not found
      */
     protected function findProjectOr404($slug)
     {
@@ -34,7 +33,11 @@ abstract class BaseController extends Controller
     }
 
     /**
-     * @return Language
+     * @param string $locale The locale identifier.
+     *
+     * @return \Openl10n\Domain\Project\Model\Language
+     *
+     * @throws NotFoundHttpException If the entity is not found
      */
     protected function findLanguageOr404(Project $project, $locale)
     {
@@ -54,7 +57,11 @@ abstract class BaseController extends Controller
     }
 
     /**
-     * @return Resource
+     * @param int $id Resource id.
+     *
+     * @return \Openl10n\Domain\Resource\Model\Resource
+     *
+     * @throws NotFoundHttpException If the entity is not found
      */
     protected function findResourceOr404($id)
     {
@@ -73,9 +80,9 @@ abstract class BaseController extends Controller
     /**
      * @param int $id Translation id.
      *
-     * @return Key The translation key
+     * @return \Openl10n\Domain\Translation\Model\Key The translation key
      *
-     * @throws NotFoundHttpException If the project is not found
+     * @throws NotFoundHttpException If the entity is not found
      */
     protected function findTranslationOr404($id)
     {
