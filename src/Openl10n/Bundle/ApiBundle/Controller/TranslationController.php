@@ -12,11 +12,10 @@ use Openl10n\Domain\Translation\Application\Action\DeleteTranslationKeyAction;
 use Openl10n\Domain\Translation\Application\Action\DeleteTranslationPhraseAction;
 use Openl10n\Domain\Translation\Application\Action\EditTranslationPhraseAction;
 use Openl10n\Value\Localization\Locale;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class TranslationController extends Controller implements ClassResourceInterface
+class TranslationController extends BaseController implements ClassResourceInterface
 {
     /**
      * @Rest\View
@@ -154,19 +153,5 @@ class TranslationController extends Controller implements ClassResourceInterface
 
         $action = new DeleteTranslationPhraseAction($translationPhrase);
         $this->get('openl10n.processor.delete_translation_phrase')->execute($action);
-    }
-
-    protected function findTranslationOr404($id)
-    {
-        $translation = $this->get('openl10n.repository.translation')->findOneById($id);
-
-        if (null === $translation) {
-            throw $this->createNotFoundException(sprintf(
-                'Unable to find translation with id %s',
-                $id
-            ));
-        }
-
-        return $translation;
     }
 }

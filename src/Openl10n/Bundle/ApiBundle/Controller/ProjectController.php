@@ -10,12 +10,10 @@ use Openl10n\Domain\Project\Application\Action\CreateProjectAction;
 use Openl10n\Domain\Project\Application\Action\DeleteProjectAction;
 use Openl10n\Domain\Project\Application\Action\EditProjectAction;
 use Openl10n\Domain\Project\Model\Project;
-use Openl10n\Value\String\Slug;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ProjectController extends Controller implements ClassResourceInterface
+class ProjectController extends BaseController implements ClassResourceInterface
 {
     /**
      * @Rest\View
@@ -113,28 +111,6 @@ class ProjectController extends Controller implements ClassResourceInterface
         $this->get('openl10n.processor.delete_project')->execute($action);
     }
 
-    /**
-     * Find a project by its slug.
-     *
-     * @param string $slug The project slug
-     *
-     * @return Project The project
-     *
-     * @throws NotFoundHttpException If the project is not found
-     */
-    protected function findProjectOr404($slug)
-    {
-        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug($slug));
-
-        if (null === $project) {
-            throw $this->createNotFoundException(sprintf(
-                'Unable to find project with slug "%s"',
-                $slug
-            ));
-        }
-
-        return $project;
-    }
 
     protected function transformProject(Project $project)
     {

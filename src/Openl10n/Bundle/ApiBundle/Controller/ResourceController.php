@@ -15,15 +15,13 @@ use Openl10n\Domain\Resource\Application\Action\ImportTranslationFileAction;
 use Openl10n\Domain\Resource\Application\Action\UpdateResourceAction;
 use Openl10n\Domain\Resource\Model\Resource;
 use Openl10n\Domain\Translation\Model\Key;
-use Openl10n\Value\String\Slug;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\Exception\InvalidResourceException;
 
-class ResourceController extends Controller implements ClassResourceInterface
+class ResourceController extends BaseController implements ClassResourceInterface
 {
     /**
      * @Rest\QueryParam(name="project", strict=true, nullable=false)
@@ -166,36 +164,5 @@ class ResourceController extends Controller implements ClassResourceInterface
         }
 
         return View::create($form, 400);
-    }
-
-    protected function findProjectOr404($slug)
-    {
-        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug($slug));
-
-        if (null === $project) {
-            throw $this->createNotFoundException(sprintf(
-                'Unable to find project with slug "%s"',
-                $slug
-            ));
-        }
-
-        return $project;
-    }
-
-    /**
-     * @return Resource
-     */
-    protected function findResourceOr404($id)
-    {
-        $resource = $this->get('openl10n.repository.resource')->find($id);
-
-        if (null === $resource) {
-            throw $this->createNotFoundException(sprintf(
-                'Unable to find resource with id %s',
-                $id
-            ));
-        }
-
-        return $resource;
     }
 }

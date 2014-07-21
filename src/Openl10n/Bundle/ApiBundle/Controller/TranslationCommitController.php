@@ -10,12 +10,10 @@ use Openl10n\Bundle\ApiBundle\Facade\TranslationCommit as TranslationCommitFacad
 use Openl10n\Bundle\InfraBundle\Specification\CustomTranslationSpecification;
 use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Value\Localization\Locale;
-use Openl10n\Value\String\Slug;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class TranslationCommitController extends Controller implements ClassResourceInterface
+class TranslationCommitController extends BaseController implements ClassResourceInterface
 {
     /**
      * @Rest\Get("/translation_commits/{source}/{target}")
@@ -68,42 +66,5 @@ class TranslationCommitController extends Controller implements ClassResourceInt
         $target = Locale::parse($target);
 
         return new TranslationCommitFacade($translation, $source, $target);
-    }
-
-    /**
-     * Find a project by its slug.
-     *
-     * @param string $slug The project slug
-     *
-     * @return ProjectInterface The project
-     *
-     * @throws NotFoundHttpException If the project is not found
-     */
-    protected function findProjectOr404($slug)
-    {
-        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug($slug));
-
-        if (null === $project) {
-            throw $this->createNotFoundException(sprintf(
-                'Unable to find project with slug "%s"',
-                $slug
-            ));
-        }
-
-        return $project;
-    }
-
-    protected function findTranslationOr404($id)
-    {
-        $translation = $this->get('openl10n.repository.translation')->findOneById($id);
-
-        if (null === $translation) {
-            throw $this->createNotFoundException(sprintf(
-                'Unable to find translation with id %s',
-                $id
-            ));
-        }
-
-        return $translation;
     }
 }
