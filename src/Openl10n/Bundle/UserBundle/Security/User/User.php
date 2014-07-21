@@ -19,6 +19,16 @@ class User implements UserInterface
         $this->salt = $credentials->getSalt();
     }
 
+    /**
+     * Get wrapped user instance.
+     *
+     * @return UserModel The user as defined in the Domain
+     */
+    public function getOriginalUser()
+    {
+        return $this->user;
+    }
+
     public function getUsername()
     {
         return (string) $this->user->getUsername();

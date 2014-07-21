@@ -1,0 +1,25 @@
+project:
+    type: rest
+    resource: Openl10n\Bundle\ApiBundle\Controller\ProjectController
+    name_prefix: openl10n_api_
+
+language:
+    type: rest
+    resource: Openl10n\Bundle\ApiBundle\Controller\LanguageController
+    parent: project
+    name_prefix: openl10n_api_
+
+resource:
+    type: rest
+    resource: Openl10n\Bundle\ApiBundle\Controller\ResourceController
+    name_prefix: openl10n_api_
+
+translation:
+    type: rest
+    resource: Openl10n\Bundle\ApiBundle\Controller\TranslationController
+    name_prefix: openl10n_api_
+
+translation_commit:
+    type: rest
+    resource: Openl10n\Bundle\ApiBundle\Controller\TranslationCommitController
+    name_prefix: openl10n_api_

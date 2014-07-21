@@ -1,12 +1,7 @@
-fos_js:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-
+# API routes
 openl10n_api:
-    type: rest
     resource: "@Openl10nApiBundle/Resources/config/routing.yml"
     prefix:   /api
-    options:
-        expose: true
 
 # Last route: match all possible patterns
 openl10n_index:

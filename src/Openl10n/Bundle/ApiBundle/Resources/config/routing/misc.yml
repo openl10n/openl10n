@@ -1,0 +1,5 @@
+openl10n_api_me:
+    path: /me
+    defaults: { _controller: Openl10nApiBundle:Me:index }
+    requirements:
+        _method: GET
