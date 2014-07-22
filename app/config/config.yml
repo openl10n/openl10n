@@ -86,3 +86,7 @@ jms_serializer:
 nelmio_api_doc:
     name: 'OpenLocalization API documentation'
     request_listener: false
+    sandbox:
+        request_format:
+            formats:
+                json: application/json
