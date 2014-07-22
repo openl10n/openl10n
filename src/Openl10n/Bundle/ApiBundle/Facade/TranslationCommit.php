@@ -19,6 +19,11 @@ class TranslationCommit
     /**
      * @Serializer\Type("string")
      */
+    public $resourcePathname;
+
+    /**
+     * @Serializer\Type("string")
+     */
     public $key;
 
     /**
@@ -58,6 +63,7 @@ class TranslationCommit
 
         $this->id = $key->getId();
         $this->resourceId = $key->getResource()->getId();
+        $this->resourcePathname = $key->getResource()->getPathname();
         $this->key = (string) $key->getIdentifier();
         $this->sourcePhrase = (string) $sourcePhrase->getText();
         $this->sourceLocale = (string) $sourcePhrase->getLocale();
