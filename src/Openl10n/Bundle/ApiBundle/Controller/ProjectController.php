@@ -141,43 +141,6 @@ class ProjectController extends BaseController implements ClassResourceInterface
     }
 
     /**
-     * Update a project.
-     *
-     * @ApiDoc(
-     *     description="Update a project",
-     *     statusCodes={
-     *         204="Returned when successful",
-     *         403="Returned when the user is not authorized",
-     *         400="Returned when data are incorrect",
-     *         404="Returned when project does not exist"
-     *     },
-     *     requirements={
-     *         { "name"="project", "dataType"="string", "required"=true, "description"="Project's slug" }
-     *     },
-     *     input={
-     *         "class"="Openl10n\Bundle\InfraBundle\Form\Type\ProjectType",
-     *         "name"=""
-     *     }
-     * )
-     * @Rest\View
-     */
-    public function patchAction(Request $request, $project)
-    {
-        $project = $this->findProjectOr404($project);
-
-        $action = new EditProjectAction($project);
-        $form = $this->get('form.factory')->createNamed('', 'openl10n_project', $action);
-
-        if ($form->submit($request->request->all(), false)->isValid()) {
-            $this->get('openl10n.processor.edit_project')->execute($action);
-
-            return new Response('', 204);
-        }
-
-        return View::create($form, 400);
-    }
-
-    /**
      * Delete a project.
      *
      * @ApiDoc(
