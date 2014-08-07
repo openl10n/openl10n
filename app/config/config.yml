@@ -91,3 +91,15 @@ nelmio_api_doc:
             formats:
                 json: application/json
             method: accept_header
+
+# Nelmio CORS
+nelmio_cors:
+    defaults:
+        allow_credentials: true
+    paths:
+        '^/api/':
+            allow_origin: ['*']
+            allow_headers: ['Authorization', 'Origin', 'X-Requested-With', 'Content-Type', 'Accept']
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS']
+            #expose_headers: ['*']
+            max_age: 3600
