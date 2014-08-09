@@ -78,12 +78,10 @@ class TranslationControllerTest extends WebTestCase
 
         $data = $this->assertJsonResponse(
             $client->getResponse(),
-            Response::HTTP_OK,
-            'translation'
+            Response::HTTP_OK
         );
 
-        $this->assertEquals('example.key1', $data->identifier);
-        $this->assertCount(2, (array) $data->phrases);
+        $this->assertCount(2, (array) $data);
     }
 
     public function testGetTranslationPhrase()

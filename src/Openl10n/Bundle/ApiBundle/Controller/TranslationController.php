@@ -50,7 +50,15 @@ class TranslationController extends BaseController implements ClassResourceInter
     {
         $translation = $this->findTranslationOr404($translation);
 
-        return new TranslationKeyFacade($translation);
+        $facade = new TranslationKeyFacade($translation);
+        $facade->phrases = [];
+
+        foreach ($translation->getPhrases() as $phrase) {
+            $locale = (string) $phrase->getLocale();
+            $facade->phrases[$locale] = new TranslationPhraseFacade($phrase);
+        }
+
+        return $facade;
     }
 
     /**
@@ -140,12 +148,11 @@ class TranslationController extends BaseController implements ClassResourceInter
     {
         $translation = $this->findTranslationOr404($translation);
 
-        $facade = new TranslationKeyFacade($translation);
-        $facade->phrases = [];
+        $facade = [];
 
         foreach ($translation->getPhrases() as $phrase) {
             $locale = (string) $phrase->getLocale();
-            $facade->phrases[$locale] = new TranslationPhraseFacade($phrase);
+            $facade[$locale] = new TranslationPhraseFacade($phrase);
         }
 
         return $facade;
