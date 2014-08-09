@@ -12,6 +12,11 @@
             "description": "Translation key identifier",
             "required": true
         },
+        "resource_id": {
+            "type": "integer",
+            "description": "Resource primary id",
+            "required": true
+        },
         "phrases": {
             "type": "object",
             "description": "Translation phrases",

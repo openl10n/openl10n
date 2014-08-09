@@ -2,16 +2,20 @@
 
 namespace Openl10n\Bundle\ApiBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationKey as TranslationKeyFacade;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase as TranslationPhraseFacade;
+use Openl10n\Bundle\InfraBundle\Specification\TranslationByProjectSpecification;
 use Openl10n\Domain\Translation\Application\Action\CreateTranslationKeyAction;
 use Openl10n\Domain\Translation\Application\Action\DeleteTranslationKeyAction;
 use Openl10n\Domain\Translation\Application\Action\DeleteTranslationPhraseAction;
 use Openl10n\Domain\Translation\Application\Action\EditTranslationPhraseAction;
+use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Value\Localization\Locale;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,11 +23,34 @@ use Symfony\Component\HttpFoundation\Response;
 class TranslationController extends BaseController implements ClassResourceInterface
 {
     /**
+     * Retrieve all the project's translations.
+     *
+     * @ApiDoc(
+     *     description="List the translations",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when the project with given id does not exist"
+     *     }
+     * )
+     *
+     * @Rest\QueryParam(name="project", strict=true, nullable=false)
      * @Rest\View
      */
-    public function cgetAction()
+    public function cgetAction(ParamFetcher $paramFetcher)
     {
-        // TODO (?) get all keys
+        $project = $this->findProjectOr404($paramFetcher->get('project'));
+
+        $specification = new TranslationByProjectSpecification($project);
+
+        $pager = $this->get('openl10n.repository.translation')->findSatisfying($specification);
+        $pager->setMaxPerPage(10000);
+
+        $translations = iterator_to_array($pager->getIterator());
+
+        return (new ArrayCollection($translations))->map(function(Key $translation) {
+            return new TranslationKeyFacade($translation, true);
+        });
     }
 
     /**

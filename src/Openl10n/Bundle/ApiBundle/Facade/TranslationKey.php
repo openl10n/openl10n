@@ -20,13 +20,26 @@ class TranslationKey
     public $identifier;
 
     /**
-     * @Serializer\Type("array<Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase>")
+     * @Serializer\Type("integer")
+     */
+    public $resourceId;
+
+    /**
+     * @Serializer\Type("array<string, Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase>")
      */
     public $phrases;
 
-    public function __construct(TranslationKeyModel $key)
+    public function __construct(TranslationKeyModel $key, $withPhrases = false)
     {
         $this->id = $key->getId();
         $this->identifier = (string) $key->getIdentifier();
+        $this->resourceId = $key->getResource()->getId();
+
+        if ($withPhrases) {
+            foreach ($key->getPhrases() as $phrase) {
+                $locale = $phrase->getLocale();
+                $this->phrases[(string) $locale] = new TranslationPhrase($phrase);
+            }
+        }
     }
 }

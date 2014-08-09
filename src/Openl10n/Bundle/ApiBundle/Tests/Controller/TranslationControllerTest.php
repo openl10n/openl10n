@@ -11,7 +11,26 @@ class TranslationControllerTest extends WebTestCase
 {
     public function testGetTranslationsListByProject()
     {
-        $this->markTestIncomplete('Not implemented yet');
+        $client = $this->getClient();
+        $client->jsonRequest('GET', '/api/translations?project=foobar');
+
+        $data = $this->assertJsonResponse(
+            $client->getResponse(),
+            Response::HTTP_OK
+        );
+
+        $this->assertCount(2, (array) $data);
+        $this->assertObjectHasAttribute('id', $data[0]);
+        $this->assertObjectHasAttribute('identifier', $data[0]);
+        $this->assertObjectHasAttribute('resource_id', $data[0]);
+        $this->assertObjectHasAttribute('phrases', $data[0]);
+        $this->assertObjectHasAttribute('en', $data[0]->phrases);
+        $this->assertObjectHasAttribute('fr', $data[0]->phrases);
+        $this->assertObjectHasAttribute('locale', $data[0]->phrases->en);
+        $this->assertObjectHasAttribute('text', $data[0]->phrases->en);
+        $this->assertObjectHasAttribute('is_approved', $data[0]->phrases->en);
+        $this->assertObjectHasAttribute('created_at', $data[0]->phrases->en);
+        $this->assertObjectHasAttribute('updated_at', $data[0]->phrases->en);
     }
 
     public function testGetTranslation()
