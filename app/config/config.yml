@@ -90,3 +90,4 @@ nelmio_api_doc:
         request_format:
             formats:
                 json: application/json
+            method: accept_header

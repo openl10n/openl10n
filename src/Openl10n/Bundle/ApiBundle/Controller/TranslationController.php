@@ -5,6 +5,7 @@ namespace Openl10n\Bundle\ApiBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationKey as TranslationKeyFacade;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase as TranslationPhraseFacade;
 use Openl10n\Domain\Translation\Application\Action\CreateTranslationKeyAction;
@@ -26,6 +27,23 @@ class TranslationController extends BaseController implements ClassResourceInter
     }
 
     /**
+     * Retrieve a translation by its id.
+     *
+     * @ApiDoc(
+     *     description="Get a translation",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when the translation with given id does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="translation", "dataType"="integer", "required"=true, "description"="Translation's id" }
+     *     },
+     *     output={
+     *         "Openl10n\Bundle\ApiBundle\Facade\TranslationKey",
+     *         "groups"={"item"}
+     *     }
+     * )
      * @Rest\View
      */
     public function getAction($translation)
@@ -36,6 +54,25 @@ class TranslationController extends BaseController implements ClassResourceInter
     }
 
     /**
+     * Create a new translation.
+     *
+     * @ApiDoc(
+     *     resource=true,
+     *     description="Create a translation",
+     *     statusCodes={
+     *         201="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         400="Returned when data are incorrect"
+     *     },
+     *     parameters={
+     *         { "name"="resource", "dataType"="integer", "required"="true", "description"="Resource's id" },
+     *         { "name"="identifier", "dataType"="string", "required"="true", "description"="Translation's key" }
+     *     },
+     *     output={
+     *         "Openl10n\Bundle\ApiBundle\Facade\TranslationKey",
+     *         "groups"={"item"}
+     *     }
+     * )
      * @Rest\View
      */
     public function cpostAction(Request $request)
@@ -60,6 +97,19 @@ class TranslationController extends BaseController implements ClassResourceInter
     }
 
     /**
+     * Delete a translation.
+     *
+     * @ApiDoc(
+     *     description="Delete a translation",
+     *     statusCodes={
+     *         204="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when the translation with given id does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="translation", "dataType"="integer", "required"=true, "description"="Translation's id" }
+     *     }
+     * )
      * @Rest\View(statusCode=204)
      */
     public function deleteAction($translation)
@@ -70,6 +120,20 @@ class TranslationController extends BaseController implements ClassResourceInter
     }
 
     /**
+     * Retrieve all the translation phrases.
+     *
+     * @ApiDoc(
+     *     description="List all translation phases",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when the translation with given id does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="translation", "dataType"="integer", "required"=true, "description"="Translation's id" }
+     *     },
+     *     output="Openl10n\Bundle\ApiBundle\Facade\TranslationKey"
+     * )
      * @Rest\View
      */
     public function cgetPhrasesAction($translation)
@@ -88,6 +152,21 @@ class TranslationController extends BaseController implements ClassResourceInter
     }
 
     /**
+     * Retrieve a translation phrase by its locale.
+     *
+     * @ApiDoc(
+     *     description="Get a translation phrase",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when the translation with given id does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="translation", "dataType"="integer", "required"=true, "description"="Translation's id" },
+     *         { "name"="locale", "dataType"="string", "required"=true }
+     *     },
+     *     output="Openl10n\Bundle\ApiBundle\Facade\TranslationPhrase"
+     * )
      * @Rest\View
      */
     public function getPhrasesAction($translation, $locale)
@@ -108,6 +187,25 @@ class TranslationController extends BaseController implements ClassResourceInter
     }
 
     /**
+     * Create a translation phrase.
+     *
+     * @ApiDoc(
+     *     description="Create a translation phrase",
+     *     statusCodes={
+     *         204="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         400="Returned when data are incorrect",
+     *         404="Returned when the translation with given id does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="translation", "dataType"="integer", "required"=true, "description"="Translation's id" },
+     *         { "name"="locale", "dataType"="string", "required"=true }
+     *     },
+     *     input={
+     *         "class"="Openl10n\Bundle\InfraBundle\Form\Type\TranslationType",
+     *         "name"=""
+     *     }
+     * )
      * @Rest\View
      */
     public function postPhrasesAction(Request $request, $translation, $locale)
@@ -128,6 +226,25 @@ class TranslationController extends BaseController implements ClassResourceInter
     }
 
     /**
+     * Update a translation phrase.
+     *
+     * @ApiDoc(
+     *     description="Update a translation phrase",
+     *     statusCodes={
+     *         204="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         400="Returned when data are incorrect",
+     *         404="Returned when the translation with given id does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="translation", "dataType"="integer", "required"=true, "description"="Translation's id" },
+     *         { "name"="locale", "dataType"="string", "required"=true }
+     *     },
+     *     input={
+     *         "class"="Openl10n\Bundle\InfraBundle\Form\Type\TranslationType",
+     *         "name"=""
+     *     }
+     * )
      * @Rest\View
      */
     public function putPhrasesAction(Request $request, $translation, $locale)
@@ -136,6 +253,20 @@ class TranslationController extends BaseController implements ClassResourceInter
     }
 
     /**
+     * Delete a translation phrase.
+     *
+     * @ApiDoc(
+     *     description="Delete a translation phrase",
+     *     statusCodes={
+     *         204="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when translation or phrase does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="translation", "dataType"="integer", "required"=true, "description"="Translation's id" },
+     *         { "name"="locale", "dataType"="string", "required"=true }
+     *     },
+     * )
      * @Rest\View(statusCode=204)
      */
     public function deletePhrasesAction($translation, $locale)

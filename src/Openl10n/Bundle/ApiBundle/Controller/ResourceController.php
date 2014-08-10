@@ -7,6 +7,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Openl10n\Bundle\ApiBundle\Facade\Resource as ResourceFacade;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationKey as TranslationKeyFacade;
 use Openl10n\Domain\Resource\Application\Action\CreateResourceAction;
@@ -24,6 +25,20 @@ use Symfony\Component\Translation\Exception\InvalidResourceException;
 class ResourceController extends BaseController implements ClassResourceInterface
 {
     /**
+     * Retrieve all the project resources.
+     *
+     * @ApiDoc(
+     *     resource=true,
+     *     description="List all project resources",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when project does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="project", "dataType"="string", "required"=true, "description"="Project's slug" }
+     *     }
+     * )
      * @Rest\QueryParam(name="project", strict=true, nullable=false)
      * @Rest\View
      */
@@ -38,6 +53,20 @@ class ResourceController extends BaseController implements ClassResourceInterfac
     }
 
     /**
+     * Retrieve a resource by its id.
+     *
+     * @ApiDoc(
+     *     description="Get a resource",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when the resource with given id does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="resource", "dataType"="integer", "required"=true, "description"="Resource's id" }
+     *     },
+     *     output="Openl10n\Bundle\ApiBundle\Facade\Resource"
+     * )
      * @Rest\View
      */
     public function getAction($resource)
@@ -48,6 +77,21 @@ class ResourceController extends BaseController implements ClassResourceInterfac
     }
 
     /**
+     * Create a new resource.
+     *
+     * @ApiDoc(
+     *     description="Create a resource",
+     *     statusCodes={
+     *         201="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         400="Returned when data are incorrect"
+     *     },
+     *     parameters={
+     *         { "name"="project", "dataType"="string", "required"="true" },
+     *         { "name"="pathname", "dataType"="string", "required"="true" }
+     *     },
+     *     output="Openl10n\Bundle\ApiBundle\Facade\Resource"
+     * )
      * @Rest\View
      */
     public function cpostAction(Request $request)
@@ -72,6 +116,25 @@ class ResourceController extends BaseController implements ClassResourceInterfac
     }
 
     /**
+     * Update a resource.
+     *
+     * @ApiDoc(
+     *     description="Update a resource",
+     *     statusCodes={
+     *         204="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         400="Returned when data are incorrect",
+     *         404="Returned when resource does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="resource", "dataType"="integer", "required"=true, "description"="Resource's id" }
+     *     },
+     *     input={
+     *         "class"="Openl10n\Bundle\InfraBundle\Form\Type\UpdateResourceType",
+     *         "name"=""
+     *     },
+     *     output="Openl10n\Bundle\ApiBundle\Facade\Resource"
+     * )
      * @Rest\View
      */
     public function putAction(Request $request, $resource)
@@ -100,6 +163,19 @@ class ResourceController extends BaseController implements ClassResourceInterfac
     }
 
     /**
+     * Retrieve all the resource translations.
+     *
+     * @ApiDoc(
+     *     description="List all resource translations",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when project does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="resource", "dataType"="integer", "required"=true, "description"="Resource's id" }
+     *     }
+     * )
      * @Rest\View
      */
     public function getTranslationsAction($resource)
@@ -114,6 +190,25 @@ class ResourceController extends BaseController implements ClassResourceInterfac
     }
 
     /**
+     * Import translations from a resource
+     *
+     * @ApiDoc(
+     *     description="Import a resource",
+     *     statusCodes={
+     *         204="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         400="Returned when data are incorrect",
+     *         404="Returned when resource does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="resource", "dataType"="integer", "required"=true, "description"="Resource's id" }
+     *     },
+     *     parameters={
+     *         { "name"="locale", "dataType"="string", "required"="true" },
+     *         { "name"="file", "dataType"="file", "required"="true" },
+     *         { "name"="options", "dataType"="choice", "required"="false", "format"="{'reviewed':'Mark translations as reviewed', 'erase':'Ecrase same values', 'clean':'Clean unused values'}" }
+     *     }
+     * )
      * @Rest\Post
      * @Rest\View
      */
@@ -139,6 +234,25 @@ class ResourceController extends BaseController implements ClassResourceInterfac
     }
 
     /**
+     * Import translations from a resource
+     *
+     * @ApiDoc(
+     *     description="Import a resource",
+     *     statusCodes={
+     *         204="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         400="Returned when data are incorrect",
+     *         404="Returned when resource does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="resource", "dataType"="integer", "required"=true, "description"="Resource's id" }
+     *     },
+     *     parameters={
+     *         { "name"="locale", "dataType"="string", "required"="true" },
+     *         { "name"="file", "dataType"="file", "required"="true" },
+     *         { "name"="options", "dataType"="choice", "required"="false", "format"="{'reviewed':'Mark translations as reviewed', 'erase':'Ecrase same values', 'clean':'Clean unused values'}" }
+     *     }
+     * )
      * @Rest\View
      */
     public function putImportAction(Request $request, $resource)
@@ -147,6 +261,25 @@ class ResourceController extends BaseController implements ClassResourceInterfac
     }
 
     /**
+     * Export translations from a resource
+     *
+     * @ApiDoc(
+     *     description="Export a resource",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         400="Returned when data are incorrect",
+     *         404="Returned when resource does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="resource", "dataType"="integer", "required"=true, "description"="Resource's id" }
+     *     },
+     *     filters={
+     *         { "name"="locale", "dataType"="choice", "required"="true" },
+     *         { "name"="format", "dataType"="choice", "required"="true", "format"="{'csv', 'ini', 'json', 'mo', 'php', 'po', 'ts', 'xliff', 'yml'}" },
+     *         { "name"="options", "dataType"="choice", "required"="false", "format"="{'reviewed':'Mark translations as reviewed', 'erase':'Ecrase same values', 'clean':'Clean unused values'}" }
+     *     }
+     * )
      * @Rest\Get
      * @Rest\View
      */

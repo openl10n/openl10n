@@ -7,8 +7,14 @@ use Openl10n\Domain\Resource\Model\Resource as ResourceModel;
 
 class Resource
 {
+    /**
+     * @Serializer\Type("integer")
+     */
     public $id;
 
+    /**
+     * @Serializer\Type("string")
+     */
     public $project;
 
     /**

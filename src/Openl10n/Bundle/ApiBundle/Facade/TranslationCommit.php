@@ -9,6 +9,9 @@ use Openl10n\Value\Localization\Locale;
 
 class TranslationCommit
 {
+    /**
+     * @Serializer\Type("integer")
+     */
     public $id;
 
     /**

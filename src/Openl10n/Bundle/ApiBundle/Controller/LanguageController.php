@@ -6,6 +6,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Openl10n\Domain\Project\Model\Language;
 use FOS\RestBundle\View\View;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Openl10n\Bundle\ApiBundle\Facade\Language as LanguageFacade;
 use Openl10n\Domain\Project\Application\Action\CreateLanguageAction;
 use Openl10n\Domain\Project\Application\Action\DeleteLanguageAction;
@@ -16,6 +17,20 @@ use Symfony\Component\HttpFoundation\Response;
 class LanguageController extends BaseController implements ClassResourceInterface
 {
     /**
+     * Retrieve all the project languages.
+     *
+     * @ApiDoc(
+     *     resource=true,
+     *     description="List all project languages",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when project does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="project", "dataType"="string", "required"=true, "description"="Project's slug" }
+     *     }
+     * )
      * @Rest\View
      */
     public function cgetAction($project)
@@ -29,6 +44,21 @@ class LanguageController extends BaseController implements ClassResourceInterfac
     }
 
     /**
+     * Retrieve a project language by its locale.
+     *
+     * @ApiDoc(
+     *     description="Get a project language",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when project or locale does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="project", "dataType"="string", "required"=true, "description"="Project's slug" },
+     *         { "name"="locale", "dataType"="string", "required"=true, "description"="Language's locale" }
+     *     },
+     *     output="Openl10n\Bundle\ApiBundle\Facade\Language"
+     * )
      * @Rest\View
      */
     public function getAction($project, $locale)
@@ -42,6 +72,24 @@ class LanguageController extends BaseController implements ClassResourceInterfac
     }
 
     /**
+     * Create a new project language.
+     *
+     * @ApiDoc(
+     *     description="Create a project language",
+     *     statusCodes={
+     *         201="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         400="Returned when data are incorrect"
+     *     },
+     *     requirements={
+     *         { "name"="project", "dataType"="string", "required"=true, "description"="Project's slug" }
+     *     },
+     *     input={
+     *         "class"="Openl10n\Bundle\InfraBundle\Form\Type\LanguageType",
+     *         "name"=""
+     *     },
+     *     output="Openl10n\Bundle\ApiBundle\Facade\Language"
+     * )
      * @Rest\View
      */
     public function cpostAction(Request $request, $project)
@@ -69,6 +117,20 @@ class LanguageController extends BaseController implements ClassResourceInterfac
     }
 
     /**
+     * Delete a project language.
+     *
+     * @ApiDoc(
+     *     description="Delete a project language",
+     *     statusCodes={
+     *         204="Returned when successful",
+     *         403="Returned when the user is not authorized",
+     *         404="Returned when project or locale does not exist"
+     *     },
+     *     requirements={
+     *         { "name"="project", "dataType"="string", "required"=true, "description"="Project's slug" },
+     *         { "name"="locale", "dataType"="string", "required"=true, "description"="Language's locale" }
+     *     }
+     * )
      * @Rest\View(statusCode=204)
      */
     public function deleteAction($project, $locale)
