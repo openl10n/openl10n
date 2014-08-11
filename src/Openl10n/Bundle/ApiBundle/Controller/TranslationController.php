@@ -66,10 +66,7 @@ class TranslationController extends BaseController implements ClassResourceInter
      *     requirements={
      *         { "name"="translation", "dataType"="integer", "required"=true, "description"="Translation's id" }
      *     },
-     *     output={
-     *         "Openl10n\Bundle\ApiBundle\Facade\TranslationKey",
-     *         "groups"={"item"}
-     *     }
+     *     output="Openl10n\Bundle\ApiBundle\Facade\TranslationKey"
      * )
      * @Rest\View
      */
@@ -104,7 +101,7 @@ class TranslationController extends BaseController implements ClassResourceInter
      *         { "name"="identifier", "dataType"="string", "required"="true", "description"="Translation's key" }
      *     },
      *     output={
-     *         "Openl10n\Bundle\ApiBundle\Facade\TranslationKey",
+     *         "class"="Openl10n\Bundle\ApiBundle\Facade\TranslationKey",
      *         "groups"={"item"}
      *     }
      * )

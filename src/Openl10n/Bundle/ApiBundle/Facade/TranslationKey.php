@@ -21,6 +21,7 @@ class TranslationKey
 
     /**
      * @Serializer\Type("integer")
+     * @Serializer\Groups({"item"})
      */
     public $resourceId;
 
