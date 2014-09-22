@@ -532,7 +532,7 @@
 .ol-editor-target-area {
     padding: 0;
     background-color: #fff;
-    //border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #eee;
     z-index: 1;
 
     textarea.phrase-editor {
@@ -546,7 +546,7 @@
         overflow-x: hidden;
         overflow-y: scroll;
         word-wrap: break-word;
-        height: 120px;
+        height: 170px;
     }
 
     .meta {

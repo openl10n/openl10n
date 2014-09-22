@@ -212,7 +212,7 @@ module.exports = Controller.extend({
 
     this.layout.actionBarRegion.show(actionBarView);
     this.layout.translationEditRegion.show(translationEditView);
-    this.layout.translationMetaTabsRegion.show(tabsView);
+    // this.layout.translationMetaTabsRegion.show(tabsView);
 
     if (!translation.get('edited')) {
       translation.fetch();
