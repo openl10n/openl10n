@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
 
+var TranslationPhrase = require('../models/translation-phrase');
 var TranslationItemView = require('./translation-item-view');
 var TranslationEmptyView = require('./translation-empty-view');
 
@@ -91,28 +92,40 @@ module.exports = Marionette.CompositeView.extend({
         this.collection.selectNextNoLoop();
     }
 
-    return;
-
     // If pressed ENTER key
-    // if (key === 13 && isCtrl) {
-    //   evt.preventDefault();
+    if (key === 13 && isCtrl) {
+      evt.preventDefault();
 
-    //   var translation = this.collection.selectedItem;
-    //   if (null === translation)
-    //     return;
+      if (!this.collection.selected)
+        return;
 
-    //   if (isShift)
-    //     translation.save({
-    //       is_translated: true,
-    //       is_approved: true
-    //     });
-    //   else
-    //     translation.save({
-    //       is_translated: true,
-    //     });
+      var translation = new TranslationPhrase({
+        text: this.collection.selected.get('target_phrase'),
+        approved: false
+      });
 
-    //   this.collection.selectNextItem();
-    // }
+      if ('' === translation.get('text')) {
+        alert('Unable to save an empty string');
+        return;
+      }
+
+      translation.id = this.collection.selected.id;
+      translation.locale = this.collection.selected.get('target_locale');
+
+      if (isShift) {
+        translation.set('approved', true);
+      }
+
+      this.collection.selected.set({
+        'is_translated': true,
+        'is_approved': translation.get('approved'),
+        'edited': false,
+      });
+
+      translation.save().fail(function() {
+        alert('Unable to save translation, please reload the page');
+      });
+    }
   },
 
   adjustPosition: function() {
