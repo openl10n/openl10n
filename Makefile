@@ -24,12 +24,10 @@ else
 	@ composer install
 endif
 	@ npm install
-	@ node_modules/.bin/bower install
 
 update:
 	@ echo "❯ Updating..."
 	@ npm update
-	@ node_modules/.bin/bower update
 
 watch:
 	@ echo "❯ Watching..."
