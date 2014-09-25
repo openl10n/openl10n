@@ -3,7 +3,7 @@
 [![Build status...](https://img.shields.io/travis/openl10n/openl10n.svg?style=flat)](http://travis-ci.org/openl10n/openl10n)
 [![Code quality...](https://img.shields.io/scrutinizer/g/openl10n/openl10n.svg?style=flat)](https://scrutinizer-ci.com/g/openl10n/openl10n/)
 [![License MIT](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/openl10n/openl10n/blob/master/LICENSE)
-[![GitHub Tag](http://img.shields.io/github/tag/openl10n/openl10n.svg?style=flat)](https://github.com/openl10n/openl10n/releases)
+[![Packagist](http://img.shields.io/packagist/v/openl10n/openl10n.svg?style=flat)](https://packagist.org/packages/openl10n/openl10n)
 
 OpenLocalization is a **localization management web-app** to help you translate
 any of your projects. Its main goal is to provide an UX friendly tool to easily
