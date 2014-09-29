@@ -19,28 +19,26 @@ Openl10n\Domain\Project\Application\Action\EditProjectAction:
         defaultLocale:
             - NotBlank: ~
 
-Openl10n\Domain\Translation\Application\Action\CreateResourceAction:
+Openl10n\Domain\Resource\Application\Action\CreateResourceAction:
     properties:
         project:
             - NotBlank: ~
-        # file:
-        #     - NotBlank: ~
         pathname:
             - NotBlank: ~
 
-Openl10n\Domain\Translation\Application\Action\ExportTranslationFileAction:
+Openl10n\Domain\Resource\Application\Action\ExportTranslationFileAction:
     properties:
         locale:
             - NotBlank: ~
 
-Openl10n\Domain\Translation\Application\Action\ImportTranslationFileAction:
+Openl10n\Domain\Resource\Application\Action\ImportTranslationFileAction:
     properties:
         file:
             - NotBlank: ~
         locale:
             - NotBlank: ~
 
-Openl10n\Domain\Translation\Application\Action\UpdateResourceAction:
+Openl10n\Domain\Resource\Application\Action\UpdateResourceAction:
     properties:
         pathname:
             - NotBlank: ~
