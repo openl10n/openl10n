@@ -276,7 +276,7 @@ class ResourceController extends BaseController implements ClassResourceInterfac
      *     },
      *     filters={
      *         { "name"="locale", "dataType"="choice", "required"="true" },
-     *         { "name"="format", "dataType"="choice", "required"="true", "format"="{'csv', 'ini', 'json', 'mo', 'php', 'po', 'ts', 'xliff', 'yml'}" },
+     *         { "name"="format", "dataType"="choice", "required"="true", "format"="{'csv', 'ini', 'json', 'mo', 'php', 'po', 'ts', 'xlf', 'yml'}" },
      *         { "name"="options", "dataType"="choice", "required"="false", "format"="{'reviewed':'Mark translations as reviewed', 'erase':'Ecrase same values', 'clean':'Clean unused values'}" }
      *     }
      * )
