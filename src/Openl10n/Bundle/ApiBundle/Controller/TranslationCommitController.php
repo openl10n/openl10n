@@ -9,6 +9,7 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Openl10n\Bundle\ApiBundle\Facade\TranslationCommit as TranslationCommitFacade;
 use Openl10n\Bundle\InfraBundle\Specification\CustomTranslationSpecification;
+use Openl10n\Bundle\InfraBundle\Specification\GetTranslationCommitByResource;
 use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Value\Localization\Locale;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
@@ -40,16 +41,27 @@ class TranslationCommitController extends BaseController implements ClassResourc
      *     }
      * )
      * @Rest\Get("/translation_commits/{source}/{target}")
-     * @Rest\QueryParam(name="project", strict=true, nullable=false)
+     * @Rest\QueryParam(name="project", requirements="[a-zA-Z0-9\-\.\_]+")
+     * @Rest\QueryParam(name="resource", requirements="\d+")
+     * @Rest\QueryParam(name="page", requirements="\d+", default="1", strict=true, nullable=false, description="Page number")
+     * @Rest\QueryParam(name="per_page", requirements="\d+", default="2000", strict=true, nullable=false, description="Item per page")
      * @Rest\View
      */
     public function cgetAction(ParamFetcher $paramFetcher, Request $request, $source, $target)
     {
+        $page = (int) $paramFetcher->get('page');
+        $perPage = (int) $paramFetcher->get('per_page');
+
         $source = Locale::parse($source);
         $target = Locale::parse($target);
-        $project = $this->findProjectOr404($paramFetcher->get('project'));
 
-        $specification = new CustomTranslationSpecification($project, $source, $target);
+        if (null !== $projectSlug = $paramFetcher->get('project')) {
+            $project = $this->findProjectOr404($projectSlug);
+            $specification = new CustomTranslationSpecification($project, $source, $target);
+        } elseif (null !== $resourceId = $paramFetcher->get('resource')) {
+            $resource = $this->findResourceOr404($resourceId);
+            $specification = new GetTranslationCommitByResource($resource, $source, $target);
+        }
 
         if ($request->query->has('translated')) {
             $specification->translated = $request->query->get('translated');
@@ -62,10 +74,10 @@ class TranslationCommitController extends BaseController implements ClassResourc
         }
 
         $pager = $this->get('openl10n.repository.translation')->findSatisfying($specification);
-        $pager->setMaxPerPage(2000);
+        $pager->setMaxPerPage($perPage);
 
         try {
-            $pager->setCurrentPage($request->query->get('page', 1));
+            $pager->setCurrentPage($page);
 
             $results = iterator_to_array($pager->getCurrentPageResults());
         } catch (OutOfRangeCurrentPageException $e) {
