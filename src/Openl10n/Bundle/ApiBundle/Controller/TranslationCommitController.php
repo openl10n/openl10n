@@ -14,6 +14,7 @@ use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Value\Localization\Locale;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class TranslationCommitController extends BaseController implements ClassResourceInterface
 {
@@ -41,8 +42,8 @@ class TranslationCommitController extends BaseController implements ClassResourc
      *     }
      * )
      * @Rest\Get("/translation_commits/{source}/{target}")
-     * @Rest\QueryParam(name="project", requirements="[a-zA-Z0-9\-\.\_]+")
-     * @Rest\QueryParam(name="resource", requirements="\d+")
+     * @Rest\QueryParam(name="project", requirements="[a-zA-Z0-9\-\.\_]+", strict=true, nullable=true)
+     * @Rest\QueryParam(name="resource", requirements="\d+", strict=true, nullable=true)
      * @Rest\QueryParam(name="page", requirements="\d+", default="1", strict=true, nullable=false, description="Page number")
      * @Rest\QueryParam(name="per_page", requirements="\d+", default="2000", strict=true, nullable=false, description="Item per page")
      * @Rest\View
@@ -61,6 +62,8 @@ class TranslationCommitController extends BaseController implements ClassResourc
         } elseif (null !== $resourceId = $paramFetcher->get('resource')) {
             $resource = $this->findResourceOr404($resourceId);
             $specification = new GetTranslationCommitByResource($resource, $source, $target);
+        } else {
+            throw new BadRequestHttpException('You must provide a "project" or "resource" parameter');
         }
 
         if ($request->query->has('translated')) {
