@@ -5,6 +5,7 @@ namespace Openl10n\Bundle\ApiBundle\Facade;
 use JMS\Serializer\Annotation as Serializer;
 use Openl10n\Domain\Project\Model\Language as LanguageModel;
 use Openl10n\Value\Localization\DisplayLocale;
+use Openl10n\Value\Localization\Locale;
 
 class Language
 {
@@ -18,9 +19,8 @@ class Language
      */
     public $name;
 
-    public function __construct(LanguageModel $language)
+    public function __construct(Locale $locale)
     {
-        $locale = $language->getLocale();
         $displayLocale = DisplayLocale::createFromLocale($locale);
 
         $this->locale = (string) $locale;
