@@ -43,25 +43,15 @@ doctrine:
 
 # REST Configuration
 fos_rest:
+    allowed_methods_listener: true
     body_listener:
         array_normalizer: fos_rest.normalizer.camel_keys
-    allowed_methods_listener: true
-    param_fetcher_listener: true
-    routing_loader:
-        default_format: json
-        include_format: false
-    view:
-        view_response_listener: force
-        serialize_null: true
-        formats:
-            xml: false
-            json: true
-        templating_formats:
-            html: false
     format_listener:
+        media_type:
+            version_regex: '/(v|version)=(?P<version>[0-9\.]+)/'
         rules:
             -
-                path: /api
+                path: '^/api'
                 priorities: ['application/json', '*/*']
                 fallback_format: json
                 prefer_extension: true
@@ -70,6 +60,22 @@ fos_rest:
                 priorities: [ 'text/html', '*/*']
                 fallback_format: html
                 prefer_extension: true
+    param_fetcher_listener: true
+    routing_loader:
+        default_format: json
+        include_format: false
+    view:
+        serialize_null: true
+        view_response_listener: force
+        mime_types:
+            json:
+                - 'application/json'
+                - 'application/vnd.api+json'
+        formats:
+            xml: false
+            json: true
+        templating_formats:
+            html: false
 
 # Framework Extra Configuration
 sensio_framework_extra:
