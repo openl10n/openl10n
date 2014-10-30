@@ -42,6 +42,7 @@ class ProjectControllerTest extends WebTestCase
         $this->assertEquals('foobar', $data->slug);
         $this->assertEquals('Foobar', $data->name);
         $this->assertEquals('en', $data->default_locale);
+        $this->assertEquals('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do elusmod tempor incididunt ut labore.', $data->description);
     }
 
     /**
@@ -81,6 +82,7 @@ class ProjectControllerTest extends WebTestCase
         $this->assertNotNull($project, 'Project "new-project" should exist');
         $this->assertEquals((string) $project->getName(), 'New Project');
         $this->assertEquals((string) $project->getDefaultLocale(), 'en');
+        $this->assertEquals((string) $project->getDescription(), '');
     }
 
     /**
@@ -93,6 +95,7 @@ class ProjectControllerTest extends WebTestCase
             'name' => 'New Project',
             'slug' => 'foobar',
             'default_locale' => 'en',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do elusmod tempor incididunt ut labore.',
         ]);
 
         $this->assertJsonResponse(
@@ -110,6 +113,7 @@ class ProjectControllerTest extends WebTestCase
         $client->jsonRequest('PUT', '/api/projects/foobar', [
             'name' => 'Barbaz',
             'default_locale' => 'fr',
+            'description' => 'Mis à jour pour un test.',
         ]);
 
         $this->assertJsonResponse(
@@ -123,6 +127,7 @@ class ProjectControllerTest extends WebTestCase
         $this->assertNotNull($project, 'Project "foobar" should exist');
         $this->assertEquals((string) $project->getName(), 'Barbaz');
         $this->assertEquals((string) $project->getDefaultLocale(), 'fr');
+        $this->assertEquals((string) $project->getDescription(), 'Mis à jour pour un test.');
     }
 
     /**

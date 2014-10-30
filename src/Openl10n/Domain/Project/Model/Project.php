@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Name;
 use Openl10n\Value\String\Slug;
+use Openl10n\Value\String\Description;
 
 class Project
 {
@@ -30,6 +31,11 @@ class Project
      * @var Locale
      */
     protected $defaultLocale;
+
+    /**
+     * @var Description
+     */
+    protected $description;
 
     /**
      * @var ArrayCollection
@@ -103,6 +109,30 @@ class Project
     public function setDefaultLocale(Locale $locale)
     {
         $this->defaultLocale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * The project description.
+     *
+     * @return Description The project description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set the project description.
+     *
+     * @param Description $description The project description
+     *
+     * @return Project The instance of this project
+     */
+    public function setDescription(Description $description)
+    {
+        $this->description = $description;
 
         return $this;
     }

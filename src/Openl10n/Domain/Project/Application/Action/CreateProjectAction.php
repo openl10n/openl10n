@@ -7,6 +7,7 @@ class CreateProjectAction
     protected $name;
     protected $slug;
     protected $defaultLocale;
+    protected $description;
 
     public function getName()
     {
@@ -44,6 +45,21 @@ class CreateProjectAction
     public function setDefaultLocale($locale)
     {
         $this->defaultLocale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
 
         return $this;
     }

@@ -5,6 +5,7 @@ namespace Openl10n\Bundle\InfraBundle\Entity;
 use Openl10n\Domain\Project\Model\Project as BaseProject;
 use Openl10n\Value\String\Slug;
 use Openl10n\Value\String\Name;
+use Openl10n\Value\String\Description;
 use Openl10n\Value\Localization\Locale;
 
 class Project extends BaseProject
@@ -34,5 +35,14 @@ class Project extends BaseProject
         }
 
         return $this->name;
+    }
+
+    public function getDescription()
+    {
+        if (!$this->description instanceof Description) {
+            $this->description = new Description($this->description);
+        }
+
+        return $this->description;
     }
 }

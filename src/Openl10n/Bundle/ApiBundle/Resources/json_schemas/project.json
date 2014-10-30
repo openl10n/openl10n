@@ -16,6 +16,11 @@
             "type": "string",
             "description": "Project default locale",
             "required": true
+        },
+        "description": {
+            "type": "string",
+            "description": "Project description",
+            "required": false
         }
     },
     "additionalProperties" : false
