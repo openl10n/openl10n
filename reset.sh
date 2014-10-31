@@ -10,3 +10,7 @@ $console doctrine:database:create $@
 $console doctrine:schema:drop --force $@
 $console doctrine:schema:create $@
 $console doctrine:fixtures:load --no-interaction $@
+
+# Init the migration table
+LATEST_VERSION=$($console doctrine:migrations:latest $@)
+$console doctrine:migrations:version --add --no-interaction $@ $LATEST_VERSION

@@ -1,0 +1,6 @@
+# Doctrine Migrations
+doctrine_migrations:
+    name:       "OpenLocalization Migrations"
+    dir_name:   %kernel.root_dir%/migrations
+    namespace:  Openl10n\Migrations
+    table_name: migration_versions

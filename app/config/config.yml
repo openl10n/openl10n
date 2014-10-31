@@ -41,13 +41,6 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
 
-# Doctrine Migrations
-doctrine_migrations:
-    name:       "OpenLocalization Migrations"
-    dir_name:   %kernel.root_dir%/migrations
-    namespace:  Openl10n\Migrations
-    table_name: migration_versions
-
 # REST Configuration
 fos_rest:
     allowed_methods_listener: true
