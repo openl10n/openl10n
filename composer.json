@@ -30,7 +30,9 @@
         "pagerfanta/pagerfanta": "~1.0",
         "justinrainbow/json-schema": "~1.3",
         "nelmio/api-doc-bundle": "~2.6",
-        "nelmio/cors-bundle": "~1.0"
+        "nelmio/cors-bundle": "~1.0",
+        "doctrine/migrations": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "dev-master"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
