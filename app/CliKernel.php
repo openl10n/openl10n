@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/AppKernel.php';
+
 use Symfony\Component\Config\Loader\LoaderInterface;
 
 class CliKernel extends AppKernel
