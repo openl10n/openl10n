@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "543fb1de0c3104c4e0eb0615d4f4bab2",
+    "hash": "ac6f4c8cd8d8d613ccc608c5ee67d04d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1778,17 +1778,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "e20461e4f8e1afd68f36cf90bdccc06f7aa6a6c2"
+                "reference": "3d7b900225882063cf179ce1d41bb8b1450a5a17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/e20461e4f8e1afd68f36cf90bdccc06f7aa6a6c2",
-                "reference": "e20461e4f8e1afd68f36cf90bdccc06f7aa6a6c2",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/3d7b900225882063cf179ce1d41bb8b1450a5a17",
+                "reference": "3d7b900225882063cf179ce1d41bb8b1450a5a17",
                 "shasum": ""
             },
             "require": {
@@ -1796,7 +1796,7 @@
                 "sensiolabs/security-checker": "~2.0",
                 "symfony/class-loader": "~2.2",
                 "symfony/form": "~2.2",
-                "symfony/framework-bundle": "~2.4",
+                "symfony/framework-bundle": "~2.3",
                 "symfony/process": "~2.2",
                 "symfony/validator": "~2.2",
                 "symfony/yaml": "~2.2"
@@ -1827,7 +1827,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2014-09-24 14:47:46"
+            "time": "2014-10-01 06:52:36"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -1978,55 +1978,6 @@
             "time": "2014-07-19 10:52:35"
         },
         {
-            "name": "symfony/icu",
-            "version": "v1.2.2",
-            "target-dir": "Symfony/Component/Icu",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Icu.git",
-                "reference": "d4d85d6055b87f394d941b45ddd3a9173e1e3d2a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Icu/zipball/d4d85d6055b87f394d941b45ddd3a9173e1e3d2a",
-                "reference": "d4d85d6055b87f394d941b45ddd3a9173e1e3d2a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-intl": "*",
-                "lib-icu": ">=4.4",
-                "php": ">=5.3.3",
-                "symfony/intl": "~2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Icu\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
-                    "name": "Bernhard Schussek",
-                    "email": "bschussek@gmail.com"
-                }
-            ],
-            "description": "Contains an excerpt of the ICU data and classes to load it.",
-            "homepage": "http://symfony.com",
-            "keywords": [
-                "icu",
-                "intl"
-            ],
-            "time": "2014-07-25 09:58:17"
-        },
-        {
             "name": "symfony/monolog-bundle",
             "version": "v2.6.1",
             "source": {
@@ -2087,23 +2038,22 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.5.5",
+            "version": "v2.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "2aef97bbc95d0c4ae63537cca81bd6d984427d81"
+                "reference": "1a1b1e528935f15dd76169f8b1dc3ef97f0d6210"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/2aef97bbc95d0c4ae63537cca81bd6d984427d81",
-                "reference": "2aef97bbc95d0c4ae63537cca81bd6d984427d81",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/1a1b1e528935f15dd76169f8b1dc3ef97f0d6210",
+                "reference": "1a1b1e528935f15dd76169f8b1dc3ef97f0d6210",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
                 "php": ">=5.3.3",
                 "psr/log": "~1.0",
-                "symfony/icu": "~1.0",
                 "twig/twig": "~1.12"
             },
             "replace": {
@@ -2197,7 +2147,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-09-28 17:33:53"
+            "time": "2014-10-24 06:55:39"
         },
         {
             "name": "twig/twig",
