@@ -1,14 +1,27 @@
-# CHANGELOG
+# Change Log
 
-## v0.x
+All notable changes to this project will be documented in this file.
 
-- **v0.1.1** (2014-10-25) — [view diff](https://github.com/openl10n/openl10n/compare/v0.1...v0.1.1)
+## Unreleased
 
-  - UI: Add the *Ctrl+Enter* **shortcut** to save & approve translations
+More flexibility. [View diff](https://github.com/openl10n/openl10n/compare/v0.1.1...master).
 
-- **v0.1.0** (2014-09-12) — initial version
+- Add paging on `/translation_commits` endpoint
+- Add `/languages` endpoint to list available languages
+- Allow versioning of the API via the FosRestBundle version listener
+- Add doctrine/migration to migrate from a version to another
 
-  - **RESTful API** for `/projects`, `/resources`, `/translations` and `/me` endpoints
-  - Authentification via **HTTP Basic**
-  - User storage in database only
-  - **Javascript client** as a "Single Page App", built with BackboneJS, MarionetteJS and Browserify
+## 0.1.1 - 2014-09-25
+
+Quick UI patch. [View diff](https://github.com/openl10n/openl10n/compare/v0.1...v0.1.1).
+
+- UI: Add the *Ctrl+Enter* **shortcut** to save & approve translations
+
+## 0.1.0 - 2014-09-12
+
+Initial version.
+
+- **RESTful API** for `/projects`, `/resources`, `/translations` and `/me` endpoints
+- Authentification via **HTTP Basic**
+- User storage in database only
+- **Javascript client** as a "Single Page App", built with BackboneJS, MarionetteJS and Browserify
