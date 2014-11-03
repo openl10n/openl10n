@@ -8,11 +8,7 @@ use Openl10n\Domain\Project\Model\Language;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Openl10n\Bundle\ApiBundle\Facade\Language as LanguageFacade;
-use Openl10n\Domain\Project\Application\Action\CreateLanguageAction;
-use Openl10n\Domain\Project\Application\Action\DeleteLanguageAction;
 use Openl10n\Value\Localization\Locale;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class LanguageController extends BaseController implements ClassResourceInterface
 {

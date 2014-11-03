@@ -4,7 +4,6 @@ namespace Openl10n\Bundle\ApiBundle\Tests\Controller;
 
 use Openl10n\Bundle\ApiBundle\Test\WebTestCase;
 use Openl10n\Value\Localization\Locale;
-use Openl10n\Value\String\Slug;
 use Symfony\Component\HttpFoundation\Response;
 
 class LanguageControllerTest extends WebTestCase

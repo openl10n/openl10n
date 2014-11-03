@@ -2,6 +2,7 @@
 
 namespace Openl10n\Bundle\InfraBundle\Form\Type;
 
+use Openl10n\Domain\Project\Model\Language;
 use Openl10n\Domain\Project\Repository\LanguageRepository;
 use Openl10n\Domain\Resource\Application\Action\ExportTranslationFileAction;
 use Openl10n\Domain\Resource\Service\Dumper\TranslationDumperInterface;
@@ -38,7 +39,7 @@ class ExportTranslationFileType extends AbstractType
                 $project = $data->getResource()->getProject();
                 $languages = $this->languageRepository->findByProject($project);
 
-                $locales = array_map(function($language) {
+                $locales = array_map(function(Language $language) {
                     return (string) $language->getLocale();
                 }, $languages);
 
