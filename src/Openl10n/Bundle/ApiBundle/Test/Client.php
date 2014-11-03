@@ -87,17 +87,19 @@ class Client extends BaseClient
      *
      * @see self::request()
      */
-    public function jsonRequest($verb, $endpoint, array $data = array())
+    public function jsonRequest($verb, $endpoint, array $data = array(), array $server = array())
     {
         $data = empty($data) ? null : json_encode($data);
+        $server = array_merge(array(
+            'CONTENT_TYPE' => 'application/json',
+            'HTTP_ACCEPT'  => 'application/json',
+            'HTTP_ACCEPT_LANGUAGE' => 'en',
+        ), $server);
 
         return $this->request($verb, $endpoint,
             array(),
             array(),
-            array(
-                'HTTP_ACCEPT'  => 'application/json',
-                'CONTENT_TYPE' => 'application/json'
-            ),
+            $server,
             $data
         );
     }

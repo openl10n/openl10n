@@ -14,7 +14,7 @@ class RootController extends BaseController implements ClassResourceInterface
     public function indexAction()
     {
         return [
-            'Hello' => 'world',
+            'motd' => $this->get('translator')->trans('motd'),
         ];
     }
 }

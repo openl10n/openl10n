@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MeControllerTest extends WebTestCase
 {
-    public function testGetUMeIndexUserData()
+    public function testGetMeIndexUserData()
     {
         $client = $this->getClient();
         $client->jsonRequest('GET', '/api/me');
