@@ -21,15 +21,20 @@ class RootControllerTest extends WebTestCase
         );
 
         $this->assertNotNull($data);
-        $this->assertEquals($message, $data->motd);
+        $this->assertStringStartsWith($message, $data->motd);
     }
 
     public function provideRootMessage()
     {
         return [
-            ["en", "Welcome on the OpenLocalization API"],
-            ["fr", "Bienvenue sur l'API d'OpenLocalization"],
-            ["fr-FR", "Bienvenue sur l'API d'OpenLocalization"],
+            // Main language
+            ["en", "Welcome"],
+            ["fr", "Bienvenue"],
+            // Language with region
+            ["fr-FR", "Bienvenue"],
+            // Priorities
+            ["en;q=0.8,fr;q=0.4", "Welcome"],
+            ["en;q=0.4,fr;q=0.8", "Bienvenue"],
         ];
     }
 }
