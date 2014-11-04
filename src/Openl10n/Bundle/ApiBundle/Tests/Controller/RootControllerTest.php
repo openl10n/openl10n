@@ -29,6 +29,7 @@ class RootControllerTest extends WebTestCase
         return [
             ["en", "Welcome on the OpenLocalization API"],
             ["fr", "Bienvenue sur l'API d'OpenLocalization"],
+            ["fr-FR", "Bienvenue sur l'API d'OpenLocalization"],
         ];
     }
 }

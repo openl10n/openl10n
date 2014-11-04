@@ -67,7 +67,7 @@ class LocaleListener implements EventSubscriberInterface
             return $this->defaultLocale;
         }
 
-        return $locale->getValue();
+        return \Locale::canonicalize($locale->getValue());
     }
 
     private function setRequestLocale(Request $request, $locale)
@@ -82,5 +82,4 @@ class LocaleListener implements EventSubscriberInterface
             $this->router->getContext()->setParameter('_locale', $request->getLocale());
         }
     }
-
 }
