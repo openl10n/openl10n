@@ -29,8 +29,7 @@ before_script:
     - ./reset.sh --env=test
 
 script:
-    - bin/phpspec run
-    - bin/phpunit -c app
+    - composer test
 
 after_failure:
     # Dump log
