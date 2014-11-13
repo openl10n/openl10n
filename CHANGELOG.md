@@ -6,11 +6,11 @@ All notable changes to this project will be documented in this file.
 
 More flexibility. [View diff](https://github.com/openl10n/openl10n/compare/v0.1.1...master).
 
-- Add paging on `/translation_commits` endpoint
-- Add `/languages` endpoint to list available languages
-- Allow versioning of the API via the FosRestBundle version listener
-- Set the app locale according to the Accept-Language header
-- Add doctrine/migration to migrate from a version to another
+- Add **paging** on `/translations` and `/translation_commits` endpoints
+- Add `/languages` endpoint to **list available languages**
+- Allow **versioning** of the API via the FosRestBundle version listener
+- Set the app locale according to the **Accept-Language header**
+- Add **doctrine/migration** to migrate from a version to another
 
 ## 0.1.1 - 2014-09-25
 

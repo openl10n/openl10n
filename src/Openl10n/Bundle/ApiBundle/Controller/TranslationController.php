@@ -35,18 +35,29 @@ class TranslationController extends BaseController implements ClassResourceInter
      * )
      *
      * @Rest\QueryParam(name="project", strict=true, nullable=false)
+     * @Rest\QueryParam(name="page", requirements="\d+", default="1", strict=true, nullable=false, description="Page number")
+     * @Rest\QueryParam(name="per_page", requirements="\d+", default="2000", strict=true, nullable=false, description="Item per page")
      * @Rest\View
      */
     public function cgetAction(ParamFetcher $paramFetcher)
     {
+        $page = (int) $paramFetcher->get('page');
+        $perPage = (int) $paramFetcher->get('per_page');
+
         $project = $this->findProjectOr404($paramFetcher->get('project'));
 
         $specification = new TranslationByProjectSpecification($project);
 
         $pager = $this->get('openl10n.repository.translation')->findSatisfying($specification);
-        $pager->setMaxPerPage(10000);
+        $pager->setMaxPerPage($perPage);
 
-        $translations = iterator_to_array($pager->getIterator());
+        try {
+            $pager->setCurrentPage($page);
+
+            $translations = iterator_to_array($pager->getCurrentPageResults());
+        } catch (OutOfRangeCurrentPageException $e) {
+            throw $this->createNotFoundException($e->getMessage(), $e);
+        }
 
         return (new ArrayCollection($translations))->map(function(Key $translation) {
             return new TranslationKeyFacade($translation, true);
