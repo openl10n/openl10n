@@ -14,6 +14,7 @@ use Openl10n\Domain\Translation\Application\Processor\CreateTranslationKeyProces
 use Openl10n\Domain\Translation\Application\Processor\DeleteTranslationKeyProcessor;
 use Openl10n\Domain\Translation\Application\Processor\EditTranslationPhraseProcessor;
 use Openl10n\Domain\Translation\Repository\TranslationRepository;
+use Openl10n\Domain\Translation\Value\Hash;
 use Openl10n\Value\Localization\Locale;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -61,6 +62,15 @@ class ImportTranslationFileProcessor
         $catalogue = $this->translationLoader->loadMessages($file, $locale, 'messages');
         $messages = $catalogue->all('messages');
 
+        // Index messages by hashing their keys.
+        // This solves a problem when keys are too long, eg. when keys are
+        // the phrase in the default language.
+        $messageKeys = array_keys($messages);
+        $messageHash = array_map(function($key) {
+            return (string) new Hash($key);
+        }, $messageKeys);
+        $messagesIndex = array_combine($messageHash, $messageKeys);
+
         //
         // Extract all translations of the specific resource by hydrating the given locale
         //
@@ -71,16 +81,16 @@ class ImportTranslationFileProcessor
         //
         // Iterate over existing translations
         //
-        foreach ($translationPager as $key) {
-            $keyIdentifier = (string) $key->getIdentifier();
+        foreach ($translationPager as $translationKey) {
+            $keyIdentifier = (string) $translationKey->getHash();
 
-            if (!isset($messages[$keyIdentifier])) {
+            if (!isset($messagesIndex[$keyIdentifier])) {
                 // If current translation is not part of the file then clean it
                 // if option was specified.
                 // Note: the erase option should only be done with the project's default locale,
                 // otherwise you may delete all translations which have not been translated yet.
                 if ($action->hasOptionClean()) {
-                    $deleteKeyAction = new DeleteTranslationKeyAction($key);
+                    $deleteKeyAction = new DeleteTranslationKeyAction($translationKey);
                     $this->deleteTranslationKeyProcessor->execute($deleteKeyAction);
                 }
 
@@ -88,22 +98,22 @@ class ImportTranslationFileProcessor
             }
 
             // Get phrase and mark translation as treated
-            $newPhrase = $messages[$keyIdentifier];
-            unset($messages[$keyIdentifier]);
+            $newPhrase = $messages[$messagesIndex[$keyIdentifier]];
+            unset($messages[$messagesIndex[$keyIdentifier]]);
 
             // Compare it to current phrase
-            $phrase = $key->getPhrase($locale);
+            $phrase = $translationKey->getPhrase($locale);
 
             if (null === $phrase || ($newPhrase !== (string) $phrase->getText() && $action->hasOptionErase())) {
                 // If phrase doesn't exist yet or is different, then edit it.
-                $editPhraseAction = new EditTranslationPhraseAction($key, $locale);
+                $editPhraseAction = new EditTranslationPhraseAction($translationKey, $locale);
                 $editPhraseAction->setText($newPhrase);
                 $editPhraseAction->setApproved($action->hasOptionReviewed());
                 $this->editTranslationPhraseProcessor->execute($editPhraseAction);
             } elseif ($action->hasOptionReviewed() && !$phrase->isApproved()) {
                 // If reviewed option is set, then automatically mark translation
                 // phrase as approved, without updating its text.
-                $editPhraseAction = new EditTranslationPhraseAction($key, $locale);
+                $editPhraseAction = new EditTranslationPhraseAction($translationKey, $locale);
                 $editPhraseAction->setApproved(true);
                 $this->editTranslationPhraseProcessor->execute($editPhraseAction);
             }

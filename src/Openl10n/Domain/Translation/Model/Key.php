@@ -4,6 +4,7 @@ namespace Openl10n\Domain\Translation\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Openl10n\Domain\Resource\Model\Resource;
+use Openl10n\Domain\Translation\Value\Hash;
 use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;
 
@@ -44,8 +45,7 @@ class Key
         $this->project = $resource->getProject();
         $this->resource = $resource;
         $this->identifier = $identifier;
-
-        $this->computeHash();
+        $this->hash = new Hash($this->identifier);
 
         $this->phrases = new ArrayCollection();
     }
@@ -89,6 +89,16 @@ class Key
     public function getIdentifier()
     {
         return $this->identifier;
+    }
+
+    /**
+     * The translation hash identifier.
+     *
+     * @return Hash
+     */
+    public function getHash()
+    {
+        return $this->hash;
     }
 
     /**
@@ -147,10 +157,5 @@ class Key
         $this->phrases->add($phrase);
 
         return $this;
-    }
-
-    private function computeHash()
-    {
-        $this->hash = sha1((string) $this->identifier);
     }
 }

@@ -3,6 +3,7 @@
 namespace Openl10n\Bundle\ApiBundle\Tests\Controller;
 
 use Openl10n\Bundle\ApiBundle\Test\WebTestCase;
+use Openl10n\Domain\Translation\Value\Hash;
 use Openl10n\Value\Localization\Locale;
 use Openl10n\Value\String\Slug;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -118,7 +119,7 @@ class ResourceControllerTest extends WebTestCase
     public function testImportResource()
     {
         // Retrieve id of the "empty" resource in foobar project
-        $emptyResource = $this->getEmptyResourceInFoobarProject();
+        $emptyResource = $this->getResource('foobar', 'empty.en.json');
         $resourceId = $emptyResource->getId();
 
         // Create dummy json file
@@ -165,10 +166,104 @@ class ResourceControllerTest extends WebTestCase
         $this->assertEquals('value3', $translationKeys[2]->getPhrase(Locale::parse('en'))->getText());
     }
 
+    public function testImportResourceWithExistingKeys()
+    {
+        // Retrieve id of the "empty" resource in foobar project
+        $emptyResource = $this->getResource('foobar', 'app/Resources/translations/messages.en.yml');
+        $resourceId = $emptyResource->getId();
+
+        // Create dummy json file
+        $tempname = sys_get_temp_dir().'/'.mt_rand(0, 9999).'_dummy.en.json';
+        $content = json_encode([
+            'example.key1' => 'new value1',
+            'example.key2' => 'new value1',
+        ]);
+        file_put_contents($tempname, $content);
+        $uploadedFile = new UploadedFile(
+            $tempname,
+            'dummy.en.json',
+            'application/json',
+            strlen($content)
+        );
+
+        $client = $this->getClient();
+
+        // Upload resource file
+        $client->request(
+            'POST',
+            '/api/resources/'.$resourceId.'/import',
+            ['locale' => 'en'],
+            ['file' => $uploadedFile]
+        );
+
+        $response = $client->getResponse();
+        $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
+
+        // Here I'm force to clear the EntityManager to be sure the `Key::getPhrase()`
+        $this->get('doctrine.orm.entity_manager')->clear();
+
+        // Assert content has been inserted in database
+        $translationKeys = $this->get('openl10n.repository.translation')->findByResource($emptyResource);
+        $this->assertGreaterThanOrEqual(2, $translationKeys);
+
+        $this->assertEquals('example.key1', $translationKeys[0]->getIdentifier());
+        $this->assertEquals('example.key2', $translationKeys[1]->getIdentifier());
+
+        $this->assertNotEquals('value1', $translationKeys[0]->getPhrase(Locale::parse('en'))->getText());
+        $this->assertNotEquals('value2', $translationKeys[1]->getPhrase(Locale::parse('en'))->getText());
+    }
+
+    public function testImportResourceWithVeryLongKey()
+    {
+        // Retrieve id of the "empty" resource in foobar project
+        $emptyResource = $this->getResource('foobar', 'empty.en.json');
+        $resourceId = $emptyResource->getId();
+
+        $veryLongKey = str_repeat('Very Long Key.', 500);
+        $veryLongValue = str_repeat('Very Long Value.', 500);
+
+        // Create dummy json file
+        $tempname = sys_get_temp_dir().'/'.mt_rand(0, 9999).'_dummy.en.json';
+        $content = json_encode([$veryLongKey => $veryLongValue]);
+        file_put_contents($tempname, $content);
+        $uploadedFile = new UploadedFile(
+            $tempname,
+            'dummy.en.json',
+            'application/json',
+            strlen($content)
+        );
+
+        $client = $this->getClient();
+
+        // Upload resource file
+        $client->request(
+            'POST',
+            '/api/resources/'.$resourceId.'/import',
+            ['locale' => 'en'],
+            ['file' => $uploadedFile]
+        );
+
+        $response = $client->getResponse();
+        $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
+
+        // Here I'm force to clear the EntityManager to be sure the `Key::getPhrase()`
+        $this->get('doctrine.orm.entity_manager')->clear();
+
+        // Assert content has been inserted in database
+        $translationKeys = $this->get('openl10n.repository.translation')->findByResource($emptyResource);
+        $this->assertCount(1, $translationKeys);
+
+        $this->assertNotEquals($veryLongKey, $translationKeys[0]->getIdentifier(), 'The key is truncated in database');
+
+        $expectedHash = (string) new Hash($veryLongKey);
+        $this->assertEquals($expectedHash, $translationKeys[0]->getHash());
+        $this->assertEquals($veryLongValue, $translationKeys[0]->getPhrase(Locale::parse('en'))->getText());
+    }
+
     public function testImportMalFormattedJsonResource()
     {
         // Retrieve id of the "empty" resource in foobar project
-        $emptyResource = $this->getEmptyResourceInFoobarProject();
+        $emptyResource = $this->getResource('foobar', 'empty.en.json');
         $resourceId = $emptyResource->getId();
 
         // Create a malformatted json file
@@ -228,16 +323,17 @@ class ResourceControllerTest extends WebTestCase
         ];
     }
 
-    private function getEmptyResourceInFoobarProject()
+    private function getResource($projectSlug, $resourcePathname)
     {
-        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug('foobar'));
+        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug($projectSlug));
         $resources = $this->get('openl10n.repository.resource')->findByProject($project);
-        $emptyResource = array_filter($resources, function($resource) {
-            return 'empty.en.json' === (string) $resource->getPathname();
+        $resource = array_filter($resources, function($resource) use ($resourcePathname) {
+            return $resourcePathname === (string) $resource->getPathname();
         });
-        $emptyResource = end($emptyResource);
 
-        return $emptyResource;
+        $resource = end($resource);
+
+        return $resource;
     }
 
     /**
