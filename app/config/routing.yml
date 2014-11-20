@@ -9,6 +9,13 @@ openl10n_api:
     prefix:   /api
 
 # App (must be last route, ie. match all other patterns)
+openl10n_app:
+    pattern: /app
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: ::app.html.twig
+
+# App (must be last route, ie. match all other patterns)
 openl10n_index:
     pattern:  /{path}
     requirements:

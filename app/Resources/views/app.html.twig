@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OpenLocalization</title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico', 'app') }}" />
+
+  <link rel="stylesheet" href="{{ asset('app.css', 'app') }}" />
+</head>
+<body ng-app="app">
+  <script>
+    var config = {
+      SERVER_BASE_URL: "{{ url('openl10n_api_root') }}",
+    };
+  </script>
+  <script src="{{ asset('app.js', 'app') }}"></script>
+</body>
+</html>

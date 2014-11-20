@@ -1,4 +1,9 @@
 parameters:
+    # General
+    locale: en
+    secret: this_token_is_not_so_secret_change_it
+
+    # Database
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
@@ -6,5 +11,7 @@ parameters:
     database_user:     root
     database_password: ~
 
-    locale: en
-    secret: this_token_is_not_so_secret_change_it
+    # Web-app
+    app_base_url: cdn.openl10n.io/app
+    app_version_format: %%2$s/%%1$s
+    app_version: v0.1
