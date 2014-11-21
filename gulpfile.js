@@ -109,6 +109,7 @@ gulp.task('styles', function (cb) {
       style: isDebug ? 'compressed' : 'nested',
       sourcemap: isDebug,
       loadPath: [
+        __dirname + '/node_modules/bootstrap-sass/assets/stylesheets/',
         __dirname + '/node_modules/bootstrap-sass/assets/stylesheets/bootstrap/',
         __dirname + '/node_modules/font-awesome/scss/'
       ]
@@ -134,6 +135,7 @@ gulp.task('vendor', function (cb) {
         .pipe(sass({
           style: isDebug ? 'compressed' : 'nested',
           loadPath: [
+            __dirname + '/node_modules/bootstrap-sass/assets/stylesheets/',
             __dirname + '/node_modules/bootstrap-sass/assets/stylesheets/bootstrap/',
             __dirname + '/node_modules/font-awesome/scss/'
           ]
