@@ -11,6 +11,7 @@ More flexibility. [View diff](https://github.com/openl10n/openl10n/compare/v0.1.
 - Allow **versioning** of the API via the FosRestBundle version listener
 - Set the app locale according to the **Accept-Language header**
 - Add **doctrine/migration** to migrate from a version to another
+- The [new web-app](https://github.com/openl10n/openl10n-app) is available on the `/app` page
 
 ## 0.1.1 - 2014-09-25
 
