@@ -14,7 +14,7 @@ See the [official website](http://openl10n.io/) to learn more about OpenLocaliza
 
 ## Installation
 
-See detailled instructions on the [official documentation](http://docs.openl10n.io/page/getting-started/installation.html).
+See detailed instructions on the [official documentation](http://docs.openl10n.io/page/getting-started/installation.html).
 
 **TL;DR**: you will need [Composer](https://getcomposer.org/doc/00-intro.md#installation-nix)
 to install PHP dependencies, and [NPM](https://www.npmjs.org/) + [Sass](http://sass-lang.com/install)

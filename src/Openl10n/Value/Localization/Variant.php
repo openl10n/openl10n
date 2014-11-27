@@ -20,7 +20,7 @@ final class Variant
     public function __construct($value)
     {
         if (empty($value)) {
-            throw new \InvalidArgumentException('variant string can not be empty');
+            throw new \InvalidArgumentException('Variant string can not be empty');
         }
 
         $this->value = $value;

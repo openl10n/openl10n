@@ -206,7 +206,7 @@ class ResourceController extends BaseController implements ClassResourceInterfac
      *     parameters={
      *         { "name"="locale", "dataType"="string", "required"="true" },
      *         { "name"="file", "dataType"="file", "required"="true" },
-     *         { "name"="options", "dataType"="choice", "required"="false", "format"="{'reviewed':'Mark translations as reviewed', 'erase':'Ecrase same values', 'clean':'Clean unused values'}" }
+     *         { "name"="options", "dataType"="choice", "required"="false", "format"="{'reviewed':'Mark translations as reviewed', 'erase':'Erase same values', 'clean':'Clean unused values'}" }
      *     }
      * )
      * @Rest\Post
@@ -250,7 +250,7 @@ class ResourceController extends BaseController implements ClassResourceInterfac
      *     parameters={
      *         { "name"="locale", "dataType"="string", "required"="true" },
      *         { "name"="file", "dataType"="file", "required"="true" },
-     *         { "name"="options", "dataType"="choice", "required"="false", "format"="{'reviewed':'Mark translations as reviewed', 'erase':'Ecrase same values', 'clean':'Clean unused values'}" }
+     *         { "name"="options", "dataType"="choice", "required"="false", "format"="{'reviewed':'Mark translations as reviewed', 'erase':'Erase same values', 'clean':'Clean unused values'}" }
      *     }
      * )
      * @Rest\View
@@ -277,7 +277,7 @@ class ResourceController extends BaseController implements ClassResourceInterfac
      *     filters={
      *         { "name"="locale", "dataType"="choice", "required"="true" },
      *         { "name"="format", "dataType"="choice", "required"="true", "format"="{'csv', 'ini', 'json', 'mo', 'php', 'po', 'ts', 'xlf', 'yml'}" },
-     *         { "name"="options", "dataType"="choice", "required"="false", "format"="{'reviewed':'Mark translations as reviewed', 'erase':'Ecrase same values', 'clean':'Clean unused values'}" }
+     *         { "name"="options", "dataType"="choice", "required"="false", "format"="{'reviewed':'Mark translations as reviewed', 'erase':'Erase same values', 'clean':'Clean unused values'}" }
      *     }
      * )
      * @Rest\Get

@@ -168,7 +168,7 @@ class ProjectController extends BaseController implements ClassResourceInterface
         $this->get('openl10n.processor.delete_project')->execute($action);
     }
 
-     /**
+    /**
      * Retrieve all the project languages.
      *
      * @ApiDoc(

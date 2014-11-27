@@ -38,13 +38,13 @@ class RegisterUserProcessor
         $password = $action->getPassword();
         $email = new Email($action->getEmail());
         $displayName = new Name($action->getDisplayName());
-        $preferedLocale = Locale::parse($action->getPreferedLocale());
+        $preferredLocale = Locale::parse($action->getPreferredLocale());
 
         $user = $this->userRepository->createNew($username);
         $user
             ->setName($displayName)
             ->setEmail($email)
-            ->setPreferedLocale($preferedLocale);
+            ->setPreferredLocale($preferredLocale);
 
         $encoder = $this->encoderFactory->getEncoder($user);
         $salt = md5(uniqid(null, true));

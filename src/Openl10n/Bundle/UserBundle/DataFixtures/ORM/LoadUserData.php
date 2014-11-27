@@ -35,7 +35,7 @@ class LoadUserData extends AbstractFixtureLoader
         return (new User(new Username($username)))
             ->setName(new Name($data['name']))
             ->setEmail(new Email($data['email']))
-            ->setPreferedLocale(Locale::parse($data['locale']))
+            ->setPreferredLocale(Locale::parse($data['locale']))
         ;
     }
 }

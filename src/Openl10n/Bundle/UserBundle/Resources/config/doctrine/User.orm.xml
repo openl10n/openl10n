@@ -17,7 +17,7 @@
         <field name="username" column="username" type="string" length="255" />
         <field name="name" column="display_name" type="string" length="255" />
         <field name="email" column="email" type="string" length="255" />
-        <field name="preferedLocale" column="prefered_locale" type="string" length="64" />
+        <field name="preferredLocale" column="preferred_locale" type="string" length="64" />
 
         <one-to-one field="credentials" target-entity="Credentials" mapped-by="user">
             <cascade>

@@ -9,7 +9,7 @@ class EditProfileAction
     protected $user;
 
     protected $displayName;
-    protected $preferedLocale;
+    protected $preferredLocale;
     protected $email;
 
     public function __construct(User $user)
@@ -17,7 +17,7 @@ class EditProfileAction
         $this->user = $user;
 
         $this->displayName = $user->getName();
-        $this->preferedLocale = $user->getPreferedLocale();
+        $this->preferredLocale = $user->getPreferredLocale();
         $this->email = $user->getEmail();
     }
 
@@ -45,14 +45,14 @@ class EditProfileAction
         return $this;
     }
 
-    public function getPreferedLocale()
+    public function getPreferredLocale()
     {
-        return $this->preferedLocale;
+        return $this->preferredLocale;
     }
 
-    public function setPreferedLocale($preferedLocale)
+    public function setPreferredLocale($preferredLocale)
     {
-        $this->preferedLocale = $preferedLocale;
+        $this->preferredLocale = $preferredLocale;
 
         return $this;
     }

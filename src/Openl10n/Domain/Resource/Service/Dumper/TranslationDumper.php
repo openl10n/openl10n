@@ -47,7 +47,7 @@ class TranslationDumper implements TranslationDumperInterface
     {
         if (!isset($this->dumpers[$format])) {
             throw new \InvalidArgumentException(sprintf(
-                'Unable to export message catallogue: '.
+                'Unable to export message catalogue: '.
                 'there is no dumper associated with format "%s".',
                 $format
             ));

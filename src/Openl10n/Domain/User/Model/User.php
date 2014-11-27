@@ -17,14 +17,14 @@ class User
     protected $username;
     protected $email;
     protected $name;
-    protected $preferedLocale;
+    protected $preferredLocale;
     protected $credentials;
 
     public function __construct(Username $username)
     {
         $this->username = $username;
         $this->name = new Name($username);
-        $this->preferedLocale = Locale::parse('en');
+        $this->preferredLocale = Locale::parse('en');
     }
 
     public function getUsername()
@@ -56,14 +56,14 @@ class User
         return $this;
     }
 
-    public function getPreferedLocale()
+    public function getPreferredLocale()
     {
-        return $this->preferedLocale;
+        return $this->preferredLocale;
     }
 
-    public function setPreferedLocale(Locale $preferedLocale)
+    public function setPreferredLocale(Locale $preferredLocale)
     {
-        $this->preferedLocale = $preferedLocale;
+        $this->preferredLocale = $preferredLocale;
 
         return $this;
     }

@@ -50,7 +50,7 @@ class ImportTranslationFileType extends AbstractType
             ->add('options', 'choice', array(
                 'choices' => array(
                     ImportTranslationFileAction::OPTION_REVIEWED => 'Mark translations as reviewed',
-                    ImportTranslationFileAction::OPTION_ERASE => 'Ecrase same values',
+                    ImportTranslationFileAction::OPTION_ERASE => 'Erase same values',
                     ImportTranslationFileAction::OPTION_CLEAN => 'Clean unused values',
                 ),
                 'multiple' => true,

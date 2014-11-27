@@ -25,7 +25,7 @@ settings:
         gravatar: You can change your avatar at
         form:
             name: Display name
-            locale: Prefered language
+            locale: Preferred language
             email: Email
     password:
         title: Change my password

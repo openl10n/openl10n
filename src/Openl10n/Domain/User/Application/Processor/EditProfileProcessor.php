@@ -27,7 +27,7 @@ class EditProfileProcessor
         $user
             ->setName(new Name($action->getDisplayName()))
             ->setEmail(new Email($action->getEmail()))
-            ->setPreferedLocale(Locale::parse($action->getPreferedLocale()))
+            ->setPreferredLocale(Locale::parse($action->getPreferredLocale()))
         ;
 
         $this->userRepository->save($user);

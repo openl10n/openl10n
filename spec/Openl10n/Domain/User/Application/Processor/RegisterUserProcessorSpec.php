@@ -55,7 +55,7 @@ class RegisterUserProcessorSpec extends ObjectBehavior
         $action->getDisplayName()->willReturn('Matthieu Moquet');
         $action->getEmail()->willReturn('mattketmo@example.org');
         $action->getPassword()->willReturn('super_passw0rd');
-        $action->getPreferedLocale()->willReturn('fr_FR');
+        $action->getPreferredLocale()->willReturn('fr_FR');
 
         $encoderFactory
             ->getEncoder($user)
@@ -83,7 +83,7 @@ class RegisterUserProcessorSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($user);
         $user
-            ->setPreferedLocale(Argument::exact(Locale::parse('fr_FR')))
+            ->setPreferredLocale(Argument::exact(Locale::parse('fr_FR')))
             ->shouldBeCalled()
             ->willReturn($user);
 

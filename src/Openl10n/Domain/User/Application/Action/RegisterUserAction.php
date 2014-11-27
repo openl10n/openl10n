@@ -8,7 +8,7 @@ class RegisterUserAction
     public $displayName;
     public $email;
     public $password;
-    public $preferedLocale = 'en';
+    public $preferredLocale = 'en';
 
     public function getUsername()
     {
@@ -58,14 +58,14 @@ class RegisterUserAction
         return $this;
     }
 
-    public function getPreferedLocale()
+    public function getPreferredLocale()
     {
-        return $this->preferedLocale;
+        return $this->preferredLocale;
     }
 
-    public function setPreferedLocale($preferedLocale)
+    public function setPreferredLocale($preferredLocale)
     {
-        $this->preferedLocale = $preferedLocale;
+        $this->preferredLocale = $preferredLocale;
 
         return $this;
     }

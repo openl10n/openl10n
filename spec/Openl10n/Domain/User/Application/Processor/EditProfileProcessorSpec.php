@@ -33,7 +33,7 @@ class EditProfileProcessorSpec extends ObjectBehavior
     {
         $action->getUser()->willReturn($user);
         $action->getDisplayName()->willReturn('John Doe');
-        $action->getPreferedLocale()->willReturn('fr_FR');
+        $action->getPreferredLocale()->willReturn('fr_FR');
         $action->getEmail()->willReturn('john.doe@example.org');
 
         $user
@@ -45,7 +45,7 @@ class EditProfileProcessorSpec extends ObjectBehavior
             ->willReturn($user)
             ->shouldBeCalled();
         $user
-            ->setPreferedLocale(Argument::exact(Locale::parse('fr_Fr')))
+            ->setPreferredLocale(Argument::exact(Locale::parse('fr_Fr')))
             ->willReturn($user)
             ->shouldBeCalled();
 

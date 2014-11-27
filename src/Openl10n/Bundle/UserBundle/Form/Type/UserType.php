@@ -17,7 +17,7 @@ class UserType extends AbstractType
             ->add('displayName', 'text', array(
                 'label' => 'settings.general.form.name'
             ))
-            ->add('preferedLocale', 'openl10n_locale_choice', array(
+            ->add('preferredLocale', 'openl10n_locale_choice', array(
                 'label' => 'settings.general.form.locale'
             ))
             ->add('email', 'email', array(
