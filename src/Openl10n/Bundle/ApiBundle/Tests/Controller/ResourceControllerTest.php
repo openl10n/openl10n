@@ -370,7 +370,7 @@ EOF;
                 return <<<EOF
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="en-US" target-language="en" datatype="plaintext" original="file.ext">
     <body>
       <trans-unit id="03fdeaf5007f7e942ebcf2d1a5803b84" resname="example.key1">
         <source>example.key1</source>
