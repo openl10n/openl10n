@@ -27,4 +27,7 @@ set :keep_releases, 5
 before 'deploy:starting', 'composer:install_executable'
 
 ## Hooks after
+after 'deploy:updated', 'assets:install'
+after 'deploy:updated', 'assets:build'
+after 'deploy:published', 'deploy:migrate'
 after 'deploy:finishing', 'deploy:cleanup'

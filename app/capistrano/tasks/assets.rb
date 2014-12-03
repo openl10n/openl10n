@@ -16,6 +16,4 @@ namespace :assets do
     end
   end
 
-  after 'deploy:updated', 'assets:install'
-  after 'deploy:updated', 'assets:build'
 end
