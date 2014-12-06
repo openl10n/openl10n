@@ -27,14 +27,6 @@ for the front-end part.
     npm install
     ./node_modules/.bin/gulp build --prod
 
-## Deployment
-
-[Capistrano](http://capistranorb.com/) is the recommended way to deploy the project.
-
-Copy the `deploy.rb.dist` file and add your environment configuration.
-
-    cp app/capistrano/stages/deploy.rb.dist app/capistrano/stages/deploy.rb
-
 ## License
 
 OpenLocalization is released under the MIT License. See the [bundled LICENSE file](LICENSE)

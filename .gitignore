@@ -1,17 +1,13 @@
 /app/cache/*
 /app/bootstrap.php.cache
 /app/config/parameters.yml
-/app/capistrano/stages/*
-!/app/capistrano/stages/deploy.rb.dist
 /app/logs/*
+/bin/*
 
 /.sass-cache/
 /node_modules/
 /web/assets/dist/
 /web/bundles/
 
-/bin/
-/build/
 /vendor/
-/behat.yml
 /composer.phar

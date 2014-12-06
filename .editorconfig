@@ -25,12 +25,3 @@ indent_size = 2
 
 [*.html.twig]
 indent_size = 2
-
-[*.tpl]
-indent_size = 2
-
-[*.feature]
-indent_size = 4
-
-[*.rb]
-indent_size = 2
