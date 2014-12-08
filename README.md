@@ -40,7 +40,7 @@ Initialize the database:
 ```bash
 php app/console doctrine:database:create --env=prod --no-debug
 php app/console doctrine:schema:create --env=prod --no-debug
-``
+```
 
 Add a new user:
 
