@@ -6,26 +6,53 @@
 [![Packagist](http://img.shields.io/packagist/v/openl10n/openl10n.svg?style=flat)](https://packagist.org/packages/openl10n/openl10n)
 [![Dependency Status](https://www.versioneye.com/user/projects/543ce4ff64e43a059e000082/badge.svg?style=flat)](https://www.versioneye.com/user/projects/543ce4ff64e43a059e000082)
 
-OpenLocalization is a **localization management web-app** to help you translate
-any of your projects. Its main goal is to provide an UX friendly tool to easily
-edit and deploy your application translations.
+OpenLocalization is a **localization management web-app** to help you translate any of your projects.
+Its goal is to provide a simple and flexible tool to easily edit and deploy your application translations.
 
 See the [official website](http://openl10n.io/) to learn more about OpenLocalization.
+The following sections are a summary of the installation steps to make it works quickly.
+You're encouraged to read the [full documentation](http://docs.openl10n.io/) for more details.
+
+## Requirements
+
+- PHP 5.4 (or higher)
+- MySQL/PostgreSQL server
+- [Composer](https://getcomposer.org/doc/00-intro.md#installation-nix)
+- [Node](http://nodejs.org/) + [NPM](https://www.npmjs.org) + [Sass](http://sass-lang.com/install)
 
 ## Installation
 
-See detailed instructions on the [official documentation](http://docs.openl10n.io/page/getting-started/installation.html).
+Install PHP dependencies:
 
-**TL;DR**: you will need [Composer](https://getcomposer.org/doc/00-intro.md#installation-nix)
-to install PHP dependencies, and [NPM](https://www.npmjs.org/) + [Sass](http://sass-lang.com/install)
-for the front-end part.
+```bash
+composer install
+```
 
-    # PHP dependencies
-    composer install
+Build the front-end assets:
 
-    # Javascript dependencies
-    npm install
-    ./node_modules/.bin/gulp build --prod
+```bash
+npm install
+./node_modules/.bin/gulp build --prod
+```
+
+Initialize the database:
+
+```bash
+php app/console doctrine:database:create --env=prod --no-debug
+php app/console doctrine:schema:create --env=prod --no-debug
+``
+
+Add a new user:
+
+```bash
+php app/console openl10n:user:new --env=prod --no-debug
+```
+
+Run the application on [http://127.0.0.1:8000](http://127.0.0.1:8000/)
+
+```bash
+php app/console server:run
+```
 
 ## License
 
