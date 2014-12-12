@@ -10,7 +10,3 @@ parameters:
     database_name:     openl10n
     database_user:     root
     database_password: ~
-
-    # Web-app
-    app_base_url: cdn.openl10n.io/app
-    app_version_format: %%2$s/%%1$s

@@ -17,12 +17,12 @@ framework:
         packages:
             app:
                 version: dev-master
-                version_format: %app_version_format%
+                version_format: %%2$s/%%1$s
                 base_urls:
                     http:
-                        - http://%app_base_url%
+                        - http://cdn.openl10n.io/app/releases
                     ssl:
-                        - https://%app_base_url%
+                        - https://cdn.openl10n.io/app/releases
     default_locale:  "%locale%"
     trusted_proxies: ~
     session: false
