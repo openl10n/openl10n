@@ -15,7 +15,7 @@ More flexibility. [View diff](https://github.com/openl10n/openl10n/compare/v0.1.
 
 ## 0.1.1 - 2014-09-25
 
-Quick UI patch. [View diff](https://github.com/openl10n/openl10n/compare/v0.1...v0.1.1).
+Quick UI patch. [View diff](https://github.com/openl10n/openl10n/compare/v0.1.0...v0.1.1).
 
 - UI: Add the *Ctrl+Enter* **shortcut** to save & approve translations
 
