@@ -7,7 +7,7 @@
             repository-class="Openl10n\Bundle\UserBundle\Repository\UserRepository">
 
         <unique-constraints>
-            <unique-constraint name="slug" columns="username" />
+            <unique-constraint name="user_slug" columns="username" />
         </unique-constraints>
 
         <id name="id" type="integer" column="id">
