@@ -8,7 +8,7 @@
         repository-class="Openl10n\Bundle\InfraBundle\Repository\TranslationRepository"
         >
         <unique-constraints>
-            <unique-constraint name="idx_hash" columns="resource_id,hash" />
+            <unique-constraint name="idx_hashkey" columns="resource_id,hash" />
         </unique-constraints>
 
         <id name="id" type="integer" column="id">
