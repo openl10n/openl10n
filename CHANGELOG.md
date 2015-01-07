@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+[View diff](https://github.com/openl10n/openl10n/compare/v0.2.0...master).
+
+- Fix database init on PostgreSQL (see [#91](https://github.com/openl10n/openl10n/pull/91))
+
 ## 0.2.0 - 2014-12-12
 
 More flexibility. [View diff](https://github.com/openl10n/openl10n/compare/v0.1.1...v0.2.0).
