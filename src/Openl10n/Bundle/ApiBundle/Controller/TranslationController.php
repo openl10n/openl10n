@@ -17,6 +17,7 @@ use Openl10n\Domain\Translation\Application\Action\DeleteTranslationPhraseAction
 use Openl10n\Domain\Translation\Application\Action\EditTranslationPhraseAction;
 use Openl10n\Domain\Translation\Model\Key;
 use Openl10n\Value\Localization\Locale;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
