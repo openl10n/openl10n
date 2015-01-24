@@ -36,6 +36,11 @@ class Key
     protected $hash;
 
     /**
+     * @var string
+     */
+    protected $description;
+
+    /**
      * @var ArrayCollection
      */
     protected $phrases;
@@ -99,6 +104,22 @@ class Key
     public function getHash()
     {
         return $this->hash;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 
     /**
