@@ -19,6 +19,7 @@
 
         <field name="locale" column="locale" type="string" length="255" />
         <field name="text" column="text" type="text" />
+        <field name="wordCount" column="word_count" type="integer" />
         <field name="isApproved" column="is_approved" type="boolean" />
         <field name="createdAt" column="created_at" type="datetime" />
         <field name="updatedAt" column="updated_at" type="datetime" />

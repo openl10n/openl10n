@@ -27,6 +27,11 @@ class Phrase
     protected $text;
 
     /**
+     * @var int
+     */
+    protected $wordCount;
+
+    /**
      * @var boolean
      */
     protected $isApproved;
@@ -52,7 +57,8 @@ class Phrase
     {
         $this->key = $key;
         $this->locale = $locale;
-        $this->text = $text;
+
+        $this->setText($text);
 
         // Default attributes
         $this->isApproved = false;
@@ -130,6 +136,7 @@ class Phrase
     public function setText($text)
     {
         $this->text = $text;
+        $this->wordCount = $this->countWords($text);
 
         return $this;
     }
@@ -156,5 +163,19 @@ class Phrase
         $this->isApproved = $isApproved;
 
         return $this;
+    }
+
+    /**
+     * Count the words in the given string.
+     *
+     * @param string $text
+     *
+     * @return int
+     */
+    private function countWords($text)
+    {
+        $words = preg_split('/\s+/', $text);
+
+        return count($words);
     }
 }
