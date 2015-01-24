@@ -29,7 +29,6 @@
 
         <field name="identifier" column="identifier" type="string" length="255" />
         <field name="hash" column="hash" type="string" length="40" />
-        <field name="description" column="description" type="text" nullable="true" />
 
         <one-to-many field="phrases" target-entity="Phrase" mapped-by="key">
             <cascade>
