@@ -23,6 +23,10 @@ translation_keys:
         - example.key1
         - example.key2
 
+translation_meta:
+    foobar-messages-example.key1:
+        description: This is a description of the translation 'example.key1'
+
 translation_phrases:
     foobar-messages-example.key1:
         en:

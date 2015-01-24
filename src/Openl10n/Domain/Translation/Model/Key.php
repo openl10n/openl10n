@@ -36,6 +36,11 @@ class Key
     protected $hash;
 
     /**
+     * @var Meta
+     */
+    protected $meta;
+
+    /**
      * @var ArrayCollection
      */
     protected $phrases;
@@ -46,6 +51,7 @@ class Key
         $this->resource = $resource;
         $this->identifier = $identifier;
         $this->hash = new Hash($this->identifier);
+        $this->meta = null;
 
         $this->phrases = new ArrayCollection();
     }
@@ -157,5 +163,29 @@ class Key
         $this->phrases->add($phrase);
 
         return $this;
+    }
+
+    /**
+     * Get the meta of the translation.
+     *
+     * @return Meta
+     */
+    public function getMeta()
+    {
+        if (null === $this->meta) {
+            $this->createNewMeta();
+        }
+
+        return $meta;
+    }
+
+    /**
+     * Create a new meta object.
+     *
+     * @return Meta
+     */
+    protected function createNewMeta()
+    {
+        return new Meta();
     }
 }

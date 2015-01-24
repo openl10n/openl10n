@@ -18,6 +18,12 @@ translation:
     resource: Openl10n\Bundle\ApiBundle\Controller\TranslationController
     name_prefix: openl10n_api_
 
+translation_meta:
+    type: rest
+    parent: translation
+    resource: Openl10n\Bundle\ApiBundle\Controller\TranslationMetaController
+    name_prefix: openl10n_api_
+
 translation_commit:
     type: rest
     resource: Openl10n\Bundle\ApiBundle\Controller\TranslationCommitController
