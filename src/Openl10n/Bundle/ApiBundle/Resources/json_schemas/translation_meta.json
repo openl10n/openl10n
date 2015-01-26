@@ -1,0 +1,12 @@
+{
+    "name": "Translation Meta",
+    "type": "object",
+    "properties": {
+        "description": {
+            "type": "string",
+            "description": "Translation description",
+            "required": true
+        }
+    },
+    "additionalProperties": false
+}

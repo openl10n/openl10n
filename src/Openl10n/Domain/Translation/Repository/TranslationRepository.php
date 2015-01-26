@@ -3,9 +3,10 @@
 namespace Openl10n\Domain\Translation\Repository;
 
 use Openl10n\Domain\Project\Model\Project;
-use Openl10n\Domain\Translation\Model\Key;
-use Openl10n\Domain\Translation\Model\Phrase;
 use Openl10n\Domain\Resource\Model\Resource;
+use Openl10n\Domain\Translation\Model\Key;
+use Openl10n\Domain\Translation\Model\Meta;
+use Openl10n\Domain\Translation\Model\Phrase;
 use Openl10n\Domain\Translation\Specification\TranslationSpecification;
 use Openl10n\Domain\Translation\Value\StringIdentifier;
 use Openl10n\Value\Localization\Locale;
@@ -43,4 +44,6 @@ interface TranslationRepository
     public function savePhrase(Phrase $phrase);
 
     public function removePhrase(Phrase $phrase);
+
+    public function saveMeta(Meta $meta);
 }

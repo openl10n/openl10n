@@ -14,13 +14,11 @@ class TranslationMetaControllerTest extends WebTestCase
 
         $data = $this->assertJsonResponse(
             $client->getResponse(),
-            Response::HTTP_OK
+            Response::HTTP_OK,
+            'translation_meta'
         );
 
-        $this->assertCount(2, (array) $data);
-        $this->assertObjectHasAttribute('id', $data[0]);
-        $this->assertObjectHasAttribute('identifier', $data[0]);
-        $this->assertObjectHasAttribute('resource_id', $data[0]);
+        $this->assertEquals('This is the description of example.key1', $data->description);
     }
 
     public function testUpdateTranslationMeta()
@@ -34,5 +32,11 @@ class TranslationMetaControllerTest extends WebTestCase
             $client->getResponse(),
             Response::HTTP_NO_CONTENT
         );
+
+        // Ensure meta has been updated
+        $translation = $this->get('openl10n.repository.translation')->findOneById(1);
+        $meta = $translation->getMeta();
+
+        $this->assertEquals('This is an update test', (string) $meta->getDescription());
     }
 }

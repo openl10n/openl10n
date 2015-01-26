@@ -8,6 +8,6 @@ class Key extends BaseKey
 {
     protected function createNewMeta()
     {
-        return new Meta();
+        return new Meta($this);
     }
 }

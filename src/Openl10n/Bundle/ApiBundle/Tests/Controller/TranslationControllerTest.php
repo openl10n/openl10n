@@ -162,9 +162,8 @@ class TranslationControllerTest extends WebTestCase
         // method refresh its relations.
         $this->get('doctrine.orm.entity_manager')->clear();
 
-        // Ensure project has been created
-        $project = $this->get('openl10n.repository.project')->findOneBySlug(new Slug('foobar'));
-        $translation = $this->get('openl10n.repository.translation')->findOneById($project, 1);
+        // Ensure translation has been updated
+        $translation = $this->get('openl10n.repository.translation')->findOneById(1);
         $phrase = $translation->getPhrase(Locale::parse('en'));
 
         $this->assertNotNull($phrase, '"en" phrase for translation 1 should be defined');

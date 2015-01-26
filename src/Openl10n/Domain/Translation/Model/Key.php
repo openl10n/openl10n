@@ -173,10 +173,10 @@ class Key
     public function getMeta()
     {
         if (null === $this->meta) {
-            $this->createNewMeta();
+            $this->meta = $this->createNewMeta();
         }
 
-        return $meta;
+        return $this->meta;
     }
 
     /**

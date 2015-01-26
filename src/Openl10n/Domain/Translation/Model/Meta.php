@@ -28,7 +28,7 @@ class Meta
     public function __construct(Key $key)
     {
         $this->key = $key;
-        $this->description = null;
+        $this->description = '';
     }
 
     /**

@@ -9,6 +9,7 @@
         <parameter key="openl10n.form.type.language.class">Openl10n\Bundle\InfraBundle\Form\Type\LanguageType</parameter>
         <parameter key="openl10n.form.type.locale_choice.class">Openl10n\Bundle\InfraBundle\Form\Type\LocaleChoiceType</parameter>
         <parameter key="openl10n.form.type.translation.class">Openl10n\Bundle\InfraBundle\Form\Type\TranslationType</parameter>
+        <parameter key="openl10n.form.type.translation_meta.class">Openl10n\Bundle\InfraBundle\Form\Type\TranslationMetaType</parameter>
         <parameter key="openl10n.form.type.create_resource.class">Openl10n\Bundle\InfraBundle\Form\Type\CreateResourceType</parameter>
         <parameter key="openl10n.form.type.update_resource.class">Openl10n\Bundle\InfraBundle\Form\Type\UpdateResourceType</parameter>
         <parameter key="openl10n.form.type.import_translation_file.class">Openl10n\Bundle\InfraBundle\Form\Type\ImportTranslationFileType</parameter>
@@ -25,6 +26,7 @@
         <parameter key="openl10n.processor.export_translation_file.class">Openl10n\Domain\Resource\Application\Processor\ExportTranslationFileProcessor</parameter>
         <parameter key="openl10n.processor.create_resource.class">Openl10n\Domain\Resource\Application\Processor\CreateResourceProcessor</parameter>
         <parameter key="openl10n.processor.update_resource.class">Openl10n\Domain\Resource\Application\Processor\UpdateResourceProcessor</parameter>
+        <parameter key="openl10n.processor.edit_translation_meta.class">Openl10n\Domain\Translation\Application\Processor\EditTranslationMetaProcessor</parameter>
         <parameter key="openl10n.processor.edit_translation.class">Openl10n\Domain\Translation\Application\Processor\EditTranslationPhraseProcessor</parameter>
         <parameter key="openl10n.processor.create_translation_key.class">Openl10n\Domain\Translation\Application\Processor\CreateTranslationKeyProcessor</parameter>
         <parameter key="openl10n.processor.delete_translation_key.class">Openl10n\Domain\Translation\Application\Processor\DeleteTranslationKeyProcessor</parameter>
@@ -83,6 +85,9 @@
         <service id="openl10n.form.type.translation" class="%openl10n.form.type.translation.class%">
             <tag name="form.type" alias="openl10n_translation" />
         </service>
+        <service id="openl10n.form.type.translation_meta" class="%openl10n.form.type.translation_meta.class%">
+            <tag name="form.type" alias="openl10n_translation_meta" />
+        </service>
 
         <!-- Repository -->
         <service id="openl10n.repository.locale" class="%openl10n.repository.locale.class%">
@@ -129,6 +134,10 @@
         <service id="openl10n.processor.export_translation_file" class="%openl10n.processor.export_translation_file.class%">
             <argument type="service" id="openl10n.repository.translation" />
             <argument type="service" id="openl10n.translation.dumper" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="openl10n.processor.edit_translation_meta" class="%openl10n.processor.edit_translation_meta.class%">
+            <argument type="service" id="openl10n.repository.translation" />
             <argument type="service" id="event_dispatcher" />
         </service>
         <service id="openl10n.processor.edit_translation" class="%openl10n.processor.edit_translation.class%">

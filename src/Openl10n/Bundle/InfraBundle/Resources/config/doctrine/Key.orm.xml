@@ -30,6 +30,13 @@
         <field name="identifier" column="identifier" type="string" length="255" />
         <field name="hash" column="hash" type="string" length="40" />
 
+        <one-to-one field="meta" target-entity="Meta" mapped-by="key">
+            <cascade>
+                <cascade-persist />
+                <cascade-remove />
+            </cascade>
+        </one-to-one>
+
         <one-to-many field="phrases" target-entity="Phrase" mapped-by="key">
             <cascade>
                 <cascade-persist />
