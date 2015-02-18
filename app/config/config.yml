@@ -16,7 +16,7 @@ framework:
         engines: ['twig']
         packages:
             app:
-                version: v0.0.1
+                version: v0.1.0
                 version_format: %%2$s/%%1$s
                 base_urls:
                     http:
