@@ -1,6 +1,6 @@
 var async = require('async');
 var browserify = require('browserify');
-var rimraf = require('rimraf');
+var del = require('del');
 var concat = require('gulp-concat');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
@@ -28,7 +28,7 @@ gulp.task('default', function() {
 // Clean
 //
 gulp.task('clean', function(cb) {
-  rimraf(distDir, cb);
+  del(distDir, cb);
 });
 
 //
