@@ -13,6 +13,21 @@ See the [official website](http://openl10n.io/) to learn more about OpenLocaliza
 The following sections are a summary of the installation steps to make it works quickly.
 You're encouraged to read the [full documentation](http://docs.openl10n.io/) for more details.
 
+## Warning
+
+This project is **under heavy development**.
+Many changes on backend and frontend apps are expected.
+However the current release is usable and data migrations will be easy.
+About the database I plan to focus on **PostgreSQL** features and will
+remove the ability to use MySQL.
+
+Due to lack of time those last weeks I prefered to work on a private fork and
+postpone the next release until I reach a better "minimal viable product".
+Don't expect to see new releases before **Q4 2015**.
+
+If you're interested in the project, help is still
+[welcomed](mailto:matthieu@moquet.net?subject=OpenLocalization) :)
+
 ## Requirements
 
 - PHP 5.4 (or higher)
