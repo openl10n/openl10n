@@ -2,12 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.2.1 - 2015-08-12
 
-[View diff](https://github.com/openl10n/openl10n/compare/v0.2.0...master).
+Dependencies update. [View diff](https://github.com/openl10n/openl10n/compare/v0.2.0...v0.2.1).
 
 - Update app version to v0.1.0 (Material Design release)
 - Fix database init on PostgreSQL (see [#91](https://github.com/openl10n/openl10n/pull/91))
+- Update composer & npm dependencies
 
 ## 0.2.0 - 2014-12-12
 
