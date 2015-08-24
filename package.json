@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "async": "^0.2.10",
-    "backbone": "^1.1.2",
+    "backbone": "1.1.2",
     "backbone.babysitter": "^0.1.4",
     "backbone.cycle": "^1.0.8",
     "backbone.marionette": "^2.0.1",
