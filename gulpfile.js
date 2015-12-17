@@ -82,7 +82,7 @@ function runBrowerify(isWatching) {
     logger.start();
 
     return bundler
-      .bundle({debug: isDebug})
+      .bundle()
       .pipe(source('js/app.js'))
       .pipe(gulp.dest(distDir))
       .on('end', logger.end);
