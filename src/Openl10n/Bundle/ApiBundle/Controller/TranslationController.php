@@ -38,16 +38,18 @@ class TranslationController extends BaseController implements ClassResourceInter
      * @Rest\QueryParam(name="project", strict=true, nullable=false)
      * @Rest\QueryParam(name="page", requirements="\d+", default="1", strict=true, nullable=false, description="Page number")
      * @Rest\QueryParam(name="per_page", requirements="\d+", default="2000", strict=true, nullable=false, description="Item per page")
+     * @Rest\QueryParam(name="identifier", description="Translation's identifier")
      * @Rest\View
      */
     public function cgetAction(ParamFetcher $paramFetcher)
     {
         $page = (int) $paramFetcher->get('page');
         $perPage = (int) $paramFetcher->get('per_page');
+        $identifier = $paramFetcher->get('identifier');
 
         $project = $this->findProjectOr404($paramFetcher->get('project'));
 
-        $specification = new TranslationByProjectSpecification($project);
+        $specification = new TranslationByProjectSpecification($project, $identifier);
 
         $pager = $this->get('openl10n.repository.translation')->findSatisfying($specification);
         $pager->setMaxPerPage($perPage);
